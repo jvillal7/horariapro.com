@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HorariaPro — Gestió intel·ligent de cobertures per a centres educatius</title>
+  <meta name="description" content="HorariaPro automatitza la gestió d'absències i cobertures del professorat amb intel·ligència artificial. Dissenyat per a equips directius de centres educatius." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --ink:     #1a1a1a;
+      --ink-2:   #444;
+      --ink-3:   #777;
+      --ink-4:   #aaa;
+      --border:  #e8e8e8;
+      --bg:      #fff;
+      --bg-2:    #f7f7f7;
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --green:   #16a34a;
+      --green-lt:#f0fdf4;
+      --r:       12px;
+      --r-lg:    20px;
+      --shadow:  0 2px 16px rgba(0,0,0,.07);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: var(--ink-2); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      background: var(--black); color: #fff;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      transition: opacity .15s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 5% 80px;
+      max-width: 960px; margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--blue-lt); color: var(--blue);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -.03em;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--blue); font-style: normal; }
+    .hero p {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--ink-2); max-width: 620px;
+      margin: 0 auto 40px;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--black); color: #fff;
+      padding: 14px 28px; border-radius: 10px;
+      font-size: 15px; font-weight: 600;
+      transition: opacity .15s;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-secondary {
+      background: var(--bg-2); color: var(--ink);
+      padding: 14px 28px; border-radius: 10px;
+      font-size: 15px; font-weight: 600;
+      border: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .btn-secondary:hover { background: var(--border); }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 5%;
+      display: flex; justify-content: center;
+      gap: 64px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 36px; font-weight: 800; color: var(--black); letter-spacing: -.02em; }
+    .stat-lbl { font-size: 14px; color: var(--ink-3); margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--black); margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--ink-2);
+      max-width: 560px; margin-bottom: 56px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-lt);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+
+    /* ── ROL SECTIONS ── */
+    .rol-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .rol-section.reverse { direction: rtl; }
+    .rol-section.reverse > * { direction: ltr; }
+    .rol-visual {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      min-height: 320px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .rol-visual-title {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--ink-3); margin-bottom: 8px;
+    }
+    .mock-row {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px;
+    }
+    .mock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .mock-dot.green { background: #22c55e; }
+    .mock-dot.orange { background: #f97316; }
+    .mock-dot.blue { background: var(--blue); }
+    .mock-label { font-weight: 600; flex: 1; }
+    .mock-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 100px;
+    }
+    .mock-badge.green { background: var(--green-lt); color: var(--green); }
+    .mock-badge.orange { background: #fff7ed; color: #c2410c; }
+    .mock-badge.blue { background: var(--blue-lt); color: var(--blue); }
+    .rol-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .rol-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+    .rol-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700; flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute; left: 23px; top: 28px; bottom: 28px;
+      width: 2px; background: var(--border);
+    }
+    .step { display: flex; gap: 24px; padding: 28px 0; }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--black); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .step-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .step-body p { font-size: 14px; color: var(--ink-2); }
+
+    /* ── LEGAL ── */
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .legal-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px;
+    }
+    .legal-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .legal-card p { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--black);
+      color: #fff;
+      padding: 80px 5%;
+    }
+    .contact-inner {
+      max-width: 640px; margin: 0 auto; text-align: center;
+    }
+    .contact-inner .section-title { color: #fff; margin-bottom: 12px; }
+    .contact-inner .section-sub { color: rgba(255,255,255,.6); margin-bottom: 40px; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.7); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 14px; color: #fff;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: rgba(255,255,255,.4); }
+    .form-group select option { background: #222; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-submit {
+      background: #fff; color: var(--black);
+      padding: 14px; border-radius: 10px;
+      font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer;
+      transition: opacity .15s; width: 100%;
+    }
+    .btn-submit:hover { opacity: .9; }
+    .form-note { font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 32px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 13px; color: var(--ink-3);
+    }
+    .footer-logo { font-weight: 800; color: var(--ink); }
+    .footer-logo span { color: var(--blue); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .rol-section { grid-template-columns: 1fr; gap: 32px; }
+      .rol-section.reverse { direction: ltr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Horaria<span>Pro</span></div>
+  <div class="nav-links">
+    <a href="#funcionalitats">Funcionalitats</a>
+    <a href="#com-funciona">Com funciona</a>
+    <a href="#legal">Privacitat</a>
+    <a href="#contacte">Contacte</a>
+  </div>
+  <a href="https://app.horariapro.com" class="nav-cta">Accedir a l'app →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
+  <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
+  <p>HorariaPro automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
+  <div class="hero-actions">
+    <a href="#contacte" class="btn-primary">Sol·licitar demo gratuïta</a>
+    <a href="#funcionalitats" class="btn-secondary">Veure funcionalitats</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">–80%</div>
+    <div class="stat-lbl">Temps gestionant cobertures</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-lbl">Grups sempre coberts</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2</div>
+    <div class="stat-lbl">Centres educatius actius</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0€</div>
+    <div class="stat-lbl">Cost d'implantació</div>
+  </div>
+</div>
+
+<!-- FUNCIONALITATS -->
+<section id="funcionalitats" style="background: var(--bg);">
+  <div class="section-inner">
+    <div class="section-tag">Funcionalitats</div>
+    <h2 class="section-title">Tot el que necessita el teu centre</h2>
+    <p class="section-sub">Una sola eina per a tot el cicle de gestió d'absències: de l'avís del docent a la cobertura confirmada.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Proposta de cobertures amb IA</h3>
+        <p>La intel·ligència artificial analitza horaris, deutes de TP i disponibilitat per proposar la cobertura òptima en segons.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <h3>Notificacions automàtiques</h3>
+        <p>El docent avisa des del mòbil. La cap d'estudis, els coordinadors de cicle i els tutors afectats reben l'email automàticament.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Graella visual en temps real</h3>
+        <p>Visió completa de tots els grups i franges horàries del dia. Detecta d'un cop d'ull quins grups queden sense cobrir.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <h3>Control equitatiu de TP</h3>
+        <p>Registre automàtic de deutes de Treball Personal. La IA prioritza els docents amb menys cobertures acumulades.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Historial i informes</h3>
+        <p>Accés complet a l'historial d'absències per dia, docent o motiu. Exportació per a inspeccions i memòries de curs.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏫</div>
+        <h3>Multi-centre</h3>
+        <p>Dissenyat per a centres de primària, CEE i centres amb estructures complexes com grups SIEI o escolaritat compartida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAP D'ESTUDIS -->
+<section style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-tag">Per a la Cap d'Estudis</div>
+    <div class="rol-section">
+      <div>
+        <h2 class="section-title">Oblida't dels papers i les trucades</h2>
+        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Rep l'avís, consulta la proposta de la IA i confirma la cobertura en dos clics. HorariaPro fa la feina administrativa perquè tu et puguis centrar en el pedagògic.</p>
+        <ul class="rol-list">
+          <li>Rep el correu d'avís en el moment que el docent envia l'absència</li>
+          <li>La IA proposa qui cobreix cada franja segons les normes del centre</li>
+          <li>Confirma o modifica la proposta amb un sol clic</li>
+          <li>Els docents afectats reben la notificació automàticament</li>
+          <li>Defineix les teves pròpies normes de cobertura per a la IA</li>
+          <li>Gestiona horaris i altes/baixes de personal des de l'app</li>
+        </ul>
+      </div>
+      <div class="rol-visual">
+        <div class="rol-visual-title">Avisos del dia</div>
+        <div class="mock-row">
+          <div class="mock-dot orange"></div>
+          <span class="mock-label">Marta Puig — Tot el dia</span>
+          <span class="mock-badge orange">Pendent</span>
+        </div>
+        <div class="mock-row">
+          <div class="mock-dot blue"></div>
+          <span class="mock-label">Joan Ferrer — f1a, f1b, f2a</span>
+          <span class="mock-badge blue">IA proposa →</span>
+        </div>
+        <div class="mock-row">
+          <div class="mock-dot green"></div>
+          <span class="mock-label">Ana López — f3a, f3b</span>
+          <span class="mock-badge green">Cobert</span>
+        </div>
+        <div style="margin-top:8px; padding:14px; background:var(--blue-lt); border-radius:10px; font-size:13px; color:var(--blue);">
+          <strong>Proposta IA:</strong> Cobrir amb Carles Mas (0 TP pendents, disponible f1a–f2a)
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIP DIRECTIU -->
+<section style="background: var(--bg);">
+  <div class="section-inner">
+    <div class="section-tag">Per a l'Equip Directiu</div>
+    <div class="rol-section reverse">
+      <div>
+        <h2 class="section-title">Visibilitat total del centre en temps real</h2>
+        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Director/a i secretaria tenen accés als informes d'absències, el registre de cobertures i els deutes de TP de tot el claustre.</p>
+        <ul class="rol-list">
+          <li>Resum diari de l'estat del centre</li>
+          <li>Historial complet per docent, motiu i data</li>
+          <li>Control de permisos ATRI amb avís integrat al formulari</li>
+          <li>Registre de justificants mèdics requerits</li>
+          <li>Accés al panell d'administració de normes de la IA</li>
+        </ul>
+      </div>
+      <div class="rol-visual">
+        <div class="rol-visual-title">Resum del curs</div>
+        <div class="mock-row"><span class="mock-label">Absències registrades</span><strong>142</strong></div>
+        <div class="mock-row"><span class="mock-label">Cobertures realitzades</span><strong>318</strong></div>
+        <div class="mock-row"><span class="mock-label">Deutes TP pendents</span><strong>7</strong></div>
+        <div class="mock-row"><span class="mock-label">Permisos ATRI gestionats</span><strong>23</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCENTS -->
+<section style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-tag">Per als Docents</div>
+    <div class="rol-section">
+      <div>
+        <h2 class="section-title">Avisar una absència: 30 segons des del mòbil</h2>
+        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Sense trucades, sense paper, sense esperar. El docent selecciona les franges, el motiu i envia. Punt.</p>
+        <ul class="rol-list">
+          <li>Formulari simplificat, accessible des de qualsevol dispositiu</li>
+          <li>Consulta les teves cobertures del dia en temps real</li>
+          <li>Historial de les teves absències i deutes de TP</li>
+          <li>Avís automàtic si el motiu requereix gestió per ATRI</li>
+          <li>Accés directe amb link personalitzat per escola</li>
+        </ul>
+      </div>
+      <div class="rol-visual">
+        <div class="rol-visual-title">Les meves cobertures avui</div>
+        <div class="mock-row">
+          <div class="mock-dot blue"></div>
+          <div>
+            <div style="font-weight:600; font-size:13px;">9:00 – 9:30 · 3rA</div>
+            <div style="font-size:12px; color:var(--ink-3);">Cobreix per: Marta Puig</div>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-dot blue"></div>
+          <div>
+            <div style="font-weight:600; font-size:13px;">11:30 – 12:00 · 5èB</div>
+            <div style="font-size:12px; color:var(--ink-3);">Cobreix per: Joan Ferrer</div>
+          </div>
+        </div>
+        <div style="padding:12px 14px; background:var(--green-lt); border-radius:8px; font-size:13px; color:var(--green); font-weight:600;">
+          ✓ Cap deute de TP pendent
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COM FUNCIONA -->
+<section id="com-funciona">
+  <div class="section-inner">
+    <div class="section-tag">Com funciona</div>
+    <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
+    <p class="section-sub">Un procés dissenyat per ser el més simple possible per a tothom.</p>
+    <div style="max-width: 600px;">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>El docent avisa des del mòbil</h3>
+            <p>Selecciona les dates, franges horàries i motiu de l'absència. L'app envia l'avís automàticament a la cap d'estudis.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>La IA analitza i proposa</h3>
+            <p>Tenint en compte els horaris, els deutes de TP acumulats i les normes del centre, la IA proposa qui cobreix cada franja.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>La cap d'estudis confirma</h3>
+            <p>Revisa la proposta, la modifica si cal i confirma amb un clic. El sistema registra la cobertura automàticament.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3>Tothom afectat rep la notificació</h3>
+            <p>El docent que cobreix, el coordinador de cicle i el tutor del grup reben un correu amb tots els detalls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL -->
+<section id="legal" style="background: var(--bg-2); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-tag">Privacitat i compliment legal</div>
+    <h2 class="section-title">Dissenyat per complir el RGPD</h2>
+    <p class="section-sub">Les dades dels teus docents estan protegides i gestionades d'acord amb la normativa europea de protecció de dades.</p>
+    <div class="legal-grid">
+      <div class="legal-card">
+        <h4>🇪🇺 Dades a Europa</h4>
+        <p>Tota la informació s'emmagatzema a servidors europeus (EU-West). Cap dada surt de la Unió Europea.</p>
+      </div>
+      <div class="legal-card">
+        <h4>🔒 Accés per PIN</h4>
+        <p>Cada docent accedeix amb el seu PIN personal. Cap contrasenya, cap compte d'usuari extern necessari.</p>
+      </div>
+      <div class="legal-card">
+        <h4>🏫 Aïllament per centre</h4>
+        <p>Les dades de cada escola estan completament separades. Cap centre pot accedir a la informació d'un altre.</p>
+      </div>
+      <div class="legal-card">
+        <h4>📄 Dades mínimes</h4>
+        <p>Només es recullen les dades estrictament necessàries: nom, horari i correu electrònic dels docents.</p>
+      </div>
+      <div class="legal-card">
+        <h4>🗑️ Dret a l'oblit</h4>
+        <p>Qualsevol centre pot sol·licitar l'eliminació completa de les seves dades en qualsevol moment.</p>
+      </div>
+      <div class="legal-card">
+        <h4>🔐 Connexions xifrades</h4>
+        <p>Totes les comunicacions van per HTTPS. Les dades en repòs estan xifrades a la base de dades.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacte" class="contact-section">
+  <div class="contact-inner">
+    <div class="section-tag" style="color:rgba(255,255,255,.5);">Contacte</div>
+    <h2 class="section-title">Porta HorariaPro al teu centre</h2>
+    <p class="section-sub">Escriu-me i t'explico com adaptar l'app al teu centre. La implantació és gratuïta i el suport és directe.</p>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom i cognoms</label>
+          <input type="text" placeholder="Verònica García" required />
+        </div>
+        <div class="form-group">
+          <label>Correu electrònic</label>
+          <input type="email" placeholder="direccio@escola.cat" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom del centre</label>
+          <input type="text" placeholder="CEIP Sant Jordi" required />
+        </div>
+        <div class="form-group">
+          <label>Rol al centre</label>
+          <select required>
+            <option value="" disabled selected>Selecciona el teu rol</option>
+            <option>Director/a</option>
+            <option>Cap d'Estudis</option>
+            <option>Secretari/a</option>
+            <option>Altre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Missatge (opcional)</label>
+        <textarea placeholder="Tenim 30 docents i busquem una solució per gestionar les cobertures..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Enviar sol·licitud →</button>
+      <p class="form-note">Les teves dades s'utilitzen únicament per respondre la teva consulta. Mai es comparteixen amb tercers.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Horaria<span>Pro</span></div>
+  <div>Desenvolupat per Jorge Villalba · <a href="mailto:horaria.admin@gmail.com" style="color:var(--blue)">horaria.admin@gmail.com</a></div>
+  <div>© 2026 HorariaPro. Tots els drets reservats.</div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Enviant...';
+    btn.disabled = true;
+    const form = e.target;
+    const nom   = form.querySelectorAll('input')[0].value;
+    const email = form.querySelectorAll('input')[1].value;
+    const centre = form.querySelectorAll('input')[2].value;
+    const rol   = form.querySelector('select').value;
+    const msg   = form.querySelector('textarea').value;
+    fetch('https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK',
+        'Authorization': 'Bearer sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK',
+      },
+      body: JSON.stringify({
+        to: 'horaria.admin@gmail.com',
+        subject: `Nova sol·licitud — ${centre}`,
+        html: `<h2>Nova sol·licitud de demo</h2>
+               <p><strong>Nom:</strong> ${nom}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Centre:</strong> ${centre}</p>
+               <p><strong>Rol:</strong> ${rol}</p>
+               <p><strong>Missatge:</strong> ${msg || '—'}</p>`,
+      }),
+    })
+    .then(() => {
+      btn.textContent = '✓ Sol·licitud enviada!';
+      btn.style.background = '#22c55e';
+      form.reset();
+    })
+    .catch(() => {
+      btn.textContent = 'Error. Escriu-nos directament.';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>
