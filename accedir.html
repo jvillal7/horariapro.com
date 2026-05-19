@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accedir — HorariaPro</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --ink:   #1a1a1a;
+      --ink-2: #444;
+      --ink-3: #777;
+      --ink-4: #aaa;
+      --border: #e8e8e8;
+      --bg:    #fff;
+      --bg-2:  #f7f7f7;
+      --blue:  #2563eb;
+      --blue-lt: #eff6ff;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-2);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--ink); }
+    .nav-logo span { color: var(--blue); }
+    .nav-back { font-size: 13px; color: var(--ink-3); text-decoration: none; }
+    .nav-back:hover { color: var(--ink); }
+
+    /* MAIN */
+    .main {
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 40px 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%; max-width: 440px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-lt);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+
+    .card h1 {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: -.02em; margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 14px; color: var(--ink-3);
+      margin-bottom: 28px; line-height: 1.5;
+    }
+
+    .f-label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--ink-3); margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .f-input {
+      width: 100%; padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink); outline: none;
+      transition: border-color .15s;
+    }
+    .f-input:focus { border-color: var(--blue); }
+    .f-input::placeholder { color: var(--ink-4); }
+
+    /* RESULT */
+    .result {
+      margin-top: 16px;
+      display: none;
+    }
+    .result.visible { display: block; }
+
+    .school-card {
+      border: 2px solid var(--blue);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer;
+      transition: background .15s;
+      margin-bottom: 12px;
+    }
+    .school-card:hover { background: var(--blue-lt); }
+    .school-avatar {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--blue-lt);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .school-name { font-size: 15px; font-weight: 700; }
+    .school-hint { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+    .no-result {
+      text-align: center; padding: 20px;
+      font-size: 13px; color: var(--ink-3);
+      display: none;
+    }
+    .no-result.visible { display: block; }
+
+    .btn-continue {
+      width: 100%; padding: 14px;
+      background: var(--black); color: #fff;
+      border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: opacity .15s;
+      display: none;
+    }
+    .btn-continue.visible { display: block; }
+    .btn-continue:hover { opacity: .85; }
+
+    /* GDPR OVERLAY */
+    .gdpr-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 9999;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .gdpr-overlay.show { opacity: 1; pointer-events: all; }
+
+    .gdpr-sheet {
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      width: 100%; max-width: 540px;
+      padding: 28px 24px 40px;
+      box-shadow: 0 -4px 32px rgba(0,0,0,.15);
+      transform: translateY(100%);
+      transition: transform .3s cubic-bezier(.32,0,.67,0);
+    }
+    .gdpr-overlay.show .gdpr-sheet {
+      transform: translateY(0);
+    }
+
+    .gdpr-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .gdpr-icon { font-size: 26px; }
+    .gdpr-title { font-size: 16px; font-weight: 700; }
+    .gdpr-subtitle { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+
+    .gdpr-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; margin-bottom: 12px; }
+    .gdpr-list {
+      list-style: none; padding: 0;
+      margin-bottom: 14px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .gdpr-list li {
+      display: flex; gap: 8px; align-items: flex-start;
+      font-size: 13px; color: var(--ink-2);
+    }
+    .gdpr-list li::before { content: '•'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .gdpr-note {
+      background: var(--blue-lt); border-radius: 8px;
+      padding: 10px 14px; font-size: 12px; color: var(--blue);
+      margin-bottom: 20px; line-height: 1.5;
+    }
+    .gdpr-legal {
+      font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 20px;
+    }
+    .btn-accept {
+      width: 100%; padding: 15px;
+      background: var(--black); color: #fff;
+      border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Horaria<span>Pro</span></a>
+  <a href="/" class="nav-back">← Tornar</a>
+</nav>
+
+<div class="main">
+  <div class="card">
+    <div class="card-icon">🏫</div>
+    <h1>Accedeix al teu centre</h1>
+    <p>Escriu el nom del teu centre educatiu per accedir directament.</p>
+
+    <label class="f-label" for="search">Nom del centre</label>
+    <input
+      class="f-input"
+      id="search"
+      type="text"
+      placeholder="Ex: Rivo Rubeo, Ca N'Oriol..."
+      autocomplete="off"
+      autofocus
+    />
+
+    <div class="result" id="result">
+      <div id="school-list"></div>
+    </div>
+
+    <div class="no-result" id="no-result">
+      Cap centre trobat. Comprova l'ortografia o <a href="/#contacte" style="color:var(--blue)">contacta'ns</a> per donar d'alta el teu centre.
+    </div>
+
+    <button class="btn-continue" id="btn-continue" onclick="showGdpr()">
+      Continuar →
+    </button>
+  </div>
+</div>
+
+<!-- GDPR SHEET -->
+<div class="gdpr-overlay" id="gdpr-overlay">
+  <div class="gdpr-sheet">
+    <div class="gdpr-header">
+      <span class="gdpr-icon">🔐</span>
+      <div>
+        <div class="gdpr-title">Consentiment de tractament de dades</div>
+        <div class="gdpr-subtitle">Protecció de Dades — RGPD / LOPDGDD</div>
+      </div>
+    </div>
+
+    <p class="gdpr-body">
+      En accedir a aquesta aplicació, el centre educatiu tractarà les dades personals següents amb finalitats organitzatives internes:
+    </p>
+    <ul class="gdpr-list">
+      <li><strong>Nom i cognoms</strong> del docent</li>
+      <li><strong>Horari lectiu setmanal</strong> i franges de Treball Personal</li>
+      <li><strong>Registre d'absències i cobertures</strong></li>
+      <li><strong>Correu electrònic</strong> per a notificacions d'absències i cobertures</li>
+    </ul>
+    <p class="gdpr-legal">
+      Aquestes dades s'utilitzen exclusivament per a la <strong>gestió interna d'absències i cobertures</strong> del centre.
+      No es cediran a tercers ni s'usaran amb cap altra finalitat.
+      Podeu exercir els vostres drets d'accés, rectificació, supressió i portabilitat adreçant-vos a la direcció del centre,
+      d'acord amb el <strong>Reglament (UE) 2016/679 (RGPD)</strong> i la <strong>Llei Orgànica 3/2018 (LOPDGDD)</strong>.
+    </p>
+    <div class="gdpr-note">
+      Aquest avís apareix <strong>una sola vegada</strong> per dispositiu. Un cop acceptat, no tornarà a aparèixer.
+    </div>
+    <button class="btn-accept" onclick="acceptGdpr()">Accepto i continuo →</button>
+  </div>
+</div>
+
+<script>
+  const SUPA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
+  const SUPA_KEY = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
+  const APP_URL  = 'https://app.horariapro.com';
+
+  let schools = [];
+  let selectedSchool = null;
+
+  // Carregar escoles
+  fetch(`${SUPA_URL}/rest/v1/escoles?select=id,nom,codi&order=nom`, {
+    headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` }
+  })
+  .then(r => r.json())
+  .then(data => { schools = data || []; });
+
+  // Cerca
+  document.getElementById('search').addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    const list = document.getElementById('school-list');
+    const result = document.getElementById('result');
+    const noResult = document.getElementById('no-result');
+    const btn = document.getElementById('btn-continue');
+
+    selectedSchool = null;
+    btn.classList.remove('visible');
+
+    if (q.length < 2) {
+      result.classList.remove('visible');
+      noResult.classList.remove('visible');
+      list.innerHTML = '';
+      return;
+    }
+
+    const matches = schools.filter(s => s.nom.toLowerCase().includes(q));
+
+    if (matches.length === 0) {
+      result.classList.remove('visible');
+      noResult.classList.add('visible');
+      list.innerHTML = '';
+      return;
+    }
+
+    noResult.classList.remove('visible');
+    result.classList.add('visible');
+    list.innerHTML = matches.map(s => `
+      <div class="school-card" onclick="selectSchool('${s.id}', '${s.nom}', '${s.codi || schoolKey(s.nom)}', this)">
+        <div class="school-avatar">🏫</div>
+        <div>
+          <div class="school-name">${s.nom}</div>
+          <div class="school-hint">Clica per seleccionar</div>
+        </div>
+      </div>
+    `).join('');
+  });
+
+  function schoolKey(nom) {
+    return nom.toLowerCase().includes('oriol') ? 'oriol' : 'rivo';
+  }
+
+  function selectSchool(id, nom, codi, el) {
+    selectedSchool = { id, nom, codi };
+    document.querySelectorAll('.school-card').forEach(c => {
+      c.style.borderColor = 'var(--border)';
+      c.querySelector('.school-hint').textContent = 'Clica per seleccionar';
+    });
+    el.style.borderColor = 'var(--blue)';
+    el.querySelector('.school-hint').textContent = '✓ Seleccionat';
+    document.getElementById('btn-continue').classList.add('visible');
+  }
+
+  function showGdpr() {
+    if (!selectedSchool) return;
+    if (localStorage.getItem('hp_consent')) {
+      goToApp();
+      return;
+    }
+    document.getElementById('gdpr-overlay').classList.add('show');
+  }
+
+  function acceptGdpr() {
+    localStorage.setItem('hp_consent', '1');
+    goToApp();
+  }
+
+  function goToApp() {
+    const key = selectedSchool.codi || schoolKey(selectedSchool.nom);
+    window.location.href = `${APP_URL}?escola=${key}`;
+  }
+</script>
+
+</body>
+</html>
