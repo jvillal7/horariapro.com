@@ -276,7 +276,14 @@
   const APP_URL  = 'https://app.horariapro.com';
 
   let schools = [];
+  let currentMatches = [];
   let selectedSchool = null;
+
+  const elList    = document.getElementById('school-list');
+  const elResult  = document.getElementById('result');
+  const elNoRes   = document.getElementById('no-result');
+  const elBtn     = document.getElementById('btn-continue');
+  const elSearch  = document.getElementById('search');
 
   // Carregar escoles
   fetch(`${SUPA_URL}/rest/v1/escoles?select=id,nom,codi&order=nom`, {
@@ -286,35 +293,32 @@
   .then(data => { schools = data || []; });
 
   // Cerca
-  document.getElementById('search').addEventListener('input', function() {
+  elSearch.addEventListener('input', function() {
     const q = this.value.trim().toLowerCase();
-    const list = document.getElementById('school-list');
-    const result = document.getElementById('result');
-    const noResult = document.getElementById('no-result');
-    const btn = document.getElementById('btn-continue');
 
     selectedSchool = null;
-    btn.classList.remove('visible');
+    elBtn.classList.remove('visible');
 
     if (q.length < 2) {
-      result.classList.remove('visible');
-      noResult.classList.remove('visible');
-      list.innerHTML = '';
+      elResult.classList.remove('visible');
+      elNoRes.classList.remove('visible');
+      elList.innerHTML = '';
+      currentMatches = [];
       return;
     }
 
-    const matches = schools.filter(s => s.nom.toLowerCase().includes(q));
+    currentMatches = schools.filter(s => s.nom.toLowerCase().includes(q));
 
-    if (matches.length === 0) {
-      result.classList.remove('visible');
-      noResult.classList.add('visible');
-      list.innerHTML = '';
+    if (currentMatches.length === 0) {
+      elResult.classList.remove('visible');
+      elNoRes.classList.add('visible');
+      elList.innerHTML = '';
       return;
     }
 
-    noResult.classList.remove('visible');
-    result.classList.add('visible');
-    list.innerHTML = matches.map((s, i) => `
+    elNoRes.classList.remove('visible');
+    elResult.classList.add('visible');
+    elList.innerHTML = currentMatches.map((s, i) => `
       <div class="school-card" data-idx="${i}">
         <div class="school-avatar">🏫</div>
         <div>
@@ -323,28 +327,25 @@
         </div>
       </div>
     `).join('');
-
-    // Guardem les dades fora del DOM per evitar problemes amb caràcters especials
-    list._matches = matches;
   });
 
-  // Delegació d'events sobre el contenidor
-  document.getElementById('school-list').addEventListener('click', function(e) {
+  // Delegació d'events — usa currentMatches (variable del mòdul, no del DOM)
+  elList.addEventListener('click', function(e) {
     const card = e.target.closest('.school-card');
-    if (!card || !this._matches) return;
+    if (!card) return;
     const idx = parseInt(card.dataset.idx, 10);
-    const s = this._matches[idx];
+    const s = currentMatches[idx];
     if (!s) return;
 
     selectedSchool = { id: s.id, nom: s.nom, codi: s.codi };
 
-    document.querySelectorAll('.school-card').forEach(c => {
+    elList.querySelectorAll('.school-card').forEach(c => {
       c.style.borderColor = 'var(--border)';
       c.querySelector('.school-hint').textContent = 'Clica per seleccionar';
     });
     card.style.borderColor = 'var(--blue)';
     card.querySelector('.school-hint').textContent = '✓ Seleccionat';
-    document.getElementById('btn-continue').classList.add('visible');
+    elBtn.classList.add('visible');
   });
 
   function showGdpr() {
