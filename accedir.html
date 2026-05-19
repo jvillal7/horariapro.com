@@ -231,9 +231,42 @@
       Cap centre trobat. Comprova l'ortografia o <a href="/#contacte" style="color:var(--blue)">contacta'ns</a> per donar d'alta el teu centre.
     </div>
 
-    <button class="btn-continue" id="btn-continue" onclick="showGdpr()">
+    <button class="btn-continue" id="btn-continue" onclick="showPin()">
       Continuar →
     </button>
+  </div>
+</div>
+
+<!-- PIN OVERLAY -->
+<div class="gdpr-overlay" id="pin-overlay">
+  <div class="gdpr-sheet">
+    <div class="gdpr-header">
+      <span class="gdpr-icon">🔑</span>
+      <div>
+        <div class="gdpr-title">Codi d'accés del centre</div>
+        <div class="gdpr-subtitle" id="pin-school-name"></div>
+      </div>
+    </div>
+    <p style="font-size:13.5px; color:var(--ink-2); line-height:1.6; margin-bottom:20px;">
+      Introdueix el codi d'accés facilitat per la direcció del centre per continuar.
+    </p>
+    <div class="form-group" style="margin-bottom:16px;">
+      <label class="f-label" for="pin-input">Codi d'accés</label>
+      <input
+        class="f-input"
+        id="pin-input"
+        type="password"
+        placeholder="····"
+        maxlength="20"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') validatePin()"
+        style="letter-spacing:.2em; font-size:20px; text-align:center;"
+      />
+      <div id="pin-error" style="color:#dc2626; font-size:12px; margin-top:6px; display:none;">
+        Codi incorrecte. Contacta amb la direcció del centre.
+      </div>
+    </div>
+    <button class="btn-accept" id="pin-btn" onclick="validatePin()">Verificar →</button>
   </div>
 </div>
 
@@ -348,14 +381,54 @@
     elBtn.classList.add('visible');
   });
 
-  function showGdpr() {
+  function showPin() {
     if (!selectedSchool) return;
-    if (localStorage.getItem('hp_consent')) {
-      goToApp();
-      return;
-    }
-    document.getElementById('gdpr-overlay').classList.add('show');
+    document.getElementById('pin-school-name').textContent = selectedSchool.nom;
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-error').style.display = 'none';
+    document.getElementById('pin-overlay').classList.add('show');
+    setTimeout(() => document.getElementById('pin-input').focus(), 350);
   }
+
+  async function validatePin() {
+    const btn = document.getElementById('pin-btn');
+    const input = document.getElementById('pin-input');
+    const error = document.getElementById('pin-error');
+    const entered = input.value.trim();
+    if (!entered) return;
+
+    btn.textContent = 'Verificant...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(
+        `${SUPA_URL}/rest/v1/escoles?id=eq.${selectedSchool.id}&select=codi_acces`,
+        { headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` } }
+      );
+      const data = await res.json();
+      const codiCorrecte = data?.[0]?.codi_acces;
+
+      if (entered === codiCorrecte) {
+        document.getElementById('pin-overlay').classList.remove('show');
+        if (localStorage.getItem('hp_consent')) {
+          goToApp();
+        } else {
+          document.getElementById('gdpr-overlay').classList.add('show');
+        }
+      } else {
+        error.style.display = 'block';
+        input.value = '';
+        input.focus();
+        btn.textContent = 'Verificar →';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Verificar →';
+      btn.disabled = false;
+    }
+  }
+
+  function showGdpr() {}
 
   function acceptGdpr() {
     localStorage.setItem('hp_consent', '1');
