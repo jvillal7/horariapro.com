@@ -315,7 +315,7 @@
     noResult.classList.remove('visible');
     result.classList.add('visible');
     list.innerHTML = matches.map(s => `
-      <div class="school-card" onclick="selectSchool('${s.id}', '${s.nom}', '${s.codi}', this)">
+      <div class="school-card" data-id="${s.id}" data-nom="${s.nom.replace(/"/g,'&quot;')}" data-codi="${s.codi}">
         <div class="school-avatar">🏫</div>
         <div>
           <div class="school-name">${s.nom}</div>
@@ -323,10 +323,14 @@
         </div>
       </div>
     `).join('');
+
+    list.querySelectorAll('.school-card').forEach(el => {
+      el.addEventListener('click', () => selectSchool(el));
+    });
   });
 
-  function selectSchool(id, nom, codi, el) {
-    selectedSchool = { id, nom, codi };
+  function selectSchool(el) {
+    selectedSchool = { id: el.dataset.id, nom: el.dataset.nom, codi: el.dataset.codi };
     document.querySelectorAll('.school-card').forEach(c => {
       c.style.borderColor = 'var(--border)';
       c.querySelector('.school-hint').textContent = 'Clica per seleccionar';
