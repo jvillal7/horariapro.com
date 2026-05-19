@@ -314,8 +314,8 @@
 
     noResult.classList.remove('visible');
     result.classList.add('visible');
-    list.innerHTML = matches.map(s => `
-      <div class="school-card" data-id="${s.id}" data-nom="${s.nom.replace(/"/g,'&quot;')}" data-codi="${s.codi}">
+    list.innerHTML = matches.map((s, i) => `
+      <div class="school-card" data-idx="${i}">
         <div class="school-avatar">🏫</div>
         <div>
           <div class="school-name">${s.nom}</div>
@@ -324,21 +324,28 @@
       </div>
     `).join('');
 
-    list.querySelectorAll('.school-card').forEach(el => {
-      el.addEventListener('click', () => selectSchool(el));
-    });
+    // Guardem les dades fora del DOM per evitar problemes amb caràcters especials
+    list._matches = matches;
   });
 
-  function selectSchool(el) {
-    selectedSchool = { id: el.dataset.id, nom: el.dataset.nom, codi: el.dataset.codi };
+  // Delegació d'events sobre el contenidor
+  document.getElementById('school-list').addEventListener('click', function(e) {
+    const card = e.target.closest('.school-card');
+    if (!card || !this._matches) return;
+    const idx = parseInt(card.dataset.idx, 10);
+    const s = this._matches[idx];
+    if (!s) return;
+
+    selectedSchool = { id: s.id, nom: s.nom, codi: s.codi };
+
     document.querySelectorAll('.school-card').forEach(c => {
       c.style.borderColor = 'var(--border)';
       c.querySelector('.school-hint').textContent = 'Clica per seleccionar';
     });
-    el.style.borderColor = 'var(--blue)';
-    el.querySelector('.school-hint').textContent = '✓ Seleccionat';
+    card.style.borderColor = 'var(--blue)';
+    card.querySelector('.school-hint').textContent = '✓ Seleccionat';
     document.getElementById('btn-continue').classList.add('visible');
-  }
+  });
 
   function showGdpr() {
     if (!selectedSchool) return;
