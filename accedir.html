@@ -315,7 +315,7 @@
     noResult.classList.remove('visible');
     result.classList.add('visible');
     list.innerHTML = matches.map(s => `
-      <div class="school-card" onclick="selectSchool('${s.id}', '${s.nom}', '${s.codi || schoolKey(s.nom)}', this)">
+      <div class="school-card" onclick="selectSchool('${s.id}', '${s.nom}', '${s.codi}', this)">
         <div class="school-avatar">🏫</div>
         <div>
           <div class="school-name">${s.nom}</div>
@@ -324,10 +324,6 @@
       </div>
     `).join('');
   });
-
-  function schoolKey(nom) {
-    return nom.toLowerCase().includes('oriol') ? 'oriol' : 'rivo';
-  }
 
   function selectSchool(id, nom, codi, el) {
     selectedSchool = { id, nom, codi };
@@ -355,8 +351,7 @@
   }
 
   function goToApp() {
-    const key = selectedSchool.codi || schoolKey(selectedSchool.nom);
-    window.location.href = `${APP_URL}?escola=${key}`;
+    window.location.href = `${APP_URL}?escola=${selectedSchool.codi}`;
   }
 </script>
 
