@@ -33,17 +33,16 @@
 
     /* NAV */
     nav {
-      background: rgba(255,255,255,.92);
+      background: rgba(10,10,10,.96);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
     }
-    .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--ink); }
-    .nav-logo span { color: var(--blue); }
-    .nav-back { font-size: 13px; color: var(--ink-3); text-decoration: none; }
-    .nav-back:hover { color: var(--ink); }
+    .nav-logo img { height: 32px; width: auto; display: block; }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; }
+    .nav-back:hover { color: #fff; }
 
     /* MAIN */
     .main {
@@ -203,7 +202,7 @@
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">Horaria<span>Pro</span></a>
+  <a href="/" class="nav-logo"><img src="/logo.png" alt="HorariaPro" /></a>
   <a href="/" class="nav-back">← Tornar</a>
 </nav>
 

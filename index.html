@@ -45,19 +45,18 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,.92);
+      background: rgba(10,10,10,.96);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .nav-logo { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: var(--ink-2); }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.6); }
+    .nav-links a:hover { color: #fff; }
     .nav-cta {
-      background: var(--black); color: #fff;
+      background: #fff; color: var(--black);
       padding: 9px 20px; border-radius: 8px;
       font-size: 14px; font-weight: 600;
       transition: opacity .15s;
@@ -318,7 +317,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Horaria<span>Pro</span></div>
+  <div class="nav-logo"><img src="/logo.png" alt="HorariaPro" /></div>
   <div class="nav-links">
     <a href="#funcionalitats">Funcionalitats</a>
     <a href="#com-funciona">Com funciona</a>
@@ -659,7 +658,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Horaria<span>Pro</span></div>
+  <div class="footer-logo"><img src="/logo.png" alt="HorariaPro" style="height:28px; filter:brightness(0) invert(1);" /></div>
   <div>Desenvolupat per Jorge Villalba · <a href="mailto:horaria.admin@gmail.com" style="color:var(--blue)">horaria.admin@gmail.com</a></div>
   <div>© 2026 HorariaPro. Tots els drets reservats.</div>
 </footer>
