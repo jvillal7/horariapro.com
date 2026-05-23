@@ -391,11 +391,19 @@
     btn.textContent = 'Redirigint...';
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'https://horariapro.com/accedir.html' }
+      options: {
+        redirectTo: 'https://horariapro.com/accedir.html',
+        queryParams: { prompt: 'select_account' }
+      }
     });
   });
 
-  // En carregar: comprova si tornem del OAuth
+  // En carregar: si és callback d'OAuth, processa la sessió; si no, neteja
+  const isOAuthCallback = window.location.hash.includes('access_token') || window.location.hash.includes('error_description');
+  if (!isOAuthCallback) {
+    await supabase.auth.signOut();
+  }
+
   const { data: { session } } = await supabase.auth.getSession();
   if (session?.user?.email) {
     await findSchools(session.user.email);
