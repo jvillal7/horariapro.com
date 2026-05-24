@@ -7,6 +7,7 @@
   <meta name="description" content="HorariaPro automatitza la gestió d'absències i cobertures del professorat amb intel·ligència artificial. Dissenyat per a equips directius de centres educatius." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -95,6 +96,7 @@
       padding: 14px 28px; border-radius: 10px;
       font-size: 15px; font-weight: 600;
       transition: opacity .15s;
+      cursor: pointer; border: none;
     }
     .btn-primary:hover { opacity: .85; }
     .btn-secondary {
@@ -137,32 +139,173 @@
       max-width: 560px; margin-bottom: 56px;
     }
 
-    /* ── FEATURES GRID ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+    /* ── FEATURE ROWS ── */
+    .feature-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
     }
-    .feature-card {
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-row-text { display: flex; flex-direction: column; }
+    .feature-row-icon {
+      width: 48px; height: 48px;
+      background: var(--blue-lt);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 18px;
+    }
+    .feature-row-icon.highlight { background: var(--blue); }
+    .feature-row-text h3 {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: -.02em; margin-bottom: 12px;
+      color: var(--black);
+    }
+    .feature-row-text p {
+      font-size: 15px; color: var(--ink-2);
+      line-height: 1.7; margin-bottom: 12px;
+    }
+    .feature-row-text ul {
+      font-size: 14px; color: var(--ink-2);
+      padding-left: 16px; line-height: 1.8;
+    }
+    .feature-row-text ul li strong { color: var(--ink); }
+
+    /* Video container */
+    .feature-video-wrap {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      position: relative;
+      aspect-ratio: 4/3;
+    }
+    .feature-video-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Mock UI placeholder (shown while no video is available) */
+    .feature-mock {
+      padding: 24px;
+      height: 100%;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .mock-screen-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .mock-screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-screen-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); margin-left: 4px; }
+
+    /* Reuse existing mock components */
+    .mock-row {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 28px;
-      transition: box-shadow .2s, transform .2s;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px;
     }
-    .feature-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
+    .mock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .mock-dot.green { background: #22c55e; }
+    .mock-dot.orange { background: #f97316; }
+    .mock-dot.blue { background: var(--blue); }
+    .mock-dot.gray { background: var(--ink-4); }
+    .mock-label { font-weight: 600; flex: 1; }
+    .mock-sub { font-size: 11px; color: var(--ink-3); }
+    .mock-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 100px; white-space: nowrap;
     }
-    .feature-icon {
-      width: 44px; height: 44px;
+    .mock-badge.green { background: var(--green-lt); color: var(--green); }
+    .mock-badge.orange { background: #fff7ed; color: #c2410c; }
+    .mock-badge.blue { background: var(--blue-lt); color: var(--blue); }
+    .mock-badge.gray { background: var(--bg-2); color: var(--ink-3); }
+
+    .mock-ia-box {
+      padding: 12px 14px;
       background: var(--blue-lt);
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; margin-bottom: 16px;
+      font-size: 13px; color: var(--blue);
+      margin-top: 4px;
     }
-    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .feature-card p { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+    .mock-stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .mock-stat-row strong { font-size: 15px; font-weight: 800; color: var(--black); }
+
+    /* Mini graella */
+    .mock-grid {
+      display: grid;
+      gap: 4px;
+    }
+    .mock-grid-header {
+      display: grid;
+      grid-template-columns: 48px repeat(5, 1fr);
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+    .mock-grid-body { display: flex; flex-direction: column; gap: 4px; }
+    .mock-grid-row { display: grid; grid-template-columns: 48px repeat(5, 1fr); gap: 4px; }
+    .mock-gh { font-size: 10px; font-weight: 700; color: var(--ink-3); text-align: center; padding: 4px 2px; }
+    .mock-gl { font-size: 10px; font-weight: 700; color: var(--ink-3); display: flex; align-items: center; padding: 2px 4px; }
+    .mock-gc {
+      border-radius: 6px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 600;
+    }
+    .mock-gc.ok { background: var(--green-lt); color: var(--green); }
+    .mock-gc.pend { background: #fff7ed; color: #c2410c; }
+    .mock-gc.cob { background: var(--blue-lt); color: var(--blue); }
+    .mock-gc.empty { background: var(--bg); border: 1px solid var(--border); color: var(--ink-4); }
+
+    /* File cards */
+    .mock-file {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .mock-file-icon {
+      width: 32px; height: 32px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .mock-file-icon.pdf { background: #fee2e2; }
+    .mock-file-icon.doc { background: #dbeafe; }
+    .mock-file-icon.img { background: var(--green-lt); }
+    .mock-file-name { font-weight: 600; flex: 1; }
+    .mock-file-date { font-size: 11px; color: var(--ink-4); }
+
+    /* Time blocks (compactació) */
+    .mock-timeblock-row { display: flex; gap: 4px; }
+    .mock-tb {
+      flex: 1; border-radius: 6px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700;
+    }
+    .mock-tb.blue { background: var(--blue-lt); color: var(--blue); }
+    .mock-tb.green { background: var(--green-lt); color: var(--green); }
+    .mock-tb.gray { background: var(--bg); border: 1px solid var(--border); color: var(--ink-4); }
+    .mock-tb.orange { background: #fff7ed; color: #c2410c; }
 
     /* ── ROL SECTIONS ── */
     .rol-section {
@@ -185,26 +328,6 @@
       text-transform: uppercase; letter-spacing: .06em;
       color: var(--ink-3); margin-bottom: 8px;
     }
-    .mock-row {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 13px;
-    }
-    .mock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .mock-dot.green { background: #22c55e; }
-    .mock-dot.orange { background: #f97316; }
-    .mock-dot.blue { background: var(--blue); }
-    .mock-label { font-weight: 600; flex: 1; }
-    .mock-badge {
-      font-size: 11px; font-weight: 600; padding: 3px 8px;
-      border-radius: 100px;
-    }
-    .mock-badge.green { background: var(--green-lt); color: var(--green); }
-    .mock-badge.orange { background: #fff7ed; color: #c2410c; }
-    .mock-badge.blue { background: var(--blue-lt); color: var(--blue); }
     .rol-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .rol-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
     .rol-list li::before {
@@ -291,6 +414,79 @@
     .btn-submit:hover { opacity: .9; }
     .form-note { font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
 
+    /* ── DEMO MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: var(--r-lg);
+      width: 100%; max-width: 560px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: modalIn .2s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(12px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    }
+    .modal-header-text h3 { font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+    .modal-header-text p { font-size: 14px; color: var(--ink-3); }
+    .modal-close {
+      background: var(--bg-2); border: none; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--ink-3); flex-shrink: 0;
+      transition: background .15s;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal-body { padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 16px; }
+
+    .modal-option {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+      text-decoration: none; color: inherit;
+    }
+    .modal-option:hover {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-lt);
+    }
+    .modal-option-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .modal-option-icon.cal { background: var(--blue-lt); }
+    .modal-option-icon.form { background: var(--bg-2); }
+    .modal-option-text { flex: 1; }
+    .modal-option-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+    .modal-option-text span { font-size: 13px; color: var(--ink-3); }
+    .modal-option-arrow { color: var(--ink-4); font-size: 18px; }
+
+    .modal-divider {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--ink-4); font-size: 13px;
+    }
+    .modal-divider::before,
+    .modal-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bg-2);
@@ -301,7 +497,6 @@
       font-size: 13px; color: var(--ink-3);
     }
     .footer-logo { font-weight: 800; color: var(--ink); }
-    .footer-logo span { color: var(--blue); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -310,6 +505,8 @@
       .rol-section.reverse { direction: ltr; }
       .form-row { grid-template-columns: 1fr; }
       .stats { gap: 32px; }
+      .feature-row { grid-template-columns: 1fr; gap: 32px; }
+      .feature-row.reverse { direction: ltr; }
     }
   </style>
 </head>
@@ -333,7 +530,7 @@
   <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
   <p>HorariaPro automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
   <div class="hero-actions">
-    <a href="#contacte" class="btn-primary">Sol·licitar demo gratuïta</a>
+    <button class="btn-primary" onclick="openDemoModal()">Sol·licitar demo gratuïta</button>
     <a href="#funcionalitats" class="btn-secondary">Veure funcionalitats</a>
   </div>
 </div>
@@ -364,67 +561,434 @@
     <div class="section-tag">Funcionalitats</div>
     <h2 class="section-title">Tot el que necessita el teu centre</h2>
     <p class="section-sub">Una sola eina per a tota la gestió d'absències, cobertures i horaris personals.</p>
-    <div class="features-grid">
 
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3>Avís d'absència des del mòbil</h3>
-        <p>Senzill i ràpid — els docents ho adopten sense formació. Centralitza tots els avisos (WhatsApp, email, trucades) en un sol canal per a la cap d'estudis.</p>
+    <div class="feature-rows">
+
+      <!-- 1. Avís des del mòbil -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">📲</div>
+          <h3>Avís d'absència des del mòbil</h3>
+          <p>Senzill i ràpid — els docents ho adopten sense formació. Centralitza tots els avisos (WhatsApp, email, trucades) en un sol canal per a la cap d'estudis.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/avis-mobil.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Avisar absència</span>
+            </div>
+            <div class="mock-row"><span class="mock-label" style="font-size:12px;">Data</span><span style="font-size:12px; color:var(--ink-2);">Dilluns 26 de maig</span></div>
+            <div class="mock-row">
+              <span class="mock-label" style="font-size:12px;">Franges</span>
+              <div style="display:flex;gap:4px;">
+                <span class="mock-badge blue">F1</span>
+                <span class="mock-badge blue">F2</span>
+                <span class="mock-badge blue">F3</span>
+              </div>
+            </div>
+            <div class="mock-row"><span class="mock-label" style="font-size:12px;">Motiu</span><span style="font-size:12px; color:var(--ink-2);">Malaltia</span></div>
+            <div style="margin-top:auto; background:var(--black); color:#fff; padding:10px 16px; border-radius:8px; text-align:center; font-size:13px; font-weight:700;">Enviar avís →</div>
+            <div style="font-size:11px; color:var(--ink-4); text-align:center;">Cap d'estudis notificada automàticament</div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">📅</div>
-        <h3>Graella grups × franges</h3>
-        <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull.</p>
+      <!-- 2. Graella grups × franges -->
+      <div class="feature-row reverse">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">📅</div>
+          <h3>Graella grups × franges</h3>
+          <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull. Veus immediatament quins grups queden sense cobrir.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/graella.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Graella avui — 26/05</span>
+            </div>
+            <div class="mock-grid-header">
+              <div></div>
+              <div class="mock-gh">F1</div>
+              <div class="mock-gh">F2</div>
+              <div class="mock-gh">F3</div>
+              <div class="mock-gh">F4</div>
+              <div class="mock-gh">F5</div>
+            </div>
+            <div class="mock-grid-body">
+              <div class="mock-grid-row">
+                <div class="mock-gl">1rA</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc pend">!</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+              </div>
+              <div class="mock-grid-row">
+                <div class="mock-gl">2nB</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc cob">IA</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+              </div>
+              <div class="mock-grid-row">
+                <div class="mock-gl">3rA</div>
+                <div class="mock-gc empty">—</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc pend">!</div>
+                <div class="mock-gc ok">✓</div>
+              </div>
+              <div class="mock-grid-row">
+                <div class="mock-gl">4tB</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+              </div>
+              <div class="mock-grid-row">
+                <div class="mock-gl">5èA</div>
+                <div class="mock-gc cob">IA</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc ok">✓</div>
+                <div class="mock-gc empty">—</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:auto;flex-wrap:wrap;">
+              <span class="mock-badge green">✓ Cobert</span>
+              <span class="mock-badge orange">! Pendent</span>
+              <span class="mock-badge blue">IA Proposa</span>
+              <span class="mock-badge gray">— Lliure</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card" style="border-color: var(--blue);">
-        <div class="feature-icon" style="background: var(--blue-lt);">🤖</div>
-        <h3>Proposta de cobertures amb IA</h3>
-        <p>La IA fa el 90% de la feina intel·lectual. El 10% restant és la confirmació i comprovació de la cap d'estudis. Dos models de notificació:</p>
-        <ul style="font-size:13px; color:var(--ink-2); margin-top:8px; padding-left:16px; line-height:1.7;">
-          <li><strong>Claustre complet:</strong> avís general que HorariaPro s'ha actualitzat.</li>
-          <li><strong>Persones afectades:</strong> qui cobreix, tutors condicionats i coordinadors d'etapa.</li>
-        </ul>
+      <!-- 3. IA cobertures -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon highlight">🤖</div>
+          <h3>Proposta de cobertures amb IA</h3>
+          <p>La IA fa el 90% de la feina intel·lectual. Analitza horaris, deutes de TP i normes del centre per proposar qui cobreix cada franja. El 10% restant és la teva confirmació.</p>
+          <ul>
+            <li><strong>Claustre complet:</strong> avís general que HorariaPro s'ha actualitzat.</li>
+            <li><strong>Persones afectades:</strong> qui cobreix, tutors condicionats i coordinadors d'etapa.</li>
+          </ul>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/proposta-ia.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Proposta IA</span>
+            </div>
+            <div class="mock-row">
+              <div class="mock-dot orange"></div>
+              <span class="mock-label">Marta Puig — Tot el dia</span>
+              <span class="mock-badge orange">Pendent</span>
+            </div>
+            <div class="mock-row">
+              <div class="mock-dot blue"></div>
+              <span class="mock-label">Joan Ferrer — F1a, F1b, F2a</span>
+              <span class="mock-badge blue">IA proposa →</span>
+            </div>
+            <div class="mock-ia-box">
+              <strong>🤖 Proposta IA — F1a (9:00–9:30)</strong><br>
+              <span style="font-size:12px;">Carles Mas · 0 TP pendents · Disponible</span>
+            </div>
+            <div class="mock-ia-box">
+              <strong>🤖 Proposta IA — F1b (9:30–10:00)</strong><br>
+              <span style="font-size:12px;">Laia Vidal · 1 TP pendent · Prioritat alta</span>
+            </div>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <div style="flex:1; background:var(--green-lt); color:var(--green); padding:10px; border-radius:8px; text-align:center; font-size:13px; font-weight:700;">✓ Confirmar tot</div>
+              <div style="background:var(--bg); border:1px solid var(--border); padding:10px 14px; border-radius:8px; font-size:13px; color:var(--ink-2);">Editar</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Registre d'absències i informes</h3>
-        <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual o Excel per a la PGA, presa de decisions i inspeccions.</p>
+      <!-- 4. Registre i informes -->
+      <div class="feature-row reverse">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">📊</div>
+          <h3>Registre d'absències i informes</h3>
+          <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual o Excel per a la PGA, presa de decisions i inspeccions.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/registre.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Historial — Maig 2026</span>
+            </div>
+            <div class="mock-stat-row"><span>Absències registrades</span><strong>24</strong></div>
+            <div class="mock-stat-row"><span>Cobertures realitzades</span><strong>67</strong></div>
+            <div class="mock-stat-row"><span>Permisos ATRI gestionats</span><strong>5</strong></div>
+            <div style="height:1px; background:var(--border); margin: 4px 0;"></div>
+            <div class="mock-row">
+              <div class="mock-dot orange"></div>
+              <div style="flex:1"><div class="mock-label" style="font-size:12px;">Puig, Marta</div><div class="mock-sub">Malaltia · 26/05</div></div>
+              <span class="mock-badge orange">ATRI</span>
+            </div>
+            <div class="mock-row">
+              <div class="mock-dot green"></div>
+              <div style="flex:1"><div class="mock-label" style="font-size:12px;">Ferrer, Joan</div><div class="mock-sub">Formació · 22/05</div></div>
+              <span class="mock-badge green">Justificada</span>
+            </div>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <div style="flex:1; background:var(--bg-2); border:1px solid var(--border); padding:9px; border-radius:8px; text-align:center; font-size:12px; font-weight:600; color:var(--ink-2);">📄 Exportar Excel</div>
+              <div style="flex:1; background:var(--bg-2); border:1px solid var(--border); padding:9px; border-radius:8px; text-align:center; font-size:12px; font-weight:600; color:var(--ink-2);">📊 Informe anual</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">👤</div>
-        <h3>Gestió del personal substitut</h3>
-        <p>Horari online del substitut, modificable fàcilment per la cap d'estudis. El personal té sempre la versió actualitzada a l'instant.</p>
+      <!-- 5. Personal substitut -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">👤</div>
+          <h3>Gestió del personal substitut</h3>
+          <p>Horari online del substitut, modificable fàcilment per la cap d'estudis. El personal té sempre la versió actualitzada a l'instant, des de qualsevol dispositiu.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/substitut.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Horari substitut</span>
+            </div>
+            <div style="font-size:12px; font-weight:700; color:var(--ink-3); margin-bottom:6px;">MARC OLIVÉ — Setmana 26–30 maig</div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px;">
+                <div style="font-size:9px;color:var(--ink-4);"></div>
+                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dl</div>
+                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dt</div>
+                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dc</div>
+                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dj</div>
+                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dv</div>
+              </div>
+              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
+                <div style="font-size:9px;color:var(--ink-4);">9:00</div>
+                <div class="mock-tb blue">3rA Mat</div>
+                <div class="mock-tb green">2nB</div>
+                <div class="mock-tb blue">1rA</div>
+                <div class="mock-tb green">4tB</div>
+                <div class="mock-tb blue">3rA</div>
+              </div>
+              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
+                <div style="font-size:9px;color:var(--ink-4);">9:30</div>
+                <div class="mock-tb green">5èA</div>
+                <div class="mock-tb gray">—</div>
+                <div class="mock-tb green">2nA</div>
+                <div class="mock-tb blue">1rB</div>
+                <div class="mock-tb gray">—</div>
+              </div>
+              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
+                <div style="font-size:9px;color:var(--ink-4);">10:00</div>
+                <div class="mock-tb gray">—</div>
+                <div class="mock-tb blue">6èA</div>
+                <div class="mock-tb orange">Guàrdia</div>
+                <div class="mock-tb gray">—</div>
+                <div class="mock-tb green">5èB</div>
+              </div>
+            </div>
+            <div style="margin-top:auto; font-size:11px; color:var(--ink-4); text-align:center; padding-top:8px; border-top: 1px solid var(--border);">Actualitzat en temps real · Accessible des del mòbil</div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">⚖️</div>
-        <h3>Seguiment de deutes de TP</h3>
-        <p>Tant la cap d'estudis com cada docent tenen control total sobre el Treball Personal acumulat. La IA el té en compte per repartir cobertures de forma equitativa.</p>
+      <!-- 6. Deutes TP -->
+      <div class="feature-row reverse">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">⚖️</div>
+          <h3>Seguiment de deutes de TP</h3>
+          <p>Tant la cap d'estudis com cada docent tenen control total sobre el Treball Personal acumulat. La IA el té en compte per repartir cobertures de forma equitativa.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/deutes-tp.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Deutes de TP</span>
+            </div>
+            <div class="mock-row">
+              <span style="font-size:11px;font-weight:800;color:var(--ink-4);width:20px;text-align:center;">1</span>
+              <span class="mock-label" style="font-size:12px;">Laia Vidal</span>
+              <span class="mock-badge orange">3 TP</span>
+            </div>
+            <div class="mock-row">
+              <span style="font-size:11px;font-weight:800;color:var(--ink-4);width:20px;text-align:center;">2</span>
+              <span class="mock-label" style="font-size:12px;">Pere Soler</span>
+              <span class="mock-badge orange">2 TP</span>
+            </div>
+            <div class="mock-row">
+              <span style="font-size:11px;font-weight:800;color:var(--ink-4);width:20px;text-align:center;">3</span>
+              <span class="mock-label" style="font-size:12px;">Anna Torres</span>
+              <span class="mock-badge blue">1 TP</span>
+            </div>
+            <div class="mock-row">
+              <span style="font-size:11px;font-weight:800;color:var(--ink-4);width:20px;text-align:center;">4</span>
+              <span class="mock-label" style="font-size:12px;">Carles Mas</span>
+              <span class="mock-badge green">0 TP</span>
+            </div>
+            <div class="mock-row">
+              <span style="font-size:11px;font-weight:800;color:var(--ink-4);width:20px;text-align:center;">5</span>
+              <span class="mock-label" style="font-size:12px;">Marta Puig</span>
+              <span class="mock-badge green">0 TP</span>
+            </div>
+            <div class="mock-ia-box" style="margin-top:auto;">
+              <span style="font-size:12px;">🤖 La IA prioritzarà <strong>Laia Vidal</strong> i <strong>Pere Soler</strong> en les pròximes cobertures</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">📁</div>
-        <h3>Gestió d'horaris (PDF, Word, imatge)</h3>
-        <p>Centralitza tots els horaris del centre. La cap d'estudis els edita i el personal accedeix sempre a la versió més actual, sense imprimir res.</p>
+      <!-- 7. Gestió horaris -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">📁</div>
+          <h3>Gestió d'horaris (PDF, Word, imatge)</h3>
+          <p>Centralitza tots els horaris del centre. La cap d'estudis els edita i el personal accedeix sempre a la versió més actual, sense imprimir res ni enviar correus.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/horaris.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Horaris del centre</span>
+            </div>
+            <div class="mock-file">
+              <div class="mock-file-icon pdf">📄</div>
+              <div style="flex:1">
+                <div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div>
+                <div class="mock-file-date">Actualitzat 15/09/2025</div>
+              </div>
+              <span class="mock-badge blue">Actual</span>
+            </div>
+            <div class="mock-file">
+              <div class="mock-file-icon doc">📝</div>
+              <div style="flex:1">
+                <div class="mock-file-name" style="font-size:12px;">Horari_Substituts_Maig.docx</div>
+                <div class="mock-file-date">Actualitzat 20/05/2026</div>
+              </div>
+              <span class="mock-badge blue">Actual</span>
+            </div>
+            <div class="mock-file">
+              <div class="mock-file-icon img">🖼️</div>
+              <div style="flex:1">
+                <div class="mock-file-name" style="font-size:12px;">Horari_Guardia_Pati.png</div>
+                <div class="mock-file-date">Actualitzat 02/10/2025</div>
+              </div>
+              <span class="mock-badge green">✓</span>
+            </div>
+            <div style="margin-top:auto; background:var(--bg-2); border:1px solid var(--border); padding:9px 14px; border-radius:8px; font-size:12px; font-weight:600; color:var(--ink-2); text-align:center; cursor:pointer;">+ Afegir horari</div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Compactació per jornada intensiva</h3>
-        <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment.</p>
+      <!-- 8. Compactació -->
+      <div class="feature-row reverse">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">⚡</div>
+          <h3>Compactació per jornada intensiva</h3>
+          <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/compactacio.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Compactació jornada</span>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA NORMAL</div>
+            <div class="mock-timeblock-row">
+              <div class="mock-tb blue">9:00–9:30</div>
+              <div class="mock-tb green">9:30–10:00</div>
+              <div class="mock-tb blue">10:00–10:30</div>
+              <div class="mock-tb gray">Esbarjo</div>
+              <div class="mock-tb green">11:00–11:30</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin: 8px 0;">
+              <div style="flex:1; height:1px; background:var(--border);"></div>
+              <span style="font-size:11px; font-weight:700; color:var(--blue); white-space:nowrap;">⚡ COMPACTAT AUTOMÀTIC</span>
+              <div style="flex:1; height:1px; background:var(--border);"></div>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA INTENSIVA</div>
+            <div class="mock-timeblock-row">
+              <div class="mock-tb blue">9:00–9:25</div>
+              <div class="mock-tb green">9:25–9:50</div>
+              <div class="mock-tb blue">9:50–10:15</div>
+              <div class="mock-tb green">10:15–10:40</div>
+              <div class="mock-tb orange">10:40–11:05</div>
+            </div>
+            <div class="mock-ia-box" style="margin-top:auto;">
+              <span style="font-size:12px;">✓ Compactat per a <strong>5 grups</strong> · Exporta com a PDF</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🎒</div>
-        <h3>Gestió de sortides i acompanyants</h3>
-        <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
+      <!-- 9. Sortides -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon">🎒</div>
+          <h3>Gestió de sortides i acompanyants</h3>
+          <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <!-- Substituir per: <video autoplay loop muted playsinline><source src="/videos/sortides.mp4" type="video/mp4"></video> -->
+          <div class="feature-mock">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Sortida — 4t cicle</span>
+            </div>
+            <div style="background:var(--blue-lt); border-radius:10px; padding:12px 14px; margin-bottom:4px;">
+              <div style="font-size:13px; font-weight:700; color:var(--blue);">🎒 Visita Museu Ciències</div>
+              <div style="font-size:11px; color:var(--blue); opacity:.8;">Dijous 29/05 · 9:00–14:00 · 4tA + 4tB</div>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin: 6px 0 4px;">ACOMPANYANTS</div>
+            <div class="mock-row">
+              <div class="mock-dot green"></div>
+              <span class="mock-label" style="font-size:12px;">Marta Puig</span>
+              <span class="mock-badge green">Confirmat</span>
+            </div>
+            <div class="mock-row">
+              <div class="mock-dot green"></div>
+              <span class="mock-label" style="font-size:12px;">Carles Mas</span>
+              <span class="mock-badge green">Confirmat</span>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin: 6px 0 4px;">COBERTURES GENERADES</div>
+            <div class="mock-ia-box">
+              <span style="font-size:12px;">🤖 <strong>4 cobertures</strong> generades automàticament per les franges buides</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-    </div>
+    </div><!-- /feature-rows -->
   </div>
 </section>
 
@@ -663,7 +1227,81 @@
   <div>© 2026 HorariaPro. Tots els drets reservats.</div>
 </footer>
 
+<!-- DEMO MODAL -->
+<div class="modal-overlay" id="demoModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h3>Sol·licitar demo gratuïta</h3>
+        <p>Tria com vols conèixer HorariaPro</p>
+      </div>
+      <button class="modal-close" onclick="closeDemoModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Opció 1: Calendly -->
+      <a class="modal-option" href="#" onclick="openCalendly(event)">
+        <div class="modal-option-icon cal">📅</div>
+        <div class="modal-option-text">
+          <strong>Reserva una demo en directe</strong>
+          <span>Videotrucada de 30 min · Et mostro l'app en acció i responc tots els dubtes</span>
+        </div>
+        <div class="modal-option-arrow">→</div>
+      </a>
+
+      <div class="modal-divider">o</div>
+
+      <!-- Opció 2: Formulari -->
+      <a class="modal-option" href="#contacte" onclick="closeDemoModal()">
+        <div class="modal-option-icon form">✉️</div>
+        <div class="modal-option-text">
+          <strong>Envia'm un missatge</strong>
+          <span>Omple el formulari i et contacto en menys de 24h</span>
+        </div>
+        <div class="modal-option-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
+  /* ── DEMO MODAL ── */
+  function openDemoModal() {
+    document.getElementById('demoModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDemoModal() {
+    document.getElementById('demoModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleModalOverlayClick(e) {
+    if (e.target === document.getElementById('demoModal')) {
+      closeDemoModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDemoModal();
+  });
+
+  /* ── CALENDLY ── */
+  function openCalendly(e) {
+    e.preventDefault();
+    closeDemoModal();
+    // TODO: substitueix l'URL per la teva URL de Calendly
+    // Passos: 1) Crea compte a calendly.com  2) Crea un event "Demo HorariaPro 30 min"
+    //         3) Copia la URL i substitueix la de sota
+    var calendlyUrl = 'https://calendly.com/horaria-admin/30min';
+    if (typeof Calendly !== 'undefined') {
+      Calendly.initPopupWidget({ url: calendlyUrl });
+    } else {
+      window.open(calendlyUrl, '_blank');
+    }
+  }
+
+  /* ── CONTACT FORM ── */
   function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.btn-submit');
