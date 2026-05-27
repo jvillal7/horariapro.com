@@ -1695,7 +1695,7 @@
           '<span style="font-size:12px;color:var(--ink-3);">Analitzant 3 franges i 28 docents...</span>' +
         '</div>' +
         '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;font-size:11px;color:var(--blue);font-family:monospace;line-height:1.9;animation:scaleIn .4s ease .4s both;">' +
-          '📋 PROPOSTA IA\n──────────────────\nF1a  │  Carles Mas  ✓\nF1b  │  Laia Vidal  ⚠TP\nF2a  │  Pere Soler  ✓\n──────────────────' +
+          '📋 PROPOSTA IA\n──────────────────\n9:00–9:30  │  Carles Mas  ✓\n9:30–10:00 │  Laia Vidal  ⚠\n10:00–10:30│  Pere Soler  ✓\n──────────────────' +
         '</div>' +
       '</div>',
 
@@ -1705,9 +1705,9 @@
         '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;animation:slideUp .3s ease both;">' +
           '<div style="font-weight:700;margin-bottom:8px;font-size:13px;">Proposta de la IA</div>' +
           '<div style="display:flex;flex-direction:column;gap:5px;">' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>F1a → Carles Mas</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>F1b → Laia Vidal</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>F2a → Pere Soler</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:00–9:30 → Carles Mas</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:30–10:00 → Laia Vidal</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>10:00–10:30 → Pere Soler</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
           '</div>' +
         '</div>' +
         '<div style="background:var(--green-lt);border:1px solid #86efac;color:var(--green);padding:12px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;animation:howConfirm .5s ease .4s both;">✓ Confirmat — 3 cobertures registrades</div>' +
@@ -1889,13 +1889,13 @@
         },
         { d: 1400, h:
           row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box"><strong>🤖 F1a</strong> → Carles Mas ✓</div>' +
-          '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 F1b (9:30–10:00)</strong><br><span style="font-size:11px;">Laia Vidal · 1 TP pendent · Prioritat alta ⚠</span></div>'
+          '<div class="mock-ia-box"><strong>🤖 9:00–9:30</strong> → Carles Mas ✓</div>' +
+          '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 9:30–10:00</strong><br><span style="font-size:11px;">Laia Vidal · 1 TP pendent · Prioritat alta ⚠</span></div>'
         },
         { d: 2000, h:
           row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box"><strong>🤖 F1a</strong> → Carles Mas ✓</div>' +
-          '<div class="mock-ia-box"><strong>🤖 F1b</strong> → Laia Vidal ⚠</div>' +
+          '<div class="mock-ia-box"><strong>🤖 9:00–9:30</strong> → Carles Mas ✓</div>' +
+          '<div class="mock-ia-box"><strong>🤖 9:30–10:00</strong> → Laia Vidal ⚠</div>' +
           '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 F2a</strong> → Pere Soler ✓</div>' +
           '<div style="margin-top:auto;display:flex;gap:6px;">' +
             '<div style="flex:1;background:var(--green-lt);color:var(--green);padding:10px;border-radius:8px;text-align:center;font-size:12px;font-weight:700;animation:pulseBorder 1s ease-in-out infinite;">✓ Confirmar tot</div>' +
@@ -1921,14 +1921,14 @@
         { d: 1800, h:
           '<div class="mock-chat-messages">' +
             '<div class="mock-bubble-ai">Hola! 👋 Per qui busques cobertura avui?</div>' +
-            '<div class="mock-bubble-user" style="animation:slideUp .3s ease both;">Marta Puig, franges f1a, f1b i f2a</div>' +
+            '<div class="mock-bubble-user" style="animation:slideUp .3s ease both;">Marta Puig, de 9:00 a 10:30</div>' +
           '</div>' +
           '<div class="mock-chat-input"><div class="mock-chat-input-field">Escriu el teu missatge...</div><div class="mock-chat-send">↑</div></div>'
         },
         { d: 2800, h:
           '<div class="mock-chat-messages">' +
             '<div class="mock-bubble-ai">Hola! 👋 Per qui busques cobertura avui?</div>' +
-            '<div class="mock-bubble-user">Marta Puig, franges f1a, f1b i f2a</div>' +
+            '<div class="mock-bubble-user">Marta Puig, de 9:00 a 10:30</div>' +
             '<div class="mock-loading-dots" style="animation:slideUp .3s ease both;">' +
               '<div class="mock-dot-pulse"><span></span><span></span><span></span></div>' +
               '<span>⚖️ Comprovant deutes de TP...</span>' +
@@ -1940,7 +1940,7 @@
           '<div class="mock-chat-messages">' +
             '<div class="mock-bubble-ai">Per a <strong>Marta Puig</strong>, he analitzat 28 docents i 3 franges.</div>' +
             '<div class="mock-chat-proposta" style="animation:scaleIn .4s ease .2s both;">' +
-              '📋 PROPOSTA IA\n══════════════════\nF1a  │  Carles Mas  ✓\nF1b  │  Laia Vidal  ⚠TP\nF2a  │  Pere Soler  ✓\n══════════════════' +
+              '📋 PROPOSTA IA\n══════════════════\n9:00–9:30  │  Carles Mas  ✓\n9:30–10:00 │  Laia Vidal  ⚠\n10:00–10:30│  Pere Soler  ✓\n══════════════════' +
             '</div>' +
             '<button style="background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;animation:slideUp .3s ease .6s both;align-self:flex-start;">✓ Aplicar proposta</button>' +
           '</div>' +
@@ -2025,7 +2025,7 @@
           '<div class="mock-file"><div class="mock-file-icon pdf">📄</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div><div class="mock-file-date">Actualitzat 15/09/2025</div></div><span class="mock-badge blue">Actual</span></div>' +
           '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:slideUp .3s ease both;">' +
             '<div style="width:16px;height:16px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:iaSpinner .7s linear infinite;flex-shrink:0;"></div>' +
-            '<div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--blue);">Nou_Horari_Juny.pdf</div><div style="font-size:11px;color:var(--blue);opacity:.7;">🤖 Claude extraient horari...</div></div>' +
+            '<div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--blue);">Nou_Horari_Juny.pdf</div><div style="font-size:11px;color:var(--blue);opacity:.7;">🤖 HorarIA extraient horari...</div></div>' +
           '</div>' +
           '<div style="margin-top:auto;background:var(--bg-2);border:1px dashed var(--border);padding:12px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:var(--ink-3);">+ Afegir horari</div>'
         },
@@ -2036,25 +2036,50 @@
         },
       ]},
 
-      'mock-compactacio': { title: 'Compactació jornada', frames: [
-        { d: 2000, h:
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:4px;">JORNADA NORMAL</div>' +
-          '<div class="mock-timeblock-row"><div class="mock-tb blue">9:00–9:30</div><div class="mock-tb green">9:30–10:00</div><div class="mock-tb blue">10:00–10:30</div><div class="mock-tb gray">Esbarjo</div><div class="mock-tb green">11:00–11:30</div></div>' +
-          '<div style="margin:12px 0;text-align:center;font-size:12px;color:var(--ink-4);">↓ Compactant automàticament...</div>' +
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:4px;">JORNADA INTENSIVA</div>' +
-          '<div class="mock-timeblock-row"><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div></div>'
+      'mock-compactacio': { title: 'Compactació de jornada', frames: [
+        { d: 3000, h:
+          '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Horari normal · Curs 2025–26</div>' +
+          '<div style="display:flex;flex-direction:column;gap:2px;font-size:10px;">' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:00</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">1a hora</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:30</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">1a hora</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">10:00</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">2a hora</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">10:30</span><div style="flex:1;background:#fef9c3;border-radius:3px;padding:3px 7px;color:#a16207;font-weight:600;">☀️ Pati</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:00</span><div style="flex:1;background:#fef9c3;border-radius:3px;padding:3px 7px;color:#a16207;font-weight:600;">☀️ Pati</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:30</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">3a hora</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:00</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">3a hora</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:30</span><div style="flex:1;background:var(--bg-2);border-radius:3px;padding:3px 7px;color:var(--ink-4);font-weight:600;">🍽️ Dinar</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:00</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:30</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">16:00</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight:700;">16:30</span><span style="color:var(--ink-4);">Fi de jornada</span></div>' +
+          '</div>'
         },
-        { d: 2500, h:
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:4px;">JORNADA NORMAL</div>' +
-          '<div class="mock-timeblock-row"><div class="mock-tb blue">9:00–9:30</div><div class="mock-tb green">9:30–10:00</div><div class="mock-tb blue">10:00–10:30</div><div class="mock-tb gray">Esbarjo</div><div class="mock-tb green">11:00–11:30</div></div>' +
-          '<div style="display:flex;align-items:center;gap:8px;margin:10px 0;">' +
-            '<div style="flex:1;height:1px;background:var(--border);"></div>' +
-            '<span style="font-size:11px;font-weight:700;color:var(--blue);white-space:nowrap;">⚡ COMPACTAT AUTOMÀTIC</span>' +
-            '<div style="flex:1;height:1px;background:var(--border);"></div>' +
+        { d: 2000, h:
+          '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:10px;">' +
+            '<div style="width:36px;height:36px;border:3px solid var(--blue-lt);border-top-color:var(--blue);border-radius:50%;animation:iaSpinner .8s linear infinite;"></div>' +
+            '<div style="font-size:13px;font-weight:700;color:var(--blue);text-align:center;">HorarIA generant jornada intensiva...</div>' +
+            '<div style="font-size:11px;color:var(--ink-3);text-align:center;">Compactant slots a 15 min · Eliminant la tarda</div>' +
+          '</div>'
+        },
+        { d: 3500, h:
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
+            '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;">Jornada intensiva · HorarIA ⚡</div>' +
+            '<span class="mock-badge green" style="animation:scaleIn .3s ease both;">Generat ✓</span>' +
           '</div>' +
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:4px;">JORNADA INTENSIVA</div>' +
-          '<div class="mock-timeblock-row" style="animation:scaleIn .4s ease both;"><div class="mock-tb blue">9:00–9:25</div><div class="mock-tb green">9:25–9:50</div><div class="mock-tb blue">9:50–10:15</div><div class="mock-tb green">10:15–10:40</div><div class="mock-tb orange">10:40–11:05</div></div>' +
-          ia('✓ Compactat per a <strong>5 grups</strong> · Exporta com a PDF')
+          '<div style="display:flex;flex-direction:column;gap:2px;font-size:10px;animation:slideUp .4s ease both;">' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:00</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">1a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:15</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">1a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:30</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">1a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:45</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">2a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">10:00</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">2a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">10:30</span><div style="flex:1;background:#fef9c3;border-radius:3px;padding:3px 7px;color:#a16207;font-weight:600;">☀️ Pati (60 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:30</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:45</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:00</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:15</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight:800;">13:00</span><div style="flex:1;background:var(--green-lt);border:1px solid #86efac;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:700;">✓ Fi — Sense tarda</div></div>' +
+          '</div>' +
+          '<div style="margin-top:auto;font-size:11px;color:var(--ink-3);text-align:center;padding-top:6px;border-top:1px solid var(--border);">Exporta com a PDF · Disponible a l\'app</div>'
         },
       ]},
 
