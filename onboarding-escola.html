@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Onboarding nova escola — HorariaPro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1a1a; --ink-2: #444; --ink-3: #777; --ink-4: #aaa;
+  --border: #e8e8e8; --bg: #fff; --bg-2: #f7f7f7;
+  --blue: #2563eb; --blue-lt: #eff6ff;
+  --green: #16a34a; --green-lt: #f0fdf4;
+  --amber: #d97706; --amber-lt: #fffbeb;
+  --purple: #7c3aed; --purple-lt: #f5f3ff;
+  --r: 10px; --shadow: 0 2px 16px rgba(0,0,0,.07);
+}
+body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--bg-2); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); }
+
+nav {
+  background: rgba(10,10,10,.96); backdrop-filter: blur(12px);
+  padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+  height: 60px; border-bottom: 1px solid rgba(255,255,255,.08);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo { font-weight: 800; font-size: 18px; color: #fff; }
+.nav-badge { background: var(--purple); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; letter-spacing: .04em; text-transform: uppercase; }
+
+.hero { background: var(--ink); color: #fff; padding: 48px 5% 40px; }
+.hero .tag { display: inline-block; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; line-height: 1.2; }
+.hero p { color: rgba(255,255,255,.6); margin-top: 10px; font-size: 14px; max-width: 640px; line-height: 1.6; }
+.hero-steps { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+.hero-step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,.7); }
+.hero-step .num { background: rgba(255,255,255,.15); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+.main { max-width: 860px; margin: 0 auto; padding: 40px 5% 80px; }
+
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 28px 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
+.card-title { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.card-title .num { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.card-title.blue { color: var(--blue); }
+.card-title.blue .num { background: var(--blue-lt); color: var(--blue); }
+.card-title.green { color: var(--green); }
+.card-title.green .num { background: var(--green-lt); color: var(--green); }
+.card-title.amber { color: var(--amber); }
+.card-title.amber .num { background: var(--amber-lt); color: var(--amber); }
+.card-title.purple { color: var(--purple); }
+.card-title.purple .num { background: var(--purple-lt); color: var(--purple); }
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-full { grid-column: 1 / -1; }
+.field label { display: block; font-size: 11px; font-weight: 700; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .03em; text-transform: uppercase; }
+.field label .req { color: var(--blue); }
+.field input, .field select, .field textarea {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 10px 13px; font-size: 14px; font-family: inherit; color: var(--ink);
+  background: var(--bg); outline: none; transition: border-color .15s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
+.field textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+.field .hint { font-size: 11px; color: var(--ink-4); margin-top: 5px; line-height: 1.5; }
+.field input[type=number] { -moz-appearance: textfield; }
+
+.check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-top: 4px; }
+.check-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 8px; transition: border-color .15s; }
+.check-opt:has(input:checked) { border-color: var(--blue); background: var(--blue-lt); }
+.check-opt input[type=checkbox] { accent-color: var(--blue); width: 15px; height: 15px; flex-shrink: 0; }
+.check-opt span { font-size: 13px; color: var(--ink-2); }
+
+.exemple-bloc { border: 1.5px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 14px; }
+.exemple-bloc:last-child { margin-bottom: 0; }
+.exemple-num { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+.exemple-bloc.emergencia { border-color: #fca5a5; background: #fff5f5; }
+.exemple-bloc.emergencia .exemple-num { color: #dc2626; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 8px 0 20px; }
+
+.submit-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 8px; }
+.btn-primary { background: var(--blue); color: #fff; border: none; border-radius: 8px; padding: 14px 32px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-primary:hover { opacity: .88; }
+.btn-primary:disabled { opacity: .45; cursor: not-allowed; }
+.btn-secondary { background: var(--bg); color: var(--ink); border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: border-color .15s; }
+.btn-secondary:hover { border-color: var(--ink-3); }
+.btn-success { background: var(--green); color: #fff; border: none; border-radius: 8px; padding: 14px 32px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-success:hover { opacity: .88; }
+.btn-success:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ── LOADING ── */
+#loading { display: none; }
+.loading-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 40px 32px; text-align: center; box-shadow: var(--shadow); }
+.loading-spinner { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.loading-sub { font-size: 14px; color: var(--ink-3); margin-bottom: 24px; }
+.loading-stream { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-size: 12px; font-family: monospace; color: var(--ink-3); min-height: 80px; max-height: 160px; overflow: hidden; text-align: left; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+
+/* ── PREVIEW ── */
+#preview { display: none; }
+.preview-header { margin-bottom: 20px; }
+.preview-header h2 { font-size: 20px; font-weight: 800; color: var(--ink); }
+.preview-header p { font-size: 14px; color: var(--ink-3); margin-top: 6px; }
+.preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+@media (max-width: 640px) { .preview-grid { grid-template-columns: 1fr; } }
+.preview-panel { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.preview-panel-header { padding: 14px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+.preview-panel-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-context { background: var(--blue); }
+.dot-normes { background: var(--green); }
+.preview-panel-header span { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.preview-panel textarea { width: 100%; border: none; padding: 16px 20px; font-size: 13px; font-family: 'Inter', monospace; line-height: 1.7; color: var(--ink-2); min-height: 400px; resize: vertical; outline: none; background: var(--bg); }
+.preview-panel textarea:focus { background: #fafbff; }
+
+.preview-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.preview-note { font-size: 12px; color: var(--ink-4); }
+
+/* ── SUCCESS ── */
+#success { display: none; }
+.success-card { background: var(--bg); border: 1.5px solid var(--green); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); }
+.success-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.success-ico { font-size: 40px; }
+.success-top h2 { font-size: 20px; font-weight: 800; color: var(--green); }
+.success-top p { font-size: 14px; color: var(--ink-3); margin-top: 4px; }
+.success-info { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+@media (max-width: 540px) { .success-info { grid-template-columns: 1fr; } }
+.info-box { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.info-box .lbl { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 4px; }
+.info-box .val { font-size: 14px; font-weight: 600; color: var(--ink); font-family: monospace; }
+.next-steps { background: var(--blue-lt); border-radius: 8px; padding: 16px 20px; }
+.next-steps p { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 10px; }
+.next-steps ol { padding-left: 18px; }
+.next-steps li { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+
+@media (max-width: 640px) {
+  .fields { grid-template-columns: 1fr; }
+  .card { padding: 20px; }
+}
+
+@media print { nav, .hero { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">HorariaPro</div>
+  <div class="nav-badge">Configuració escola</div>
+</nav>
+
+<div class="hero">
+  <div class="tag">Onboarding</div>
+  <h1>Configuració de nova escola</h1>
+  <p>Respon les preguntes amb el màxim detall possible. La IA analitzarà les respostes i generarà automàticament el Context IA i les Normes IA de l'escola, llestes per activar.</p>
+  <div class="hero-steps">
+    <div class="hero-step"><div class="num">1</div> Ompliu el formulari</div>
+    <div class="hero-step"><div class="num">2</div> La IA genera Context + Normes</div>
+    <div class="hero-step"><div class="num">3</div> Reviseu i confirmeu</div>
+    <div class="hero-step"><div class="num">4</div> Escola activa a HorariaPro</div>
+  </div>
+</div>
+
+<div class="main">
+<form id="form" novalidate>
+
+<!-- ══ A. DADES DEL CENTRE ══ -->
+<div class="card">
+  <div class="card-title blue"><div class="num">A</div> Dades del centre</div>
+  <div class="fields">
+    <div class="field">
+      <label>Nom complet del centre <span class="req">*</span></label>
+      <input type="text" id="nom" placeholder="CEIP / CEE / INS..." required />
+    </div>
+    <div class="field">
+      <label>Codi curt <span class="req">*</span></label>
+      <input type="text" id="codi" placeholder="Ex: RIVO, ORIOL, PRATS..." maxlength="6" required />
+      <div class="hint">3–6 lletres majúscules, sense espais. Identificador intern de l'escola.</div>
+    </div>
+    <div class="field">
+      <label>Etapes educatives <span class="req">*</span></label>
+      <select id="etapes" required>
+        <option value="">— Selecciona —</option>
+        <option value="Infantil i Primària">Infantil i Primària (CEIP)</option>
+        <option value="Primària">Primària (CEP)</option>
+        <option value="Educació Especial">Educació Especial (CEE)</option>
+        <option value="Secundària">Secundària (INS)</option>
+        <option value="Infantil, Primària i Secundària">Infantil, Primària i Secundària (CFA/ZER)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Nombre de docents aprox.</label>
+      <input type="number" id="num_docents" placeholder="30" min="1" />
+    </div>
+    <div class="field field-full">
+      <label>Serveis i recursos del centre</label>
+      <div class="check-group">
+        <label class="check-opt"><input type="checkbox" id="te_siei" /><span>Aula SIEI</span></label>
+        <label class="check-opt"><input type="checkbox" id="te_siei_plus" /><span>Aula SIEI+</span></label>
+        <label class="check-opt"><input type="checkbox" id="te_mesi" /><span>Personal MESI</span></label>
+        <label class="check-opt"><input type="checkbox" id="te_educadores" /><span>Educadores</span></label>
+        <label class="check-opt"><input type="checkbox" id="te_vetlladores" /><span>Vetlladores</span></label>
+        <label class="check-opt"><input type="checkbox" id="te_acollida" /><span>Aula d'acollida</span></label>
+        <label class="check-opt"><input type="checkbox" id="horari_tarda" /><span>Horari de tarda</span></label>
+        <label class="check-opt"><input type="checkbox" id="horari_intensiu" /><span>Horari intensiu/compactat</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ B. EQUIP DIRECTIU ══ -->
+<div class="card">
+  <div class="card-title blue"><div class="num">B</div> Equip directiu</div>
+  <div class="fields">
+    <div class="field">
+      <label>Nom del/la director/a <span class="req">*</span></label>
+      <input type="text" id="nom_director" placeholder="Nom i cognoms" required />
+    </div>
+    <div class="field">
+      <label>Nom de la cap d'estudis <span class="req">*</span></label>
+      <input type="text" id="nom_jefa" placeholder="Nom i cognoms" required />
+    </div>
+    <div class="field">
+      <label>Nom del/la secretari/a</label>
+      <input type="text" id="nom_secretaria" placeholder="Nom i cognoms" />
+    </div>
+    <div class="field">
+      <label>Email de la cap d'estudis</label>
+      <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
+    </div>
+  </div>
+</div>
+
+<!-- ══ C. GRUPS, CICLES I PERSONAL ══ -->
+<div class="card">
+  <div class="card-title green"><div class="num">C</div> Estructura de grups, cicles i personal</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Llista de tots els grups/classes <span class="req">*</span></label>
+      <input type="text" id="grups" placeholder="Ex: I3A, I3B, I4A, I4B, I5A, I5B, 1rA, 1rB, 2nA, 2nB, 3rA, 3rB, 4tA, 4tB, 5eA, 5eB, 6eA, 6eB" required />
+      <div class="hint">Separats per comes. Exactament com apareixeran a l'app.</div>
+    </div>
+    <div class="field field-full">
+      <label>Organització en cicles</label>
+      <input type="text" id="cicles" placeholder="Ex: Infantil (I3-I5) · Cicle Inicial (1r-2n) · Cicle Mitjà (3r-4t) · Cicle Superior (5è-6è)" />
+    </div>
+    <div class="field field-full">
+      <label>Coordinadors/es de cicle</label>
+      <input type="text" id="coordinadors" placeholder="Ex: Anna (Infantil), Carles (CI), Marta (CM), Lluís (CS)" />
+    </div>
+    <div class="field field-full">
+      <label>Personal de suport especial (noms i funció)</label>
+      <textarea id="personal_suport" placeholder="Ex: Aurora i Clara (SIEI — alumnes amb NEE, no cobrien absències generals). Sònia i Leyre (educadores — suport a alumnes concrets, no fan docència general). Víctor (vetllador). Montse (MESI — última opció per cobrir)." ></textarea>
+      <div class="hint">Especifica nom i funció real de cada persona. Serà clau per les normes de cobertura.</div>
+    </div>
+    <div class="field field-full">
+      <label>Especialistes i les seves àrees</label>
+      <textarea id="especialistes" placeholder="Ex: Jordi (Educació Física), Laia (Anglès), Neus (Música), Anna M. (EI Suport). Tots imparteixen classe al centre però no tenen grup tutor fix." ></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Docents a temps parcial o mitja jornada</label>
+      <input type="text" id="mitges_jornades" placeholder="Ex: Glòria (matins fins a les 12:30), Laura P. (tardes des de les 15:00)" />
+    </div>
+  </div>
+</div>
+
+<!-- ══ D. PRIORITATS DE COBERTURA ══ -->
+<div class="card">
+  <div class="card-title amber"><div class="num">D</div> Prioritats i lògica de cobertura</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Quan reps un avís d'absència, quin és el primer que mires? Qui valores primer? <span class="req">*</span></label>
+      <textarea id="q_prioritats" placeholder="Ex: Primer miro si hi ha algú alliberat perquè el seu grup és de sortida. Després, qui fa suport al mateix grup o cicle. Si no, busco qui té TP aquella franja..." required></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Hi ha un ordre clar de prioritat? Descriu-lo pas a pas.</label>
+      <textarea id="q_ordre" placeholder="1r: Docent alliberat per sortida del grup. 2n: Suport al mateix grup/nivell. 3r: Suport al mateix cicle. 4t: TP del propi cicle. 5è: TP d'un altre cicle. Últim recurs: coordinació o directiu..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Hi ha docents que MAI fas servir per cobrir? Per quina raó?</label>
+      <textarea id="q_mai_cobrir" placeholder="Ex: El personal SIEI (Aurora i Clara) mai cobreix perquè han d'atendre els alumnes NEE. Les vetlladores tampoc, per la mateixa raó. Els directius, en general, evitem trencar-los la feina de gestió..."></textarea>
+    </div>
+    <div class="field">
+      <label>Si tens dues opcions igual de bones, quin criteri desempata?</label>
+      <textarea id="q_desempat" placeholder="Ex: Trio la persona que porta menys cobertures aquell mes / la que no ha cobert aquell mateix dia / la que coneix millor el grup..."></textarea>
+    </div>
+    <div class="field">
+      <label>Límit màxim de cobertures per docent en una mateixa jornada</label>
+      <input type="text" id="q_limit_jornada" placeholder="Ex: Màxim 2 hores (2 franges) per jornada" />
+    </div>
+    <div class="field field-full">
+      <label>Intentes repartir les cobertures equitativament? Com ho controles?</label>
+      <textarea id="q_equitat" placeholder="Ex: Sí, porto un recompte mental per mes. A partir de 3 cobertures en el mes, intento no posar-ne més a aquella persona si hi ha alternatives..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Tens en compte les cobertures que ja ha fet aquell mateix dia?</label>
+      <textarea id="q_mateix_dia" placeholder="Ex: Sí, si la Joan ja ha cobert la 1a franja del matí, evito posar-li també la 3a. Prefereixo distribuir..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Prefereixes enviar algú que coneix el grup/cicle? Fins a quin punt és important?</label>
+      <textarea id="q_afinitat" placeholder="Ex: Per Infantil sí que ho prioritzo bastant, sobretot pels més petits (I3). Per Primària és menys crític. Si falta un especialista (EF, Música), que cobreixi el tutor del grup..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ E. ACTIVITATS ESPECIALS ══ -->
+<div class="card">
+  <div class="card-title amber"><div class="num">E</div> Activitats especials del centre</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Teniu desdoblaments, racons, tallers, o activitats on alumnes de grups diferents es barregen?</label>
+      <textarea id="q_activitats" placeholder="Ex: Sí, tenim Racons els dimarts al matí: un especialista agafa alumnes de dos grups del mateix nivell mentre les tutores es queden amb menys alumnes. Tenim Tallers els dijous a la tarda: alumnes del cicle barrellats per grups de 12-15..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Per a cada activitat especial: si falta el TUTOR, que passa? I si falta l'ESPECIALISTA?</label>
+      <textarea id="q_activitats_protocol" placeholder="Ex: Si falta el tutor el dia de racons → l'especialista del racó assumeix el grup complet, no cal cobrir a part. Si falta l'especialista → no es fan racons, cada tutora es queda el seu grup, no cal cobrir l'especialista..."></textarea>
+    </div>
+    <div class="field field-full" id="camp_intensiu" style="display:none;">
+      <label>Com funciona la cobertura en horari intensiu/compactat?</label>
+      <textarea id="q_intensiu" placeholder="Ex: En intensiu no hi ha tarda. Les franges del matí s'amplien. Si falta algú, el criteri és el mateix però nomes fins a les 13:00-14:00..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ F. TREBALL PERSONAL I COORDINACIÓ ══ -->
+<div class="card">
+  <div class="card-title purple"><div class="num">F</div> Treball Personal (TP) i coordinació</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Quan trenques el TP d'algú, com i quan ho comuniques?</label>
+      <textarea id="q_tp_comunicar" placeholder="Ex: Li aviso per WhatsApp o en persona just quan ho decideixo. Si l'absència és de la nit anterior, aviso per WhatsApp aquella nit..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Com es retorna el TP? Hi ha un termini o sistema concret?</label>
+      <textarea id="q_tp_retornar" placeholder="Ex: Intento retornar-lo la mateixa setmana o la següent. Busco una franja de pati, suport o reducció de grup on pugui alliberar la persona..."></textarea>
+    </div>
+    <div class="field">
+      <label>Hi ha un límit de TPs acumulats que no pot superar cap docent?</label>
+      <input type="text" id="q_tp_limit" placeholder="Ex: Intentem que no s'acumulin més de 3-4 TPs pendents" />
+    </div>
+    <div class="field">
+      <label>Protegeixes els que acumulen molts TPs sense retornar?</label>
+      <textarea id="q_tp_protegir" placeholder="Ex: Sí, si algú porta 3 TPs sense retornar, procuro no trencar-li'n més si hi ha alternatives..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Si l'única opció disponible és algú amb coordinació o càrrec aquella hora, li demanes?</label>
+      <textarea id="q_coordinacio" placeholder="Ex: Sí, però és el darrer recurs. Els coordinadors de cicle sí que els interrompo si cal. Al coordinador de riscos laborals, quasi mai, és molt crític. L'equip directiu en situació extrema..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Hi ha algun coordinador que mai interrompes perquè la seva funció és crítica?</label>
+      <input type="text" id="q_coordinacio_mai" placeholder="Ex: La coordinadora pedagògica (Clara) quasi mai. El coordinador TAC tampoc durant sessions amb alumnes..." />
+    </div>
+  </div>
+</div>
+
+<!-- ══ G. PERSONAL DE SUPORT ══ -->
+<div class="card">
+  <div class="card-title purple"><div class="num">G</div> Personal de suport (SIEI, MESI, educadores, vetlladores)</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>El personal SIEI o MESI pot cobrir absències generals? En quines circumstàncies?</label>
+      <textarea id="q_siei" placeholder="Ex: El SIEI (Aurora i Clara) mai cobreix tutors, la seva funció és exclusivament els alumnes NEE. El MESI (Montse) pot cobrir com a ÚLTIM recurs si no hi ha absolutament ningú, però intentem no trencar-li la sessió..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Les educadores/vetlladores poden cobrir un grup normal? Quin és el protocol EXACTE?</label>
+      <textarea id="q_educadores" placeholder="Ex: Les educadores (Sònia i Leyre) NO cobreixen tutors en cap cas, la seva funció és suport a alumnes concrets. Si no hi ha absolutament ningú, es reparteix el grup entre aules veïnes del mateix cicle..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Els docents a temps parcial/mitja jornada, quan i com es fan servir per cobrir?</label>
+      <textarea id="q_mitja_jornada" placeholder="Ex: La Glòria (matins) pot cobrir qualsevol franja fins a les 12:30. La Laura P. (tardes) pot cobrir des de les 15:00. Mai se'ls posa cobertures fora del seu horari parcial..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ H. EMERGÈNCIES I SITUACIONS LÍMIT ══ -->
+<div class="card">
+  <div class="card-title amber"><div class="num">H</div> Emergències i situacions límit</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Si no hi ha absolutament ningú disponible, què fas? Com gestiones el grup?</label>
+      <textarea id="q_emergencia" placeholder="Ex: Divideixo el grup entre les aules veïnes del mateix cicle. Si és infantil, sempre intento que no quedin més de 30 alumnes per aula. Com a últim recurs entro jo (cap d'estudis) a fer-me càrrec..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Hi ha algun docent que funciona com a 'reserva' o coixí per a situacions extremes?</label>
+      <input type="text" id="q_reserva" placeholder="Ex: La Montse (MESI) és el nostre últim recurs. En alguns casos, el cap d'estudis entra directament." />
+    </div>
+    <div class="field">
+      <label>Per a absències d'una sola franja, el criteri és el mateix que per a tot el dia?</label>
+      <textarea id="q_franja_unica" placeholder="Ex: Sí, el criteri és el mateix. Però per a una franja curta soc menys estricta amb el criteri d'afinitat de cicle..."></textarea>
+    </div>
+    <div class="field">
+      <label>Per a absències de tot el dia, intentes que sigui el mateix docent tota la jornada?</label>
+      <textarea id="q_tot_dia" placeholder="Ex: Prefereixo que sigui el mateix, especialment a Infantil. Però si no és possible, que almenys el matí sigui una persona i la tarda una altra..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Quan avises el docent que ha de cobrir? Al moment? La nit anterior?</label>
+      <input type="text" id="q_quan_avisar" placeholder="Ex: Si sé l'absència la nit anterior, aviso aquella nit per WhatsApp. Si és del matí, aviso just al principi de la jornada." />
+    </div>
+  </div>
+</div>
+
+<!-- ══ I. EXEMPLES REALS ══ -->
+<div class="card">
+  <div class="card-title green"><div class="num">I</div> Exemples reals — la part més important</div>
+  <p style="font-size:13px; color:var(--ink-3); margin-bottom:20px;">Aquests exemples reals li donen a la IA el raonament real que fas servir. Com més detallats, millor funcionarà l'app des del primer dia.</p>
+
+  <div class="exemple-bloc" id="ex1">
+    <div class="exemple-num">Exemple 1</div>
+    <div class="fields">
+      <div class="field"><label>Qui faltava i quan (dia, franja)</label><input type="text" id="ex1_qui" placeholder="Ex: La Marta (tutora 3rA) faltava un dimarts, franges f1a i f1b" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex1_opcio" placeholder="Ex: La Laia (Anglès, tenia TP a f1a-f1b)" /></div>
+      <div class="field field-full"><label>Qui havia disponible i per qui vas optar — i per què</label><textarea id="ex1_pq" placeholder="Ex: Tenia el Joan (suport CI) però ja havia cobert 2 franges aquell matí. La Laia tenia TP i coneixia el cicle. La Marta (coordinadora CM) no la volia interrompre..." ></textarea></div>
+    </div>
+  </div>
+
+  <div class="exemple-bloc" id="ex2">
+    <div class="exemple-num">Exemple 2</div>
+    <div class="fields">
+      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex2_qui" placeholder="Ex: En Carles (EF) faltava tot el dijous" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex2_opcio" placeholder="Ex: La tutora de cada grup va assumir la seva sessió d'EF" /></div>
+      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex2_pq" placeholder="Ex: En EF els tutors solen quedar-se amb el seu grup perquè ja el coneixen. Evitem posar un MESI que no té relació amb l'alumnat de primària..." ></textarea></div>
+    </div>
+  </div>
+
+  <div class="exemple-bloc" id="ex3">
+    <div class="exemple-num">Exemple 3</div>
+    <div class="fields">
+      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex3_qui" placeholder="" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex3_opcio" placeholder="" /></div>
+      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex3_pq"></textarea></div>
+    </div>
+  </div>
+
+  <div class="exemple-bloc" id="ex4">
+    <div class="exemple-num">Exemple 4</div>
+    <div class="fields">
+      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex4_qui" placeholder="" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex4_opcio" placeholder="" /></div>
+      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex4_pq"></textarea></div>
+    </div>
+  </div>
+
+  <div class="exemple-bloc" id="ex5">
+    <div class="exemple-num">Exemple 5</div>
+    <div class="fields">
+      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex5_qui" placeholder="" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex5_opcio" placeholder="" /></div>
+      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex5_pq"></textarea></div>
+    </div>
+  </div>
+
+  <div class="exemple-bloc emergencia">
+    <div class="exemple-num">🚨 Cas límit — quan no hi havia ningú disponible</div>
+    <div class="fields">
+      <div class="field field-full"><label>Descriu la situació (qui faltava, quin dia, quantes franges)</label><textarea id="cas_limit_situacio" placeholder="Ex: Un dilluns de gener van faltar 4 docents alhora (grip). No teníem ningú disponible per la 3a franja de 3rB..."></textarea></div>
+      <div class="field field-full"><label>Exactament què vas fer</label><textarea id="cas_limit_solucio" placeholder="Ex: Vaig dividir 3rB entre 3rA i els dos grups de 4t. Vaig trucar al MESI perquè entrés a un dels grups. Jo mateixa vaig entrar a cobrir la darrera franja..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ J. NORMES NO ESCRITES ══ -->
+<div class="card">
+  <div class="card-title green"><div class="num">J</div> Normes no escrites i context especial</div>
+  <div class="fields">
+    <div class="field field-full">
+      <label>Hi ha normes del centre que fa anys que es respecten però no estan escrites en cap lloc?</label>
+      <textarea id="q_normes_no_escrites" placeholder="Ex: Sempre evitem posar la Montse (MESI) a cobrir si té alumnes amb necessitats urgents aquella franja. Al Joan mai li trenquem el TP si ja n'ha acumulat 3 o més..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Hi ha docents o situacions que sempre generen conflicte o que has après a gestionar d'una manera especial?</label>
+      <textarea id="q_conflictes" placeholder="Ex: Quan falta la tutora d'I3A, el grup és molt difícil i hem après que cal posar algú que ja el conegui. Si falta l'especialista d'Anglès el dia d'avaluació, el criteri canvia..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Si poguessis explicar la teva lògica de cobertures en 3 frases a algú nou, com ho faries?</label>
+      <textarea id="q_resum" placeholder="Ex: Primer miro qui pot cobrir sense trencar res important. Després, qui conegui millor el grup. Finalment, reparteixo perquè ningú s'acarregui de tot..."></textarea>
+    </div>
+    <div class="field field-full">
+      <label>Alguna cosa més que la IA hauria de saber sobre com gestioneu les cobertures?</label>
+      <textarea id="q_extra" placeholder="Qualsevol informació addicional, particularitat del centre, context cultural o situació especial que no hagin cobert les preguntes anteriors."></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="submit-bar">
+  <button type="submit" class="btn-primary" id="btn-submit">
+    <span>Analitzar amb IA i generar configuració →</span>
+  </button>
+  <span style="font-size:12px; color:var(--ink-4);">El procés pot trigar 15–20 segons mentre la IA processa les respostes.</span>
+</div>
+
+</form><!-- /form -->
+
+<!-- ══ LOADING ══ -->
+<div id="loading">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <div class="loading-title">La IA està analitzant les respostes…</div>
+    <div class="loading-sub">Generant el Context IA i les Normes de cobertura personalitzades.</div>
+    <div class="loading-stream" id="stream-output">Iniciant…</div>
+  </div>
+</div>
+
+<!-- ══ PREVIEW ══ -->
+<div id="preview">
+  <div class="preview-header">
+    <h2>Revisa la configuració generada</h2>
+    <p>Pots editar els dos documents directament abans de crear l'escola. Els canvis es guardaran tal com els veges aquí.</p>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview-panel">
+      <div class="preview-panel-header">
+        <div class="dot dot-context"></div>
+        <span>Context IA</span>
+      </div>
+      <textarea id="context-preview" spellcheck="false"></textarea>
+    </div>
+    <div class="preview-panel">
+      <div class="preview-panel-header">
+        <div class="dot dot-normes"></div>
+        <span>Normes IA</span>
+      </div>
+      <textarea id="normes-preview" spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <div class="preview-actions">
+    <button class="btn-success" id="btn-crear" onclick="createSchool()">
+      <span>✓ Crear escola a HorariaPro</span>
+    </button>
+    <button class="btn-secondary" onclick="tornarFormulari()">← Tornar al formulari</button>
+    <span class="preview-note">L'escola es crearà a Supabase amb el Context IA i les Normes IA que veieu aquí.</span>
+  </div>
+</div>
+
+<!-- ══ SUCCESS ══ -->
+<div id="success">
+  <div class="success-card">
+    <div class="success-top">
+      <div class="success-ico">🎉</div>
+      <div>
+        <h2>Escola creada correctament a HorariaPro</h2>
+        <p>El Context IA i les Normes de cobertura estan actius. Ja podeu accedir a l'app.</p>
+      </div>
+    </div>
+    <div class="success-info">
+      <div class="info-box"><div class="lbl">Nom del centre</div><div class="val" id="s-nom">—</div></div>
+      <div class="info-box"><div class="lbl">Codi</div><div class="val" id="s-codi">—</div></div>
+      <div class="info-box"><div class="lbl">Escola ID (Supabase)</div><div class="val" id="s-id" style="font-size:11px;">—</div></div>
+      <div class="info-box"><div class="lbl">Cap d'estudis</div><div class="val" id="s-jefa">—</div></div>
+    </div>
+    <div class="next-steps">
+      <p>Propers passos per activar l'escola:</p>
+      <ol>
+        <li>Afegir el nou <code>escola_id</code> als usuaris directius a <code>MANAGEMENT_USERS</code> en <code>constants.js</code>.</li>
+        <li>Importar la llista de docents amb els seus horaris (CSV o manual via AdminPage).</li>
+        <li>Revisar i ajustar les Normes IA des de l'AdminPage (<code>?superadmin=1</code> → seleccionar escola).</li>
+        <li>Fer la sessió de prova amb la cap d'estudis per validar la primera proposta de cobertura.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const WORKER_URL   = 'https://orange-bar-54f5gceip-claude-proxy.jvillal7.workers.dev';
+const WORKER_TOKEN = 'gd-2024-xK9mQpR7wZ';
+const SUPA_URL     = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
+const SUPA_KEY     = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
+
+// Mostra/amaga camp intensiu
+document.getElementById('horari_intensiu').addEventListener('change', function() {
+  document.getElementById('camp_intensiu').style.display = this.checked ? 'block' : 'none';
+});
+
+function v(id) { return (document.getElementById(id)?.value || '').trim(); }
+function chk(id) { return document.getElementById(id)?.checked || false; }
+
+function show(id) { document.getElementById(id).style.display = 'block'; }
+function hide(id) { document.getElementById(id).style.display = 'none'; }
+
+function tornarFormulari() {
+  hide('preview');
+  show('form');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── CONSTRUCCIÓ DEL PROMPT ──
+function buildPrompt() {
+  const serveis = [
+    chk('te_siei') && 'Aula SIEI',
+    chk('te_siei_plus') && 'Aula SIEI+',
+    chk('te_mesi') && 'Personal MESI',
+    chk('te_educadores') && 'Educadores',
+    chk('te_vetlladores') && 'Vetlladores',
+    chk('te_acollida') && "Aula d'acollida",
+    chk('horari_tarda') && 'Horari de tarda',
+    chk('horari_intensiu') && 'Horari intensiu/compactat',
+  ].filter(Boolean).join(', ') || 'Cap servei especial indicat';
+
+  const exemples = [1,2,3,4,5].map(n => {
+    const qui = v(`ex${n}_qui`);
+    const opcio = v(`ex${n}_opcio`);
+    const pq = v(`ex${n}_pq`);
+    if (!qui && !opcio && !pq) return null;
+    return `  Exemple ${n}: ${qui || '—'}\n  Opció triada: ${opcio || '—'}\n  Raonament: ${pq || '—'}`;
+  }).filter(Boolean).join('\n\n');
+
+  const casLimit = v('cas_limit_situacio') || v('cas_limit_solucio')
+    ? `Situació: ${v('cas_limit_situacio')}\nSolució: ${v('cas_limit_solucio')}`
+    : '(no indicat)';
+
+  return `Ets l'expert configurador de HorariaPro, sistema de gestió de cobertures per a centres educatius catalans.
+
+Genera EXACTAMENT dos documents a partir d'aquest formulari d'onboarding d'una cap d'estudis.
+
+FORMAT OBLIGATORI (no afegeixis res fora d'aquests delimitadors):
+===CONTEXT_IA===
+[document markdown concís del centre: nom, codi, etapes, grups, cicles, equip directiu, personal especial amb noms i funcions, serveis actius, notes rellevants]
+===NORMES_IA===
+[llista numerada de normes de cobertura. Estil: "NORMA N — NOM_CURT: Descripció clara i accionable de la regla. Inclou quan s'aplica i si genera deute TP o no." Cobreix: ordre de prioritat, límits jornada, activitats especials del centre, protocols TP, coordinació, personal que NO pot cobrir, emergències. Usa els exemples reals per detectar patrons de raonament implícits.]
+===FI===
+
+═══ FORMULARI D'ONBOARDING ═══
+
+CENTRE: ${v('nom')} (codi: ${v('codi').toUpperCase()})
+ETAPES: ${v('etapes')}
+DOCENTS APROX: ${v('num_docents') || 'no indicat'}
+SERVEIS: ${serveis}
+
+EQUIP DIRECTIU:
+- Director/a: ${v('nom_director')}
+- Cap d'estudis: ${v('nom_jefa')}${v('email_jefa') ? ' (' + v('email_jefa') + ')' : ''}
+- Secretari/a: ${v('nom_secretaria') || 'no indicat'}
+
+GRUPS: ${v('grups')}
+CICLES: ${v('cicles') || 'no indicat'}
+COORDINADORS: ${v('coordinadors') || 'no indicat'}
+PERSONAL ESPECIAL: ${v('personal_suport') || 'no indicat'}
+ESPECIALISTES: ${v('especialistes') || 'no indicat'}
+MITGES JORNADES: ${v('mitges_jornades') || 'no indicat'}
+
+── PRIORITATS I LÒGICA ──
+Primer que mira: ${v('q_prioritats') || 'no indicat'}
+Ordre de prioritat: ${v('q_ordre') || 'no indicat'}
+Mai cobreix: ${v('q_mai_cobrir') || 'no indicat'}
+Criteri desempat: ${v('q_desempat') || 'no indicat'}
+Límit per jornada: ${v('q_limit_jornada') || 'no indicat'}
+Equitat i recompte: ${v('q_equitat') || 'no indicat'}
+Cobertures del mateix dia: ${v('q_mateix_dia') || 'no indicat'}
+Afinitat grups/cicles: ${v('q_afinitat') || 'no indicat'}
+
+── ACTIVITATS ESPECIALS ──
+Activitats amb alumnes barrejats: ${v('q_activitats') || 'no n\'hi ha / no indicat'}
+Protocol tutor vs especialista: ${v('q_activitats_protocol') || 'no indicat'}
+${chk('horari_intensiu') ? 'Horari intensiu: ' + (v('q_intensiu') || 'sí, sense detalls') : ''}
+
+── TREBALL PERSONAL I COORDINACIÓ ──
+Comunicació TP: ${v('q_tp_comunicar') || 'no indicat'}
+Com es retorna TP: ${v('q_tp_retornar') || 'no indicat'}
+Límit TPs acumulats: ${v('q_tp_limit') || 'no indicat'}
+Protecció TPs acumulats: ${v('q_tp_protegir') || 'no indicat'}
+Interrompre coordinació: ${v('q_coordinacio') || 'no indicat'}
+Coordinadors que mai s'interrompen: ${v('q_coordinacio_mai') || 'no indicat'}
+
+── PERSONAL DE SUPORT ──
+SIEI/MESI i cobertures: ${v('q_siei') || 'no indicat'}
+Educadores/vetlladores: ${v('q_educadores') || 'no indicat'}
+Mitges jornades i cobertures: ${v('q_mitja_jornada') || 'no indicat'}
+
+── EMERGÈNCIES ──
+Quan no hi ha ningú: ${v('q_emergencia') || 'no indicat'}
+Docent reserva: ${v('q_reserva') || 'no indicat'}
+Franja única vs tot el dia: ${v('q_franja_unica') || 'no indicat'}
+Tot el dia, mateix docent?: ${v('q_tot_dia') || 'no indicat'}
+Quan avises: ${v('q_quan_avisar') || 'no indicat'}
+
+── EXEMPLES REALS ──
+${exemples || '(cap exemple indicat)'}
+
+Cas límit (sense ningú disponible):
+${casLimit}
+
+── NORMES NO ESCRITES ──
+${v('q_normes_no_escrites') || 'no indicat'}
+
+Situacions especials / conflictes:
+${v('q_conflictes') || 'no indicat'}
+
+Resum en 3 frases:
+${v('q_resum') || 'no indicat'}
+
+Notes addicionals:
+${v('q_extra') || 'cap'}`;
+}
+
+// ── CRIDAR LA IA AMB STREAMING ──
+async function callIAStreaming(prompt) {
+  const streamEl = document.getElementById('stream-output');
+  const res = await fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Auth-Token': WORKER_TOKEN },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 4096,
+      stream: true,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if (!res.ok) throw new Error('Error al Worker: ' + res.status);
+
+  const reader = res.body.getReader();
+  const dec = new TextDecoder();
+  let full = '', buf = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    const lines = buf.split('\n');
+    buf = lines.pop();
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (raw === '[DONE]') continue;
+      try {
+        const evt = JSON.parse(raw);
+        if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta') {
+          full += evt.delta.text;
+          streamEl.textContent = full.slice(-300);
+          streamEl.scrollTop = streamEl.scrollHeight;
+        }
+      } catch (_) {}
+    }
+  }
+  return full;
+}
+
+// ── PARSEJAR LA RESPOSTA ──
+function parseResponse(text) {
+  const cMatch = text.match(/===CONTEXT_IA===([\s\S]*?)===NORMES_IA===/);
+  const nMatch = text.match(/===NORMES_IA===([\s\S]*?)(?:===FI===|$)/);
+  return {
+    context_ia: cMatch?.[1]?.trim() || text,
+    normes_ia:  nMatch?.[1]?.trim() || ''
+  };
+}
+
+// ── ENVIAR FORMULARI ──
+document.getElementById('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  if (!v('nom') || !v('codi') || !v('nom_director') || !v('nom_jefa') || !v('grups')) {
+    alert('Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu i Grups.');
+    return;
+  }
+
+  const codi = v('codi').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  document.getElementById('codi').value = codi;
+
+  hide('form');
+  show('loading');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  try {
+    const prompt = buildPrompt();
+    const raw = await callIAStreaming(prompt);
+    const { context_ia, normes_ia } = parseResponse(raw);
+
+    document.getElementById('context-preview').value = context_ia;
+    document.getElementById('normes-preview').value  = normes_ia;
+
+    hide('loading');
+    show('preview');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    hide('loading');
+    show('form');
+    alert('Error en el processament IA: ' + err.message + '\nTorna-ho a intentar.');
+  }
+});
+
+// ── CREAR ESCOLA A SUPABASE ──
+async function createSchool() {
+  const btn = document.getElementById('btn-crear');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = 'Creant escola…';
+
+  const nom       = v('nom');
+  const codi      = v('codi').toUpperCase();
+  const nom_jefa  = v('nom_jefa');
+  const context_ia = document.getElementById('context-preview').value.trim();
+  const normes_ia  = document.getElementById('normes-preview').value.trim();
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/escoles`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({ nom, codi, normes_ia, context_ia })
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
+    }
+
+    const [escola] = await res.json();
+
+    document.getElementById('s-nom').textContent  = nom;
+    document.getElementById('s-codi').textContent = codi;
+    document.getElementById('s-id').textContent   = escola?.id || '(comprova Supabase)';
+    document.getElementById('s-jefa').textContent = nom_jefa;
+
+    hide('preview');
+    show('success');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.querySelector('span').textContent = '✓ Crear escola a HorariaPro';
+    alert('Error en desar a Supabase: ' + err.message);
+  }
+}
+</script>
+
+</body>
+</html>
