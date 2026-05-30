@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacitat — HorariaPro</title>
+  <meta name="description" content="Política de privacitat i tractament de dades personals de HorariaPro, plataforma de gestió de cobertures per a centres educatius." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:   #0a0a0a;
+      --ink:     #1a1a1a;
+      --ink-2:   #444;
+      --ink-3:   #777;
+      --ink-4:   #aaa;
+      --border:  #e8e8e8;
+      --bg:      #fff;
+      --bg-2:    #f7f7f7;
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --green:   #16a34a;
+      --green-lt:#f0fdf4;
+      --r:       12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; text-decoration: none; }
+    .nav-back { font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; }
+    .nav-back:hover { color: #fff; text-decoration: none; }
+
+    .page-hero {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 5% 40px;
+    }
+    .page-hero .tag {
+      display: inline-block;
+      background: var(--green-lt);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--ink); }
+    .page-hero .updated { font-size: 13px; color: var(--ink-3); margin-top: 8px; }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 5% 80px;
+    }
+    .content h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 40px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+    .content h2:first-child { margin-top: 0; }
+    .content p { color: var(--ink-2); margin-bottom: 14px; }
+    .content ul { color: var(--ink-2); padding-left: 20px; margin-bottom: 14px; }
+    .content ul li { margin-bottom: 6px; }
+    .content table {
+      width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;
+    }
+    .content table th {
+      background: var(--bg-2); text-align: left; padding: 10px 14px;
+      font-weight: 600; color: var(--ink); border: 1px solid var(--border);
+    }
+    .content table td {
+      padding: 10px 14px; color: var(--ink-2); border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .info-box {
+      background: var(--blue-lt);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+    .info-box p { color: var(--ink); margin: 0; font-size: 15px; }
+    .info-box strong { color: var(--blue); }
+    .rights-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px; margin-bottom: 20px;
+    }
+    .rights-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 14px 16px;
+    }
+    .rights-card .rights-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+    .rights-card p { font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.5; }
+
+    footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 32px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 13px; color: var(--ink-3);
+    }
+    .footer-logo { font-weight: 800; color: var(--ink); }
+    .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-legal a { color: var(--ink-3); font-size: 13px; }
+    .footer-legal a:hover { color: var(--blue); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">HorariaPro</a>
+  <a href="/" class="nav-back">← Tornar a l'inici</a>
+</nav>
+
+<div class="page-hero">
+  <div style="max-width:760px; margin:0 auto;">
+    <div class="tag">Privacitat i RGPD</div>
+    <h1>Política de Privacitat</h1>
+    <p class="updated">Darrera actualització: juny de 2026</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2>1. Responsable del tractament</h2>
+  <div class="info-box">
+    <p>
+      <strong>Responsable:</strong> Jorge Villalba<br>
+      <strong>Correu electrònic:</strong> <a href="mailto:horaria.admin@gmail.com">horaria.admin@gmail.com</a><br>
+      <strong>Domini:</strong> horariapro.com
+    </p>
+  </div>
+  <p>En compliment del Reglament (UE) 2016/679 del Parlament Europeu i del Consell (RGPD) i de la Llei Orgànica 3/2018, de 5 de desembre, de Protecció de Dades Personals i Garantia dels Drets Digitals (LOPDGDD), us informem del tractament de les vostres dades personals.</p>
+
+  <h2>2. Dades que recollim i per a quina finalitat</h2>
+  <p>Aquest lloc web recull únicamente les dades que proporcioneu voluntàriament a través del formulari de contacte:</p>
+  <table>
+    <tr>
+      <th>Dada</th>
+      <th>Finalitat</th>
+      <th>Base legal</th>
+    </tr>
+    <tr>
+      <td>Nom i cognoms</td>
+      <td>Identificar la persona de contacte per respondre la consulta</td>
+      <td>Consentiment (art. 6.1.a RGPD)</td>
+    </tr>
+    <tr>
+      <td>Adreça de correu electrònic</td>
+      <td>Enviar la resposta a la consulta realitzada</td>
+      <td>Consentiment (art. 6.1.a RGPD)</td>
+    </tr>
+    <tr>
+      <td>Centre educatiu i càrrec</td>
+      <td>Contextualitzar la consulta i adequar la resposta</td>
+      <td>Consentiment (art. 6.1.a RGPD)</td>
+    </tr>
+    <tr>
+      <td>Missatge</td>
+      <td>Atendre la consulta o sol·licitud de demostració</td>
+      <td>Consentiment (art. 6.1.a RGPD)</td>
+    </tr>
+  </table>
+  <p><strong>No es recull ni es tracta cap altra dada personal</strong> en la navegació per aquest lloc web.</p>
+
+  <h2>3. Conservació de les dades</h2>
+  <p>Les dades del formulari de contacte es conserven durant el temps necessari per atendre la vostra consulta i, posteriorment, durant un màxim d'<strong>un (1) any</strong> per si cal fer-hi referència en comunicacions posteriors relacionades. Un cop transcorregut aquest termini, les dades seran eliminades de manera segura.</p>
+
+  <h2>4. Destinataris i cessions</h2>
+  <p>Les vostres dades <strong>no es cedeixen ni es venen a tercers</strong> amb finalitats de màrqueting o comercials. Únicament s'utilitzen per respondre la vostra consulta.</p>
+  <p>Per a la prestació del servei de formulari de contacte s'utilitza la plataforma <strong>Supabase</strong> (emmagatzemament EU-West), que actua com a encarregat del tractament en el marc d'un contracte que garanteix el compliment del RGPD. Totes les dades es mantenen dins del territori de la Unió Europea.</p>
+
+  <h2>5. Dades dels centres educatius clients</h2>
+  <p>Les dades del personal docent dels centres educatius que contracten el servei HorariaPro (noms, horaris, correus electrònics) es gestionen de manera completament independent de les dades del formulari de contacte d'aquesta pàgina web.</p>
+  <p>En aquest cas, el <strong>centre educatiu actua com a responsable del tractament</strong> i HorariaPro actua com a <strong>encarregat del tractament</strong> en virtut de l'article 28 del RGPD. Les condicions específiques es regulen en el contracte de servei subscrit entre les parts.</p>
+  <p>Garanties tècniques aplicades a les dades dels centres educatius:</p>
+  <ul>
+    <li>Emmagatzemament exclusivament en servidors ubicats a la Unió Europea (EU-West).</li>
+    <li>Xifrat de dades en trànsit (HTTPS) i en repòs.</li>
+    <li>Aïllament complet de dades entre centres (no hi ha accés creuat de cap tipus).</li>
+    <li>Dret a la supressió: qualsevol centre pot sol·licitar l'eliminació total de les seves dades.</li>
+  </ul>
+
+  <h2>6. Drets de les persones interessades</h2>
+  <p>D'acord amb el RGPD i la LOPDGDD, podeu exercir els drets següents en relació amb les vostres dades personals:</p>
+  <div class="rights-grid">
+    <div class="rights-card">
+      <div class="rights-title">Accés</div>
+      <p>Obtenir confirmació de si tractem les vostres dades i accedir-hi.</p>
+    </div>
+    <div class="rights-card">
+      <div class="rights-title">Rectificació</div>
+      <p>Sol·licitar la correcció de dades inexactes o incompletes.</p>
+    </div>
+    <div class="rights-card">
+      <div class="rights-title">Supressió</div>
+      <p>Demanar l'eliminació de les vostres dades quan ja no siguin necessàries.</p>
+    </div>
+    <div class="rights-card">
+      <div class="rights-title">Oposició</div>
+      <p>Oposar-vos al tractament de les vostres dades en determinades circumstàncies.</p>
+    </div>
+    <div class="rights-card">
+      <div class="rights-title">Limitació</div>
+      <p>Sol·licitar la limitació del tractament en certs supòsits.</p>
+    </div>
+    <div class="rights-card">
+      <div class="rights-title">Portabilitat</div>
+      <p>Rebre les vostres dades en un format estructurat i llegible per màquina.</p>
+    </div>
+  </div>
+  <p>Per exercir qualsevol d'aquests drets, podeu contactar per correu electrònic a <a href="mailto:horaria.admin@gmail.com">horaria.admin@gmail.com</a>, indicant el dret que voleu exercir i adjuntant una còpia del vostre document d'identitat.</p>
+  <p>Si considereu que el tractament de les vostres dades no és conforme a la normativa, teniu dret a presentar una reclamació davant l'<strong>Agència Española de Protecció de Dades (AEPD)</strong> a través de <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
+
+  <h2>7. Seguretat</h2>
+  <p>HorariaPro aplica les mesures tècniques i organitzatives adequades per garantir la seguretat de les dades personals i evitar-ne la destrucció, pèrdua, alteració o accés no autoritzat, d'acord amb l'estat de la tècnica i la naturalesa de les dades tractades. Totes les comunicacions entre el navegador i els servidors es realitzen de forma xifrada mitjançant el protocol HTTPS.</p>
+
+  <h2>8. Modificacions d'aquesta política</h2>
+  <p>Ens reservem el dret de modificar aquesta política de privacitat per adaptar-la a canvis legislatius o a millores del servei. Qualsevol modificació serà publicada en aquesta mateixa pàgina amb la data d'actualització corresponent. Us recomanem que la reviseu periòdicament.</p>
+
+  <h2>9. Contacte</h2>
+  <p>Per a qualsevol consulta relacionada amb el tractament de les vostres dades personals, podeu contactar amb nosaltres a: <a href="mailto:horaria.admin@gmail.com">horaria.admin@gmail.com</a></p>
+
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="/logo.png" alt="HorariaPro" style="height:24px; filter:brightness(0);" /></div>
+  <div class="footer-legal">
+    <a href="/avis-legal.html">Avís Legal</a>
+    <a href="/politica-privacitat.html">Política de Privacitat</a>
+    <a href="/politica-cookies.html">Política de Cookies</a>
+  </div>
+  <div>© 2026 HorariaPro. Tots els drets reservats.</div>
+</footer>
+
+</body>
+</html>
