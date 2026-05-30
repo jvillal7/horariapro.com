@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alta de nou centre — HorariaPro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a1a; --ink-2: #444; --ink-3: #777; --ink-4: #aaa;
+    --border: #e8e8e8; --bg: #fff; --bg-2: #f7f7f7;
+    --blue: #2563eb; --blue-lt: #eff6ff;
+    --green: #16a34a; --green-lt: #f0fdf4;
+    --r: 10px; --shadow: 0 2px 16px rgba(0,0,0,.07);
+  }
+  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--bg-2); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); text-decoration: none; }
+
+  nav {
+    background: rgba(10,10,10,.96); backdrop-filter: blur(12px);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+    height: 60px; border-bottom: 1px solid rgba(255,255,255,.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo { font-weight: 800; font-size: 18px; color: #fff; }
+  .nav-badge { background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; letter-spacing: .04em; text-transform: uppercase; }
+
+  .hero { background: var(--ink); color: #fff; padding: 48px 5% 40px; }
+  .hero .tag { display: inline-block; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; line-height: 1.2; }
+  .hero p { color: rgba(255,255,255,.6); margin-top: 10px; font-size: 14px; max-width: 560px; }
+
+  .main { max-width: 800px; margin: 0 auto; padding: 40px 5% 80px; }
+
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 28px 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .card-title { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .card-title span { background: var(--blue); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field-full { grid-column: 1 / -1; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .02em; text-transform: uppercase; }
+  .field label .req { color: var(--blue); }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 10px 13px; font-size: 14px; font-family: inherit; color: var(--ink);
+    background: var(--bg); transition: border-color .15s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .field .hint { font-size: 11px; color: var(--ink-4); margin-top: 4px; }
+
+  .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .radio-opt { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+  .radio-opt input[type=radio] { accent-color: var(--blue); width: 16px; height: 16px; }
+  .radio-opt span { font-size: 14px; color: var(--ink-2); }
+
+  .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .check-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .check-opt input[type=checkbox] { accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; }
+  .check-opt span { font-size: 14px; color: var(--ink-2); }
+
+  .submit-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 8px; }
+  .btn-primary {
+    background: var(--blue); color: #fff; border: none; border-radius: 8px;
+    padding: 13px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: opacity .15s;
+  }
+  .btn-primary:hover { opacity: .88; }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+  .form-note { font-size: 12px; color: var(--ink-4); }
+
+  /* ── SUCCESS + CONTRACT ── */
+  #success { display: none; }
+  .success-banner { background: var(--green-lt); border: 1.5px solid var(--green); border-radius: var(--r); padding: 20px 24px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .success-banner .ico { font-size: 28px; }
+  .success-banner h2 { font-size: 17px; font-weight: 700; color: var(--green); }
+  .success-banner p { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+
+  .btn-print { background: var(--ink); color: #fff; border: none; border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; transition: opacity .15s; margin-bottom: 24px; }
+  .btn-print:hover { opacity: .85; }
+
+  /* ── CONTRACT PREVIEW ── */
+  #contract-preview {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--r);
+    box-shadow: 0 4px 32px rgba(0,0,0,.10);
+  }
+  .cp-portada { background: var(--ink); color: #fff; padding: 48px 48px 40px; border-radius: var(--r) var(--r) 0 0; }
+  .cp-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 20px; color: #93c5fd; letter-spacing: -.3px; margin-bottom: 32px; }
+  .cp-titol h1 { font-size: 22px; font-weight: 800; line-height: 1.3; }
+  .cp-titol .sub { color: rgba(255,255,255,.55); font-size: 13px; margin-top: 8px; }
+  .cp-parts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.15); }
+  .cp-part { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 18px 20px; }
+  .cp-part .rol { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 6px; }
+  .cp-part .nom { font-size: 14px; font-weight: 700; }
+  .cp-part .det { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 4px; line-height: 1.6; }
+
+  .cp-body { padding: 40px 48px; font-family: Georgia, serif; font-size: 11pt; line-height: 1.7; color: #333; }
+  .cp-body h2 { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; color: #1e40af; text-transform: uppercase; letter-spacing: .06em; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #dbeafe; }
+  .cp-body h2:first-child { margin-top: 0; }
+  .cp-body p { color: #555; margin-bottom: 10px; }
+  .cp-body ul { color: #555; padding-left: 20px; margin-bottom: 12px; }
+  .cp-body ul li { margin-bottom: 5px; }
+  .cp-body .hl { background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-bottom: 14px; }
+  .cp-body .hl p { margin: 0; color: #1e3a8a; font-family: 'Inter', sans-serif; font-size: 13px; }
+  .cp-body table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 12px; margin-bottom: 16px; }
+  .cp-body table th { background: #1e3a8a; color: #fff; padding: 8px 10px; text-align: left; }
+  .cp-body table td { padding: 8px 10px; border: 1px solid #e5e7eb; color: #555; vertical-align: top; }
+  .cp-body table tr:nth-child(even) td { background: #f8fafc; }
+  .cp-sigs { padding: 32px 48px 40px; border-top: 1px solid #e5e7eb; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .cp-sig .rol { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2563eb; margin-bottom: 4px; }
+  .cp-sig .nom { font-weight: 700; font-size: 13px; }
+  .cp-sig .det { font-size: 12px; color: #777; margin-top: 3px; line-height: 1.5; }
+  .cp-sig .linia { margin-top: 56px; border-top: 1px solid #333; padding-top: 8px; font-family: 'Inter', sans-serif; font-size: 11px; color: #777; }
+  .cp-peu { font-family: 'Inter', sans-serif; font-size: 11px; color: #aaa; text-align: center; padding: 20px 48px; border-top: 1px solid #f0f0f0; }
+
+  @media (max-width: 640px) {
+    .fields { grid-template-columns: 1fr; }
+    .card { padding: 20px; }
+    .cp-portada { padding: 28px 24px; }
+    .cp-parts { grid-template-columns: 1fr; }
+    .cp-body { padding: 28px 24px; }
+    .cp-sigs { padding: 24px; grid-template-columns: 1fr; }
+    .cp-peu { padding: 16px 24px; }
+  }
+
+  @media print {
+    nav, .hero, .main > *:not(#success) { display: none !important; }
+    #success { display: block !important; }
+    .success-banner, .btn-print { display: none !important; }
+    body { background: #fff; }
+    #contract-preview { border: none; box-shadow: none; }
+    .cp-portada { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">HorariaPro</div>
+  <div class="nav-badge">Alta de centre</div>
+</nav>
+
+<div class="hero">
+  <div class="tag">Incorporació</div>
+  <h1>Alta de nou centre educatiu</h1>
+  <p>Omple aquest formulari per formalitzar la incorporació a HorariaPro. Amb les dades introduïdes es generarà automàticament el contracte de servei llest per signar.</p>
+</div>
+
+<div class="main">
+
+<!-- ── FORMULARI ── -->
+<form id="form" novalidate>
+
+  <!-- A. Dades legals del centre -->
+  <div class="card">
+    <div class="card-title"><span>A</span> Identificació del centre · Dades legals</div>
+    <div class="fields">
+      <div class="field">
+        <label>Nom del centre educatiu <span class="req">*</span></label>
+        <input type="text" id="centre_nom" placeholder="CEIP / CEE / INS..." required />
+      </div>
+      <div class="field">
+        <label>CIF / NIF del centre <span class="req">*</span></label>
+        <input type="text" id="centre_cif" placeholder="S0800000X" required />
+      </div>
+      <div class="field field-full">
+        <label>Adreça completa</label>
+        <input type="text" id="centre_adreca" placeholder="Carrer, número, municipi, codi postal" />
+      </div>
+      <div class="field">
+        <label>Nom del representant legal <span class="req">*</span></label>
+        <input type="text" id="representant_nom" placeholder="Nom i cognoms" required />
+      </div>
+      <div class="field">
+        <label>Càrrec del representant <span class="req">*</span></label>
+        <input type="text" id="representant_carrec" placeholder="Director/a, Secretari/a..." required />
+      </div>
+      <div class="field">
+        <label>Correu electrònic del centre <span class="req">*</span></label>
+        <input type="email" id="centre_email" placeholder="direccio@ceip..." required />
+      </div>
+      <div class="field">
+        <label>Correu electrònic de la cap d'estudis</label>
+        <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
+      </div>
+      <div class="field">
+        <label>Nom de la cap d'estudis</label>
+        <input type="text" id="nom_jefa" placeholder="Nom i cognoms" />
+      </div>
+    </div>
+  </div>
+
+  <!-- B. Quota acordada -->
+  <div class="card">
+    <div class="card-title"><span>B</span> Condicions econòmiques</div>
+    <div class="fields">
+      <div class="field">
+        <label>Quota mensual acordada (€) <span class="req">*</span></label>
+        <input type="number" id="preu_mensual" placeholder="79" min="0" step="1" required />
+      </div>
+      <div class="field">
+        <label>Modalitat de facturació</label>
+        <div class="radio-group" style="margin-top:8px;">
+          <label class="radio-opt"><input type="radio" name="modalitat" value="mensual" checked /><span>Mensual</span></label>
+          <label class="radio-opt"><input type="radio" name="modalitat" value="anual" /><span>Anual (–10%)</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C. Perfil operatiu bàsic -->
+  <div class="card">
+    <div class="card-title"><span>C</span> Perfil operatiu del centre</div>
+    <div class="fields">
+      <div class="field">
+        <label>Nombre aproximat de docents</label>
+        <input type="number" id="num_docents" placeholder="25" min="1" />
+      </div>
+      <div class="field">
+        <label>Etapes educatives</label>
+        <select id="etapes">
+          <option value="infantil i primaria">Infantil i Primària</option>
+          <option value="primaria">Primària (sense Infantil)</option>
+          <option value="infantil">Infantil</option>
+          <option value="educació especial">Educació Especial (CEE)</option>
+          <option value="secundaria">Secundària</option>
+          <option value="altres">Altres</option>
+        </select>
+      </div>
+      <div class="field field-full">
+        <label>Serveis i recursos especials del centre</label>
+        <div class="check-group" style="margin-top:8px;">
+          <label class="check-opt"><input type="checkbox" id="te_siei" /><span>Aula SIEI o SIEI+</span></label>
+          <label class="check-opt"><input type="checkbox" id="te_educadores" /><span>Educadores / Vetlladores</span></label>
+          <label class="check-opt"><input type="checkbox" id="te_mesi" /><span>Personal MESI</span></label>
+          <label class="check-opt"><input type="checkbox" id="te_acollida" /><span>Aula d'acollida</span></label>
+          <label class="check-opt"><input type="checkbox" id="horari_tarda" /><span>Horari de tarda (fins les 16:30)</span></label>
+          <label class="check-opt"><input type="checkbox" id="horari_intensiu" /><span>Horari intensiu / compactat</span></label>
+        </div>
+      </div>
+      <div class="field field-full">
+        <label>Particularitats del centre o notes per a la configuració</label>
+        <textarea id="notes" placeholder="Alumnes amb necessitats especials, personal compartit amb altres centres, règim especial, qualsevol cosa rellevant per a la gestió de cobertures..."></textarea>
+        <div class="hint">Com més context, millor podrà configurar-se la IA de cobertures des del primer dia.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-bar">
+    <button type="submit" class="btn-primary" id="btn-submit">Desar i generar contracte →</button>
+    <span class="form-note">Les dades es guarden de forma segura i s'utilitzen únicament per configurar HorariaPro.</span>
+  </div>
+</form>
+
+<!-- ── SUCCESS + CONTRACTE ── -->
+<div id="success">
+
+  <div class="success-banner">
+    <div class="ico">✅</div>
+    <div>
+      <h2>Incorporació registrada correctament</h2>
+      <p id="success-msg">Les dades del centre s'han desat. A continuació pots generar el contracte personalitzat i imprimir-lo en PDF.</p>
+    </div>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">
+    🖨️ Imprimir contracte / Desar com a PDF
+  </button>
+
+  <div id="contract-preview">
+
+    <div class="cp-portada">
+      <div class="cp-logo">HorariaPro</div>
+      <div class="cp-titol">
+        <h1>Contracte de Prestació de Serveis<br>i Encàrrec de Tractament de Dades</h1>
+        <div class="sub">Versió 1.0 · <span id="cp-data"></span> · D'acord amb el RGPD (UE) 2016/679</div>
+      </div>
+      <div class="cp-parts">
+        <div class="cp-part">
+          <div class="rol">Proveïdor · Encarregat del Tractament</div>
+          <div class="nom">Jorge Villalba</div>
+          <div class="det">HorariaPro<br>horaria.admin@gmail.com<br>horariapro.com</div>
+        </div>
+        <div class="cp-part">
+          <div class="rol">Client · Responsable del Tractament</div>
+          <div class="nom" id="cp-centre-nom">—</div>
+          <div class="det" id="cp-centre-det">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cp-body">
+
+      <h2>Exposició prèvia</h2>
+      <p><strong>PRIMER.</strong> Jorge Villalba, d'ara endavant <strong>"el Proveïdor"</strong>, és el titular i desenvolupador de HorariaPro, una plataforma SaaS per a la gestió automatitzada d'absències i cobertures del personal docent en centres educatius.</p>
+      <p><strong>SEGON.</strong> <strong id="cp-centre-nom2">—</strong>, d'ara endavant <strong>"el Client"</strong>, és un centre educatiu que subscriu el servei HorariaPro per gestionar les absències del seu personal i l'assignació de cobertures.</p>
+      <p><strong>TERCER.</strong> En la prestació del servei, el Proveïdor tractarà dades del personal docent del Client com a encarregat del tractament (art. 28 RGPD). El present contracte regula tant les condicions comercials com les obligacions en matèria de protecció de dades.</p>
+
+      <h2>Part I — Condicions del Servei</h2>
+
+      <p><strong>Cl. 1. Objecte.</strong> El Proveïdor presta al Client accés a la plataforma HorariaPro / GDOCENT: registre d'absències, cobertures per IA, quadre en temps real, gestió del Treball Personal (TP), extracció d'horaris, historial i informes.</p>
+
+      <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. El primer mes és de prova sense cost.</p>
+
+      <p><strong>Cl. 3. Preu i forma de pagament.</strong></p>
+      <div class="hl">
+        <p id="cp-preu">Quota mensual: — €/mes · Modalitat: —</p>
+      </div>
+      <p>Pagament per transferència o domiciliació els primers 10 dies de cada període. En cas d'impagament superior a 30 dies, el Proveïdor pot suspendre l'accés fins a regularització.</p>
+
+      <p><strong>Cl. 4. Obligacions del Proveïdor.</strong> Disponibilitat objectiu del 99% mensual; suport tècnic per email (48h hàbils); configuració inicial del centre; aïllament complet de dades; notificació d'incidents en 72h.</p>
+
+      <p><strong>Cl. 5. Obligacions del Client.</strong> Facilitar dades de configuració inicial (docents, horaris, grups); designar persona de contacte; custodiar els PINs d'accés; abonar les quotes en termini.</p>
+
+      <p><strong>Cl. 6. Propietat intel·lectual.</strong> El Proveïdor conserva tots els drets sobre HorariaPro. El contracte atorga al Client una llicència d'ús no exclusiva i intransferible durant la vigència.</p>
+
+      <p><strong>Cl. 7. Limitació de responsabilitat.</strong> La responsabilitat màxima del Proveïdor queda limitada a tres (3) mesos de quota. Les propostes de la IA tenen caràcter orientatiu i no vinculant.</p>
+
+      <p><strong>Cl. 8. Resolució.</strong> Per incompliment greu (preavís 15 dies hàbils per esmenar) o per mutu acord. Resolució unilateral del Client: 30 dies de preavís. A la resolució, les dades queden disponibles 30 dies en format exportable i posteriorment s'eliminen.</p>
+
+      <h2>Part II — Encàrrec de Tractament (Art. 28 RGPD)</h2>
+
+      <p><strong>Cl. 9. Parts.</strong> El Client actua com a <strong>Responsable del Tractament</strong>. El Proveïdor actua com a <strong>Encarregat del Tractament</strong>.</p>
+
+      <p><strong>Cl. 10. Descripció del tractament encarregat.</strong></p>
+      <table>
+        <tr><th>Element</th><th>Descripció</th></tr>
+        <tr><td>Finalitat</td><td>Gestió d'absències, cobertures i Treball Personal del personal docent</td></tr>
+        <tr><td>Tipus de dades</td><td>Nom, correu electrònic, horari lectiu, absències, cobertures, deutes TP</td></tr>
+        <tr><td>Interessats</td><td>Personal docent i de suport educatiu del centre</td></tr>
+        <tr><td>Durada</td><td>Durant la vigència del contracte + 30 dies per exportar</td></tr>
+      </table>
+
+      <p><strong>Cl. 11. Obligacions de l'Encarregat.</strong> Tractar dades únicament per instruccions documentades del Responsable; garantir confidencialitat; implementar mesures de seguretat (art. 32 RGPD); gestionar subencàrregats; assistir en drets dels interessats; notificar violacions en 72h; suprimir o retornar dades en finalitzar.</p>
+
+      <p><strong>Cl. 12. Subencàrregats autoritzats.</strong></p>
+      <table>
+        <tr><th>Subencàrregat</th><th>Servei</th><th>Ubicació</th></tr>
+        <tr><td>Supabase Inc.</td><td>Base de dades</td><td>UE (EU-West)</td></tr>
+        <tr><td>Anthropic PBC</td><td>IA de cobertures</td><td>EUA (clàusules contractuals UE)</td></tr>
+        <tr><td>Cloudflare Inc.</td><td>Proxy IA</td><td>EUA/UE (clàusules contractuals UE)</td></tr>
+        <tr><td>Google LLC</td><td>Notificacions email</td><td>EUA (clàusules contractuals UE)</td></tr>
+      </table>
+
+      <p><strong>Cl. 13. Mesures de seguretat.</strong> HTTPS/TLS en trànsit; xifrat en repòs; autenticació per PIN; aïllament per centre; còpies de seguretat automàtiques; control d'accés per rol; emmagatzemament a la UE.</p>
+
+      <p><strong>Cl. 14–16.</strong> Drets dels interessats: el Responsable és l'interlocutor principal. Eliminació de dades: 30 dies per exportar + 30 dies per eliminar + certificat d'eliminació opcional. Violacions: notificació en 72h amb detall de la incidència.</p>
+
+      <h2>Part III — Disposicions Finals</h2>
+      <p><strong>Cl. 17.</strong> Llei espanyola aplicable. Jurisdicció dels tribunals competents. <strong>Cl. 18.</strong> Modificacions per escrit i signades per ambdues parts. <strong>Cl. 19.</strong> Comunicacions per correu electrònic a les adreces indicades. <strong>Cl. 20.</strong> Document complet que substitueix acords anteriors. En cas de contradicció, prevaldrà la Part II en matèria de protecció de dades.</p>
+
+    </div>
+
+    <div class="cp-sigs">
+      <div class="cp-sig">
+        <div class="rol">Proveïdor · Encarregat del Tractament</div>
+        <div class="nom">Jorge Villalba</div>
+        <div class="det">HorariaPro · horaria.admin@gmail.com</div>
+        <div class="linia">Signatura i segell<br><br>Lloc: _________________ Data: _________________</div>
+      </div>
+      <div class="cp-sig">
+        <div class="rol">Client · Responsable del Tractament</div>
+        <div class="nom" id="cp-sig-nom">—</div>
+        <div class="det" id="cp-sig-det">—</div>
+        <div class="linia">Signatura i segell del centre<br><br>Lloc: _________________ Data: _________________</div>
+      </div>
+    </div>
+
+    <div class="cp-peu">
+      HorariaPro · horaria.admin@gmail.com · horariapro.com · Contracte v1.0
+    </div>
+
+  </div><!-- /contract-preview -->
+</div><!-- /success -->
+
+</div><!-- /main -->
+
+<script>
+const SUPA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
+const SUPA_KEY = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
+
+function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+function chk(id) { return document.getElementById(id)?.checked || false; }
+function set(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+function txt(id, t) { const el = document.getElementById(id); if (el) el.textContent = t; }
+
+document.getElementById('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const centreNom = v('centre_nom');
+  const centreCif = v('centre_cif');
+  const centreEmail = v('centre_email');
+  const repNom = v('representant_nom');
+  const repCarrec = v('representant_carrec');
+
+  if (!centreNom || !centreCif || !centreEmail || !repNom || !repCarrec) {
+    alert('Si us plau, omple tots els camps obligatoris (*).');
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Desant...';
+
+  const modalitat = document.querySelector('input[name="modalitat"]:checked')?.value || 'mensual';
+  const preuMensual = parseFloat(v('preu_mensual')) || null;
+
+  const serveis = [];
+  if (chk('te_siei')) serveis.push('SIEI/SIEI+');
+  if (chk('te_educadores')) serveis.push('Educadores/Vetlladores');
+  if (chk('te_mesi')) serveis.push('MESI');
+  if (chk('te_acollida')) serveis.push('Aula acollida');
+  if (chk('horari_tarda')) serveis.push('Horari tarda');
+  if (chk('horari_intensiu')) serveis.push('Horari intensiu');
+
+  const payload = {
+    centre_nom: centreNom,
+    centre_cif: centreCif,
+    centre_adreca: v('centre_adreca'),
+    centre_email: centreEmail,
+    representant_nom: repNom,
+    representant_carrec: repCarrec,
+    preu_mensual: preuMensual,
+    modalitat,
+    num_docents: parseInt(v('num_docents')) || null,
+    etapes: v('etapes'),
+    te_siei: chk('te_siei'),
+    te_educadores: chk('te_educadores'),
+    horari_tarda: chk('horari_tarda'),
+    nom_jefa: v('nom_jefa'),
+    email_jefa: v('email_jefa'),
+    notes: [
+      v('notes'),
+      serveis.length ? 'Serveis: ' + serveis.join(', ') : ''
+    ].filter(Boolean).join('\n'),
+  };
+
+  try {
+    await fetch(`${SUPA_URL}/rest/v1/incorporacions`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (_) {}
+
+  fillContract(payload, modalitat, preuMensual, serveis);
+
+  document.getElementById('form').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+  document.getElementById('success').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+function fillContract(d, modalitat, preu, serveis) {
+  const avui = new Date().toLocaleDateString('ca', { day: 'numeric', month: 'long', year: 'numeric' });
+  const pretext = modalitat === 'anual'
+    ? `Quota anual: ${preu ? (preu * 12 * 0.9).toFixed(0) + ' €/any' : '— €/any'} (–10% pagament anual, equivalent a ${preu ? (preu * 0.9).toFixed(2) : '—'} €/mes) · Modalitat: Anual`
+    : `Quota mensual: ${preu ? preu + ' €/mes' : '— €/mes'} · Modalitat: Mensual`;
+
+  set('cp-data', avui);
+  txt('cp-centre-nom', d.centre_nom);
+  txt('cp-centre-nom2', d.centre_nom);
+
+  const det = [
+    d.centre_cif ? 'CIF: ' + d.centre_cif : '',
+    d.centre_adreca || '',
+    d.centre_email || '',
+    d.representant_nom ? d.representant_nom + (d.representant_carrec ? ', ' + d.representant_carrec : '') : '',
+  ].filter(Boolean).join('<br>');
+  set('cp-centre-det', det);
+
+  set('cp-preu', pretext);
+  txt('cp-sig-nom', d.representant_nom || '—');
+
+  const sigDet = [
+    d.centre_nom,
+    d.representant_carrec,
+    d.centre_cif ? 'CIF: ' + d.centre_cif : '',
+  ].filter(Boolean).join('<br>');
+  set('cp-sig-det', sigDet);
+
+  const infoAddicional = [
+    d.nom_jefa ? `Cap d'estudis: ${d.nom_jefa}${d.email_jefa ? ' · ' + d.email_jefa : ''}` : '',
+    d.num_docents ? `Docents aprox.: ${d.num_docents}` : '',
+    d.etapes ? `Etapes: ${d.etapes}` : '',
+    serveis.length ? `Serveis especials: ${serveis.join(', ')}` : '',
+  ].filter(Boolean);
+
+  if (infoAddicional.length) {
+    const nota = document.createElement('p');
+    nota.style.cssText = 'margin-top:16px; font-size:11px; color:#999; font-family:Inter,sans-serif; border-top:1px solid #f0f0f0; padding-top:12px;';
+    nota.innerHTML = '<strong>Configuració inicial acordada:</strong> ' + infoAddicional.join(' · ');
+    document.querySelector('.cp-peu').before(nota);
+  }
+}
+</script>
+</body>
+</html>
