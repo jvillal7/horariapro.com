@@ -57,6 +57,34 @@
   .radio-opt input[type=radio] { accent-color: var(--blue); width: 16px; height: 16px; }
   .radio-opt span { font-size: 14px; color: var(--ink-2); }
 
+  /* Plans de preu */
+  .plans-toggle { display: flex; background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 3px; width: fit-content; margin-bottom: 20px; gap: 2px; }
+  .plans-toggle button { border: none; border-radius: 6px; padding: 7px 18px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; background: transparent; color: var(--ink-3); transition: all .15s; }
+  .plans-toggle button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.10); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 580px) { .plans-grid { grid-template-columns: 1fr; } }
+  .plan-card { border: 2px solid var(--border); border-radius: var(--r); padding: 20px; cursor: pointer; transition: all .15s; position: relative; background: var(--bg); }
+  .plan-card:hover { border-color: #93c5fd; }
+  .plan-card.selected { border-color: var(--blue); background: var(--blue-lt); }
+  .plan-card.plan-pro { border-color: var(--ink); background: var(--ink); color: #fff; }
+  .plan-card.plan-pro:hover { border-color: #374151; }
+  .plan-card.plan-pro.selected { border-color: #60a5fa; background: #1e3a8a; }
+  .plan-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 100px; white-space: nowrap; letter-spacing: .04em; }
+  .plan-nom { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .plan-card.plan-pro .plan-nom { color: rgba(255,255,255,.5); }
+  .plan-preu { font-size: 32px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+  .plan-card.plan-pro .plan-preu { color: #fff; }
+  .plan-preu-mes { font-size: 13px; color: var(--ink-3); font-weight: 400; }
+  .plan-card.plan-pro .plan-preu-mes { color: rgba(255,255,255,.5); }
+  .plan-lim { font-size: 12px; color: var(--ink-4); margin-top: 4px; }
+  .plan-card.plan-pro .plan-lim { color: rgba(255,255,255,.4); }
+  .plan-anual-info { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 6px; background: var(--green-lt); border-radius: 4px; padding: 3px 8px; display: inline-block; }
+  .plan-card.plan-pro .plan-anual-info { color: #4ade80; background: rgba(74,222,128,.15); }
+  .plan-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); margin-top: 14px; display: flex; align-items: center; justify-content: center; }
+  .plan-card.selected .plan-check, .plan-card.plan-pro.selected .plan-check { background: var(--blue); border-color: var(--blue); }
+  .plan-check::after { content: ''; display: none; width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+  .plan-card.selected .plan-check::after, .plan-card.plan-pro.selected .plan-check::after { display: block; }
+
   .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
   .check-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
   .check-opt input[type=checkbox] { accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; }
@@ -195,20 +223,54 @@
 
   <!-- B. Quota acordada -->
   <div class="card">
-    <div class="card-title"><span>B</span> Condicions econòmiques</div>
-    <div class="fields">
-      <div class="field">
-        <label>Quota mensual acordada (€) <span class="req">*</span></label>
-        <input type="number" id="preu_mensual" placeholder="79" min="0" step="1" required />
-      </div>
-      <div class="field">
-        <label>Modalitat de facturació</label>
-        <div class="radio-group" style="margin-top:8px;">
-          <label class="radio-opt"><input type="radio" name="modalitat" value="mensual" checked /><span>Mensual</span></label>
-          <label class="radio-opt"><input type="radio" name="modalitat" value="anual" /><span>Anual (–10%)</span></label>
-        </div>
-      </div>
+    <div class="card-title"><span>B</span> Pla contractat</div>
+
+    <div class="plans-toggle">
+      <button type="button" id="toggle-mensual" class="active" onclick="setModalitat('mensual')">Mensual</button>
+      <button type="button" id="toggle-anual" onclick="setModalitat('anual')">Anual (2 mesos gratis)</button>
     </div>
+
+    <div class="plans-grid">
+
+      <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
+        <div class="plan-nom">Bàsic</div>
+        <div>
+          <span class="plan-preu" id="preu-basic">€59</span>
+          <span class="plan-preu-mes">/mes</span>
+        </div>
+        <div class="plan-lim">Fins a 25 docents</div>
+        <div class="plan-anual-info" id="anual-basic" style="display:none;">€590/any · estalvies €118</div>
+        <div class="plan-check"></div>
+      </div>
+
+      <div class="plan-card plan-pro" id="plan-pro" onclick="selectPlan('pro')">
+        <div class="plan-badge">El més popular</div>
+        <div class="plan-nom">Pro</div>
+        <div>
+          <span class="plan-preu" id="preu-pro">€79</span>
+          <span class="plan-preu-mes">/mes</span>
+        </div>
+        <div class="plan-lim">25–60 docents</div>
+        <div class="plan-anual-info" id="anual-pro" style="display:none;">€790/any · estalvies €158</div>
+        <div class="plan-check"></div>
+      </div>
+
+      <div class="plan-card" id="plan-centre" onclick="selectPlan('centre')">
+        <div class="plan-nom">Centre+</div>
+        <div>
+          <span class="plan-preu" id="preu-centre">€119</span>
+          <span class="plan-preu-mes">/mes</span>
+        </div>
+        <div class="plan-lim">+60 docents o institut</div>
+        <div class="plan-anual-info" id="anual-centre" style="display:none;">€1.190/any · estalvies €238</div>
+        <div class="plan-check"></div>
+      </div>
+
+    </div>
+
+    <input type="hidden" id="preu_mensual" />
+    <input type="hidden" id="modalitat_hidden" value="mensual" />
+    <p id="plan-error" style="display:none; color:#dc2626; font-size:13px; margin-top:12px;">Si us plau, selecciona un pla.</p>
   </div>
 
   <!-- C. Perfil operatiu bàsic -->
@@ -382,6 +444,51 @@
 const SUPA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
 const SUPA_KEY = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
 
+const PLANS = {
+  basic:  { nom: 'Bàsic',    preu: 59,  lim: 'Fins a 25 docents' },
+  pro:    { nom: 'Pro',      preu: 79,  lim: '25–60 docents' },
+  centre: { nom: 'Centre+',  preu: 119, lim: '+60 docents o institut' },
+};
+
+let planSeleccionat = null;
+let modalitatActual = 'mensual';
+
+function setModalitat(m) {
+  modalitatActual = m;
+  document.getElementById('toggle-mensual').classList.toggle('active', m === 'mensual');
+  document.getElementById('toggle-anual').classList.toggle('active', m === 'anual');
+  document.getElementById('modalitat_hidden').value = m;
+  Object.keys(PLANS).forEach(k => {
+    const p = PLANS[k];
+    const preuEl = document.getElementById('preu-' + k);
+    const anualEl = document.getElementById('anual-' + k);
+    if (m === 'anual') {
+      preuEl.textContent = '€' + (p.preu * 10 / 12).toFixed(0);
+      anualEl.style.display = 'inline-block';
+    } else {
+      preuEl.textContent = '€' + p.preu;
+      anualEl.style.display = 'none';
+    }
+  });
+  if (planSeleccionat) updatePreuHidden();
+}
+
+function selectPlan(k) {
+  planSeleccionat = k;
+  ['basic', 'pro', 'centre'].forEach(id => {
+    document.getElementById('plan-' + id).classList.toggle('selected', id === k);
+  });
+  document.getElementById('plan-error').style.display = 'none';
+  updatePreuHidden();
+}
+
+function updatePreuHidden() {
+  if (!planSeleccionat) return;
+  const p = PLANS[planSeleccionat];
+  const preu = modalitatActual === 'anual' ? +(p.preu * 10 / 12).toFixed(2) : p.preu;
+  document.getElementById('preu_mensual').value = preu;
+}
+
 function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
 function chk(id) { return document.getElementById(id)?.checked || false; }
 function set(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
@@ -401,11 +508,17 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     return;
   }
 
+  if (!planSeleccionat) {
+    document.getElementById('plan-error').style.display = 'block';
+    document.getElementById('plan-basic').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
   const btn = document.getElementById('btn-submit');
   btn.disabled = true;
   btn.textContent = 'Desant...';
 
-  const modalitat = document.querySelector('input[name="modalitat"]:checked')?.value || 'mensual';
+  const modalitat = modalitatActual;
   const preuMensual = parseFloat(v('preu_mensual')) || null;
 
   const serveis = [];
@@ -425,6 +538,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     representant_carrec: repCarrec,
     preu_mensual: preuMensual,
     modalitat,
+    pla: PLANS[planSeleccionat].nom,
     num_docents: parseInt(v('num_docents')) || null,
     etapes: v('etapes'),
     te_siei: chk('te_siei'),
@@ -460,9 +574,14 @@ document.getElementById('form').addEventListener('submit', async function(e) {
 
 function fillContract(d, modalitat, preu, serveis) {
   const avui = new Date().toLocaleDateString('ca', { day: 'numeric', month: 'long', year: 'numeric' });
-  const pretext = modalitat === 'anual'
-    ? `Quota anual: ${preu ? (preu * 12 * 0.9).toFixed(0) + ' €/any' : '— €/any'} (–10% pagament anual, equivalent a ${preu ? (preu * 0.9).toFixed(2) : '—'} €/mes) · Modalitat: Anual`
-    : `Quota mensual: ${preu ? preu + ' €/mes' : '— €/mes'} · Modalitat: Mensual`;
+  const plaDades = PLANS[planSeleccionat];
+  let pretext;
+  if (modalitat === 'anual') {
+    const anual = plaDades.preu * 10;
+    pretext = `Pla ${d.pla} · Quota anual: ${anual} €/any (equivalent a ${(anual/12).toFixed(2)} €/mes, 2 mesos de franc) · Modalitat: Anual`;
+  } else {
+    pretext = `Pla ${d.pla} · Quota mensual: ${plaDades.preu} €/mes · ${plaDades.lim} · Modalitat: Mensual`;
+  }
 
   set('cp-data', avui);
   txt('cp-centre-nom', d.centre_nom);
