@@ -63,6 +63,10 @@
       padding: 9px 20px; border-radius: 8px;
       font-size: 14px; font-weight: 600;
       transition: opacity .15s;
+      white-space: nowrap;
+      display: inline-flex; align-items: center;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-appearance: none;
     }
     .nav-cta:hover { opacity: .85; }
 
@@ -648,13 +652,15 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-cta { padding: 8px 14px; font-size: 13px; }
       .rol-section { grid-template-columns: 1fr; gap: 32px; }
       .rol-section.reverse { direction: ltr; }
       .form-row { grid-template-columns: 1fr; }
       .stats { gap: 32px; }
       .feature-row { grid-template-columns: 1fr; gap: 32px; }
       .feature-row.reverse { direction: ltr; }
-      .how-layout { grid-template-columns: 1fr; gap: 32px; }
+      .how-layout { grid-template-columns: 1fr; gap: 24px; }
+      .how-preview { order: -1; min-height: 220px; }
     }
   </style>
 </head>
