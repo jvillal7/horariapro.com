@@ -35,6 +35,7 @@
     html {
       scroll-behavior: smooth;
       overflow-x: hidden;
+      scroll-padding-top: 72px;
     }
 
     body {
@@ -46,19 +47,29 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       max-width: 100vw;
+      padding-top: 72px;
     }
 
     a { color: inherit; text-decoration: none; }
 
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       background: rgba(10,10,10,.96);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,.08);
       padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
       height: 72px;
+      transition: background .4s ease, backdrop-filter .4s ease, border-color .4s ease, box-shadow .4s ease;
+    }
+    nav.nav-glass {
+      background: rgba(10,10,10,.5);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 8px 32px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
     }
     .nav-logo img { height: 52px; width: auto; display: block; }
     .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.6); }
@@ -101,6 +112,26 @@
       color: var(--ink-2); max-width: 620px;
       margin: 0 auto 40px;
     }
+    .brand-word {
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+      animation: brandBlink 2s ease-in-out 2.6s 1;
+    }
+    .brand-word span { letter-spacing: -.01em; font-weight: 800; }
+    .brand-word .bw-1, .brand-word .bw-3 { color: var(--black); }
+    .brand-word .bw-ia { color: #a78bfa; }
+    @keyframes brandBlink {
+      0%   { opacity: 1; text-shadow: none; }
+      12%  { opacity: .35; text-shadow: none; }
+      24%  { opacity: 1; text-shadow: 0 0 16px rgba(167,139,250,.55); }
+      40%  { opacity: 1; text-shadow: none; }
+      52%  { opacity: .35; text-shadow: none; }
+      64%  { opacity: 1; text-shadow: 0 0 16px rgba(167,139,250,.55); }
+      100% { opacity: 1; text-shadow: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brand-word { animation: none; }
+    }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       background: var(--black); color: #fff;
@@ -118,6 +149,23 @@
       transition: background .15s;
     }
     .btn-secondary:hover { background: var(--border); }
+
+    /* ── HERO ENTRANCE ANIMATION ── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(90px) scale(.94); filter: blur(10px); }
+      to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    .hero-badge, .hero h1, .hero p, .hero-actions {
+      opacity: 0;
+      animation: heroFadeUp 1.1s cubic-bezier(.16,1,.3,1) both;
+    }
+    .hero-badge { animation-delay: .05s; }
+    .hero h1    { animation-delay: .25s; }
+    .hero p     { animation-delay: .48s; }
+    .hero-actions { animation-delay: .72s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-badge, .hero h1, .hero p, .hero-actions { animation: none; opacity: 1; }
+    }
 
     /* ── STATS ── */
     .stats {
@@ -692,7 +740,7 @@
 <div class="hero">
   <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
   <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
-  <p>HorariaPro automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
+  <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
   <div class="hero-actions">
     <button class="btn-primary" onclick="openDemoModal()">Sol·licitar demo gratuïta</button>
     <a href="#funcionalitats" class="btn-secondary">Veure funcionalitats</a>
@@ -1400,7 +1448,7 @@
   <div class="section-inner">
     <div class="section-tag">Preus</div>
     <h2 class="section-title">Sense permanència. Sense sorpreses.</h2>
-    <p class="section-sub">Implantació gratuïta, suport directe inclòs. Pagues mes a mes i cancel·les quan vulguis.</p>
+    <p class="section-sub">Implantació gratuïta, suport directe inclòs i sense permanència.</p>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px; align-items:start;">
 
       <!-- Bàsic -->
@@ -1443,9 +1491,9 @@
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Normes i context IA personalitzat</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Suport per email</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió de torns de pati</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Sortides amb acompanyaments</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Jornada intensiva</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió torns del pati</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió horaris jornada intensiva</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
         <button onclick="openDemoModal()" style="margin-top:auto; background:#fff; color:var(--black); border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
@@ -1468,9 +1516,9 @@
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió de torns de pati</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Sortides amb acompanyaments</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Jornada intensiva</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió torns del pati</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió horaris jornada intensiva</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
         <button onclick="openDemoModal()" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
@@ -1479,8 +1527,29 @@
     </div>
 
     <!-- Nota anual -->
-    <div style="margin-top:32px; text-align:center; padding:20px; background:var(--blue-lt); border-radius:var(--r); border:1px solid #bfdbfe;">
-      <span style="font-size:14px; color:var(--blue);">💡 <strong>Pla anual:</strong> paga 10 mesos i obtén 2 de franc — estalvia ~€158/any al pla Pro.</span>
+    <div style="margin-top:32px; background:var(--blue-lt); border:1px solid #bfdbfe; border-radius:var(--r-lg); padding:28px;">
+      <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:13px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:.06em;">💡 Pagament anual</div>
+        <h3 style="font-size:20px; font-weight:800; color:var(--black); margin-top:8px;">Un únic pagament a l'any, sense mensualitats</h3>
+        <p style="font-size:14px; color:var(--ink-3); margin-top:6px;">Ideal per a la gestió pressupostària del centre: una sola factura anual i 2 mesos de franc.</p>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; text-align:center;">
+        <div>
+          <div style="font-size:13px; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Bàsic</div>
+          <div style="font-size:26px; font-weight:800; color:var(--black); margin-top:4px;">€590<span style="font-size:13px; font-weight:600; color:var(--ink-3);">/any</span></div>
+          <div style="font-size:12px; color:var(--green); font-weight:700; margin-top:2px;">Estalvia €118/any</div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Pro</div>
+          <div style="font-size:26px; font-weight:800; color:var(--black); margin-top:4px;">€790<span style="font-size:13px; font-weight:600; color:var(--ink-3);">/any</span></div>
+          <div style="font-size:12px; color:var(--green); font-weight:700; margin-top:2px;">Estalvia €158/any</div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Centre+</div>
+          <div style="font-size:26px; font-weight:800; color:var(--black); margin-top:4px;">€1.190<span style="font-size:13px; font-weight:600; color:var(--ink-3);">/any</span></div>
+          <div style="font-size:12px; color:var(--green); font-weight:700; margin-top:2px;">Estalvia €238/any</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1628,6 +1697,16 @@
       closeDemoModal();
     }
   }
+
+  /* ── NAV LIQUID GLASS ON SCROLL ── */
+  (function() {
+    const nav = document.querySelector('nav');
+    function onScroll() {
+      nav.classList.toggle('nav-glass', window.scrollY > 20);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeDemoModal();
@@ -2094,7 +2173,7 @@
         },
         { d: 5200, h:
           '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
-            '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;">Jornada intensiva · HorarIA ⚡</div>' +
+            '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;">Gestió horaris jornada intensiva · HorarIA ⚡</div>' +
             '<span class="mock-badge green" style="animation:scaleIn .3s ease both;">Generat ✓</span>' +
           '</div>' +
           '<div style="display:flex;flex-direction:column;gap:2px;font-size:10px;animation:slideUp .4s ease both;">' +
