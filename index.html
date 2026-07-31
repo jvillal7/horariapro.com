@@ -570,46 +570,62 @@
     }
     .footer-logo { font-weight: 800; color: var(--ink); }
 
-    /* ── HOW IT WORKS (Interactive) ── */
-    .how-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: start;
+    /* ── HOW IT WORKS (steps + live demo panel) ── */
+    .how-steps-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
+      margin-bottom: 32px;
     }
-    .how-steps-list { display: flex; flex-direction: column; gap: 4px; }
     .how-step-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 16px; border-radius: var(--r); cursor: pointer;
-      transition: background .15s; border: 1px solid transparent;
-    }
-    .how-step-item:hover { background: rgba(0,0,0,.03); }
-    .how-step-item.active {
-      background: #fff; border-color: var(--border);
-      box-shadow: var(--shadow);
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px; border-radius: var(--r);
+      border: 1px solid var(--border); background: #fff;
     }
     .how-step-num-circle {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: var(--border); display: flex; align-items: center;
-      justify-content: center; font-size: 15px; font-weight: 800;
-      flex-shrink: 0; color: var(--ink-3);
-      transition: background .15s, color .15s;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--black); color: #fff; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; font-weight: 800;
+      flex-shrink: 0;
     }
-    .how-step-item.active .how-step-num-circle { background: var(--black); color: #fff; }
     .how-step-content { flex: 1; min-width: 0; }
-    .how-step-label { font-size: 15px; font-weight: 700; color: var(--ink-3); margin-bottom: 3px; transition: color .15s; }
-    .how-step-item.active .how-step-label { color: var(--black); }
-    .how-step-sublabel { font-size: 13px; color: var(--ink-4); line-height: 1.5; }
+    .how-step-label { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 3px; }
+    .how-step-sublabel { font-size: 12px; color: var(--ink-4); line-height: 1.5; }
     .how-icon-badge { width: 16px; height: 16px; border-radius: 4px; vertical-align: -3px; display: inline-block; margin: 0 1px; }
-    .how-prog-wrap { height: 2px; background: var(--border); border-radius: 1px; margin-top: 10px; overflow: hidden; opacity: 0; transition: opacity .2s; }
-    .how-step-item.active .how-prog-wrap { opacity: 1; }
-    .how-prog-fill { height: 100%; width: 0%; background: var(--black); border-radius: 1px; }
-    .how-preview {
+
+    .demo-panel {
       background: #fff; border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 28px;
-      min-height: 300px; box-shadow: var(--shadow);
-      transition: opacity 0.2s ease;
-      display: flex; flex-direction: column; gap: 10px;
+      border-radius: var(--r-lg); box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .demo-panel-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; background: var(--bg-2); border-bottom: 1px solid var(--border);
+    }
+    .demo-panel-title {
+      font-size: 12px; font-weight: 600; color: var(--ink-3);
+      margin-left: 4px; flex: 1;
+    }
+    .demo-fullscreen-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: #fff; border: 1px solid var(--border); border-radius: 7px;
+      padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--ink);
+      cursor: pointer; transition: background .15s;
+    }
+    .demo-fullscreen-btn:hover { background: var(--bg-2); }
+    .demo-panel-body { position: relative; height: 640px; background: var(--bg-2); }
+    .demo-panel:fullscreen .demo-panel-body { height: calc(100vh - 45px); }
+    .demo-panel iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .demo-panel-loading {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: var(--ink-4); font-size: 13px;
+    }
+    .demo-panel-spinner {
+      width: 28px; height: 28px; border: 3px solid var(--border);
+      border-top-color: var(--blue); border-radius: 50%;
+      animation: iaSpinner .8s linear infinite;
+    }
+    @media (max-width: 768px) {
+      .demo-panel-body { height: 520px; }
     }
 
     /* ── MOCK ANIMATIONS ── */
@@ -725,8 +741,6 @@
       .form-row { grid-template-columns: 1fr; }
       .feature-row { grid-template-columns: 1fr; gap: 32px; }
       .feature-row.reverse { direction: ltr; }
-      .how-layout { grid-template-columns: 1fr; gap: 24px; }
-      .how-preview { order: -1; min-height: 220px; }
       .hero-bg-video, .hero-bg-scrim { height: 440px; }
     }
     @media (max-width: 480px) {
@@ -773,47 +787,64 @@
   <div class="section-inner">
     <div class="section-tag">Com funciona</div>
     <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
-    <p class="section-sub">Un procés dissenyat per ser el més simple possible per a tothom.</p>
+    <p class="section-sub">Prova l'aplicació real ací baix — dades fictícies, funcionalitat completa. És exactament el mateix producte que fan servir els centres.</p>
 
-    <div class="how-layout">
-      <!-- Esquerra: llista de passos -->
-      <div class="how-steps-list">
-        <div class="how-step-item active" data-step="0" onclick="goHowStep(0)">
-          <div class="how-step-num-circle">1</div>
-          <div class="how-step-content">
-            <div class="how-step-label">El docent avisa des del mòbil: <span style="display:inline-flex;align-items:center;gap:3px;">per l'app <img src="favicon.svg" alt="" class="how-icon-badge" /></span> o <span style="display:inline-flex;align-items:center;gap:3px;">per WhatsApp <svg class="how-icon-badge" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#25D366"/><path d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z" fill="#fff"/></svg></span></div>
-            <div class="how-step-sublabel">Des de l'app en 30 segons, o escrivint-ho directament per WhatsApp.</div>
-            <div class="how-prog-wrap"><div class="how-prog-fill" id="how-prog-0"></div></div>
-          </div>
-        </div>
-        <div class="how-step-item" data-step="1" onclick="goHowStep(1)">
-          <div class="how-step-num-circle">2</div>
-          <div class="how-step-content">
-            <div class="how-step-label">🤖 La IA analitza i proposa</div>
-            <div class="how-step-sublabel">Horaris, deutes TP i normes del centre.</div>
-            <div class="how-prog-wrap"><div class="how-prog-fill" id="how-prog-1"></div></div>
-          </div>
-        </div>
-        <div class="how-step-item" data-step="2" onclick="goHowStep(2)">
-          <div class="how-step-num-circle">3</div>
-          <div class="how-step-content">
-            <div class="how-step-label">✅ La cap d'estudis confirma</div>
-            <div class="how-step-sublabel">Revisa, modifica si cal, un sol clic.</div>
-            <div class="how-prog-wrap"><div class="how-prog-fill" id="how-prog-2"></div></div>
-          </div>
-        </div>
-        <div class="how-step-item" data-step="3" onclick="goHowStep(3)">
-          <div class="how-step-num-circle">4</div>
-          <div class="how-step-content">
-            <div class="how-step-label"><svg viewBox="0 0 48 40" width="18" height="15" style="vertical-align:-2px;"><path fill="#4CAF50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/><path fill="#1E88E5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/><path fill="#E53935" d="M35,11.2V23.7l-11,8.7l-11-8.7V11.2l11,8.2L35,11.2z"/><path fill="#C62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C8.601,7.984,7,7.34,7,7.34L3,12.298z"/><path fill="#FBC02D" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C39.399,7.984,41,7.34,41,7.34L45,12.298z"/></svg> Tothom rep la notificació</div>
-            <div class="how-step-sublabel">Correu automàtic amb tots els detalls.</div>
-            <div class="how-prog-wrap"><div class="how-prog-fill" id="how-prog-3"></div></div>
-          </div>
+    <div class="how-steps-list">
+      <div class="how-step-item">
+        <div class="how-step-num-circle">1</div>
+        <div class="how-step-content">
+          <div class="how-step-label">El docent avisa des del mòbil: <span style="display:inline-flex;align-items:center;gap:3px;">per l'app <img src="favicon.svg" alt="" class="how-icon-badge" /></span> o <span style="display:inline-flex;align-items:center;gap:3px;">per WhatsApp <svg class="how-icon-badge" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#25D366"/><path d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z" fill="#fff"/></svg></span></div>
+          <div class="how-step-sublabel">Des de l'app en 30 segons, o escrivint-ho directament per WhatsApp.</div>
         </div>
       </div>
+      <div class="how-step-item">
+        <div class="how-step-num-circle">2</div>
+        <div class="how-step-content">
+          <div class="how-step-label">🔔 HorariaPro notifica els Avisos Rebuts a la cap d'estudis</div>
+          <div class="how-step-sublabel">Apareix a l'instant al seu panell — sense haver de buscar-lo enlloc ni esperar cap correu.</div>
+        </div>
+      </div>
+      <div class="how-step-item">
+        <div class="how-step-num-circle">3</div>
+        <div class="how-step-content">
+          <div class="how-step-label">🤖 La IA analitza i proposa</div>
+          <div class="how-step-sublabel">Horaris, deutes TP i normes del centre.</div>
+        </div>
+      </div>
+      <div class="how-step-item">
+        <div class="how-step-num-circle">4</div>
+        <div class="how-step-content">
+          <div class="how-step-label">✅ La cap d'estudis confirma</div>
+          <div class="how-step-sublabel">Revisa, modifica si cal, un sol clic.</div>
+        </div>
+      </div>
+      <div class="how-step-item">
+        <div class="how-step-num-circle">5</div>
+        <div class="how-step-content">
+          <div class="how-step-label"><svg viewBox="0 0 48 40" width="18" height="15" style="vertical-align:-2px;"><path fill="#4CAF50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/><path fill="#1E88E5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/><path fill="#E53935" d="M35,11.2V23.7l-11,8.7l-11-8.7V11.2l11,8.2L35,11.2z"/><path fill="#C62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C8.601,7.984,7,7.34,7,7.34L3,12.298z"/><path fill="#FBC02D" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C39.399,7.984,41,7.34,41,7.34L45,12.298z"/></svg> Tothom rep la notificació</div>
+          <div class="how-step-sublabel">Correu automàtic amb tots els detalls.</div>
+        </div>
+      </div>
+    </div>
 
-      <!-- Dreta: preview animat -->
-      <div class="how-preview" id="how-preview"></div>
+    <p style="text-align:center; font-size:14px; color:var(--ink-3); margin-bottom:16px;">⏱️ Fixa't en el cronòmetre de la demo — mesura en temps real quant triga a resoldre's una absència completa, de principi a fi.</p>
+
+    <!-- Panell fix amb la demo real incrustada -->
+    <div class="demo-panel" id="demoPanel">
+      <div class="demo-panel-bar">
+        <div class="mock-screen-dot" style="background:#ff5f57"></div>
+        <div class="mock-screen-dot" style="background:#febc2e"></div>
+        <div class="mock-screen-dot" style="background:#28c840"></div>
+        <span class="demo-panel-title">Demo interactiva — HorariaPro</span>
+        <button class="demo-fullscreen-btn" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ Pantalla completa</button>
+      </div>
+      <div class="demo-panel-body">
+        <div class="demo-panel-loading" id="demoPanelLoading">
+          <div class="demo-panel-spinner"></div>
+          <span>Carregant la demo interactiva…</span>
+        </div>
+        <iframe id="demoIframe" title="Demo interactiva de HorariaPro" loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -1770,144 +1801,47 @@
   }
 
   /* ═══════════════════════════════════════════════
-     HOW IT WORKS — Controller interactiu
+     DEMO PANEL — càrrega diferida + pantalla completa
   ═══════════════════════════════════════════════ */
   (function() {
-    var STEP_DURATION = 7000;
-    var currentStep = 0;
-    var progInterval = null;
-    var elapsed = 0;
-    var running = false;
+    var loaded = false;
 
-    var gmailIcon = '<svg viewBox="0 0 48 40" width="18" height="15" style="vertical-align:-2px;"><path fill="#4CAF50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/><path fill="#1E88E5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/><path fill="#E53935" d="M35,11.2V23.7l-11,8.7l-11-8.7V11.2l11,8.2L35,11.2z"/><path fill="#C62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C8.601,7.984,7,7.34,7,7.34L3,12.298z"/><path fill="#FBC02D" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C39.399,7.984,41,7.34,41,7.34L45,12.298z"/></svg>';
-
-    var previews = [
-      // Pas 1 — Docent avisa
-      '<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">' +
-        '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">📲 Vista del docent</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;animation:slideUp .4s ease both;">' +
-          '<span style="color:var(--ink-3);font-size:12px;">Data</span>' +
-          '<span style="font-weight:600;font-size:12px;">Dilluns, 26 de maig</span>' +
-        '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:8px;animation:slideUp .4s ease .1s both;">' +
-          '<span style="color:var(--ink-3);font-size:12px;flex:1;">Franges</span>' +
-          '<span class="mock-badge blue">1a hora</span><span class="mock-badge blue">2a hora</span><span class="mock-badge blue">3a hora</span>' +
-        '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;animation:slideUp .4s ease .2s both;">' +
-          '<span style="color:var(--ink-3);font-size:12px;">Motiu</span><span style="font-weight:600;font-size:12px;">Malaltia</span>' +
-        '</div>' +
-        '<div style="background:var(--black);color:#fff;padding:12px;border-radius:8px;text-align:center;font-size:13px;font-weight:700;animation:slideUp .4s ease .3s both;">✓ Enviar avís →</div>' +
-        '<div style="font-size:11px;color:var(--ink-4);text-align:center;animation:fadeIn .4s ease .5s both;">Cap d\'estudis notificada automàticament</div>' +
-      '</div>',
-
-      // Pas 2 — IA analitza
-      '<div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">' +
-        '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">🤖 Processant absència</div>' +
-        '<div style="background:var(--bg-2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:slideUp .3s ease both;">' +
-          '<div style="width:18px;height:18px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:iaSpinner .7s linear infinite;flex-shrink:0;"></div>' +
-          '<span style="font-size:12px;color:var(--ink-3);">Analitzant la jornada completa i 28 docents...</span>' +
-        '</div>' +
-        '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:10px;padding:14px;animation:scaleIn .4s ease .4s both;">' +
-          '<div style="font-weight:700;margin-bottom:8px;font-size:13px;color:var(--blue);">📋 Proposta IA</div>' +
-          '<div style="display:flex;flex-direction:column;gap:5px;">' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>9:00–10:30 → Carles Mas</span><span style="font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>11:00–12:30 → Laia Vidal</span><span style="font-weight:700;">⚠</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>15:00–16:30 → Pere Soler</span><span style="font-weight:700;">✓</span></div>' +
-          '</div>' +
-        '</div>' +
-      '</div>',
-
-      // Pas 3 — Cap confirma
-      '<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">' +
-        '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">✅ Vista de la cap d\'estudis</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;animation:slideUp .3s ease both;">' +
-          '<div style="font-weight:700;margin-bottom:8px;font-size:13px;">Proposta de la IA</div>' +
-          '<div style="display:flex;flex-direction:column;gap:5px;">' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:00–10:30 → Carles Mas</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>11:00–12:30 → Laia Vidal</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>15:00–16:30 → Pere Soler</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-          '</div>' +
-        '</div>' +
-        '<div style="background:var(--green-lt);border:1px solid #86efac;color:var(--green);padding:12px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;animation:howConfirm .5s ease .4s both;">✓ Confirmat — 3 cobertures registrades</div>' +
-      '</div>',
-
-      // Pas 4 — Notificació
-      '<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">' +
-        '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">' + gmailIcon + ' Notificacions enviades</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .1s both;">' +
-          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + gmailIcon + '</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Carles Mas</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 9:00–10:30 · 3rA</div></div>' +
-          '<span class="mock-badge blue">Enviat</span>' +
-        '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .25s both;">' +
-          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + gmailIcon + '</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Laia Vidal</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 11:00–12:30 · 5èA</div></div>' +
-          '<span class="mock-badge blue">Enviat</span>' +
-        '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .4s both;">' +
-          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + gmailIcon + '</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Pere Soler</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 15:00–16:30 · 4tB</div></div>' +
-          '<span class="mock-badge blue">Enviat</span>' +
-        '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .55s both;">' +
-          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + gmailIcon + '</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Núria Camps <span style="font-weight:400;color:var(--ink-3);">· Coord. de cicle</span></div><div style="font-size:11px;color:var(--ink-3);">Resum de cobertures del dia</div></div>' +
-          '<span class="mock-badge blue">Enviat</span>' +
-        '</div>' +
-      '</div>'
-    ];
-
-    function goToStep(idx) {
-      currentStep = idx;
-      elapsed = 0;
-      document.querySelectorAll('.how-step-item').forEach(function(el, i) {
-        el.classList.toggle('active', i === idx);
+    function loadDemo() {
+      if (loaded) return;
+      loaded = true;
+      var iframe = document.getElementById('demoIframe');
+      var loading = document.getElementById('demoPanelLoading');
+      iframe.addEventListener('load', function() {
+        if (loading) loading.style.display = 'none';
       });
-      document.querySelectorAll('.how-prog-fill').forEach(function(b) { b.style.transition = 'none'; b.style.width = '0%'; });
-      var preview = document.getElementById('how-preview');
-      if (preview) {
-        preview.style.opacity = '0';
-        setTimeout(function() {
-          preview.innerHTML = previews[idx];
-          preview.style.opacity = '1';
-        }, 200);
+      iframe.src = 'demo/index.html';
+    }
+
+    window.toggleDemoFullscreen = function() {
+      var panel = document.getElementById('demoPanel');
+      var btn = document.getElementById('demoFullscreenBtn');
+      if (!document.fullscreenElement) {
+        loadDemo();
+        panel.requestFullscreen().catch(function() {});
+      } else {
+        document.exitFullscreen();
       }
-      startProgress(idx);
-    }
-
-    function startProgress(idx) {
-      clearInterval(progInterval);
-      var bar = document.getElementById('how-prog-' + idx);
-      if (!bar) return;
-      var interval = 40;
-      setTimeout(function() {
-        bar.style.transition = 'width ' + interval + 'ms linear';
-        progInterval = setInterval(function() {
-          elapsed += interval;
-          bar.style.width = Math.min(100, (elapsed / STEP_DURATION) * 100) + '%';
-          if (elapsed >= STEP_DURATION) {
-            clearInterval(progInterval);
-            goToStep((currentStep + 1) % 4);
-          }
-        }, interval);
-      }, 10);
-    }
-
-    window.goHowStep = function(idx) {
-      clearInterval(progInterval);
-      goToStep(idx);
+      document.addEventListener('fullscreenchange', function onChange() {
+        document.removeEventListener('fullscreenchange', onChange);
+        btn.textContent = document.fullscreenElement ? '✕ Tancar' : '⛶ Pantalla completa';
+      });
     };
 
     document.addEventListener('DOMContentLoaded', function() {
-      var section = document.getElementById('com-funciona');
-      if (!section) return;
+      var panel = document.getElementById('demoPanel');
+      if (!panel) return;
       var obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting && !running) {
-          running = true;
-          goToStep(0);
+        if (entries[0].isIntersecting) {
+          loadDemo();
+          obs.disconnect();
         }
-      }, { threshold: 0.3 });
-      obs.observe(section);
+      }, { threshold: 0.2 });
+      obs.observe(panel);
     });
   })();
 
