@@ -87,7 +87,33 @@
     .nav-cta:hover { opacity: .85; }
 
     /* ── HERO ── */
+    .hero-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-video {
+      position: absolute;
+      top: 0; left: 50%;
+      width: 100vw; height: 100%;
+      transform: translateX(-50%);
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    }
+    .hero-bg-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: rgba(255,255,255,.4);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+    }
     .hero {
+      position: relative;
+      z-index: 1;
       padding: 100px 5% 80px;
       max-width: 960px; margin: 0 auto;
       text-align: center;
@@ -166,19 +192,6 @@
     @media (prefers-reduced-motion: reduce) {
       .hero-badge, .hero h1, .hero p, .hero-actions { animation: none; opacity: 1; }
     }
-
-    /* ── STATS ── */
-    .stats {
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 40px 5%;
-      display: flex; justify-content: center;
-      gap: 64px; flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-size: 36px; font-weight: 800; color: var(--black); letter-spacing: -.02em; }
-    .stat-lbl { font-size: 14px; color: var(--ink-3); margin-top: 2px; }
 
     /* ── SECTIONS ── */
     section { padding: 80px 5%; }
@@ -709,11 +722,11 @@
       .rol-section { grid-template-columns: 1fr; gap: 32px; }
       .rol-section.reverse { direction: ltr; }
       .form-row { grid-template-columns: 1fr; }
-      .stats { gap: 32px; }
       .feature-row { grid-template-columns: 1fr; gap: 32px; }
       .feature-row.reverse { direction: ltr; }
       .how-layout { grid-template-columns: 1fr; gap: 24px; }
       .how-preview { order: -1; min-height: 220px; }
+      .hero-bg-video, .hero-bg-scrim { height: 440px; }
     }
     @media (max-width: 480px) {
       .nav-logo img { height: 34px; }
@@ -737,35 +750,22 @@
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
-  <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
-  <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="openDemoModal()">Sol·licitar demo gratuïta</button>
-    <a href="#funcionalitats" class="btn-secondary">Veure funcionalitats</a>
+<div class="hero-wrap">
+  <video class="hero-bg-video" id="heroBgVideo" autoplay muted loop playsinline poster="videos/hero-bg-poster.jpg" aria-hidden="true">
+    <source src="videos/hero-bg.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-bg-scrim"></div>
+  <div class="hero">
+    <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
+    <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
+    <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openDemoModal()">Sol·licitar demo gratuïta</button>
+      <a href="https://horariapro.com/demo/" class="btn-secondary">Veure com funciona</a>
+    </div>
   </div>
 </div>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-num">–80%</div>
-    <div class="stat-lbl">Temps gestionant cobertures</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">100%</div>
-    <div class="stat-lbl">Grups sempre coberts</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">2</div>
-    <div class="stat-lbl">Centres educatius actius</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0€</div>
-    <div class="stat-lbl">Cost d'implantació</div>
-  </div>
-</div>
 
 <!-- COM FUNCIONA (interactiu) -->
 <section id="com-funciona" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
@@ -2291,6 +2291,23 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       Object.keys(MOCKS).forEach(function(id) { startMock(id, MOCKS[id]); });
+    });
+  })();
+</script>
+
+<script>
+  (function() {
+    var video = document.getElementById('heroBgVideo');
+    if (!video) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      return;
+    }
+    var tryPlay = function() { video.play().catch(function() {}); };
+    tryPlay();
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && video.paused) tryPlay();
     });
   })();
 </script>
