@@ -600,6 +600,7 @@
     .how-step-label { font-size: 15px; font-weight: 700; color: var(--ink-3); margin-bottom: 3px; transition: color .15s; }
     .how-step-item.active .how-step-label { color: var(--black); }
     .how-step-sublabel { font-size: 13px; color: var(--ink-4); line-height: 1.5; }
+    .how-icon-badge { width: 16px; height: 16px; border-radius: 4px; vertical-align: -3px; display: inline-block; margin: 0 1px; }
     .how-prog-wrap { height: 2px; background: var(--border); border-radius: 1px; margin-top: 10px; overflow: hidden; opacity: 0; transition: opacity .2s; }
     .how-step-item.active .how-prog-wrap { opacity: 1; }
     .how-prog-fill { height: 100%; width: 0%; background: var(--black); border-radius: 1px; }
@@ -780,8 +781,8 @@
         <div class="how-step-item active" data-step="0" onclick="goHowStep(0)">
           <div class="how-step-num-circle">1</div>
           <div class="how-step-content">
-            <div class="how-step-label">📲 El docent avisa des del mòbil</div>
-            <div class="how-step-sublabel">Selecciona data, franges i motiu. 30 segons.</div>
+            <div class="how-step-label">El docent avisa des del mòbil: <span style="display:inline-flex;align-items:center;gap:3px;">per l'app <img src="favicon.svg" alt="" class="how-icon-badge" /></span> o <span style="display:inline-flex;align-items:center;gap:3px;">per WhatsApp <svg class="how-icon-badge" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#25D366"/><path d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z" fill="#fff"/></svg></span></div>
+            <div class="how-step-sublabel">Des de l'app en 30 segons, o escrivint-ho directament per WhatsApp.</div>
             <div class="how-prog-wrap"><div class="how-prog-fill" id="how-prog-0"></div></div>
           </div>
         </div>
@@ -1802,10 +1803,15 @@
         '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">🤖 Processant absència</div>' +
         '<div style="background:var(--bg-2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:slideUp .3s ease both;">' +
           '<div style="width:18px;height:18px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:iaSpinner .7s linear infinite;flex-shrink:0;"></div>' +
-          '<span style="font-size:12px;color:var(--ink-3);">Analitzant 3 franges i 28 docents...</span>' +
+          '<span style="font-size:12px;color:var(--ink-3);">Analitzant la jornada completa i 28 docents...</span>' +
         '</div>' +
-        '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;font-size:11px;color:var(--blue);font-family:monospace;line-height:1.9;animation:scaleIn .4s ease .4s both;">' +
-          '📋 PROPOSTA IA\n──────────────────\n9:00–9:30  │  Carles Mas  ✓\n9:30–10:00 │  Laia Vidal  ⚠\n10:00–10:30│  Pere Soler  ✓\n──────────────────' +
+        '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:10px;padding:14px;animation:scaleIn .4s ease .4s both;">' +
+          '<div style="font-weight:700;margin-bottom:8px;font-size:13px;color:var(--blue);">📋 Proposta IA</div>' +
+          '<div style="display:flex;flex-direction:column;gap:5px;">' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>9:00–10:30 → Carles Mas</span><span style="font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>11:00–12:30 → Laia Vidal</span><span style="font-weight:700;">⚠</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--blue);"><span>15:00–16:30 → Pere Soler</span><span style="font-weight:700;">✓</span></div>' +
+          '</div>' +
         '</div>' +
       '</div>',
 
@@ -1815,9 +1821,9 @@
         '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;animation:slideUp .3s ease both;">' +
           '<div style="font-weight:700;margin-bottom:8px;font-size:13px;">Proposta de la IA</div>' +
           '<div style="display:flex;flex-direction:column;gap:5px;">' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:00–9:30 → Carles Mas</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:30–10:00 → Laia Vidal</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>10:00–10:30 → Pere Soler</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>9:00–10:30 → Carles Mas</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>11:00–12:30 → Laia Vidal</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);"><span>15:00–16:30 → Pere Soler</span><span style="color:var(--green);font-weight:700;">✓</span></div>' +
           '</div>' +
         '</div>' +
         '<div style="background:var(--green-lt);border:1px solid #86efac;color:var(--green);padding:12px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;animation:howConfirm .5s ease .4s both;">✓ Confirmat — 3 cobertures registrades</div>' +
@@ -1828,18 +1834,23 @@
         '<div style="font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">📧 Notificacions enviades</div>' +
         '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .1s both;">' +
           '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📧</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Carles Mas</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 9:00–9:30 · 3rA</div></div>' +
+          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Carles Mas</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 9:00–10:30 · 3rA</div></div>' +
           '<span class="mock-badge blue">Enviat</span>' +
         '</div>' +
-        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .3s both;">' +
+        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .25s both;">' +
           '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📧</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Laia Vidal</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 9:30–10:00 · 5èA</div></div>' +
+          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Laia Vidal</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 11:00–12:30 · 5èA</div></div>' +
           '<span class="mock-badge blue">Enviat</span>' +
         '</div>' +
-        '<div style="background:var(--green-lt);border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .5s both;">' +
-          '<div style="background:var(--green-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📋</div>' +
-          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Claustre</div><div style="font-size:11px;color:var(--ink-3);">HorariaPro actualitzat · 3 cobertures</div></div>' +
-          '<span class="mock-badge green">✓</span>' +
+        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .4s both;">' +
+          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📧</div>' +
+          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Pere Soler</div><div style="font-size:11px;color:var(--ink-3);">Cobertura 15:00–16:30 · 4tB</div></div>' +
+          '<span class="mock-badge blue">Enviat</span>' +
+        '</div>' +
+        '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:howNotify .4s ease .55s both;">' +
+          '<div style="background:var(--blue-lt);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📧</div>' +
+          '<div style="flex:1;"><div style="font-weight:600;font-size:12px;">Núria Camps <span style="font-weight:400;color:var(--ink-3);">· Coord. de cicle</span></div><div style="font-size:11px;color:var(--ink-3);">Resum de cobertures del dia</div></div>' +
+          '<span class="mock-badge blue">Enviat</span>' +
         '</div>' +
       '</div>'
     ];
