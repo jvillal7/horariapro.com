@@ -7,6 +7,41 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <meta name="description" content="HorariaPro automatitza la gestió d'absències i cobertures del professorat amb intel·ligència artificial. Dissenyat per a equips directius de centres educatius." />
+  <link rel="canonical" href="https://horariapro.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://horariapro.com/" />
+  <meta property="og:site_name" content="HorariaPro" />
+  <meta property="og:title" content="HorariaPro — Gestió intel·ligent de cobertures per a centres educatius" />
+  <meta property="og:description" content="Automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions." />
+  <meta property="og:image" content="https://horariapro.com/logo.png" />
+  <meta property="og:locale" content="ca_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HorariaPro — Gestió intel·ligent de cobertures per a centres educatius" />
+  <meta name="twitter:description" content="Automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions." />
+  <meta name="twitter:image" content="https://horariapro.com/logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HorariaPro",
+    "url": "https://horariapro.com/",
+    "description": "HorariaPro automatitza la gestió d'absències i cobertures del professorat amb intel·ligència artificial per a centres educatius.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "ca",
+    "offers": [
+      { "@type": "Offer", "name": "Bàsic", "price": "59", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" },
+      { "@type": "Offer", "name": "Pro", "price": "79", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" },
+      { "@type": "Offer", "name": "Centre+", "price": "119", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
@@ -85,31 +120,40 @@
       -webkit-appearance: none;
     }
     .nav-cta:hover { opacity: .85; }
+    .nav-burger {
+      display: none;
+      width: 40px; height: 40px;
+      background: transparent; border: none; cursor: pointer;
+      flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; transition: transform .25s ease, opacity .25s ease; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-menu {
+      position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+      background: rgba(10,10,10,.98);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      display: flex; flex-direction: column;
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .nav-mobile-menu.open { max-height: 420px; }
+    .nav-mobile-menu a {
+      padding: 16px 5%; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-mobile-menu a:last-child {
+      border-bottom: none; color: #0a0a0a; background: #fff;
+      margin: 12px 5% 16px; border-radius: 8px; text-align: center;
+    }
 
     /* ── HERO ── */
     .hero-wrap {
       position: relative;
       overflow: hidden;
-    }
-    .hero-bg-video {
-      position: absolute;
-      top: 0; left: 50%;
-      width: 100vw; height: 100%;
-      transform: translateX(-50%);
-      object-fit: cover;
-      z-index: 0;
-      pointer-events: none;
-      mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-    }
-    .hero-bg-scrim {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background: rgba(255,255,255,.4);
-      backdrop-filter: blur(1px);
-      -webkit-backdrop-filter: blur(1px);
     }
     .hero {
       position: relative;
@@ -181,7 +225,7 @@
       from { opacity: 0; transform: translateY(90px) scale(.94); filter: blur(10px); }
       to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
-    .hero-badge, .hero h1, .hero p, .hero-actions {
+    .hero-badge, .hero h1, .hero p, .hero-actions, .hero-trust {
       opacity: 0;
       animation: heroFadeUp 1.1s cubic-bezier(.16,1,.3,1) both;
     }
@@ -189,8 +233,9 @@
     .hero h1    { animation-delay: .25s; }
     .hero p     { animation-delay: .48s; }
     .hero-actions { animation-delay: .72s; }
+    .hero-trust { animation-delay: .9s; margin-top: 20px; font-size: 13px; font-weight: 600; color: var(--ink-3); }
     @media (prefers-reduced-motion: reduce) {
-      .hero-badge, .hero h1, .hero p, .hero-actions { animation: none; opacity: 1; }
+      .hero-badge, .hero h1, .hero p, .hero-actions, .hero-trust { animation: none; opacity: 1; }
     }
 
     /* ── SECTIONS ── */
@@ -559,6 +604,70 @@
       content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; background: var(--bg); }
+    .faq-question {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 20px; background: none; border: none; cursor: pointer; text-align: left;
+      font-size: 15px; font-weight: 700; color: var(--black); font-family: inherit;
+    }
+    .faq-icon { font-size: 22px; font-weight: 400; color: var(--ink-4); transition: transform .2s ease; flex-shrink: 0; line-height: 1; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--blue); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .faq-answer p { padding: 0 20px 18px; font-size: 14px; color: var(--ink-2); line-height: 1.7; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 997;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      transition: transform .15s ease, bottom .2s ease;
+    }
+    .whatsapp-float:hover { transform: scale(1.08); }
+    .whatsapp-float.raised { bottom: 96px; }
+    @media (max-width: 480px) {
+      .whatsapp-float { right: 16px; bottom: 16px; width: 50px; height: 50px; }
+      .whatsapp-float.raised { bottom: 130px; }
+    }
+
+    /* ── COOKIE BANNER ── */
+    .cookie-banner {
+      position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 998;
+      max-width: 640px; margin: 0 auto;
+      background: var(--black); color: #fff;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 20px 24px;
+      display: none;
+      align-items: center; gap: 16px; flex-wrap: wrap;
+      animation: fadeIn .3s ease both;
+    }
+    .cookie-banner.show { display: flex; }
+    .cookie-banner p { flex: 1; min-width: 220px; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,.75); }
+    .cookie-banner a { color: #fff; text-decoration: underline; }
+    .cookie-banner-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn-accept {
+      background: #fff; color: var(--black); border: none;
+      padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: opacity .15s; white-space: nowrap;
+    }
+    .cookie-btn-accept:hover { opacity: .85; }
+    .cookie-btn-reject {
+      background: transparent; color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+    }
+    .cookie-btn-reject:hover { background: rgba(255,255,255,.08); }
+    @media (max-width: 480px) {
+      .cookie-banner { left: 12px; right: 12px; bottom: 12px; padding: 16px; }
+      .cookie-banner-actions { width: 100%; }
+      .cookie-btn-accept, .cookie-btn-reject { flex: 1; }
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bg-2);
@@ -591,41 +700,41 @@
     .how-step-sublabel { font-size: 12px; color: var(--ink-4); line-height: 1.5; }
     .how-icon-badge { width: 16px; height: 16px; border-radius: 4px; vertical-align: -3px; display: inline-block; margin: 0 1px; }
 
-    .demo-panel {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: var(--r-lg); box-shadow: var(--shadow-lg);
-      overflow: hidden;
+    /* ── DEMO EMBED (app real, sense finestra falsa) ── */
+    .demo-embed {
+      background: var(--bg-2); border-radius: var(--r-lg);
+      overflow: hidden; position: relative;
     }
-    .demo-panel-bar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 10px 14px; background: var(--bg-2); border-bottom: 1px solid var(--border);
-    }
-    .demo-panel-title {
-      font-size: 12px; font-weight: 600; color: var(--ink-3);
-      margin-left: 4px; flex: 1;
-    }
-    .demo-fullscreen-btn {
-      display: flex; align-items: center; gap: 6px;
-      background: #fff; border: 1px solid var(--border); border-radius: 7px;
-      padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--ink);
-      cursor: pointer; transition: background .15s;
-    }
-    .demo-fullscreen-btn:hover { background: var(--bg-2); }
-    .demo-panel-body { position: relative; height: 640px; background: var(--bg-2); }
-    .demo-panel:fullscreen .demo-panel-body { height: calc(100vh - 45px); }
-    .demo-panel iframe { width: 100%; height: 100%; border: 0; display: block; }
-    .demo-panel-loading {
+    .demo-embed-body { position: relative; height: 640px; }
+    .demo-embed:fullscreen .demo-embed-body { height: 100vh; }
+    .demo-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .demo-embed-loading {
       position: absolute; inset: 0; display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 10px;
-      color: var(--ink-4); font-size: 13px;
+      color: var(--ink-4); font-size: 13px; background: var(--bg-2);
     }
-    .demo-panel-spinner {
+    .demo-embed-spinner {
       width: 28px; height: 28px; border: 3px solid var(--border);
       border-top-color: var(--blue); border-radius: 50%;
       animation: iaSpinner .8s linear infinite;
     }
+    .demo-fullscreen-fab {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--ink);
+      cursor: pointer; box-shadow: var(--shadow); transition: background .15s;
+    }
+    .demo-fullscreen-fab:hover { background: #fff; }
+    .demo-try-link { text-align: center; font-size: 13px; color: var(--ink-3); margin-top: 16px; }
+    .demo-try-link a { color: var(--blue); font-weight: 600; }
     @media (max-width: 768px) {
-      .demo-panel-body { height: 520px; }
+      .demo-embed-body { height: 520px; }
+    }
+    @media (max-width: 480px) {
+      .demo-fullscreen-fab .fs-label { display: none; }
+      .demo-fullscreen-fab { padding: 8px; }
     }
 
     /* ── MOCK ANIMATIONS ── */
@@ -736,12 +845,12 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
+      .nav-burger { display: flex; }
       .rol-section { grid-template-columns: 1fr; gap: 32px; }
       .rol-section.reverse { direction: ltr; }
       .form-row { grid-template-columns: 1fr; }
       .feature-row { grid-template-columns: 1fr; gap: 32px; }
       .feature-row.reverse { direction: ltr; }
-      .hero-bg-video, .hero-bg-scrim { height: 440px; }
     }
     @media (max-width: 480px) {
       .nav-logo img { height: 34px; }
@@ -755,29 +864,41 @@
 <nav>
   <div class="nav-logo"><img src="/logo.svg" alt="HorariaPro" /></div>
   <div class="nav-links">
+    <a href="#com-funciona">Veure demo</a>
     <a href="#funcionalitats">Funcionalitats</a>
-    <a href="#com-funciona">Com funciona</a>
     <a href="#preus">Preus</a>
+    <a href="#faq">FAQ</a>
     <a href="#legal">Privacitat</a>
     <a href="#contacte">Contacte</a>
   </div>
-  <a href="/accedir.html" class="nav-cta">Accedir a l'app →</a>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <a href="/accedir.html" class="nav-cta">Accedir a l'app →</a>
+    <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#com-funciona" onclick="closeMobileMenu()">Veure demo</a>
+  <a href="#funcionalitats" onclick="closeMobileMenu()">Funcionalitats</a>
+  <a href="#preus" onclick="closeMobileMenu()">Preus</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
+  <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
+  <a href="/accedir.html">Accedir a l'app →</a>
+</div>
 
 <!-- HERO -->
 <div class="hero-wrap">
-  <video class="hero-bg-video" id="heroBgVideo" autoplay muted loop playsinline poster="videos/hero-bg-poster.jpg" aria-hidden="true">
-    <source src="videos/hero-bg.mp4" type="video/mp4" />
-  </video>
-  <div class="hero-bg-scrim"></div>
   <div class="hero">
     <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
     <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
     <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="openDemoModal()">Sol·licitar demo gratuïta</button>
-      <a href="https://horariapro.com/demo/" class="btn-secondary">Veure com funciona</a>
+      <a href="#com-funciona" class="btn-primary">Veure demo</a>
+      <a href="#funcionalitats" class="btn-secondary">Com funciona?</a>
     </div>
+    <p class="hero-trust">✓ Ja en marxa a 2 centres educatius</p>
   </div>
 </div>
 
@@ -787,7 +908,7 @@
   <div class="section-inner">
     <div class="section-tag">Com funciona</div>
     <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
-    <p class="section-sub">Prova l'aplicació real ací baix — dades fictícies, funcionalitat completa. És exactament el mateix producte que fan servir els centres.</p>
+    <p class="section-sub">Prova l'aplicació real aquí baix — el mateix producte que ja fan servir els centres, amb dades fictícies.</p>
 
     <div class="how-steps-list">
       <div class="how-step-item">
@@ -827,25 +948,19 @@
       </div>
     </div>
 
-    <p style="text-align:center; font-size:14px; color:var(--ink-3); margin-bottom:16px;">⏱️ Fixa't en el cronòmetre de la demo — mesura en temps real quant triga a resoldre's una absència completa, de principi a fi.</p>
-
-    <!-- Panell fix amb la demo real incrustada -->
-    <div class="demo-panel" id="demoPanel">
-      <div class="demo-panel-bar">
-        <div class="mock-screen-dot" style="background:#ff5f57"></div>
-        <div class="mock-screen-dot" style="background:#febc2e"></div>
-        <div class="mock-screen-dot" style="background:#28c840"></div>
-        <span class="demo-panel-title">Demo interactiva — HorariaPro</span>
-        <button class="demo-fullscreen-btn" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ Pantalla completa</button>
-      </div>
-      <div class="demo-panel-body">
-        <div class="demo-panel-loading" id="demoPanelLoading">
-          <div class="demo-panel-spinner"></div>
+    <!-- Demo real incrustada, sense finestra falsa -->
+    <div class="demo-embed" id="demoPanel">
+      <button class="demo-fullscreen-fab" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ <span class="fs-label">Pantalla completa</span></button>
+      <div class="demo-embed-body">
+        <div class="demo-embed-loading" id="demoPanelLoading">
+          <div class="demo-embed-spinner"></div>
           <span>Carregant la demo interactiva…</span>
         </div>
         <iframe id="demoIframe" title="Demo interactiva de HorariaPro" loading="lazy"></iframe>
       </div>
     </div>
+
+    <p class="demo-try-link">📱 En mòbil, toca ⛶ per veure-la en pantalla completa, o <a href="/demo/" target="_blank" rel="noopener">obri-la en una pestanya nova →</a></p>
   </div>
 </section>
 
@@ -1480,7 +1595,7 @@
   <div class="section-inner">
     <div class="section-tag">Preus</div>
     <h2 class="section-title">Sense permanència. Sense sorpreses.</h2>
-    <p class="section-sub">Implantació gratuïta, suport directe inclòs i sense permanència.</p>
+    <p class="section-sub">Sense permanència · Suport directe inclòs · Cancel·la quan vulguis.</p>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px; align-items:start;">
 
       <!-- Bàsic -->
@@ -1586,6 +1701,98 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq" style="background: var(--bg);">
+  <div class="section-inner">
+    <div class="section-tag">Preguntes freqüents</div>
+    <h2 class="section-title">Resolem els teus dubtes</h2>
+    <p class="section-sub">Si en tens més, escriu-nos — responem en menys de 24h.</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Cal instal·lar alguna cosa?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>No. Funciona 100% al navegador, des de mòbil, tauleta o ordinador. Ni la cap d'estudis ni el professorat han d'instal·lar res.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Com accedeixen els docents? Necessiten contrasenya?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Cada docent entra amb el seu correu XTEC o corporatiu del centre (si en teniu). Sense comptes externs ni contrasenyes innecessàries.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Què passa amb les nostres dades si deixem d'utilitzar HorariaPro?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Tens dret a l'oblit: pots sol·licitar l'eliminació completa de totes les dades del centre en qualsevol moment.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>On s'emmagatzemen les dades?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>A servidors europeus (EU-West), seguint el RGPD i el reglament del Departament d'Educació. Cap dada surt de la Unió Europea.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Quant triga la implantació?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Entre uns dies i una setmana com a màxim, depenent de la mida del claustre (docents, educadors i altre personal). La implantació és gratuïta i inclou suport directe per configurar horaris i normes de cobertura.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>És compatible amb altres eines que ja utilitzem al centre?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Sí. HorariaPro funciona de manera complementària a l'ecosistema de Google Workspace for Education (Gmail, Calendar) que ja fan servir la majoria de centres: les notificacions arriben directament al vostre correu, sense duplicar informació ni canviar cap altra eina.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Com decideix la IA qui cobreix cada franja?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Analitza horaris disponibles i deutes de Treball Personal (TP) acumulats, combinant-ho amb les normes de cobertura i el context personalitzat que cada centre defineix per a la IA — sempre repartint les cobertures de manera equitativa.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>I si la proposta de la IA no és la que voldríem?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>La cap d'estudis pot editar-la abans de confirmar-la — és una proposta, no una decisió automàtica. A més, amb el Chat Horaria pots conversar directament amb la IA per afinar-la o corregir-la ("i si en Carles no pot?"), d'una manera senzilla i intuïtiva.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Hi ha permanència o costos ocults?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>No. Sense permanència, sense cost d'implantació, i es pot cancel·lar quan es vulgui.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Funciona per a instituts, o només per a primària?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Funciona per a qualsevol centre educatiu, sigui quin sigui el nivell: escoles d'educació infantil, CEIP o instituts.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- LEGAL -->
 <section id="legal" style="background: var(--bg-2); border-top: 1px solid var(--border);">
   <div class="section-inner">
@@ -1675,6 +1882,20 @@
   <div>© 2026 HorariaPro. Tots els drets reservats.</div>
 </footer>
 
+<!-- WHATSAPP FLOAT -->
+<a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/34651781289?text=Hola!%20Voldria%20m%C3%A9s%20informaci%C3%B3%20sobre%20HorariaPro" target="_blank" rel="noopener" aria-label="Contacta per WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z"/></svg>
+</a>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <p>Utilitzem cookies pròpies i de tercers (com les de Calendly, per a la reserva de demos) per millorar la teva experiència. <a href="/politica-cookies.html">Més informació</a>.</p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn-reject" onclick="setCookieConsent(false)">Rebutjar</button>
+    <button class="cookie-btn-accept" onclick="setCookieConsent(true)">D'acord</button>
+  </div>
+</div>
+
 <!-- DEMO MODAL -->
 <div class="modal-overlay" id="demoModal" onclick="handleModalOverlayClick(event)">
   <div class="modal-box">
@@ -1711,8 +1932,30 @@
   </div>
 </div>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
+  /* ── COOKIE CONSENT ── */
+  function setCookieConsent(accepted) {
+    localStorage.setItem('hp_cookies_consent', accepted ? 'accepted' : 'rejected');
+    document.getElementById('cookieBanner').classList.remove('show');
+    var wa = document.getElementById('whatsappFloat');
+    if (wa) wa.classList.remove('raised');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('hp_cookies_consent')) {
+      document.getElementById('cookieBanner').classList.add('show');
+      var wa = document.getElementById('whatsappFloat');
+      if (wa) wa.classList.add('raised');
+    }
+  });
+
+  /* ── FAQ ACCORDION ── */
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  }
+
   /* ── DEMO MODAL ── */
   function openDemoModal() {
     document.getElementById('demoModal').classList.add('open');
@@ -1730,6 +1973,20 @@
     }
   }
 
+  /* ── MOBILE NAV MENU ── */
+  function toggleMobileMenu() {
+    var burger = document.getElementById('navBurger');
+    var menu = document.getElementById('navMobileMenu');
+    var open = menu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function closeMobileMenu() {
+    document.getElementById('navBurger').classList.remove('open');
+    document.getElementById('navMobileMenu').classList.remove('open');
+    document.getElementById('navBurger').setAttribute('aria-expanded', 'false');
+  }
+
   /* ── NAV LIQUID GLASS ON SCROLL ── */
   (function() {
     const nav = document.querySelector('nav');
@@ -1744,19 +2001,33 @@
     if (e.key === 'Escape') closeDemoModal();
   });
 
-  /* ── CALENDLY ── */
+  /* ── CALENDLY (carregat de manera diferida, només quan cal) ── */
+  var calendlyScriptLoaded = false;
+  function loadCalendlyScript(callback) {
+    if (calendlyScriptLoaded) { callback(); return; }
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = function() { calendlyScriptLoaded = true; callback(); };
+    document.body.appendChild(script);
+  }
   function openCalendly(e) {
     e.preventDefault();
     closeDemoModal();
+    if (!localStorage.getItem('hp_cookies_consent')) {
+      setCookieConsent(true);
+    }
     // TODO: substitueix l'URL per la teva URL de Calendly
     // Passos: 1) Crea compte a calendly.com  2) Crea un event "Demo HorariaPro 30 min"
     //         3) Copia la URL i substitueix la de sota
     var calendlyUrl = 'https://calendly.com/horaria-admin/30min';
-    if (typeof Calendly !== 'undefined') {
-      Calendly.initPopupWidget({ url: calendlyUrl });
-    } else {
-      window.open(calendlyUrl, '_blank');
-    }
+    loadCalendlyScript(function() {
+      if (typeof Calendly !== 'undefined') {
+        Calendly.initPopupWidget({ url: calendlyUrl });
+      } else {
+        window.open(calendlyUrl, '_blank');
+      }
+    });
   }
 
   /* ── CONTACT FORM ── */
@@ -1801,7 +2072,7 @@
   }
 
   /* ═══════════════════════════════════════════════
-     DEMO PANEL — càrrega diferida + pantalla completa
+     DEMO EMBED — càrrega diferida + pantalla completa
   ═══════════════════════════════════════════════ */
   (function() {
     var loaded = false;
@@ -1820,15 +2091,26 @@
     window.toggleDemoFullscreen = function() {
       var panel = document.getElementById('demoPanel');
       var btn = document.getElementById('demoFullscreenBtn');
+      // iOS Safari no suporta la Fullscreen API sobre elements arbitraris — obrim la demo en una pestanya nova.
+      var supportsFullscreen = document.fullscreenEnabled && panel.requestFullscreen;
+      if (!supportsFullscreen) {
+        loadDemo();
+        window.open('https://horariapro.com/demo/', '_blank');
+        return;
+      }
       if (!document.fullscreenElement) {
         loadDemo();
-        panel.requestFullscreen().catch(function() {});
+        panel.requestFullscreen().catch(function() {
+          window.open('https://horariapro.com/demo/', '_blank');
+        });
       } else {
         document.exitFullscreen();
       }
       document.addEventListener('fullscreenchange', function onChange() {
         document.removeEventListener('fullscreenchange', onChange);
-        btn.textContent = document.fullscreenElement ? '✕ Tancar' : '⛶ Pantalla completa';
+        btn.innerHTML = document.fullscreenElement
+          ? '✕ <span class="fs-label">Tancar</span>'
+          : '⛶ <span class="fs-label">Pantalla completa</span>';
       });
     };
 
@@ -2238,23 +2520,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       Object.keys(MOCKS).forEach(function(id) { startMock(id, MOCKS[id]); });
-    });
-  })();
-</script>
-
-<script>
-  (function() {
-    var video = document.getElementById('heroBgVideo');
-    if (!video) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      video.removeAttribute('autoplay');
-      video.pause();
-      return;
-    }
-    var tryPlay = function() { video.play().catch(function() {}); };
-    tryPlay();
-    document.addEventListener('visibilitychange', function() {
-      if (!document.hidden && video.paused) tryPlay();
     });
   })();
 </script>
