@@ -385,15 +385,6 @@
       font-size: 13px; color: var(--blue);
       margin-top: 4px;
     }
-    .mock-stat-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 13px;
-    }
-    .mock-stat-row strong { font-size: 15px; font-weight: 800; color: var(--black); }
 
     /* Mini graella */
     .mock-grid {
@@ -976,40 +967,17 @@
         </div>
       </div>
 
-      <!-- 5. Registre i informes -->
+      <!-- 4. Registre i informes -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon">📊</div>
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">4</div>
           <h3>Registre d'absències i informes</h3>
-          <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual o Excel per a la PGA, presa de decisions i inspeccions.</p>
+          <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual, amb taules i gràfiques. També es pot descarregar en format PDF o Excel per a la PGA, presa de decisions i inspeccions.</p>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-registre">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Historial — Maig 2026</span>
-            </div>
-            <div class="mock-stat-row"><span>Absències registrades</span><strong>24</strong></div>
-            <div class="mock-stat-row"><span>Cobertures realitzades</span><strong>67</strong></div>
-            <div class="mock-stat-row"><span>Permisos ATRI gestionats</span><strong>5</strong></div>
-            <div style="height:1px; background:var(--border); margin: 4px 0;"></div>
-            <div class="mock-row">
-              <div class="mock-dot orange"></div>
-              <div style="flex:1"><div class="mock-label" style="font-size:12px;">Puig, Marta</div><div class="mock-sub">Malaltia · 26/05</div></div>
-              <span class="mock-badge orange">ATRI</span>
-            </div>
-            <div class="mock-row">
-              <div class="mock-dot green"></div>
-              <div style="flex:1"><div class="mock-label" style="font-size:12px;">Ferrer, Joan</div><div class="mock-sub">Formació · 22/05</div></div>
-              <span class="mock-badge green">Justificada</span>
-            </div>
-            <div style="margin-top:auto; display:flex; gap:8px;">
-              <div style="flex:1; background:var(--bg-2); border:1px solid var(--border); padding:9px; border-radius:8px; text-align:center; font-size:12px; font-weight:600; color:var(--ink-2);">📄 Exportar Excel</div>
-              <div style="flex:1; background:var(--bg-2); border:1px solid var(--border); padding:9px; border-radius:8px; text-align:center; font-size:12px; font-weight:600; color:var(--ink-2);">📊 Informe anual</div>
-            </div>
-          </div>
+        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/historial.mp4','video')">
+          <video autoplay muted loop playsinline aria-label="Historial d'absències i informes">
+            <source src="videos/historial.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
@@ -2016,30 +1984,6 @@
     function ia(html) { return '<div class="mock-ia-box"><span style="font-size:12px;">' + html + '</span></div>'; }
 
     var MOCKS = {
-
-      'mock-registre': { title: 'Historial — Maig 2026', frames: [
-        { d: 4000, h:
-          '<div class="mock-stat-row"><span>Absències registrades</span><strong style="font-size:15px;">0</strong></div>' +
-          '<div class="mock-stat-row"><span>Cobertures realitzades</span><strong style="font-size:15px;">0</strong></div>' +
-          '<div class="mock-stat-row"><span>Permisos ATRI gestionats</span><strong style="font-size:15px;">0</strong></div>'
-        },
-        { d: 4800, h:
-          '<div class="mock-stat-row"><span>Absències registrades</span><strong style="font-size:15px;color:var(--blue);">24</strong></div>' +
-          '<div class="mock-stat-row"><span>Cobertures realitzades</span><strong style="font-size:15px;color:var(--blue);">67</strong></div>' +
-          '<div class="mock-stat-row"><span>Permisos ATRI gestionats</span><strong style="font-size:15px;color:var(--blue);">5</strong></div>'
-        },
-        { d: 4000, h:
-          '<div class="mock-stat-row"><span>Absències registrades</span><strong>24</strong></div>' +
-          '<div class="mock-stat-row"><span>Cobertures realitzades</span><strong>67</strong></div>' +
-          '<div style="height:1px;background:var(--border);margin:4px 0;"></div>' +
-          row('orange','Puig, Marta · Malaltia · 26/05','ATRI','orange') +
-          row('green','Ferrer, Joan · Formació · 22/05','Justificada','green') +
-          '<div style="margin-top:auto;display:flex;gap:6px;">' +
-            '<div style="flex:1;background:var(--bg-2);border:1px solid var(--border);padding:8px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:var(--ink-3);">📄 Excel</div>' +
-            '<div style="flex:1;background:var(--bg-2);border:1px solid var(--border);padding:8px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:var(--ink-3);">📊 Informe</div>' +
-          '</div>'
-        },
-      ]},
 
       'mock-substitut': { title: 'Horari substitut', frames: [
         { d: 4000, h:
