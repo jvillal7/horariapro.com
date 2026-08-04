@@ -324,10 +324,11 @@
     .feature-media-item video, .feature-media-item img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    /* Retalla només la franja negra fina de l'estat del mòbil, sense tocar la capçalera real */
-    .feature-media-item video, .feature-video-wrap.portrait video {
-      transform: scale(1.025) translateY(-1.2%);
-    }
+    .feature-media-item.contain img { object-fit: contain; background: #fff; }
+    /* Retalla exactament la barra negra del navegador gravada a cada vídeo (mesurada píxel a píxel) */
+    .feature-media-item video { transform: scale(1.113) translateY(-4.81%); }
+    .feature-video-wrap.portrait video { transform: scale(1.056) translateY(-2.37%); }
+    .has-lightbox { cursor: pointer; }
     .feature-media-label {
       position: absolute; bottom: 10px; left: 10px;
       background: rgba(10,10,10,.75); color: #fff;
@@ -660,6 +661,32 @@
       .whatsapp-float.raised { bottom: 130px; }
     }
 
+    /* ── MEDIA LIGHTBOX ── */
+    .media-lightbox-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,.9);
+      align-items: center; justify-content: center;
+      padding: 32px;
+    }
+    .media-lightbox-overlay.open { display: flex; }
+    .media-lightbox-content {
+      max-width: 420px; width: 100%; max-height: 88vh;
+      border-radius: var(--r-lg); overflow: hidden;
+      background: #000; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .media-lightbox-content img, .media-lightbox-content video {
+      width: 100%; height: 100%; max-height: 88vh; display: block; object-fit: contain;
+    }
+    .media-lightbox-close {
+      position: fixed; top: 24px; right: 24px; z-index: 1000;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff;
+      font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .media-lightbox-close:hover { background: rgba(255,255,255,.22); }
+
     /* ── COOKIE BANNER ── */
     .cookie-banner {
       position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 998;
@@ -959,17 +986,17 @@
           <p>Senzill i ràpid — els docents ho adopten sense formació. Centralitza tots els avisos (WhatsApp, email, trucades) en un sol canal per a la cap d'estudis.</p>
         </div>
         <div class="feature-media-pair">
-          <div class="feature-media-item">
+          <div class="feature-media-item has-lightbox" onclick="openMediaLightbox('videos/avis-app.mp4','video')">
             <video autoplay muted loop playsinline aria-label="Avís d'absència des de l'app">
               <source src="videos/avis-app.mp4" type="video/mp4" />
             </video>
             <span class="feature-media-label">Des de l'app</span>
           </div>
-          <div class="feature-media-item">
+          <div class="feature-media-item has-lightbox" onclick="openMediaLightbox('images/avis-whatsapp.png','image')">
             <img src="images/avis-whatsapp.png" alt="Avís d'absència per WhatsApp" loading="lazy" />
             <span class="feature-media-label">Per WhatsApp</span>
           </div>
-          <div class="feature-media-item">
+          <div class="feature-media-item contain has-lightbox" onclick="openMediaLightbox('images/avis-manual.png','image')">
             <img src="images/avis-manual.png" alt="Registre manual d'una cobertura per la cap d'estudis" loading="lazy" />
             <span class="feature-media-label">Manualment</span>
           </div>
@@ -983,7 +1010,7 @@
           <h3>Graella grups × franges</h3>
           <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull. Veus immediatament quins grups queden sense cobrir.</p>
         </div>
-        <div class="feature-video-wrap portrait">
+        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/graella-grups.mp4','video')">
           <video autoplay muted loop playsinline aria-label="Graella de grups per franges">
             <source src="videos/graella-grups.mp4" type="video/mp4" />
           </video>
@@ -1798,6 +1825,12 @@
   <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z"/></svg>
 </a>
 
+<!-- MEDIA LIGHTBOX -->
+<div class="media-lightbox-overlay" id="mediaLightbox" onclick="handleLightboxBgClick(event)">
+  <button class="media-lightbox-close" onclick="closeMediaLightbox()" aria-label="Tancar">✕</button>
+  <div class="media-lightbox-content" id="mediaLightboxContent"></div>
+</div>
+
 <!-- COOKIE BANNER -->
 <div class="cookie-banner" id="cookieBanner">
   <p>Utilitzem cookies pròpies i de tercers (com les de Calendly, per a la reserva de demos) per millorar la teva experiència. <a href="/politica-cookies.html">Més informació</a>.</p>
@@ -1877,6 +1910,39 @@
     document.getElementById('demoModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  /* ── MEDIA LIGHTBOX ── */
+  function openMediaLightbox(src, type) {
+    var content = document.getElementById('mediaLightboxContent');
+    content.innerHTML = '';
+    var el;
+    if (type === 'video') {
+      el = document.createElement('video');
+      el.src = src;
+      el.autoplay = true; el.muted = true; el.loop = true; el.playsInline = true;
+    } else {
+      el = document.createElement('img');
+      el.src = src;
+      el.alt = '';
+    }
+    content.appendChild(el);
+    document.getElementById('mediaLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMediaLightbox() {
+    document.getElementById('mediaLightbox').classList.remove('open');
+    document.getElementById('mediaLightboxContent').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function handleLightboxBgClick(e) {
+    if (e.target.id === 'mediaLightbox') closeMediaLightbox();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMediaLightbox();
+  });
 
   function handleModalOverlayClick(e) {
     if (e.target === document.getElementById('demoModal')) {
