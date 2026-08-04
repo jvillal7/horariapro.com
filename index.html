@@ -2035,6 +2035,14 @@
       var loading = document.getElementById('demoPanelLoading');
       iframe.addEventListener('load', function() {
         if (loading) loading.style.display = 'none';
+        // Injectem la regla anti-scroll-chaining DINS del document de la demo
+        // (des de fora no funciona: cal aplicar-la a l'element que fa scroll de veritat).
+        try {
+          var doc = iframe.contentDocument;
+          var style = doc.createElement('style');
+          style.textContent = 'html, body { overscroll-behavior-y: contain !important; }';
+          doc.head.appendChild(style);
+        } catch (e) {}
       });
       iframe.src = 'demo/index.html';
     }
