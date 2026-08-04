@@ -780,59 +780,6 @@
     /* ── MOCK ANIMATIONS ── */
     .feature-mock[id] { transition: opacity 0.2s ease; }
 
-    /* Chat mock */
-    .mock-chat-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 4px;
-    }
-    .mock-chat-title {
-      font-size: 13px; font-weight: 800;
-      background: linear-gradient(to right, #7c3aed, #2563eb);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .mock-bubble-ai {
-      background: var(--bg-2); border-radius: 10px 10px 10px 2px;
-      padding: 9px 12px; font-size: 12px; max-width: 88%; line-height: 1.5; align-self: flex-start;
-    }
-    .mock-bubble-user {
-      background: var(--ink); color: #fff;
-      border-radius: 10px 10px 2px 10px;
-      padding: 9px 12px; font-size: 12px; max-width: 80%; line-height: 1.5; align-self: flex-end;
-    }
-    .mock-chat-messages { display: flex; flex-direction: column; gap: 7px; flex: 1; }
-    .mock-chat-proposta {
-      background: var(--green-lt); border: 1px solid #bbf7d0;
-      border-radius: 8px; padding: 10px 12px;
-      font-size: 11px; color: var(--green);
-      font-family: monospace; line-height: 1.8; white-space: pre;
-    }
-    .mock-chat-input {
-      display: flex; gap: 6px; margin-top: auto;
-      padding-top: 10px; border-top: 1px solid var(--border);
-    }
-    .mock-chat-input-field {
-      flex: 1; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 6px; padding: 7px 10px; font-size: 11px; color: var(--ink-4);
-    }
-    .mock-chat-send {
-      background: var(--green); color: #fff; width: 28px; height: 28px;
-      border-radius: 6px; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; flex-shrink: 0;
-    }
-    .mock-loading-dots {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--bg-2); border-radius: 10px 10px 10px 2px;
-      padding: 10px 14px; font-size: 12px; color: var(--ink-3);
-    }
-    .mock-dot-pulse { display: flex; gap: 3px; align-items: center; }
-    .mock-dot-pulse span {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--ink-4);
-      animation: dotBounce .8s ease-in-out infinite;
-    }
-    .mock-dot-pulse span:nth-child(2) { animation-delay: .15s; }
-    .mock-dot-pulse span:nth-child(3) { animation-delay: .30s; }
-
     /* Pati mock */
     .mock-pati-grid { display: grid; grid-template-columns: 40px 1fr 1fr; gap: 4px; font-size: 11px; }
     .mock-pati-gh { font-weight: 700; color: var(--ink-3); text-align: center; padding: 5px 2px; }
@@ -846,10 +793,6 @@
     .mock-pati-row-today .mock-pati-day { color: var(--black); font-weight: 800; }
 
     /* Animation keyframes */
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-4px); }
-    }
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -876,9 +819,6 @@
     }
     @keyframes iaSpinner {
       to { transform: rotate(360deg); }
-    }
-    @keyframes progFill {
-      from { width: 0%; } to { width: 100%; }
     }
 
     /* ── RESPONSIVE ── */
@@ -1017,79 +957,22 @@
         </div>
       </div>
 
-      <!-- 3. IA cobertures -->
+      <!-- 3. IA cobertures + Chat Horaria (fusionat) -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon highlight" style="font-weight:800; color:#fff; font-size:18px;">3.1</div>
+          <div class="feature-row-icon highlight" style="font-weight:800; color:#fff; font-size:20px;">3</div>
           <h3>Proposta de cobertures amb IA</h3>
           <p>La IA fa el 90% de la feina intel·lectual. Analitza horaris, deutes de TP i normes del centre per proposar qui cobreix cada franja. El 10% restant és la teva confirmació.</p>
-          <ul>
-            <li><strong>Claustre complet:</strong> avís general que HorariaPro s'ha actualitzat.</li>
-            <li><strong>Persones afectades:</strong> qui cobreix, tutors condicionats i coordinadors d'etapa.</li>
-          </ul>
-        </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-ia">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Proposta IA</span>
-            </div>
-            <div class="mock-row">
-              <div class="mock-dot orange"></div>
-              <span class="mock-label">Marta Puig — Tot el dia</span>
-              <span class="mock-badge orange">Pendent</span>
-            </div>
-            <div class="mock-row">
-              <div class="mock-dot blue"></div>
-              <span class="mock-label">Joan Ferrer — 9:00–10:30</span>
-              <span class="mock-badge blue">IA proposa →</span>
-            </div>
-            <div class="mock-ia-box">
-              <strong>🤖 Proposta IA — 9:00–9:30</strong><br>
-              <span style="font-size:12px;">Carles Mas · 0 TP pendents · Disponible</span>
-            </div>
-            <div class="mock-ia-box">
-              <strong>🤖 Proposta IA — 9:30–10:00</strong><br>
-              <span style="font-size:12px;">Laia Vidal · 1 TP pendent · Prioritat alta</span>
-            </div>
-            <div style="margin-top:auto; display:flex; gap:8px;">
-              <div style="flex:1; background:var(--green-lt); color:var(--green); padding:10px; border-radius:8px; text-align:center; font-size:13px; font-weight:700;">✓ Confirmar tot</div>
-              <div style="background:var(--bg); border:1px solid var(--border); padding:10px 14px; border-radius:8px; font-size:13px; color:var(--ink-2);">Editar</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Chat Horaria (NOU) -->
-      <div class="feature-row reverse">
-        <div class="feature-row-text">
-          <div class="feature-row-icon highlight" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">💬</div>
-          <h3>Chat Horaria — Conversa amb la IA</h3>
-          <p>L'assistent expert en cobertures. Explica-li qui s'absenta i la IA raona en veu alta: consulta els horaris, comprova els deutes de TP i proposa qui cobreix cada franja.</p>
+          <p>Amb el Chat Horaria, l'assistent expert en cobertures, explica-li qui s'absenta i la IA raona en veu alta: consulta els horaris, comprova els deutes de TP i proposa qui cobreix cada franja.</p>
           <ul>
             <li><strong>Conversa natural:</strong> "i si en Carles no pot?" — la IA respon i recalcula.</li>
             <li><strong>Un clic per aplicar:</strong> la proposta es registra directament a l'app.</li>
           </ul>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-chat">
-            <div class="mock-chat-header">
-              <div>
-                <div class="mock-chat-title">💬 Horaria</div>
-                <div style="font-size:10px;color:var(--ink-4);">Assistent expert en cobertures</div>
-              </div>
-              <div style="width:3px;height:24px;border-radius:2px;overflow:hidden;background:var(--border);"><div style="height:25%;width:100%;background:linear-gradient(90deg,#7c3aed,#2563eb);animation:progFill 1.6s ease-in-out infinite alternate;"></div></div>
-            </div>
-            <div class="mock-chat-messages">
-              <div class="mock-bubble-ai">Hola! 👋 Per qui busques cobertura avui?</div>
-            </div>
-            <div class="mock-chat-input">
-              <div class="mock-chat-input-field">Escriu el teu missatge...</div>
-              <div class="mock-chat-send">↑</div>
-            </div>
-          </div>
+        <div class="feature-video-wrap portrait has-lightbox" style="aspect-ratio:514/848;" onclick="openMediaLightbox('videos/chat-horaria.mp4','video')">
+          <video autoplay muted loop playsinline aria-label="Chat Horaria — proposta de cobertures amb IA">
+            <source src="videos/chat-horaria.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
@@ -2133,82 +2016,6 @@
     function ia(html) { return '<div class="mock-ia-box"><span style="font-size:12px;">' + html + '</span></div>'; }
 
     var MOCKS = {
-      'mock-ia': { title: 'Proposta IA', frames: [
-        { d: 4800, h: row('orange','Marta Puig — Tot el dia','Pendent','orange') + '<div style="font-size:11px;color:var(--ink-4);padding:8px 12px;text-align:center;">La IA analitzarà les franges i el TP del claustre...</div>' },
-        { d: 5200, h:
-          row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box" style="display:flex;align-items:center;gap:10px;"><div style="width:16px;height:16px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:iaSpinner .7s linear infinite;flex-shrink:0;"></div><span style="font-size:12px;">Analitzant horaris i deutes TP...</span></div>'
-        },
-        { d: 5200, h:
-          row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 9:00–9:30</strong><br><span style="font-size:11px;">Carles Mas · 0 TP · Disponible ✓</span></div>'
-        },
-        { d: 5200, h:
-          row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box"><strong>🤖 9:00–9:30</strong> → Carles Mas ✓</div>' +
-          '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 9:30–10:00</strong><br><span style="font-size:11px;">Laia Vidal · 1 TP pendent · Prioritat alta ⚠</span></div>'
-        },
-        { d: 4800, h:
-          row('orange','Marta Puig — Tot el dia','Pendent','orange') +
-          '<div class="mock-ia-box"><strong>🤖 9:00–9:30</strong> → Carles Mas ✓</div>' +
-          '<div class="mock-ia-box"><strong>🤖 9:30–10:00</strong> → Laia Vidal ⚠</div>' +
-          '<div class="mock-ia-box" style="animation:slideUp .3s ease both;"><strong>🤖 10:00–10:30</strong> → Pere Soler ✓</div>' +
-          '<div style="margin-top:auto;display:flex;gap:6px;">' +
-            '<div style="flex:1;background:var(--green-lt);color:var(--green);padding:10px;border-radius:8px;text-align:center;font-size:12px;font-weight:700;animation:pulseBorder 1s ease-in-out infinite;">✓ Confirmar tot</div>' +
-            '<div style="background:var(--bg);border:1px solid var(--border);padding:10px 12px;border-radius:8px;font-size:12px;color:var(--ink-3);">Editar</div>' +
-          '</div>'
-        },
-        { d: 4000, h:
-          '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">' +
-            '<div style="font-size:32px;animation:scaleIn .3s ease both;">✅</div>' +
-            '<div style="font-weight:700;color:var(--green);font-size:14px;animation:fadeIn .3s ease .2s both;">3 cobertures registrades</div>' +
-            '<div style="font-size:12px;color:var(--ink-3);text-align:center;animation:fadeIn .3s ease .4s both;">Carles Mas, Laia Vidal i Pere Soler notificats</div>' +
-          '</div>'
-        },
-      ]},
-
-      'mock-chat': { title: '💬 Horaria', frames: [
-        { d: 4000, h:
-          '<div class="mock-chat-messages">' +
-            '<div class="mock-bubble-ai">Hola! 👋 Soc <strong>Horaria</strong>. Per qui busques cobertura avui?</div>' +
-          '</div>' +
-          '<div class="mock-chat-input"><div class="mock-chat-input-field">Escriu el teu missatge...</div><div class="mock-chat-send">↑</div></div>'
-        },
-        { d: 4200, h:
-          '<div class="mock-chat-messages">' +
-            '<div class="mock-bubble-ai">Hola! 👋 Per qui busques cobertura avui?</div>' +
-            '<div class="mock-bubble-user" style="animation:slideUp .3s ease both;">Marta Puig, de 9:00 a 10:30</div>' +
-          '</div>' +
-          '<div class="mock-chat-input"><div class="mock-chat-input-field">Escriu el teu missatge...</div><div class="mock-chat-send">↑</div></div>'
-        },
-        { d: 4200, h:
-          '<div class="mock-chat-messages">' +
-            '<div class="mock-bubble-ai">Hola! 👋 Per qui busques cobertura avui?</div>' +
-            '<div class="mock-bubble-user">Marta Puig, de 9:00 a 10:30</div>' +
-            '<div class="mock-loading-dots" style="animation:slideUp .3s ease both;">' +
-              '<div class="mock-dot-pulse"><span></span><span></span><span></span></div>' +
-              '<span>⚖️ Comprovant deutes de TP...</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="mock-chat-input"><div class="mock-chat-input-field">Escriu el teu missatge...</div><div class="mock-chat-send">↑</div></div>'
-        },
-        { d: 5200, h:
-          '<div class="mock-chat-messages">' +
-            '<div class="mock-bubble-ai">Per a <strong>Marta Puig</strong>, he analitzat 28 docents i 3 franges.</div>' +
-            '<div class="mock-chat-proposta" style="animation:scaleIn .4s ease .2s both;">' +
-              '📋 PROPOSTA IA\n══════════════════\n9:00–9:30  │  Carles Mas  ✓\n9:30–10:00 │  Laia Vidal  ⚠\n10:00–10:30│  Pere Soler  ✓\n══════════════════' +
-            '</div>' +
-            '<button style="background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;animation:slideUp .3s ease .6s both;align-self:flex-start;">✓ Aplicar proposta</button>' +
-          '</div>' +
-          '<div class="mock-chat-input"><div class="mock-chat-input-field">i si Carles no pot demà?</div><div class="mock-chat-send">↑</div></div>'
-        },
-        { d: 4000, h:
-          '<div class="mock-chat-messages">' +
-            '<div class="mock-bubble-ai" style="background:var(--green-lt);color:var(--green);">✅ <strong>3 cobertures registrades</strong> — Carles, Laia i Pere notificats.</div>' +
-          '</div>' +
-          '<div class="mock-chat-input"><div class="mock-chat-input-field">Escriu el teu missatge...</div><div class="mock-chat-send">↑</div></div>'
-        },
-      ]},
 
       'mock-registre': { title: 'Historial — Maig 2026', frames: [
         { d: 4000, h:
