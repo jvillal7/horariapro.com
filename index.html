@@ -313,7 +313,7 @@
     .feature-video-wrap.portrait { aspect-ratio: 576/1296; max-width: 320px; margin: 0 auto; }
     /* App vs WhatsApp media pair (bloc 1 de Funcionalitats) */
     .feature-media-pair {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
     }
     .feature-media-item {
       position: relative;
@@ -323,6 +323,10 @@
     }
     .feature-media-item video, .feature-media-item img {
       width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    /* Retalla la franja negra de l'estat del mòbil a dalt dels vídeos */
+    .feature-media-item video, .feature-video-wrap.portrait video {
+      transform: scale(1.08) translateY(-3%);
     }
     .feature-media-label {
       position: absolute; bottom: 10px; left: 10px;
@@ -965,6 +969,10 @@
             <img src="images/avis-whatsapp.png" alt="Avís d'absència per WhatsApp" loading="lazy" />
             <span class="feature-media-label">Per WhatsApp</span>
           </div>
+          <div class="feature-media-item">
+            <img src="images/avis-manual.png" alt="Registre manual d'una cobertura per la cap d'estudis" loading="lazy" />
+            <span class="feature-media-label">Manualment</span>
+          </div>
         </div>
       </div>
 
@@ -985,7 +993,7 @@
       <!-- 3. IA cobertures -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon highlight">🤖</div>
+          <div class="feature-row-icon highlight" style="font-weight:800; color:#fff; font-size:18px;">3.1</div>
           <h3>Proposta de cobertures amb IA</h3>
           <p>La IA fa el 90% de la feina intel·lectual. Analitza horaris, deutes de TP i normes del centre per proposar qui cobreix cada franja. El 10% restant és la teva confirmació.</p>
           <ul>
