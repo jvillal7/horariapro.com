@@ -310,6 +310,7 @@
       object-fit: cover;
       display: block;
     }
+    .feature-video-wrap.portrait { aspect-ratio: 576/1296; max-width: 320px; margin: 0 auto; }
     /* App vs WhatsApp media pair (bloc 1 de Funcionalitats) */
     .feature-media-pair {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
@@ -970,75 +971,14 @@
       <!-- 2. Graella grups × franges -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon">📅</div>
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">2</div>
           <h3>Graella grups × franges</h3>
           <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull. Veus immediatament quins grups queden sense cobrir.</p>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-graella">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Graella avui — 26/05</span>
-            </div>
-            <div class="mock-grid-header">
-              <div></div>
-              <div class="mock-gh">9-10h</div>
-              <div class="mock-gh">10-11h</div>
-              <div class="mock-gh">Pati</div>
-              <div class="mock-gh">Dinar</div>
-              <div class="mock-gh">Tarda</div>
-            </div>
-            <div class="mock-grid-body">
-              <div class="mock-grid-row">
-                <div class="mock-gl">1rA</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc pend">!</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-              </div>
-              <div class="mock-grid-row">
-                <div class="mock-gl">2nB</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc cob">IA</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-              </div>
-              <div class="mock-grid-row">
-                <div class="mock-gl">3rA</div>
-                <div class="mock-gc empty">—</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc pend">!</div>
-                <div class="mock-gc ok">✓</div>
-              </div>
-              <div class="mock-grid-row">
-                <div class="mock-gl">4tB</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-              </div>
-              <div class="mock-grid-row">
-                <div class="mock-gl">5èA</div>
-                <div class="mock-gc cob">IA</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc ok">✓</div>
-                <div class="mock-gc empty">—</div>
-              </div>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:auto;flex-wrap:wrap;">
-              <span class="mock-badge green">✓ Cobert</span>
-              <span class="mock-badge orange">! Pendent</span>
-              <span class="mock-badge blue">IA Proposa</span>
-              <span class="mock-badge gray">— Lliure</span>
-            </div>
-          </div>
+        <div class="feature-video-wrap portrait">
+          <video autoplay muted loop playsinline aria-label="Graella de grups per franges">
+            <source src="videos/graella-grups.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
@@ -2119,39 +2059,6 @@
     function ia(html) { return '<div class="mock-ia-box"><span style="font-size:12px;">' + html + '</span></div>'; }
 
     var MOCKS = {
-      'mock-graella': { title: 'Avui — 26/05/2026', frames: [
-        { d: 4800, h:
-          '<div class="mock-grid-header"><div></div><div class="mock-gh">9-10h</div><div class="mock-gh">10-11h</div><div class="mock-gh">Pati</div><div class="mock-gh">Dinar</div><div class="mock-gh">Tarda</div></div>' +
-          '<div class="mock-grid-body">' +
-            '<div class="mock-grid-row"><div class="mock-gl">1rA</div><div class="mock-gc ok">✓</div><div class="mock-gc pend">!</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">2nB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc pend">!</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">3rA</div><div class="mock-gc empty">—</div><div class="mock-gc ok">✓</div><div class="mock-gc pend">!</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">4tB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-          '</div>' +
-          '<div style="display:flex;gap:6px;margin-top:auto;flex-wrap:wrap;"><span class="mock-badge orange">3 pendents</span></div>'
-        },
-        { d: 4000, h:
-          '<div class="mock-grid-header"><div></div><div class="mock-gh">9-10h</div><div class="mock-gh">10-11h</div><div class="mock-gh">Pati</div><div class="mock-gh">Dinar</div><div class="mock-gh">Tarda</div></div>' +
-          '<div class="mock-grid-body">' +
-            '<div class="mock-grid-row"><div class="mock-gl">1rA</div><div class="mock-gc ok">✓</div><div class="mock-gc cob" style="animation:pulseBorder .8s ease">IA</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">2nB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc cob" style="animation:pulseBorder .8s ease .1s">IA</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">3rA</div><div class="mock-gc empty">—</div><div class="mock-gc ok">✓</div><div class="mock-gc cob" style="animation:pulseBorder .8s ease .2s">IA</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">4tB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-          '</div>' +
-          '<div style="display:flex;gap:6px;margin-top:auto;flex-wrap:wrap;"><span class="mock-badge blue">IA proposa 3</span></div>'
-        },
-        { d: 4000, h:
-          '<div class="mock-grid-header"><div></div><div class="mock-gh">9-10h</div><div class="mock-gh">10-11h</div><div class="mock-gh">Pati</div><div class="mock-gh">Dinar</div><div class="mock-gh">Tarda</div></div>' +
-          '<div class="mock-grid-body">' +
-            '<div class="mock-grid-row"><div class="mock-gl">1rA</div><div class="mock-gc ok">✓</div><div class="mock-gc ok" style="animation:scaleIn .3s ease">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">2nB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok" style="animation:scaleIn .3s ease .1s">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">3rA</div><div class="mock-gc empty">—</div><div class="mock-gc ok">✓</div><div class="mock-gc ok" style="animation:scaleIn .3s ease .2s">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-            '<div class="mock-grid-row"><div class="mock-gl">4tB</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div><div class="mock-gc ok">✓</div></div>' +
-          '</div>' +
-          '<div style="display:flex;gap:6px;margin-top:auto;"><span class="mock-badge green">✓ Tots els grups coberts</span></div>'
-        },
-      ]},
-
       'mock-ia': { title: 'Proposta IA', frames: [
         { d: 4800, h: row('orange','Marta Puig — Tot el dia','Pendent','orange') + '<div style="font-size:11px;color:var(--ink-4);padding:8px 12px;text-align:center;">La IA analitzarà les franges i el TP del claustre...</div>' },
         { d: 5200, h:
