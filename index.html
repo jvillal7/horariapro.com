@@ -329,6 +329,18 @@
     .feature-media-item video { transform: scale(1.113) translateY(-4.81%); }
     .feature-video-wrap.portrait video { transform: scale(1.056) translateY(-2.37%); }
     .has-lightbox { cursor: pointer; }
+    .feature-media-toggle-btn {
+      display: none;
+      align-items: center; gap: 8px;
+      background: var(--bg-2); color: var(--ink);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 18px; font-size: 14px; font-weight: 700;
+      margin-top: 18px; cursor: pointer; font-family: inherit;
+    }
+    @media (max-width: 768px) {
+      .feature-video-wrap.has-lightbox, .feature-media-pair { display: none; }
+      .feature-media-toggle-btn { display: inline-flex; }
+    }
     .feature-media-label {
       position: absolute; bottom: 10px; left: 10px;
       background: rgba(10,10,10,.75); color: #fff;
@@ -1793,6 +1805,21 @@
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeMediaLightbox();
+  });
+
+  /* En mòbil, el contingut multimèdia real queda amagat i es substitueix per un botó "Veure com funciona" */
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.feature-row').forEach(function(row) {
+      var mediaEl = row.querySelector('.has-lightbox[onclick]');
+      var text = row.querySelector('.feature-row-text');
+      if (!mediaEl || !text) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'feature-media-toggle-btn';
+      btn.textContent = '▶ Veure com funciona';
+      btn.setAttribute('onclick', mediaEl.getAttribute('onclick'));
+      text.appendChild(btn);
+    });
   });
 
   function handleModalOverlayClick(e) {
