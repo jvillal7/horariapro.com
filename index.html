@@ -708,6 +708,13 @@
       font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 100px;
     }
     .media-lightbox-overlay.gallery .media-lightbox-counter { display: block; }
+    .media-lightbox-label {
+      display: none;
+      position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 1000;
+      background: rgba(255,255,255,.12); color: #fff;
+      font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 100px;
+    }
+    .media-lightbox-overlay.gallery .media-lightbox-label { display: block; }
     @media (max-width: 560px) {
       .media-lightbox-arrow { width: 38px; height: 38px; font-size: 20px; }
       .media-lightbox-arrow.prev { left: 8px; }
@@ -1718,6 +1725,7 @@
   <button class="media-lightbox-arrow prev" onclick="lightboxPrev(event)" aria-label="Anterior">‹</button>
   <div class="media-lightbox-content" id="mediaLightboxContent"></div>
   <button class="media-lightbox-arrow next" onclick="lightboxNext(event)" aria-label="Següent">›</button>
+  <div class="media-lightbox-label" id="mediaLightboxLabel"></div>
   <div class="media-lightbox-counter" id="mediaLightboxCounter"></div>
 </div>
 
@@ -1822,6 +1830,7 @@
     content.appendChild(el);
     document.getElementById('mediaLightbox').classList.toggle('gallery', lbItems.length > 1);
     document.getElementById('mediaLightboxCounter').textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+    document.getElementById('mediaLightboxLabel').textContent = it.label || '';
   }
 
   function openMediaLightboxGallery(items, index) {
@@ -1873,7 +1882,9 @@
       if (!mediaEls.length || !text) return;
       var items = mediaEls.map(function(el) {
         var m = el.getAttribute('onclick').match(/openMediaLightbox\('([^']+)','([^']+)'\)/);
-        return m ? { src: m[1], type: m[2] } : null;
+        if (!m) return null;
+        var labelEl = el.querySelector('.feature-media-label');
+        return { src: m[1], type: m[2], label: labelEl ? labelEl.textContent : '' };
       }).filter(Boolean);
       if (!items.length) return;
       var btn = document.createElement('button');
