@@ -689,6 +689,30 @@
       transition: background .15s;
     }
     .media-lightbox-close:hover { background: rgba(255,255,255,.22); }
+    .media-lightbox-arrow {
+      display: none;
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 1000;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff;
+      font-size: 26px; line-height: 1; cursor: pointer; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .media-lightbox-arrow:hover { background: rgba(255,255,255,.22); }
+    .media-lightbox-arrow.prev { left: 16px; }
+    .media-lightbox-arrow.next { right: 16px; }
+    .media-lightbox-overlay.gallery .media-lightbox-arrow { display: flex; }
+    .media-lightbox-counter {
+      display: none;
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
+      background: rgba(255,255,255,.12); color: #fff;
+      font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 100px;
+    }
+    .media-lightbox-overlay.gallery .media-lightbox-counter { display: block; }
+    @media (max-width: 560px) {
+      .media-lightbox-arrow { width: 38px; height: 38px; font-size: 20px; }
+      .media-lightbox-arrow.prev { left: 8px; }
+      .media-lightbox-arrow.next { right: 8px; }
+    }
 
     /* ── COOKIE BANNER ── */
     .cookie-banner {
@@ -1691,7 +1715,10 @@
 <!-- MEDIA LIGHTBOX -->
 <div class="media-lightbox-overlay" id="mediaLightbox" onclick="handleLightboxBgClick(event)">
   <button class="media-lightbox-close" onclick="closeMediaLightbox()" aria-label="Tancar">✕</button>
+  <button class="media-lightbox-arrow prev" onclick="lightboxPrev(event)" aria-label="Anterior">‹</button>
   <div class="media-lightbox-content" id="mediaLightboxContent"></div>
+  <button class="media-lightbox-arrow next" onclick="lightboxNext(event)" aria-label="Següent">›</button>
+  <div class="media-lightbox-counter" id="mediaLightboxCounter"></div>
 </div>
 
 <!-- COOKIE BANNER -->
@@ -1774,23 +1801,51 @@
     document.body.style.overflow = '';
   }
 
-  /* ── MEDIA LIGHTBOX ── */
-  function openMediaLightbox(src, type) {
+  /* ── MEDIA LIGHTBOX (amb suport de galeria si un bloc té més d'un element) ── */
+  var lbItems = [];
+  var lbIndex = 0;
+
+  function renderLightboxItem() {
     var content = document.getElementById('mediaLightboxContent');
     content.innerHTML = '';
+    var it = lbItems[lbIndex];
     var el;
-    if (type === 'video') {
+    if (it.type === 'video') {
       el = document.createElement('video');
-      el.src = src;
+      el.src = it.src;
       el.autoplay = true; el.muted = true; el.loop = true; el.playsInline = true;
     } else {
       el = document.createElement('img');
-      el.src = src;
+      el.src = it.src;
       el.alt = '';
     }
     content.appendChild(el);
+    document.getElementById('mediaLightbox').classList.toggle('gallery', lbItems.length > 1);
+    document.getElementById('mediaLightboxCounter').textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+  }
+
+  function openMediaLightboxGallery(items, index) {
+    lbItems = items;
+    lbIndex = index || 0;
+    renderLightboxItem();
     document.getElementById('mediaLightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  function openMediaLightbox(src, type) {
+    openMediaLightboxGallery([{ src: src, type: type }], 0);
+  }
+
+  function lightboxPrev(e) {
+    if (e) e.stopPropagation();
+    lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length;
+    renderLightboxItem();
+  }
+
+  function lightboxNext(e) {
+    if (e) e.stopPropagation();
+    lbIndex = (lbIndex + 1) % lbItems.length;
+    renderLightboxItem();
   }
 
   function closeMediaLightbox() {
@@ -1804,20 +1859,28 @@
   }
 
   document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('mediaLightbox').classList.contains('open')) return;
     if (e.key === 'Escape') closeMediaLightbox();
+    if (e.key === 'ArrowLeft') lightboxPrev();
+    if (e.key === 'ArrowRight') lightboxNext();
   });
 
   /* En mòbil, el contingut multimèdia real queda amagat i es substitueix per un botó "Veure com funciona" */
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.feature-row').forEach(function(row) {
-      var mediaEl = row.querySelector('.has-lightbox[onclick]');
+      var mediaEls = [...row.querySelectorAll('.has-lightbox[onclick]')];
       var text = row.querySelector('.feature-row-text');
-      if (!mediaEl || !text) return;
+      if (!mediaEls.length || !text) return;
+      var items = mediaEls.map(function(el) {
+        var m = el.getAttribute('onclick').match(/openMediaLightbox\('([^']+)','([^']+)'\)/);
+        return m ? { src: m[1], type: m[2] } : null;
+      }).filter(Boolean);
+      if (!items.length) return;
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'feature-media-toggle-btn';
       btn.textContent = '▶ Veure com funciona';
-      btn.setAttribute('onclick', mediaEl.getAttribute('onclick'));
+      btn.addEventListener('click', function() { openMediaLightboxGallery(items, 0); });
       text.appendChild(btn);
     });
   });
