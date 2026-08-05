@@ -341,6 +341,15 @@
       .feature-video-wrap.has-lightbox, .feature-media-pair { display: none; }
       .feature-media-toggle-btn { display: inline-flex; }
     }
+    .doc-sample-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg-2); color: var(--ink);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 16px; font-size: 13px; font-weight: 700;
+      text-decoration: none; transition: background .15s;
+      margin-top: 6px;
+    }
+    .doc-sample-link:hover { background: var(--border); }
     .feature-media-label {
       position: absolute; bottom: 10px; left: 10px;
       background: rgba(10,10,10,.75); color: #fff;
@@ -1016,6 +1025,10 @@
           <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">4</div>
           <h3>Registre d'absències i informes</h3>
           <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual, amb taules i gràfiques. També es pot descarregar en format PDF o Excel per a la PGA, presa de decisions i inspeccions.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="docs/historial-absencies-exemple.pdf" target="_blank" rel="noopener" class="doc-sample-link">📄 Veure PDF d'exemple</a>
+            <a href="docs/historial-absencies-exemple.xlsx" download class="doc-sample-link">📊 Descarregar Excel d'exemple</a>
+          </div>
         </div>
         <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/historial.mp4','video')">
           <video autoplay muted loop playsinline aria-label="Historial d'absències i informes">
