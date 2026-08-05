@@ -281,6 +281,13 @@
       font-size: 22px; margin-bottom: 18px;
     }
     .feature-row-icon.highlight { background: var(--blue); }
+    .beta-badge {
+      display: inline-block; vertical-align: middle; margin-left: 8px;
+      background: #fff7ed; color: #c2410c;
+      font-size: 11px; font-weight: 700; letter-spacing: .02em;
+      padding: 3px 10px; border-radius: 100px;
+      text-transform: uppercase;
+    }
     .feature-row-text h3 {
       font-size: 22px; font-weight: 800;
       letter-spacing: -.02em; margin-bottom: 12px;
@@ -1062,53 +1069,10 @@
         </div>
       </div>
 
-      <!-- 8. Compactació -->
+      <!-- 7. Sortides -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon">⚡</div>
-          <h3>Compactació per jornada intensiva</h3>
-          <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment.</p>
-        </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-compactacio">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Compactació jornada</span>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA NORMAL</div>
-            <div class="mock-timeblock-row">
-              <div class="mock-tb blue">9:00–9:30</div>
-              <div class="mock-tb green">9:30–10:00</div>
-              <div class="mock-tb blue">10:00–10:30</div>
-              <div class="mock-tb gray">Esbarjo</div>
-              <div class="mock-tb green">11:00–11:30</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px; margin: 8px 0;">
-              <div style="flex:1; height:1px; background:var(--border);"></div>
-              <span style="font-size:11px; font-weight:700; color:var(--blue); white-space:nowrap;">⚡ COMPACTAT AUTOMÀTIC</span>
-              <div style="flex:1; height:1px; background:var(--border);"></div>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA INTENSIVA</div>
-            <div class="mock-timeblock-row">
-              <div class="mock-tb blue">9:00–9:25</div>
-              <div class="mock-tb green">9:25–9:50</div>
-              <div class="mock-tb blue">9:50–10:15</div>
-              <div class="mock-tb green">10:15–10:40</div>
-              <div class="mock-tb orange">10:40–11:05</div>
-            </div>
-            <div class="mock-ia-box" style="margin-top:auto;">
-              <span style="font-size:12px;">✓ Compactat per a <strong>5 grups</strong> · Exporta com a PDF</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 9. Sortides -->
-      <div class="feature-row reverse">
-        <div class="feature-row-text">
-          <div class="feature-row-icon">🎒</div>
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">7</div>
           <h3>Gestió de sortides i acompanyants</h3>
           <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
         </div>
@@ -1143,10 +1107,10 @@
         </div>
       </div>
 
-      <!-- 11. Torns de pati (NOU) -->
-      <div class="feature-row">
+      <!-- 8. Torns de pati -->
+      <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon">☀️</div>
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">8</div>
           <h3>Torns de pati</h3>
           <p>Cada docent veu els seus torns de pati de la setmana des del mòbil, amb el d'avui destacat. La cap d'estudis configura l'assignació setmanal en un sol lloc.</p>
           <ul>
@@ -1194,6 +1158,49 @@
             </div>
             <div style="margin-top:auto;background:#FFF3E0;border:1px solid #FFB74D;border-radius:8px;padding:10px 12px;font-size:12px;color:#E65100;font-weight:600;text-align:center;">
               ☀️ Avui — Torn A · 10:30–11:00 · Pati principal
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Compactació (jornada intensiva) -->
+      <div class="feature-row">
+        <div class="feature-row-text">
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">9</div>
+          <h3>Compactació per jornada intensiva <span class="beta-badge">Beta</span></h3>
+          <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment.</p>
+        </div>
+        <div class="feature-video-wrap">
+          <div class="feature-mock" id="mock-compactacio">
+            <div class="mock-screen-bar">
+              <div class="mock-screen-dot" style="background:#ff5f57"></div>
+              <div class="mock-screen-dot" style="background:#febc2e"></div>
+              <div class="mock-screen-dot" style="background:#28c840"></div>
+              <span class="mock-screen-title">Compactació jornada</span>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA NORMAL</div>
+            <div class="mock-timeblock-row">
+              <div class="mock-tb blue">9:00–9:30</div>
+              <div class="mock-tb green">9:30–10:00</div>
+              <div class="mock-tb blue">10:00–10:30</div>
+              <div class="mock-tb gray">Esbarjo</div>
+              <div class="mock-tb green">11:00–11:30</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin: 8px 0;">
+              <div style="flex:1; height:1px; background:var(--border);"></div>
+              <span style="font-size:11px; font-weight:700; color:var(--blue); white-space:nowrap;">⚡ COMPACTAT AUTOMÀTIC</span>
+              <div style="flex:1; height:1px; background:var(--border);"></div>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA INTENSIVA</div>
+            <div class="mock-timeblock-row">
+              <div class="mock-tb blue">9:00–9:25</div>
+              <div class="mock-tb green">9:25–9:50</div>
+              <div class="mock-tb blue">9:50–10:15</div>
+              <div class="mock-tb green">10:15–10:40</div>
+              <div class="mock-tb orange">10:40–11:05</div>
+            </div>
+            <div class="mock-ia-box" style="margin-top:auto;">
+              <span style="font-size:12px;">✓ Compactat per a <strong>5 grups</strong> · Exporta com a PDF</span>
             </div>
           </div>
         </div>
