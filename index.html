@@ -1041,55 +1041,15 @@
       <!-- 5. Personal substitut -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon">👤</div>
+          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">5</div>
           <h3>Gestió del personal substitut</h3>
-          <p>Horari online del substitut, modificable fàcilment per la cap d'estudis. El personal té sempre la versió actualitzada a l'instant, des de qualsevol dispositiu.</p>
+          <p>HorarIAPro permet tenir l'horari diari i setmanal sempre a mà, de manera digital. La cap d'estudis pot editar i modificar els diferents horaris i s'actualitzen a l'instant. Per aquest motiu, HorarIAPro permet que qualsevol membre del claustre interí o substitut pugui tenir accés al seu horari des del primer minut a l'escola, totalment actualitzat dia a dia considerant les necessitats de l'escola i les consideracions de la cap d'estudis. En definitiva, tot el claustre té sempre la versió actualitzada a l'instant, des de qualsevol dispositiu.</p>
+          <p>També es pot descarregar en format PDF per tenir l'última versió del teu horari enganxada a la teva aula.</p>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-substitut">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Horari substitut</span>
-            </div>
-            <div style="font-size:12px; font-weight:700; color:var(--ink-3); margin-bottom:6px;">MARC OLIVÉ — Setmana 26–30 maig</div>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px;">
-                <div style="font-size:9px;color:var(--ink-4);"></div>
-                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dl</div>
-                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dt</div>
-                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dc</div>
-                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dj</div>
-                <div style="font-size:9px;font-weight:700;color:var(--ink-3);text-align:center;">Dv</div>
-              </div>
-              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
-                <div style="font-size:9px;color:var(--ink-4);">9:00</div>
-                <div class="mock-tb blue">3rA Mat</div>
-                <div class="mock-tb green">2nB</div>
-                <div class="mock-tb blue">1rA</div>
-                <div class="mock-tb green">4tB</div>
-                <div class="mock-tb blue">3rA</div>
-              </div>
-              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
-                <div style="font-size:9px;color:var(--ink-4);">9:30</div>
-                <div class="mock-tb green">5èA</div>
-                <div class="mock-tb gray">—</div>
-                <div class="mock-tb green">2nA</div>
-                <div class="mock-tb blue">1rB</div>
-                <div class="mock-tb gray">—</div>
-              </div>
-              <div style="display:grid; grid-template-columns:40px repeat(5,1fr); gap:3px; align-items:center;">
-                <div style="font-size:9px;color:var(--ink-4);">10:00</div>
-                <div class="mock-tb gray">—</div>
-                <div class="mock-tb blue">6èA</div>
-                <div class="mock-tb orange">Guàrdia</div>
-                <div class="mock-tb gray">—</div>
-                <div class="mock-tb green">5èB</div>
-              </div>
-            </div>
-            <div style="margin-top:auto; font-size:11px; color:var(--ink-4); text-align:center; padding-top:8px; border-top: 1px solid var(--border);">Actualitzat en temps real · Accessible des del mòbil</div>
-          </div>
+        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/horari-substitut.mp4','video')">
+          <video autoplay muted loop playsinline aria-label="Horari del personal substitut">
+            <source src="videos/horari-substitut.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
@@ -2099,30 +2059,6 @@
     function ia(html) { return '<div class="mock-ia-box"><span style="font-size:12px;">' + html + '</span></div>'; }
 
     var MOCKS = {
-
-      'mock-substitut': { title: 'Horari substitut', frames: [
-        { d: 4000, h:
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:6px;">MARC OLIVÉ — Setmana 26–30 maig</div>' +
-          '<div style="display:grid;grid-template-columns:40px repeat(5,1fr);gap:3px;">' +
-            '<div></div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dl</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dt</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dc</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dj</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dv</div>' +
-            '<div style="font-size:9px;color:var(--ink-4);">9:00</div>' +
-            '<div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div>' +
-            '<div style="font-size:9px;color:var(--ink-4);">9:30</div>' +
-            '<div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div><div class="mock-tb gray">—</div>' +
-          '</div>'
-        },
-        { d: 4000, h:
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:6px;">MARC OLIVÉ — Setmana 26–30 maig</div>' +
-          '<div style="display:grid;grid-template-columns:40px repeat(5,1fr);gap:3px;">' +
-            '<div></div><div style="font-size:9px;font-weight:700;color:var(--black);text-align:center;">Dl</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dt</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dc</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dj</div><div style="font-size:9px;font-weight:700;color:var(--ink-4);text-align:center;">Dv</div>' +
-            '<div style="font-size:9px;color:var(--ink-4);">9:00</div>' +
-            '<div class="mock-tb blue" style="animation:scaleIn .3s ease both;">3rA</div><div class="mock-tb green" style="animation:scaleIn .3s ease .05s both;">2nB</div><div class="mock-tb blue" style="animation:scaleIn .3s ease .1s both;">1rA</div><div class="mock-tb green" style="animation:scaleIn .3s ease .15s both;">4tB</div><div class="mock-tb blue" style="animation:scaleIn .3s ease .2s both;">3rA</div>' +
-            '<div style="font-size:9px;color:var(--ink-4);">9:30</div>' +
-            '<div class="mock-tb green" style="animation:scaleIn .3s ease .1s both;">5èA</div><div class="mock-tb gray">—</div><div class="mock-tb green" style="animation:scaleIn .3s ease .15s both;">2nA</div><div class="mock-tb blue" style="animation:scaleIn .3s ease .2s both;">1rB</div><div class="mock-tb gray">—</div>' +
-          '</div>' +
-          '<div style="margin-top:auto;font-size:11px;color:var(--ink-4);text-align:center;padding-top:8px;border-top:1px solid var(--border);">Actualitzat en temps real · Accessible des del mòbil</div>'
-        },
-      ]},
 
       'mock-tp': { title: 'Deutes de TP', frames: [
         { d: 600, h: '<div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-4);font-size:13px;">Carregant deutes...</div>' },
