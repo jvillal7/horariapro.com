@@ -440,26 +440,6 @@
     .mock-gc.cob { background: var(--blue-lt); color: var(--blue); }
     .mock-gc.empty { background: var(--bg); border: 1px solid var(--border); color: var(--ink-4); }
 
-    /* File cards */
-    .mock-file {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 13px;
-    }
-    .mock-file-icon {
-      width: 32px; height: 32px; border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0;
-    }
-    .mock-file-icon.pdf { background: #fee2e2; }
-    .mock-file-icon.doc { background: #dbeafe; }
-    .mock-file-icon.img { background: var(--green-lt); }
-    .mock-file-name { font-weight: 600; flex: 1; }
-    .mock-file-date { font-size: 11px; color: var(--ink-4); }
-
     /* Time blocks (compactació) */
     .mock-timeblock-row { display: flex; gap: 4px; }
     .mock-tb {
@@ -1082,52 +1062,8 @@
         </div>
       </div>
 
-      <!-- 7. Gestió horaris -->
-      <div class="feature-row">
-        <div class="feature-row-text">
-          <div class="feature-row-icon">📁</div>
-          <h3>Gestió d'horaris (PDF, Word, imatge)</h3>
-          <p>Centralitza tots els horaris del centre. La cap d'estudis els edita i el personal accedeix sempre a la versió més actual, sense imprimir res ni enviar correus.</p>
-        </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-horaris">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Horaris del centre</span>
-            </div>
-            <div class="mock-file">
-              <div class="mock-file-icon pdf">📄</div>
-              <div style="flex:1">
-                <div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div>
-                <div class="mock-file-date">Actualitzat 15/09/2025</div>
-              </div>
-              <span class="mock-badge blue">Actual</span>
-            </div>
-            <div class="mock-file">
-              <div class="mock-file-icon doc">📝</div>
-              <div style="flex:1">
-                <div class="mock-file-name" style="font-size:12px;">Horari_Substituts_Maig.docx</div>
-                <div class="mock-file-date">Actualitzat 20/05/2026</div>
-              </div>
-              <span class="mock-badge blue">Actual</span>
-            </div>
-            <div class="mock-file">
-              <div class="mock-file-icon img">🖼️</div>
-              <div style="flex:1">
-                <div class="mock-file-name" style="font-size:12px;">Horari_Guardia_Pati.png</div>
-                <div class="mock-file-date">Actualitzat 02/10/2025</div>
-              </div>
-              <span class="mock-badge green">✓</span>
-            </div>
-            <div style="margin-top:auto; background:var(--bg-2); border:1px solid var(--border); padding:9px 14px; border-radius:8px; font-size:12px; font-weight:600; color:var(--ink-2); text-align:center; cursor:pointer;">+ Afegir horari</div>
-          </div>
-        </div>
-      </div>
-
       <!-- 8. Compactació -->
-      <div class="feature-row reverse">
+      <div class="feature-row">
         <div class="feature-row-text">
           <div class="feature-row-icon">⚡</div>
           <h3>Compactació per jornada intensiva</h3>
@@ -1170,7 +1106,7 @@
       </div>
 
       <!-- 9. Sortides -->
-      <div class="feature-row">
+      <div class="feature-row reverse">
         <div class="feature-row-text">
           <div class="feature-row-icon">🎒</div>
           <h3>Gestió de sortides i acompanyants</h3>
@@ -1208,7 +1144,7 @@
       </div>
 
       <!-- 11. Torns de pati (NOU) -->
-      <div class="feature-row reverse">
+      <div class="feature-row">
         <div class="feature-row-text">
           <div class="feature-row-icon">☀️</div>
           <h3>Torns de pati</h3>
@@ -2052,27 +1988,6 @@
             '<div class="mock-row" style="animation:slideUp .3s ease .3s both;"><span style="font-size:10px;font-weight:800;color:var(--ink-4);width:18px;text-align:center;">4</span><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge green">0 TP</span></div>' +
           '</div>' +
           ia('🤖 La IA prioritzarà <strong>Laia Vidal</strong> i <strong>Pere Soler</strong> en les pròximes cobertures')
-        },
-      ]},
-
-      'mock-horaris': { title: 'Horaris del centre', frames: [
-        { d: 4800, h:
-          '<div class="mock-file" style="animation:slideUp .3s ease both;"><div class="mock-file-icon pdf">📄</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div><div class="mock-file-date">Actualitzat 15/09/2025</div></div><span class="mock-badge blue">Actual</span></div>' +
-          '<div class="mock-file" style="animation:slideUp .3s ease .1s both;"><div class="mock-file-icon doc">📝</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Horari_Substituts_Maig.docx</div><div class="mock-file-date">Actualitzat 20/05/2026</div></div><span class="mock-badge blue">Actual</span></div>' +
-          '<div style="margin-top:auto;background:var(--bg-2);border:1px dashed var(--border);padding:12px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:var(--ink-3);">+ Afegir horari</div>'
-        },
-        { d: 4800, h:
-          '<div class="mock-file"><div class="mock-file-icon pdf">📄</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div><div class="mock-file-date">Actualitzat 15/09/2025</div></div><span class="mock-badge blue">Actual</span></div>' +
-          '<div style="background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;animation:slideUp .3s ease both;">' +
-            '<div style="width:16px;height:16px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:iaSpinner .7s linear infinite;flex-shrink:0;"></div>' +
-            '<div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--blue);">Nou_Horari_Juny.pdf</div><div style="font-size:11px;color:var(--blue);opacity:.7;">🤖 HorarIA extraient horari...</div></div>' +
-          '</div>' +
-          '<div style="margin-top:auto;background:var(--bg-2);border:1px dashed var(--border);padding:12px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:var(--ink-3);">+ Afegir horari</div>'
-        },
-        { d: 4000, h:
-          '<div class="mock-file"><div class="mock-file-icon pdf">📄</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Horari_General_2025-26.pdf</div><div class="mock-file-date">Actualitzat 15/09/2025</div></div><span class="mock-badge blue">Actual</span></div>' +
-          '<div class="mock-file" style="animation:scaleIn .4s ease both;border-color:var(--green);"><div class="mock-file-icon pdf" style="background:var(--green-lt);">✅</div><div style="flex:1;"><div class="mock-file-name" style="font-size:12px;">Nou_Horari_Juny.pdf</div><div class="mock-file-date" style="color:var(--green);">35 docents · 5 dies extrets</div></div><span class="mock-badge green">Nou</span></div>' +
-          '<div style="margin-top:auto;background:var(--bg-2);border:1px dashed var(--border);padding:12px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:var(--ink-3);">+ Afegir horari</div>'
         },
       ]},
 
