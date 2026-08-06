@@ -344,6 +344,7 @@
     /* Retalla exactament la barra negra del navegador gravada a cada vídeo (mesurada píxel a píxel) */
     .feature-media-item video { transform: scale(1.113) translateY(-4.81%); }
     .feature-video-wrap.portrait video { transform: scale(1.056) translateY(-2.37%); }
+    .feature-video-wrap.portrait.sortides video { transform: scale(1.08) translateY(-3.7%); }
     .has-lightbox { cursor: pointer; }
     .feature-media-toggle-btn {
       display: none;
@@ -1106,35 +1107,16 @@
           <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">7</div>
           <h3>Gestió de sortides i acompanyants</h3>
           <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
+          <p>Hi ha dues categories d'acompanyants a les sortides:</p>
+          <ul>
+            <li><strong>Millor opció:</strong> especialistes que estan amb el grup durant la sortida.</li>
+            <li><strong>Per afinitat setmanal:</strong> especialistes que al llarg de la setmana entren i treballen amb el grup.</li>
+          </ul>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-sortides">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Sortida — 4t cicle</span>
-            </div>
-            <div style="background:var(--blue-lt); border-radius:10px; padding:12px 14px; margin-bottom:4px;">
-              <div style="font-size:13px; font-weight:700; color:var(--blue);">🎒 Visita Museu Ciències</div>
-              <div style="font-size:11px; color:var(--blue); opacity:.8;">Dijous 29/05 · 9:00–14:00 · 4tA + 4tB</div>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin: 6px 0 4px;">ACOMPANYANTS</div>
-            <div class="mock-row">
-              <div class="mock-dot green"></div>
-              <span class="mock-label" style="font-size:12px;">Marta Puig</span>
-              <span class="mock-badge green">Confirmat</span>
-            </div>
-            <div class="mock-row">
-              <div class="mock-dot green"></div>
-              <span class="mock-label" style="font-size:12px;">Carles Mas</span>
-              <span class="mock-badge green">Confirmat</span>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin: 6px 0 4px;">COBERTURES GENERADES</div>
-            <div class="mock-ia-box">
-              <span style="font-size:12px;">🤖 <strong>4 cobertures</strong> generades automàticament per les franges buides</span>
-            </div>
-          </div>
+        <div class="feature-video-wrap portrait sortides has-lightbox" onclick="openMediaLightbox('videos/sortides.mp4','video')">
+          <video autoplay muted loop playsinline aria-label="Gestió de sortides i acompanyants">
+            <source src="videos/sortides.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
