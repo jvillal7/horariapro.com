@@ -1109,12 +1109,12 @@
           <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
           <p>Hi ha dues categories d'acompanyants a les sortides:</p>
           <ul>
-            <li><strong>Millor opció:</strong> especialistes que estan amb el grup durant la sortida.</li>
-            <li><strong>Per afinitat setmanal:</strong> especialistes que al llarg de la setmana entren i treballen amb el grup.</li>
+            <li><strong>Millor opció:</strong> docents que estan amb el grup durant el dia de la sortida.</li>
+            <li><strong>Per afinitat setmanal:</strong> docents que al llarg de la setmana entren i treballen amb el grup.</li>
           </ul>
         </div>
-        <div class="feature-video-wrap portrait sortides has-lightbox" onclick="openMediaLightbox('videos/sortides.mp4','video')">
-          <video autoplay muted loop playsinline aria-label="Gestió de sortides i acompanyants">
+        <div class="feature-video-wrap portrait sortides has-lightbox" onclick="openMediaLightbox('videos/sortides.mp4','video',11)">
+          <video autoplay muted playsinline data-start-at="11" aria-label="Gestió de sortides i acompanyants">
             <source src="videos/sortides.mp4" type="video/mp4" />
           </video>
         </div>
@@ -1725,6 +1725,18 @@
   var lbItems = [];
   var lbIndex = 0;
 
+  /* Fa que un video comence (i torne a començar en bucle) a partir de "start" segons, en lloc de 0 */
+  function setupLoopFrom(v, start) {
+    v.loop = false;
+    var seek = function() { try { v.currentTime = start; } catch (e) {} };
+    v.addEventListener('loadedmetadata', seek);
+    v.addEventListener('ended', function() { seek(); v.play(); });
+  }
+
+  document.querySelectorAll('video[data-start-at]').forEach(function(v) {
+    setupLoopFrom(v, parseFloat(v.dataset.startAt));
+  });
+
   function renderLightboxItem() {
     var content = document.getElementById('mediaLightboxContent');
     content.innerHTML = '';
@@ -1733,7 +1745,8 @@
     if (it.type === 'video') {
       el = document.createElement('video');
       el.src = it.src;
-      el.autoplay = true; el.muted = true; el.loop = true; el.playsInline = true;
+      el.autoplay = true; el.muted = true; el.playsInline = true;
+      if (it.startAt) { setupLoopFrom(el, it.startAt); } else { el.loop = true; }
     } else {
       el = document.createElement('img');
       el.src = it.src;
@@ -1753,8 +1766,8 @@
     document.body.style.overflow = 'hidden';
   }
 
-  function openMediaLightbox(src, type) {
-    openMediaLightboxGallery([{ src: src, type: type }], 0);
+  function openMediaLightbox(src, type, startAt) {
+    openMediaLightboxGallery([{ src: src, type: type, startAt: startAt }], 0);
   }
 
   function lightboxPrev(e) {
@@ -1795,10 +1808,13 @@
       var text = row.querySelector('.feature-row-text');
       if (!mediaEls.length || !text) return;
       var items = mediaEls.map(function(el) {
-        var m = el.getAttribute('onclick').match(/openMediaLightbox\('([^']+)','([^']+)'\)/);
+        var m = el.getAttribute('onclick').match(/openMediaLightbox\('([^']+)','([^']+)'(?:,\s*([\d.]+))?\)/);
         if (!m) return null;
         var labelEl = el.querySelector('.feature-media-label');
-        return { src: m[1], type: m[2], label: labelEl ? labelEl.textContent : '' };
+        return {
+          src: m[1], type: m[2], label: labelEl ? labelEl.textContent : '',
+          startAt: m[3] ? parseFloat(m[3]) : undefined
+        };
       }).filter(Boolean);
       if (!items.length) return;
 
