@@ -332,6 +332,8 @@
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .feature-media-item.tp-docent { aspect-ratio: 970/2048; }
+    /* "Manualment" manté la seua pròpia proporció (sense retallar contingut) i queda centrat verticalment respecte als altres */
+    .feature-media-item.manual { aspect-ratio: 1006/1620; align-self: center; }
     /* El video tp-cap ve amb marges negres per als 4 costats (edició pròpia); retall exacte mesurat píxel a píxel */
     .feature-media-item.tp-cap { aspect-ratio: 853/1823; }
     .feature-media-item.tp-cap video {
@@ -354,6 +356,28 @@
     @media (max-width: 768px) {
       .feature-video-wrap.has-lightbox, .feature-media-pair { display: none; }
       .feature-media-toggle-btn { display: inline-flex; }
+    }
+    /* Targeta amb un botó per element quan un bloc en té més d'un (perquè no es perdi cap opció en mòbil) */
+    .feature-media-picker {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: var(--bg-2); padding: 16px;
+    }
+    .feature-media-picker-title {
+      font-size: 13px; font-weight: 700; color: var(--ink-2);
+      margin-bottom: 12px;
+    }
+    .feature-media-picker-options { display: flex; flex-wrap: wrap; gap: 8px; }
+    .feature-media-picker-btn {
+      background: #fff; color: var(--ink);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: background .15s;
+    }
+    .feature-media-picker-btn:hover { background: var(--border); }
+    @media (max-width: 768px) {
+      .feature-media-picker { display: block; }
     }
     .doc-sample-link {
       display: inline-flex; align-items: center; gap: 6px;
@@ -1780,7 +1804,9 @@
     if (e.key === 'ArrowRight') lightboxNext();
   });
 
-  /* En mòbil, el contingut multimèdia real queda amagat i es substitueix per un botó "Veure com funciona" */
+  /* En mòbil, el contingut multimèdia real queda amagat. Amb 1 element es mostra un botó
+     "Veure com funciona"; amb més d'un, una targeta amb un botó per element (perquè no calga
+     endevinar que es pot lliscar per veure la resta). */
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.feature-row').forEach(function(row) {
       var mediaEls = [...row.querySelectorAll('.has-lightbox[onclick]')];
@@ -1793,12 +1819,34 @@
         return { src: m[1], type: m[2], label: labelEl ? labelEl.textContent : '' };
       }).filter(Boolean);
       if (!items.length) return;
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'feature-media-toggle-btn';
-      btn.textContent = '▶ Veure com funciona';
-      btn.addEventListener('click', function() { openMediaLightboxGallery(items, 0); });
-      text.appendChild(btn);
+
+      if (items.length === 1) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'feature-media-toggle-btn';
+        btn.textContent = '▶ Veure com funciona';
+        btn.addEventListener('click', function() { openMediaLightboxGallery(items, 0); });
+        text.appendChild(btn);
+      } else {
+        var card = document.createElement('div');
+        card.className = 'feature-media-picker';
+        var title = document.createElement('div');
+        title.className = 'feature-media-picker-title';
+        title.textContent = '▶ Veure com funciona';
+        card.appendChild(title);
+        var options = document.createElement('div');
+        options.className = 'feature-media-picker-options';
+        items.forEach(function(item, idx) {
+          var obtn = document.createElement('button');
+          obtn.type = 'button';
+          obtn.className = 'feature-media-picker-btn';
+          obtn.textContent = item.label || ('Element ' + (idx + 1));
+          obtn.addEventListener('click', function() { openMediaLightboxGallery(items, idx); });
+          options.appendChild(obtn);
+        });
+        card.appendChild(options);
+        text.appendChild(card);
+      }
     });
   });
 
