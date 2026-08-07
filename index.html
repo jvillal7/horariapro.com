@@ -57,8 +57,8 @@
       --border:  #e8e8e8;
       --bg:      #fff;
       --bg-2:    #f7f7f7;
-      --blue:    #2563eb;
-      --blue-lt: #eff6ff;
+      --blue:    #1A7A4E;
+      --blue-lt: #EAF5EE;
       --green:   #16a34a;
       --green-lt:#f0fdf4;
       --r:       12px;
@@ -500,6 +500,7 @@
     }
     .rol-section.reverse { direction: rtl; }
     .rol-section.reverse > * { direction: ltr; }
+    .rol-section.text-only { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; }
     .rol-visual {
       background: var(--bg-2);
       border: 1px solid var(--border);
@@ -557,7 +558,7 @@
 
     /* ── CONTACT ── */
     .contact-section {
-      background: var(--black);
+      background: linear-gradient(180deg, var(--black) 0%, #0a1a0f 100%);
       color: #fff;
       padding: 80px 5%;
     }
@@ -879,7 +880,7 @@
       border-radius: 6px; padding: 6px 8px; text-align: center;
       background: var(--bg); border: 1px solid var(--border);
     }
-    .mock-pati-cell.mine { background: var(--blue-lt); border-color: #bfdbfe; color: var(--blue); font-weight: 600; }
+    .mock-pati-cell.mine { background: var(--blue-lt); border-color: #bfe4cf; color: var(--blue); font-weight: 600; }
     .mock-pati-cell.today-mine { background: var(--blue); color: #fff; font-weight: 700; }
     .mock-pati-row-today .mock-pati-day { color: var(--black); font-weight: 800; }
 
@@ -1204,7 +1205,7 @@
 <section id="cap-estudis" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
     <div class="section-tag">Com a Cap d'Estudis</div>
-    <div class="rol-section">
+    <div class="rol-section text-only">
       <div>
         <h2 class="section-title">Oblida't dels papers i les trucades</h2>
         <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Rep l'avís, consulta la proposta de la IA i confirma la cobertura en dos clics. HorariaPro fa la feina administrativa perquè tu et puguis centrar en la pedagògica.</p>
@@ -1218,27 +1219,6 @@
           <li><strong>100% al navegador — ni tu ni cap docent heu d'instal·lar res. Funciona des de mòbil, tauleta o ordinador, online.</strong></li>
         </ul>
       </div>
-      <div class="rol-visual">
-        <div class="rol-visual-title">Avisos del dia</div>
-        <div class="mock-row">
-          <div class="mock-dot orange"></div>
-          <span class="mock-label">Marta Puig — Tot el dia</span>
-          <span class="mock-badge orange">Pendent</span>
-        </div>
-        <div class="mock-row">
-          <div class="mock-dot blue"></div>
-          <span class="mock-label">Joan Ferrer — 9:00–10:30</span>
-          <span class="mock-badge blue">IA proposa →</span>
-        </div>
-        <div class="mock-row">
-          <div class="mock-dot green"></div>
-          <span class="mock-label">Ana López — 11:30–12:30</span>
-          <span class="mock-badge green">Cobert</span>
-        </div>
-        <div style="margin-top:8px; padding:14px; background:var(--blue-lt); border-radius:10px; font-size:13px; color:var(--blue);">
-          <strong>Proposta IA:</strong> Cobrir amb Carles Mas (0 TP pendents, disponible f1a–f2a)
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1247,7 +1227,7 @@
 <section id="equip-directiu" style="background: var(--bg);">
   <div class="section-inner">
     <div class="section-tag">Com a Equip Directiu</div>
-    <div class="rol-section reverse">
+    <div class="rol-section text-only">
       <div>
         <h2 class="section-title">Visibilitat total del centre en temps real</h2>
         <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Director/a i secretaria tenen accés als informes d'absències, el registre de cobertures i els deutes de TP de tot el claustre.</p>
@@ -1260,13 +1240,6 @@
           <li>Tot en un mateix lloc, en format PDF o Excel per complementar les dades cap a inspecció o per elaborar la Memòria del Curs</li>
         </ul>
       </div>
-      <div class="rol-visual">
-        <div class="rol-visual-title">Resum del curs</div>
-        <div class="mock-row"><span class="mock-label">Absències registrades</span><strong>142</strong></div>
-        <div class="mock-row"><span class="mock-label">Cobertures realitzades</span><strong>318</strong></div>
-        <div class="mock-row"><span class="mock-label">Deutes TP pendents</span><strong>7</strong></div>
-        <div class="mock-row"><span class="mock-label">Permisos ATRI gestionats</span><strong>23</strong></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1275,7 +1248,7 @@
 <section id="docents" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
     <div class="section-tag">Com a Docent</div>
-    <div class="rol-section">
+    <div class="rol-section text-only">
       <div>
         <h2 class="section-title">Avisar una absència: 30 segons des del mòbil</h2>
         <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Sense trucades, sense paper, sense esperar. El docent selecciona les franges, el motiu i envia. Punt.</p>
@@ -1286,26 +1259,6 @@
           <li>Avís automàtic si el motiu requereix gestió per ATRI</li>
           <li>Accés directe amb link personalitzat per escola</li>
         </ul>
-      </div>
-      <div class="rol-visual">
-        <div class="rol-visual-title">Les meves cobertures avui</div>
-        <div class="mock-row">
-          <div class="mock-dot blue"></div>
-          <div>
-            <div style="font-weight:600; font-size:13px;">9:00 – 9:30 · 3rA</div>
-            <div style="font-size:12px; color:var(--ink-3);">Cobreix per: Marta Puig</div>
-          </div>
-        </div>
-        <div class="mock-row">
-          <div class="mock-dot blue"></div>
-          <div>
-            <div style="font-weight:600; font-size:13px;">11:30 – 12:00 · 5èB</div>
-            <div style="font-size:12px; color:var(--ink-3);">Cobreix per: Joan Ferrer</div>
-          </div>
-        </div>
-        <div style="padding:12px 14px; background:var(--green-lt); border-radius:8px; font-size:13px; color:var(--green); font-weight:600;">
-          ✓ Cap deute de TP pendent
-        </div>
       </div>
     </div>
   </div>
@@ -1396,7 +1349,7 @@
     </div>
 
     <!-- Nota anual -->
-    <div style="margin-top:32px; background:var(--blue-lt); border:1px solid #bfdbfe; border-radius:var(--r-lg); padding:28px;">
+    <div style="margin-top:32px; background:var(--blue-lt); border:1px solid #bfe4cf; border-radius:var(--r-lg); padding:28px;">
       <div style="text-align:center; margin-bottom:20px;">
         <div style="font-size:13px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:.06em;">💡 Pagament anual</div>
         <h3 style="font-size:20px; font-weight:800; color:var(--black); margin-top:8px;">Un únic pagament a l'any, sense mensualitats</h3>
