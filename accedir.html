@@ -19,8 +19,8 @@
       --border: #e8e8e8;
       --bg:    #fff;
       --bg-2:  #f7f7f7;
-      --blue:  #2563eb;
-      --blue-lt: #eff6ff;
+      --blue:  #1A7A4E;
+      --blue-lt: #EAF5EE;
     }
 
     html, body {
@@ -31,22 +31,63 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    nav {
-      background: rgba(10,10,10,.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      padding: 0 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 72px;
+    /* ── SPLIT LAYOUT ── */
+    .auth-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
     }
-    .nav-logo img { height: 52px; width: auto; display: block; }
-    .nav-back { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; }
-    .nav-back:hover { color: #fff; }
 
-    .main {
+    .auth-hero {
+      position: relative;
+      overflow: hidden;
+      background: #0a1a0f;
+      color: #fff;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 32px 48px 48px;
+    }
+    .auth-hero::before {
+      content: ''; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,122,78,.4) 0%, transparent 70%);
+      top: -120px; right: -100px; pointer-events: none;
+    }
+    .auth-hero::after {
+      content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,122,78,.25) 0%, transparent 70%);
+      bottom: -100px; left: -80px; pointer-events: none;
+    }
+    .auth-hero-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; }
+    .auth-hero-top img { height: 40px; width: auto; display: block; }
+    .auth-hero-back { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; }
+    .auth-hero-back:hover { color: #fff; }
+
+    .auth-hero-content { position: relative; z-index: 1; max-width: 420px; }
+    .auth-hero-content h1 {
+      font-size: clamp(26px, 3vw, 36px); font-weight: 800; letter-spacing: -.02em;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .auth-hero-content h1 em { color: #6fcf97; font-style: normal; }
+    .auth-hero-content p { font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.65; }
+    .auth-hero-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .auth-hero-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.85); }
+    .auth-hero-list li::before { content: '✓'; color: #6fcf97; font-weight: 700; }
+
+    .auth-hero-trust {
+      position: relative; z-index: 1;
+      font-size: 13px; color: rgba(255,255,255,.45);
+    }
+
+    .auth-panel {
       display: flex; align-items: center; justify-content: center;
-      min-height: calc(100vh - 72px);
       padding: 40px 16px;
+    }
+
+    @media (max-width: 860px) {
+      .auth-wrap { grid-template-columns: 1fr; }
+      .auth-hero { padding: 24px 24px 32px; }
+      .auth-hero-list { display: none; }
+      .auth-hero-content { margin-top: 8px; }
+      .auth-hero-content p { display: none; }
     }
 
     .card {
@@ -208,13 +249,26 @@
 </head>
 <body>
 
-<nav>
-  <a href="/" class="nav-logo"><img src="/logo.svg" alt="HorariaPro" /></a>
-  <a href="/" class="nav-back">← Tornar</a>
-</nav>
+<div class="auth-wrap">
+  <div class="auth-hero">
+    <div class="auth-hero-top">
+      <a href="/"><img src="/logo.svg" alt="HorariaPro" /></a>
+      <a href="/" class="auth-hero-back">← Tornar</a>
+    </div>
+    <div class="auth-hero-content">
+      <h1>Gestiona absències i cobertures <em>en minuts</em></h1>
+      <p>HorariaPro automatitza la proposta de cobertures del professorat amb IA i notifica tothom afectat.</p>
+      <ul class="auth-hero-list">
+        <li>Proposta de cobertures amb IA</li>
+        <li>Notificacions automàtiques</li>
+        <li>100% al navegador, sense instal·lar res</li>
+      </ul>
+    </div>
+    <div class="auth-hero-trust">✓ Ja en marxa a 2 centres educatius</div>
+  </div>
 
-<div class="main">
-  <div class="card">
+  <div class="auth-panel">
+    <div class="card">
 
     <!-- Vista: login amb Google -->
     <div id="view-login">
@@ -257,6 +311,7 @@
       <button class="btn-primary" onclick="tornarLogin()">Prova amb un altre compte</button>
     </div>
 
+    </div>
   </div>
 </div>
 
