@@ -35,7 +35,7 @@
     "operatingSystem": "Web",
     "inLanguage": "ca",
     "offers": [
-      { "@type": "Offer", "name": "Bàsic", "price": "59", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" },
+      { "@type": "Offer", "name": "Estàndard", "price": "59", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" },
       { "@type": "Offer", "name": "Pro", "price": "79", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" },
       { "@type": "Offer", "name": "Centre+", "price": "119", "priceCurrency": "EUR", "priceValidUntil": "2027-12-31", "url": "https://horariapro.com/#preus" }
     ]
@@ -133,14 +133,20 @@
     .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .nav-mobile-menu {
       position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
-      background: rgba(10,10,10,.98);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,.1);
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       display: flex; flex-direction: column;
       max-height: 0; overflow: hidden;
-      transition: max-height .3s ease;
+      transition: max-height .3s ease, background .4s ease, backdrop-filter .4s ease, border-color .4s ease;
     }
     .nav-mobile-menu.open { max-height: 420px; }
+    /* Ha de coincidir amb l'estil de la barra (nav.nav-glass) quan es fa scroll, perquè no quede més fosc que la barra de dalt */
+    nav.nav-glass ~ .nav-mobile-menu {
+      background: rgba(10,10,10,.5);
+      backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
     .nav-mobile-menu a {
       padding: 16px 5%; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85);
       border-bottom: 1px solid rgba(255,255,255,.06);
@@ -333,6 +339,7 @@
     }
     .feature-media-item.tp-docent { aspect-ratio: 970/2048; }
     .feature-media-item.pati-docent { aspect-ratio: 969/2048; }
+    .feature-media-item.jornada-intensiva { aspect-ratio: 970/2048; }
     .feature-media-item.pati-cap video { transform: scale(1.052) translateY(-2.47%); }
     /* "Manualment" manté la seua pròpia proporció (sense retallar contingut) i queda centrat verticalment respecte als altres */
     .feature-media-item.manual { aspect-ratio: 1006/1620; align-self: center; }
@@ -949,6 +956,7 @@
     <div class="hero-actions">
       <a href="#com-funciona" class="btn-primary">Veure demo</a>
       <a href="#funcionalitats" class="btn-secondary">Com funciona?</a>
+      <a href="#cap-estudis" class="btn-secondary">Per què HorariaPro?</a>
     </div>
     <p class="hero-trust">✓ Ja en marxa a 2 centres educatius</p>
   </div>
@@ -985,7 +993,7 @@
 <section id="funcionalitats" style="background: var(--bg);">
   <div class="section-inner">
     <div class="section-tag">Funcionalitats</div>
-    <h2 class="section-title">Tot el que necessita el teu centre</h2>
+    <h2 class="section-title">Les 9 funcionalitats que necessita el teu centre</h2>
     <p class="section-sub">Una sola eina per a tota la gestió d'absències, cobertures i horaris de tot el claustre.</p>
 
     <div class="feature-rows">
@@ -1148,40 +1156,14 @@
         <div class="feature-row-text">
           <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">9</div>
           <h3>Compactació per jornada intensiva <span class="beta-badge">Beta</span></h3>
-          <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment.</p>
+          <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-ho de recalcular manualment. Permetent establir normes, pautes i regles noves personalitzades.</p>
         </div>
-        <div class="feature-video-wrap">
-          <div class="feature-mock" id="mock-compactacio">
-            <div class="mock-screen-bar">
-              <div class="mock-screen-dot" style="background:#ff5f57"></div>
-              <div class="mock-screen-dot" style="background:#febc2e"></div>
-              <div class="mock-screen-dot" style="background:#28c840"></div>
-              <span class="mock-screen-title">Compactació jornada</span>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA NORMAL</div>
-            <div class="mock-timeblock-row">
-              <div class="mock-tb blue">9:00–9:30</div>
-              <div class="mock-tb green">9:30–10:00</div>
-              <div class="mock-tb blue">10:00–10:30</div>
-              <div class="mock-tb gray">Esbarjo</div>
-              <div class="mock-tb green">11:00–11:30</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px; margin: 8px 0;">
-              <div style="flex:1; height:1px; background:var(--border);"></div>
-              <span style="font-size:11px; font-weight:700; color:var(--blue); white-space:nowrap;">⚡ COMPACTAT AUTOMÀTIC</span>
-              <div style="flex:1; height:1px; background:var(--border);"></div>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--ink-3); margin-bottom:4px;">JORNADA INTENSIVA</div>
-            <div class="mock-timeblock-row">
-              <div class="mock-tb blue">9:00–9:25</div>
-              <div class="mock-tb green">9:25–9:50</div>
-              <div class="mock-tb blue">9:50–10:15</div>
-              <div class="mock-tb green">10:15–10:40</div>
-              <div class="mock-tb orange">10:40–11:05</div>
-            </div>
-            <div class="mock-ia-box" style="margin-top:auto;">
-              <span style="font-size:12px;">✓ Compactat per a <strong>5 grups</strong> · Exporta com a PDF</span>
-            </div>
+        <div class="feature-media-pair" style="grid-template-columns:1fr 1fr;">
+          <div class="feature-media-item jornada-intensiva has-lightbox" onclick="openMediaLightbox('images/jornada-intensiva-1.jpeg','image')">
+            <img src="images/jornada-intensiva-1.jpeg" alt="Compactació per jornada intensiva" loading="lazy" />
+          </div>
+          <div class="feature-media-item jornada-intensiva has-lightbox" onclick="openMediaLightbox('images/jornada-intensiva-2.jpeg','image')">
+            <img src="images/jornada-intensiva-2.jpeg" alt="Regles de compactació per jornada intensiva" loading="lazy" />
           </div>
         </div>
       </div>
@@ -1191,7 +1173,7 @@
 </section>
 
 <!-- CAP D'ESTUDIS -->
-<section style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<section id="cap-estudis" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
     <div class="section-tag">Per a la Cap d'Estudis</div>
     <div class="rol-section">
@@ -1309,10 +1291,10 @@
     <p class="section-sub">Sense permanència · Suport directe inclòs · Cancel·la quan vulguis.</p>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px; align-items:start;">
 
-      <!-- Bàsic -->
+      <!-- Estàndard -->
       <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
         <div>
-          <div style="font-size:13px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Bàsic</div>
+          <div style="font-size:13px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Estàndard</div>
           <div style="display:flex; align-items:baseline; gap:4px;">
             <span style="font-size:40px; font-weight:800; color:var(--black); letter-spacing:-.03em;">€59</span>
             <span style="font-size:14px; color:var(--ink-3);">/mes</span>
@@ -1393,7 +1375,7 @@
       </div>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; text-align:center;">
         <div>
-          <div style="font-size:13px; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Bàsic</div>
+          <div style="font-size:13px; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Estàndard</div>
           <div style="font-size:26px; font-weight:800; color:var(--black); margin-top:4px;">€590<span style="font-size:13px; font-weight:600; color:var(--ink-3);">/any</span></div>
           <div style="font-size:12px; color:var(--green); font-weight:700; margin-top:2px;">Estalvia €118/any</div>
         </div>
@@ -1510,6 +1492,7 @@
     <div class="section-tag">Privacitat i compliment legal</div>
     <h2 class="section-title">Dissenyat per complir el RGPD</h2>
     <p class="section-sub">Les dades dels teus docents estan protegides i gestionades d'acord amb la normativa europea de protecció de dades.</p>
+    <p style="max-width:720px; color:var(--ink-2); font-size:14px; line-height:1.7; margin-top:-8px; margin-bottom:32px;">El <strong>RGPD (Reglament General de Protecció de Dades)</strong> és la llei europea que obliga qualsevol servei que tracte dades personals —com els noms, horaris o correus dels docents— a protegir-les, a explicar clarament per a què s'utilitzen i a garantir que el centre en manté sempre el control: pot consultar-les, corregir-les o demanar-ne l'eliminació en qualsevol moment. HorariaPro compleix aquesta llei des del disseny, no com un afegit.</p>
     <div class="legal-grid">
       <div class="legal-card">
         <h4>🇪🇺 Dades a Europa</h4>
