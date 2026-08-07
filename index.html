@@ -337,6 +337,7 @@
     .feature-media-item video, .feature-media-item img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
+    .feature-media-item.graella-video video { transform: scale(1.056) translateY(-2.37%); }
     .feature-media-item.tp-docent { aspect-ratio: 970/2048; }
     .feature-media-item.pati-docent { aspect-ratio: 969/2048; }
     .feature-media-item.jornada-intensiva { aspect-ratio: 970/2048; }
@@ -1045,10 +1046,19 @@
           <h3>Graella grups × franges</h3>
           <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull. Veus immediatament quins grups queden sense cobrir.</p>
         </div>
-        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/graella-grups.mp4','video')">
-          <video autoplay muted loop playsinline aria-label="Graella de grups per franges">
-            <source src="videos/graella-grups.mp4" type="video/mp4" />
-          </video>
+        <div class="feature-media-pair" style="grid-template-columns:1fr 1fr;">
+          <div class="feature-media-item graella-video has-lightbox" onclick="openMediaLightbox('videos/graella-grups.mp4','video')">
+            <video autoplay muted loop playsinline aria-label="Graella amb tots els grups resolts">
+              <source src="videos/graella-grups.mp4" type="video/mp4" />
+            </video>
+            <span class="feature-media-label">Graella amb tots els grups resolts</span>
+          </div>
+          <div class="feature-media-item graella-video has-lightbox" onclick="openMediaLightbox('videos/graella-per-resoldre.mp4','video')">
+            <video autoplay muted loop playsinline aria-label="Graella amb els grups per resoldre">
+              <source src="videos/graella-per-resoldre.mp4" type="video/mp4" />
+            </video>
+            <span class="feature-media-label">Graella amb els grups per resoldre</span>
+          </div>
         </div>
       </div>
 
