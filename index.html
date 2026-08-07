@@ -686,6 +686,18 @@
     .faq-answer p { padding: 0 20px 18px; font-size: 14px; color: var(--ink-2); line-height: 1.7; }
     .faq-item.open .faq-answer { max-height: 300px; }
 
+    /* ── SELECTOR DE ROL ("Per què HorariaPro?") ── */
+    .role-picker-options { display: flex; flex-direction: column; gap: 12px; max-width: 560px; margin: 0 auto; }
+    .role-picker-btn {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 20px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r);
+      font-size: 15px; font-weight: 700; color: var(--black); text-align: left;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .role-picker-btn .role-picker-arrow { font-size: 18px; color: var(--ink-4); transition: transform .15s ease, color .15s ease; flex-shrink: 0; }
+    .role-picker-btn:hover { background: var(--blue-lt); border-color: var(--blue); color: var(--blue); }
+    .role-picker-btn:hover .role-picker-arrow { color: var(--blue); transform: translateX(4px); }
+
     /* ── WHATSAPP FLOAT ── */
     .whatsapp-float {
       position: fixed; right: 20px; bottom: 20px; z-index: 997;
@@ -925,6 +937,7 @@
   <div class="nav-links">
     <a href="#com-funciona">Veure demo</a>
     <a href="#funcionalitats">Funcionalitats</a>
+    <a href="#per-que-horariapro">Per què HorariaPro?</a>
     <a href="#preus">Preus</a>
     <a href="#faq">FAQ</a>
     <a href="#legal">Privacitat</a>
@@ -940,6 +953,7 @@
 <div class="nav-mobile-menu" id="navMobileMenu">
   <a href="#com-funciona" onclick="closeMobileMenu()">Veure demo</a>
   <a href="#funcionalitats" onclick="closeMobileMenu()">Funcionalitats</a>
+  <a href="#per-que-horariapro" onclick="closeMobileMenu()">Per què HorariaPro?</a>
   <a href="#preus" onclick="closeMobileMenu()">Preus</a>
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
@@ -956,7 +970,7 @@
     <div class="hero-actions">
       <a href="#com-funciona" class="btn-primary">Veure demo</a>
       <a href="#funcionalitats" class="btn-secondary">Com funciona?</a>
-      <a href="#cap-estudis" class="btn-secondary">Per què HorariaPro?</a>
+      <a href="#per-que-horariapro" class="btn-secondary">Per què HorariaPro?</a>
     </div>
     <p class="hero-trust">✓ Ja en marxa a 2 centres educatius</p>
   </div>
@@ -1172,10 +1186,24 @@
   </div>
 </section>
 
+<!-- PER QUÈ HORARIAPRO (selector de rol) -->
+<section id="per-que-horariapro" style="background: var(--bg-2); border-top: 1px solid var(--border);">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-tag" style="text-align:center;">Per què HorariaPro?</div>
+    <h2 class="section-title">Tria el teu perfil</h2>
+    <p class="section-sub" style="margin-left:auto; margin-right:auto;">Descobreix en un clic com t'ajuda HorariaPro segons el teu rol al centre.</p>
+    <div class="role-picker-options">
+      <a href="#cap-estudis" class="role-picker-btn">Com a cap d'estudis... <span class="role-picker-arrow">→</span></a>
+      <a href="#equip-directiu" class="role-picker-btn">Com a equip directiu... <span class="role-picker-arrow">→</span></a>
+      <a href="#docents" class="role-picker-btn">Com a docent... <span class="role-picker-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- CAP D'ESTUDIS -->
 <section id="cap-estudis" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
-    <div class="section-tag">Per a la Cap d'Estudis</div>
+    <div class="section-tag">Com a Cap d'Estudis</div>
     <div class="rol-section">
       <div>
         <h2 class="section-title">Oblida't dels papers i les trucades</h2>
@@ -1216,9 +1244,9 @@
 </section>
 
 <!-- EQUIP DIRECTIU -->
-<section style="background: var(--bg);">
+<section id="equip-directiu" style="background: var(--bg);">
   <div class="section-inner">
-    <div class="section-tag">Per a l'Equip Directiu</div>
+    <div class="section-tag">Com a Equip Directiu</div>
     <div class="rol-section reverse">
       <div>
         <h2 class="section-title">Visibilitat total del centre en temps real</h2>
@@ -1243,9 +1271,9 @@
 </section>
 
 <!-- DOCENTS -->
-<section style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<section id="docents" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
-    <div class="section-tag">Per als Docents</div>
+    <div class="section-tag">Com a Docent</div>
     <div class="rol-section">
       <div>
         <h2 class="section-title">Avisar una absència: 30 segons des del mòbil</h2>
