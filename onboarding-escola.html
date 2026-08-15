@@ -564,8 +564,7 @@ nav {
 </div><!-- /main -->
 
 <script>
-const WORKER_URL   = 'https://orange-bar-54f5gceip-claude-proxy.jvillal7.workers.dev';
-const WORKER_TOKEN = 'gd-2024-xK9mQpR7wZ';
+const WORKER_URL   = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/onboarding-ia';
 const SUPA_URL     = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
 const SUPA_KEY     = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
 
@@ -700,11 +699,8 @@ async function callIAStreaming(prompt) {
   const streamEl = document.getElementById('stream-output');
   const res = await fetch(WORKER_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Auth-Token': WORKER_TOKEN },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
-      stream: true,
       messages: [{ role: 'user', content: prompt }]
     })
   });
