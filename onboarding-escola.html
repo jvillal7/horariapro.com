@@ -71,6 +71,13 @@ nav {
 .check-opt input[type=checkbox] { accent-color: var(--blue); width: 15px; height: 15px; flex-shrink: 0; }
 .check-opt span { font-size: 13px; color: var(--ink-2); }
 
+.franja-preview { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding: 14px; background: var(--bg-2); border-radius: 8px; }
+.franja-chip { display: flex; flex-direction: column; padding: 6px 10px; border-radius: 6px; font-size: 11.5px; background: var(--bg); border: 1px solid var(--border); min-width: 74px; }
+.franja-chip.pati { background: var(--amber-lt); border-color: transparent; }
+.franja-chip.dinar { background: var(--bg-2); color: var(--ink-3); font-style: italic; border-style: dashed; }
+.franja-chip b { font-size: 12px; }
+.franja-chip span { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
 .exemple-bloc { border: 1.5px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 14px; }
 .exemple-bloc:last-child { margin-bottom: 0; }
 .exemple-num { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
@@ -164,6 +171,57 @@ nav {
 <div class="main">
 <form id="form" novalidate>
 
+<!-- ══ 0. HORARI DEL CENTRE (genera les franges reals de l'app) ══ -->
+<div class="card">
+  <div class="card-title blue"><div class="num">0</div> Horari del centre</div>
+  <p style="font-size:13px; color:var(--ink-3); margin-bottom:16px;">Açò genera la graella d'horaris real que farà servir HorarIA per proposar cobertures — no cal escriure-la enlloc més.</p>
+  <div class="fields">
+    <div class="field">
+      <label>Hora d'inici del matí</label>
+      <input type="time" id="h_ini" value="09:00" oninput="actualitzarPreview()" />
+    </div>
+    <div class="field">
+      <label>Durada de cada sessió</label>
+      <select id="durada_sessio" onchange="actualitzarPreview()">
+        <option value="15">15 minuts</option>
+        <option value="30" selected>30 minuts</option>
+        <option value="45">45 minuts</option>
+        <option value="60">60 minuts</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Torns de pati</label>
+      <select id="torns_pati" onchange="actualitzarPreview()">
+        <option value="1" selected>1 torn (tothom alhora)</option>
+        <option value="2">2 torns (Infantil i Primària separats)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Hora d'inici del pati</label>
+      <input type="time" id="h_pati" value="10:30" oninput="actualitzarPreview()" />
+    </div>
+    <div class="field">
+      <label>Durada de cada torn de pati (min)</label>
+      <input type="number" id="durada_pati" value="30" min="15" step="15" oninput="actualitzarPreview()" />
+    </div>
+    <div class="field">
+      <label style="display:flex; align-items:center; gap:8px; text-transform:none; font-weight:600; color:var(--ink-2);">
+        <input type="checkbox" id="te_dinar" checked onchange="actualitzarPreview()" style="width:auto;" />
+        El centre fa migdia (dinar dins de l'horari escolar)
+      </label>
+    </div>
+    <div class="field">
+      <label>Hora d'inici del dinar</label>
+      <input type="time" id="h_dinar" value="12:30" oninput="actualitzarPreview()" />
+    </div>
+    <div class="field">
+      <label>Hora de fi de la tarda</label>
+      <input type="time" id="h_fi" value="16:30" oninput="actualitzarPreview()" />
+    </div>
+  </div>
+  <div class="franja-preview" id="franja-preview"></div>
+</div>
+
 <!-- ══ A. DADES DEL CENTRE ══ -->
 <div class="card">
   <div class="card-title blue"><div class="num">A</div> Dades del centre</div>
@@ -174,8 +232,8 @@ nav {
     </div>
     <div class="field">
       <label>Codi curt <span class="req">*</span></label>
-      <input type="text" id="codi" placeholder="Ex: RIVO, ORIOL, PRATS..." maxlength="6" required />
-      <div class="hint">3–6 lletres majúscules, sense espais. Identificador intern de l'escola.</div>
+      <input type="text" id="codi" placeholder="Ex: rivo, oriol, prats..." maxlength="14" required />
+      <div class="hint">Identificador intern de l'escola — es normalitza automàticament (minúscules, sense espais) i s'avisa si ja està en ús.</div>
     </div>
     <div class="field">
       <label>Etapes educatives <span class="req">*</span></label>
@@ -225,8 +283,9 @@ nav {
       <input type="text" id="nom_secretaria" placeholder="Nom i cognoms" />
     </div>
     <div class="field">
-      <label>Email de la cap d'estudis</label>
-      <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
+      <label>Email de la cap d'estudis <span class="req">*</span></label>
+      <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." required />
+      <div class="hint">Amb este correu entrarà a l'app (Google Sign-In) — cal que siga vàlid.</div>
     </div>
   </div>
 </div>
@@ -552,9 +611,9 @@ nav {
     <div class="next-steps">
       <p>Propers passos per activar l'escola:</p>
       <ol>
-        <li>Afegir el nou <code>escola_id</code> als usuaris directius a <code>MANAGEMENT_USERS</code> en <code>constants.js</code>.</li>
-        <li>Importar la llista de docents amb els seus horaris (CSV o manual via AdminPage).</li>
-        <li>Revisar i ajustar les Normes IA des de l'AdminPage (<code>?superadmin=1</code> → seleccionar escola).</li>
+        <li>La cap d'estudis ja pot entrar a <a href="https://app.horariapro.com" target="_blank">app.horariapro.com</a> amb Google Sign-In, amb el correu que heu indicat.</li>
+        <li>Importar la llista de docents amb els seus horaris (des de "Gestions" → pujar horari, accepta PDF/Excel/Word).</li>
+        <li>Revisar i ajustar les Normes IA generades des del panell de l'escola si cal afinar-les.</li>
         <li>Fer la sessió de prova amb la cap d'estudis per validar la primera proposta de cobertura.</li>
       </ol>
     </div>
@@ -564,9 +623,8 @@ nav {
 </div><!-- /main -->
 
 <script>
-const WORKER_URL   = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/onboarding-ia';
-const SUPA_URL     = 'https://mtrylcazzwolgzfzmbrn.supabase.co';
-const SUPA_KEY     = 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK';
+const WORKER_URL      = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/onboarding-ia';
+const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
 // Mostra/amaga camp intensiu
 document.getElementById('horari_intensiu').addEventListener('change', function() {
@@ -575,6 +633,113 @@ document.getElementById('horari_intensiu').addEventListener('change', function()
 
 function v(id) { return (document.getElementById(id)?.value || '').trim(); }
 function chk(id) { return document.getElementById(id)?.checked || false; }
+
+// ── Generador de franges reals (mateix format que constants.js: id/label/sub/hora/min) ──
+function addMin(hhmm, min) {
+  const [h, m] = hhmm.split(':').map(Number);
+  const total = h * 60 + m + min;
+  const hh = Math.floor((total / 60) % 24).toString().padStart(2, '0');
+  const mm = (total % 60).toString().padStart(2, '0');
+  return `${hh}:${mm}`;
+}
+function minutsEntre(a, b) {
+  const [ah, am] = a.split(':').map(Number), [bh, bm] = b.split(':').map(Number);
+  return (bh * 60 + bm) - (ah * 60 + am);
+}
+
+function buildFranjesReals() {
+  const hIni = v('h_ini') || '09:00';
+  const durada = +v('durada_sessio') || 30;
+  const perHora = Math.max(1, Math.round(60 / durada));
+  const torns = +v('torns_pati') || 1;
+  const hPati = v('h_pati') || '10:30';
+  const dPati = +v('durada_pati') || 30;
+  const teDinar = chk('te_dinar');
+  const hDinar = v('h_dinar') || '12:30';
+  const hFi = v('h_fi') || '16:30';
+
+  const franjes = [];
+  let idx = 1, hourCount = 0, slotInHour = 0;
+  const pushClasse = (ini, fi) => {
+    if (slotInHour === 0) hourCount++;
+    franjes.push({ id: `f${idx}`, label: `${hourCount}a hora`, sub: `${ini}–${fi}`, hora: `${hourCount}a hora`, min: durada });
+    idx++;
+    slotInHour = (slotInHour + 1) % perHora;
+  };
+
+  let t = hIni;
+  while (t < hPati) {
+    const end = addMin(t, durada);
+    if (end > hPati) break;
+    pushClasse(t, end);
+    t = end;
+  }
+
+  let patiEnd;
+  if (torns === 2) {
+    const mid = addMin(hPati, dPati);
+    franjes.push({ id: 'patiA', label: 'Pati A', sub: `${hPati}–${mid}`, hora: 'Pati A', min: dPati, patio: true });
+    patiEnd = addMin(mid, dPati);
+    franjes.push({ id: 'patiB', label: 'Pati B', sub: `${mid}–${patiEnd}`, hora: 'Pati B', min: dPati, patio: true });
+  } else {
+    patiEnd = addMin(hPati, dPati);
+    franjes.push({ id: 'patiA', label: 'Pati', sub: `${hPati}–${patiEnd}`, hora: 'Pati', min: dPati, patio: true });
+  }
+
+  hourCount = 0; slotInHour = 0;
+  const finMati = teDinar ? hDinar : hFi;
+  t = patiEnd;
+  while (t < finMati) {
+    const end = addMin(t, durada);
+    if (end > finMati) break;
+    pushClasse(t, end);
+    t = end;
+  }
+
+  if (teDinar) {
+    const finDinar = hFi < '15:00' ? hFi : '15:00';
+    franjes.push({ id: `f${idx}`, label: 'Dinar', sub: `${hDinar}–${finDinar}`, hora: 'Dinar', min: Math.max(0, minutsEntre(hDinar, finDinar)), lliure: true });
+    idx++; hourCount = 0; slotInHour = 0;
+    t = finDinar;
+    while (t < hFi) {
+      const end = addMin(t, durada);
+      if (end > hFi) break;
+      franjes.push({ id: `f${idx}`, label: 'Tarda', sub: `${t}–${end}`, hora: 'Tarda', min: durada });
+      idx++; t = end;
+    }
+  }
+
+  return franjes;
+}
+
+function actualitzarPreview() {
+  const franjes = buildFranjesReals();
+  const el = document.getElementById('franja-preview');
+  el.innerHTML = franjes.map(f => `
+    <div class="franja-chip ${f.patio ? 'pati' : ''} ${f.lliure ? 'dinar' : ''}">
+      <b>${f.label}</b><span>${f.sub}</span>
+    </div>`).join('');
+}
+
+// ── Preomplir des de incorporacio.html (?incorporacio=ID&nom=...&etapes=...) ──
+let incorporacioId = null;
+(function prefillFromQuery() {
+  const q = new URLSearchParams(window.location.search);
+  incorporacioId = q.get('incorporacio') || null;
+  const setVal = (id, key) => { const val = q.get(key); if (val) document.getElementById(id).value = val; };
+  const setChk = (id, key) => { if (q.get(key) === '1') document.getElementById(id).checked = true; };
+  setVal('nom', 'nom');
+  setVal('num_docents', 'num_docents');
+  setVal('etapes', 'etapes');
+  setVal('nom_jefa', 'nom_jefa');
+  setVal('email_jefa', 'email_jefa');
+  setChk('te_siei', 'te_siei');
+  setChk('te_educadores', 'te_educadores');
+  setChk('horari_tarda', 'horari_tarda');
+  setChk('horari_intensiu', 'horari_intensiu');
+  if (q.get('horari_intensiu') === '1') document.getElementById('camp_intensiu').style.display = 'block';
+})();
+actualitzarPreview();
 
 function show(id) { document.getElementById(id).style.display = 'block'; }
 function hide(id) { document.getElementById(id).style.display = 'none'; }
@@ -748,8 +913,8 @@ function parseResponse(text) {
 document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  if (!v('nom') || !v('codi') || !v('nom_director') || !v('nom_jefa') || !v('grups')) {
-    alert('Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu i Grups.');
+  if (!v('nom') || !v('codi') || !v('nom_director') || !v('nom_jefa') || !v('email_jefa') || !v('grups')) {
+    alert("Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu (incl. email de la cap d'estudis) i Grups.");
     return;
   }
 
@@ -779,41 +944,36 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   }
 });
 
-// ── CREAR ESCOLA A SUPABASE ──
+// ── CREAR ESCOLA (via Edge Function amb service role — mai amb la clau anon) ──
 async function createSchool() {
   const btn = document.getElementById('btn-crear');
   btn.disabled = true;
   btn.querySelector('span').textContent = 'Creant escola…';
 
-  const nom       = v('nom');
-  const codi      = v('codi').toUpperCase();
-  const nom_jefa  = v('nom_jefa');
-  const context_ia = document.getElementById('context-preview').value.trim();
-  const normes_ia  = document.getElementById('normes-preview').value.trim();
+  const nom          = v('nom');
+  const codi         = v('codi');
+  const nom_jefa     = v('nom_jefa');
+  const email_jefa   = v('email_jefa');
+  const tipus        = v('etapes') === 'Educació Especial' ? 'cee' : 'ordinaria';
+  const context_ia   = document.getElementById('context-preview').value.trim();
+  const normes_ia    = document.getElementById('normes-preview').value.trim();
+  const franges_ia   = buildFranjesReals();
+  const config_pati  = +v('torns_pati') === 2 ? { split: true } : {};
 
   try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/escoles`, {
+    const res = await fetch(CREAR_ESCOLA_URL, {
       method: 'POST',
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': `Bearer ${SUPA_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
-      },
-      body: JSON.stringify({ nom, codi, normes_ia, context_ia })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nom, codi, tipus, context_ia, normes_ia, franges_ia, config_pati, director_nom: nom_jefa, director_email: email_jefa, incorporacio_id: incorporacioId }),
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(err);
-    }
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error || `Error ${res.status}`);
 
-    const [escola] = await res.json();
-
-    document.getElementById('s-nom').textContent  = nom;
-    document.getElementById('s-codi').textContent = codi;
-    document.getElementById('s-id').textContent   = escola?.id || '(comprova Supabase)';
-    document.getElementById('s-jefa').textContent = nom_jefa;
+    document.getElementById('s-nom').textContent  = data.escola.nom;
+    document.getElementById('s-codi').textContent = data.escola.codi;
+    document.getElementById('s-id').textContent   = data.escola.id;
+    document.getElementById('s-jefa').textContent = data.directiu.nom;
 
     hide('preview');
     show('success');
@@ -822,7 +982,7 @@ async function createSchool() {
   } catch (err) {
     btn.disabled = false;
     btn.querySelector('span').textContent = '✓ Crear escola a HorariaPro';
-    alert('Error en desar a Supabase: ' + err.message);
+    alert('Error en crear l\'escola: ' + err.message);
   }
 }
 </script>
