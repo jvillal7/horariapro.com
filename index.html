@@ -1591,13 +1591,25 @@
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-header-text">
-        <h3>Sol·licitar demo gratuïta</h3>
-        <p>Tria com vols conèixer HorariaPro</p>
+        <h3>Comença amb HorariaPro</h3>
+        <p>Tria com vols fer-ho</p>
       </div>
       <button class="modal-close" onclick="closeDemoModal()">✕</button>
     </div>
     <div class="modal-body">
-      <!-- Opció 1: Calendly -->
+      <!-- Opció 1: Autoservei -->
+      <a class="modal-option" href="/incorporacio.html">
+        <div class="modal-option-icon" style="background:#EAF5EE;">⚡</div>
+        <div class="modal-option-text">
+          <strong>Integra HorariaPro ara mateix</strong>
+          <span>Alta immediata, sense esperar — configures el teu centre en uns minuts, amb prova gratuïta</span>
+        </div>
+        <div class="modal-option-arrow">→</div>
+      </a>
+
+      <div class="modal-divider">o</div>
+
+      <!-- Opció 2: Calendly -->
       <a class="modal-option" href="#" onclick="openCalendly(event)">
         <div class="modal-option-icon cal">📅</div>
         <div class="modal-option-text">
@@ -1609,7 +1621,7 @@
 
       <div class="modal-divider">o</div>
 
-      <!-- Opció 2: Formulari -->
+      <!-- Opció 3: Formulari -->
       <a class="modal-option" href="#contacte" onclick="closeDemoModal()">
         <div class="modal-option-icon form">✉️</div>
         <div class="modal-option-text">
