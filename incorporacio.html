@@ -276,13 +276,17 @@
     <div class="plans-grid">
       <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
         <div class="plan-nom">Gratuït</div>
-        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/60 dies</span></div>
-        <div class="plan-lim">60 dies o 30 propostes IA</div>
+        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/30 dies</span></div>
+        <div class="plan-lim">30 dies o 30 propostes IA</div>
         <ul class="plan-features">
+          <li>Proposta de cobertures amb IA (30u)</li>
           <li>Notificacions automàtiques</li>
           <li>Normes i context IA personalitzat</li>
           <li>Historial i informes (ATRI)</li>
           <li>Suport per email</li>
+          <li>Gestió torns del pati (1u)</li>
+          <li>Gestió sortides amb acompanyants (1u)</li>
+          <li>Gestió Treball Personal (1u)</li>
         </ul>
       </div>
       <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
@@ -313,6 +317,7 @@
           <li>Suport per email</li>
           <li>Gestió torns del pati</li>
           <li>Gestió sortides amb acompanyants</li>
+          <li>Gestió Treball Personal</li>
           <li>Gestió horaris jornada intensiva</li>
           <li>Chat HorarIA per WhatsApp</li>
           <li>Implantació gratuïta</li>
@@ -331,6 +336,7 @@
           <li>Suport per email</li>
           <li>Gestió torns del pati</li>
           <li>Gestió sortides amb acompanyants</li>
+          <li>Gestió Treball Personal</li>
           <li>Gestió horaris jornada intensiva</li>
           <li>Chat HorarIA per WhatsApp</li>
           <li>Implantació gratuïta</li>
@@ -461,7 +467,7 @@ const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functio
 const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
 const PLANS = {
-  gratuit: { nom: 'Gratuït',  preu: 0,   lim: "60 dies o 30 propostes IA" },
+  gratuit: { nom: 'Gratuït',  preu: 0,   lim: "30 dies o 30 propostes IA" },
   basic:   { nom: 'Estàndard', preu: 59,  lim: 'Fins a 25 docents' },
   pro:     { nom: 'Pro',      preu: 79,  lim: '25–60 docents' },
   centre:  { nom: 'Centre+',  preu: 119, lim: '+60 docents o institut' },

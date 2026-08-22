@@ -929,6 +929,13 @@
       .nav-logo img { height: 34px; }
       .nav-cta { padding: 7px 11px; font-size: 12px; }
     }
+    /* Targetes de preus: sempre 2x2, mai una targeta sola en una fila amb
+       espai buit al costat (passava amb auto-fit en pantalles d'escriptori
+       prou amples per a 3 columnes però no per a 4). */
+    .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    @media (min-width: 640px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -1295,7 +1302,7 @@
       </span>
     </div>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px; align-items:start;">
+    <div class="pricing-grid">
 
       <!-- Gratuït -->
       <div style="background:var(--bg); border:1.5px dashed var(--green); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
@@ -1304,14 +1311,18 @@
           <div style="display:flex; align-items:baseline; gap:4px;">
             <span style="font-size:40px; font-weight:800; color:var(--black); letter-spacing:-.03em;">€0</span>
           </div>
-          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">60 dies o 30 propostes IA — el que arribe primer</div>
+          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">30 dies o 30 propostes IA — el que arribe primer</div>
         </div>
         <div style="height:1px; background:var(--border);"></div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Proposta de cobertures amb IA (30u)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió torns del pati (1u)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants (1u)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió Treball Personal (1u)</li>
         </ul>
         <a href="incorporacio.html" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
       </div>
@@ -1360,6 +1371,7 @@
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Suport per email</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió torns del pati</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió Treball Personal</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió horaris jornada intensiva</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Implantació gratuïta</li>
@@ -1388,6 +1400,7 @@
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió torns del pati</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió Treball Personal</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió horaris jornada intensiva</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
