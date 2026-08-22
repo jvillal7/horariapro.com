@@ -617,8 +617,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
       const magicUrl = 'https://app.horariapro.com?magic=' + encodeURIComponent(escolaData.magic_token);
       btnConfigurar.textContent = '✓ Compte creat — anem-hi →';
       btnConfigurar.href = magicUrl;
-      txt('success-msg', 'Les dades del centre s\'han desat. T\'estem portant a l\'autoconfiguració del teu compte…');
-      setTimeout(() => { window.location.href = magicUrl; }, 2500);
+      txt('success-msg', 'Les dades del centre s\'han desat. Quan vulgues, imprimeix o desa el contracte en PDF i després clica "Anem-hi" per configurar HorariaPro.');
     } else if (escolaRes.ok) {
       btnConfigurar.textContent = '✓ Compte creat — entra amb Google →';
       btnConfigurar.href = 'https://app.horariapro.com';
