@@ -61,8 +61,13 @@
   .plans-toggle { display: flex; background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 3px; width: fit-content; margin-bottom: 20px; gap: 2px; }
   .plans-toggle button { border: none; border-radius: 6px; padding: 7px 18px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; background: transparent; color: var(--ink-3); transition: all .15s; }
   .plans-toggle button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.10); }
-  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 860px) { .plans-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 580px) { .plans-grid { grid-template-columns: 1fr; } }
+  .plan-card.plan-gratuit { border-color: var(--green); }
+  .plan-card.plan-gratuit.selected { background: var(--green-lt); }
+  .plan-features { list-style: none; padding: 0; margin: 10px 0 0; font-size: 11.5px; color: var(--ink-3); line-height: 1.7; }
+  .plan-features li::before { content: "✓ "; color: var(--green); font-weight: 700; }
   .plan-card { border: 2px solid var(--border); border-radius: var(--r); padding: 20px; cursor: pointer; transition: all .15s; position: relative; background: var(--bg); }
   .plan-card:hover { border-color: #93c5fd; }
   .plan-card.selected { border-color: var(--blue); background: var(--blue-lt); }
@@ -232,6 +237,23 @@
     </div>
 
     <div class="plans-grid">
+
+      <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
+        <div class="plan-nom">Gratuït</div>
+        <div>
+          <span class="plan-preu" id="preu-gratuit">€0</span>
+          <span class="plan-preu-mes">/60 dies</span>
+        </div>
+        <div class="plan-lim">60 dies o 30 propostes IA — el que arribe primer</div>
+        <div class="plan-anual-info" id="anual-gratuit" style="display:none;">Sense targeta · sense compromís</div>
+        <ul class="plan-features">
+          <li>Notificacions automàtiques</li>
+          <li>Normes i context IA personalitzat</li>
+          <li>Historial i informes d'absències (ATRI)</li>
+          <li>Suport per email</li>
+        </ul>
+        <div class="plan-check"></div>
+      </div>
 
       <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
         <div class="plan-nom">Estàndard</div>
@@ -451,9 +473,10 @@ const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functio
 const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
 const PLANS = {
-  basic:  { nom: 'Estàndard', preu: 59,  lim: 'Fins a 25 docents' },
-  pro:    { nom: 'Pro',      preu: 79,  lim: '25–60 docents' },
-  centre: { nom: 'Centre+',  preu: 119, lim: '+60 docents o institut' },
+  gratuit: { nom: 'Gratuït',  preu: 0,   lim: "60 dies o 30 propostes IA" },
+  basic:   { nom: 'Estàndard', preu: 59,  lim: 'Fins a 25 docents' },
+  pro:     { nom: 'Pro',      preu: 79,  lim: '25–60 docents' },
+  centre:  { nom: 'Centre+',  preu: 119, lim: '+60 docents o institut' },
 };
 
 let planSeleccionat = null;
@@ -481,7 +504,7 @@ function setModalitat(m) {
 
 function selectPlan(k) {
   planSeleccionat = k;
-  ['basic', 'pro', 'centre'].forEach(id => {
+  ['gratuit', 'basic', 'pro', 'centre'].forEach(id => {
     document.getElementById('plan-' + id).classList.toggle('selected', id === k);
   });
   document.getElementById('plan-error').style.display = 'none';
