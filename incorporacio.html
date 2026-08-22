@@ -5,199 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Alta de nou centre — HorariaPro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --ink: #1a1a1a; --ink-2: #444; --ink-3: #777; --ink-4: #aaa;
-    --border: #e8e8e8; --bg: #fff; --bg-2: #f7f7f7;
+    --border: #e8e8e8; --border-2: #ddd; --bg-2: #f7f7f7; --surface: #fff;
     --blue: #2563eb; --blue-lt: #eff6ff;
     --green: #16a34a; --green-lt: #f0fdf4;
-    --r: 10px; --shadow: 0 2px 16px rgba(0,0,0,.07);
+    --purple: #7c3aed; --purple-lt: #a78bfa;
+    --r: 18px; --r-sm: 8px;
+    --sh-lg: 0 30px 80px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.2);
   }
-  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--bg-2); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', sans-serif; color: var(--ink); font-size: 15px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background: radial-gradient(1100px 700px at 18% -8%, #241a3d, #0a0a0f 62%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 44px 16px 60px;
+  }
   a { color: var(--blue); text-decoration: none; }
 
-  nav {
-    background: rgba(10,10,10,.96); backdrop-filter: blur(12px);
-    padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
-    height: 60px; border-bottom: 1px solid rgba(255,255,255,.08);
-    position: sticky; top: 0; z-index: 100;
+  .wiz-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .wiz-brand img { height: 22px; width: auto; display: block; }
+  .wiz-eyebrow {
+    color: rgba(255,255,255,.5); font-size: 12px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; margin-bottom: 26px; text-align: center;
   }
-  .nav-logo { font-weight: 800; font-size: 18px; color: #fff; }
-  .nav-badge { background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; letter-spacing: .04em; text-transform: uppercase; }
 
-  .hero { background: var(--ink); color: #fff; padding: 48px 5% 40px; }
-  .hero .tag { display: inline-block; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
-  .hero h1 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; line-height: 1.2; }
-  .hero p { color: rgba(255,255,255,.6); margin-top: 10px; font-size: 14px; max-width: 560px; }
+  .wiz-card {
+    background: var(--surface); border-radius: var(--r); width: 100%; max-width: 640px;
+    box-shadow: var(--sh-lg); padding: 32px 34px 28px;
+  }
+  @media (max-width: 640px) { .wiz-card { padding: 24px 20px 20px; border-radius: 16px; } }
 
-  .main { max-width: 800px; margin: 0 auto; padding: 40px 5% 80px; }
+  #wiz-progress { display: flex; align-items: center; gap: 7px; margin-bottom: 22px; }
+  .wiz-dot { width: 8px; height: 8px; border-radius: 5px; background: var(--border-2); transition: all .2s; }
+  .wiz-dot.on { background: var(--ink); }
+  .wiz-dot.cur { width: 22px; }
+  #wiz-steplabel { font-size: 12px; color: var(--ink-3); margin-left: 4px; }
 
-  .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 28px 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
-  .card-title { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-  .card-title span { background: var(--blue); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+  .wiz-step h2 { font-family: Georgia, serif; font-weight: 400; font-size: 23px; margin: 0 0 4px; color: var(--ink); }
+  .wiz-step > p.wiz-sub { color: var(--ink-3); font-size: 13.5px; margin: 0 0 22px; }
 
-  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 6px; }
   .field-full { grid-column: 1 / -1; }
-  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .02em; text-transform: uppercase; }
+  @media (max-width: 640px) { .fields { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .02em; text-transform: uppercase; }
   .field label .req { color: var(--blue); }
   .field input, .field select, .field textarea {
-    width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+    width: 100%; border: 1.5px solid var(--border); border-radius: var(--r-sm);
     padding: 10px 13px; font-size: 14px; font-family: inherit; color: var(--ink);
-    background: var(--bg); transition: border-color .15s;
-    outline: none;
+    background: var(--surface); transition: border-color .15s; outline: none;
   }
   .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
-  .field textarea { resize: vertical; min-height: 90px; }
+  .field textarea { resize: vertical; min-height: 80px; }
   .field .hint { font-size: 11px; color: var(--ink-4); margin-top: 4px; }
+  .field-err { border-color: #dc2626 !important; }
+  #wiz-err0 { color: #dc2626; font-size: 12.5px; margin: 10px 0 0; display: none; }
 
-  .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
-  .radio-opt { display: flex; align-items: center; gap: 7px; cursor: pointer; }
-  .radio-opt input[type=radio] { accent-color: var(--blue); width: 16px; height: 16px; }
-  .radio-opt span { font-size: 14px; color: var(--ink-2); }
+  .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 9px; margin-top: 6px; }
+  .check-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .check-opt input[type=checkbox] { accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; }
+  .check-opt span { font-size: 13.5px; color: var(--ink-2); }
 
-  /* Plans de preu */
-  .plans-toggle { display: flex; background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 3px; width: fit-content; margin-bottom: 20px; gap: 2px; }
-  .plans-toggle button { border: none; border-radius: 6px; padding: 7px 18px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; background: transparent; color: var(--ink-3); transition: all .15s; }
+  /* Plans */
+  .plans-toggle { display: flex; background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 3px; width: fit-content; margin-bottom: 18px; gap: 2px; }
+  .plans-toggle button { border: none; border-radius: 6px; padding: 7px 16px; font-size: 12.5px; font-weight: 600; font-family: inherit; cursor: pointer; background: transparent; color: var(--ink-3); transition: all .15s; }
   .plans-toggle button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.10); }
-  .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 860px) { .plans-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 580px) { .plans-grid { grid-template-columns: 1fr; } }
-  .plan-card.plan-gratuit { border-color: var(--green); }
-  .plan-card.plan-gratuit.selected { background: var(--green-lt); }
-  .plan-features { list-style: none; padding: 0; margin: 10px 0 0; font-size: 11.5px; color: var(--ink-3); line-height: 1.7; }
-  .plan-features li::before { content: "✓ "; color: var(--green); font-weight: 700; }
-  .plan-card { border: 2px solid var(--border); border-radius: var(--r); padding: 20px; cursor: pointer; transition: all .15s; position: relative; background: var(--bg); }
+  .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 460px) { .plans-grid { grid-template-columns: 1fr; } }
+  .plan-card { border: 2px solid var(--border); border-radius: 14px; padding: 16px 18px; cursor: pointer; transition: all .15s; position: relative; background: var(--surface); }
   .plan-card:hover { border-color: #93c5fd; }
   .plan-card.selected { border-color: var(--blue); background: var(--blue-lt); }
+  .plan-card.plan-gratuit { border-color: var(--green); }
+  .plan-card.plan-gratuit.selected { background: var(--green-lt); }
   .plan-card.plan-pro { border-color: var(--ink); background: var(--ink); color: #fff; }
   .plan-card.plan-pro:hover { border-color: #374151; }
   .plan-card.plan-pro.selected { border-color: #60a5fa; background: #1e3a8a; }
-  .plan-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 100px; white-space: nowrap; letter-spacing: .04em; }
-  .plan-nom { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .plan-badge { position: absolute; top: -9px; left: 16px; background: var(--blue); color: #fff; font-size: 9.5px; font-weight: 700; padding: 2px 10px; border-radius: 100px; white-space: nowrap; letter-spacing: .04em; }
+  .plan-nom { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 5px; }
   .plan-card.plan-pro .plan-nom { color: rgba(255,255,255,.5); }
-  .plan-preu { font-size: 32px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+  .plan-preu { font-size: 26px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
   .plan-card.plan-pro .plan-preu { color: #fff; }
-  .plan-preu-mes { font-size: 13px; color: var(--ink-3); font-weight: 400; }
+  .plan-preu-mes { font-size: 12px; color: var(--ink-3); font-weight: 400; }
   .plan-card.plan-pro .plan-preu-mes { color: rgba(255,255,255,.5); }
-  .plan-lim { font-size: 12px; color: var(--ink-4); margin-top: 4px; }
+  .plan-lim { font-size: 11px; color: var(--ink-4); margin-top: 3px; }
   .plan-card.plan-pro .plan-lim { color: rgba(255,255,255,.4); }
-  .plan-anual-info { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 6px; background: var(--green-lt); border-radius: 4px; padding: 3px 8px; display: inline-block; }
+  .plan-anual-info { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 5px; background: var(--green-lt); border-radius: 4px; padding: 2px 7px; display: inline-block; }
   .plan-card.plan-pro .plan-anual-info { color: #4ade80; background: rgba(74,222,128,.15); }
-  .plan-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); margin-top: 14px; display: flex; align-items: center; justify-content: center; }
-  .plan-card.selected .plan-check, .plan-card.plan-pro.selected .plan-check { background: var(--blue); border-color: var(--blue); }
-  .plan-check::after { content: ''; display: none; width: 6px; height: 6px; background: #fff; border-radius: 50%; }
-  .plan-card.selected .plan-check::after, .plan-card.plan-pro.selected .plan-check::after { display: block; }
+  .plan-features { list-style: none; padding: 0; margin: 8px 0 0; font-size: 10.5px; color: var(--ink-3); line-height: 1.6; }
+  .plan-features li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+  #plan-error { display: none; color: #dc2626; font-size: 12.5px; margin-top: 10px; }
 
-  .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-  .check-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-  .check-opt input[type=checkbox] { accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; }
-  .check-opt span { font-size: 14px; color: var(--ink-2); }
-
-  .submit-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 8px; }
-  .btn-primary {
-    background: var(--blue); color: #fff; border: none; border-radius: 8px;
-    padding: 13px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
-    font-family: inherit; transition: opacity .15s;
-  }
+  /* Navegació de passos */
+  .wiz-nav { display: flex; gap: 10px; margin-top: 24px; }
+  .btn { border: none; border-radius: var(--r-sm); padding: 12px 20px; font-size: 14.5px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s, background .15s; }
+  .btn-primary { background: var(--ink); color: #fff; flex: 1; }
   .btn-primary:hover { opacity: .88; }
   .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
-  .form-note { font-size: 12px; color: var(--ink-4); }
+  .btn-ghost { background: var(--bg-2); color: var(--ink-2); }
+  .btn-print { background: var(--surface); color: var(--ink); border: 1.5px solid var(--border-2); }
 
-  /* ── SUCCESS + CONTRACT ── */
-  #success { display: none; }
-  .success-banner { background: var(--green-lt); border: 1.5px solid var(--green); border-radius: var(--r); padding: 20px 24px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-  .success-banner .ico { font-size: 28px; }
-  .success-banner h2 { font-size: 17px; font-weight: 700; color: var(--green); }
-  .success-banner p { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
-
-  .btn-print { background: var(--ink); color: #fff; border: none; border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; transition: opacity .15s; margin-bottom: 24px; }
-  .btn-print:hover { opacity: .85; }
-
-  /* ── CONTRACT PREVIEW ── */
+  /* Contracte */
   #contract-preview {
-    background: #fff; border: 1px solid var(--border); border-radius: var(--r);
-    box-shadow: 0 4px 32px rgba(0,0,0,.10);
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    max-height: 46vh; overflow-y: auto;
   }
-  .cp-portada { background: var(--ink); color: #fff; padding: 48px 48px 40px; border-radius: var(--r) var(--r) 0 0; }
-  .cp-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 20px; color: #93c5fd; letter-spacing: -.3px; margin-bottom: 32px; }
-  .cp-titol h1 { font-size: 22px; font-weight: 800; line-height: 1.3; }
-  .cp-titol .sub { color: rgba(255,255,255,.55); font-size: 13px; margin-top: 8px; }
-  .cp-parts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.15); }
-  .cp-part { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 18px 20px; }
-  .cp-part .rol { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 6px; }
-  .cp-part .nom { font-size: 14px; font-weight: 700; }
-  .cp-part .det { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 4px; line-height: 1.6; }
+  .cp-portada { background: var(--ink); color: #fff; padding: 28px 26px 24px; border-radius: 11px 11px 0 0; }
+  .cp-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 17px; color: #93c5fd; letter-spacing: -.3px; margin-bottom: 20px; }
+  .cp-titol h1 { font-size: 17px; font-weight: 800; line-height: 1.3; }
+  .cp-titol .sub { color: rgba(255,255,255,.55); font-size: 11.5px; margin-top: 6px; }
+  .cp-parts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); }
+  @media (max-width: 480px) { .cp-parts { grid-template-columns: 1fr; } }
+  .cp-part { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 13px 15px; }
+  .cp-part .rol { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 5px; }
+  .cp-part .nom { font-size: 13px; font-weight: 700; }
+  .cp-part .det { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 3px; line-height: 1.6; }
 
-  .cp-body { padding: 40px 48px; font-family: Georgia, serif; font-size: 11pt; line-height: 1.7; color: #333; }
-  .cp-body h2 { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; color: #1e40af; text-transform: uppercase; letter-spacing: .06em; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #dbeafe; }
+  .cp-body { padding: 24px 26px; font-family: Georgia, serif; font-size: 10.5pt; line-height: 1.65; color: #333; }
+  .cp-body h2 { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: #1e40af; text-transform: uppercase; letter-spacing: .06em; margin: 24px 0 8px; padding-bottom: 5px; border-bottom: 2px solid #dbeafe; }
   .cp-body h2:first-child { margin-top: 0; }
-  .cp-body p { color: #555; margin-bottom: 10px; }
-  .cp-body ul { color: #555; padding-left: 20px; margin-bottom: 12px; }
-  .cp-body ul li { margin-bottom: 5px; }
-  .cp-body .hl { background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-bottom: 14px; }
-  .cp-body .hl p { margin: 0; color: #1e3a8a; font-family: 'Inter', sans-serif; font-size: 13px; }
-  .cp-body table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 12px; margin-bottom: 16px; }
-  .cp-body table th { background: #1e3a8a; color: #fff; padding: 8px 10px; text-align: left; }
-  .cp-body table td { padding: 8px 10px; border: 1px solid #e5e7eb; color: #555; vertical-align: top; }
+  .cp-body p { color: #555; margin-bottom: 9px; }
+  .cp-body ul { color: #555; padding-left: 18px; margin-bottom: 10px; }
+  .cp-body ul li { margin-bottom: 4px; }
+  .cp-body .hl { background: #eff6ff; border-left: 4px solid #2563eb; padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 12px; }
+  .cp-body .hl p { margin: 0; color: #1e3a8a; font-family: 'Inter', sans-serif; font-size: 12px; }
+  .cp-body table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 11px; margin-bottom: 14px; }
+  .cp-body table th { background: #1e3a8a; color: #fff; padding: 7px 9px; text-align: left; }
+  .cp-body table td { padding: 7px 9px; border: 1px solid #e5e7eb; color: #555; vertical-align: top; }
   .cp-body table tr:nth-child(even) td { background: #f8fafc; }
-  .cp-sigs { padding: 32px 48px 40px; border-top: 1px solid #e5e7eb; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-  .cp-sig .rol { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2563eb; margin-bottom: 4px; }
-  .cp-sig .nom { font-weight: 700; font-size: 13px; }
-  .cp-sig .det { font-size: 12px; color: #777; margin-top: 3px; line-height: 1.5; }
-  .cp-sig .linia { margin-top: 56px; border-top: 1px solid #333; padding-top: 8px; font-family: 'Inter', sans-serif; font-size: 11px; color: #777; }
-  .cp-peu { font-family: 'Inter', sans-serif; font-size: 11px; color: #aaa; text-align: center; padding: 20px 48px; border-top: 1px solid #f0f0f0; }
+  .cp-sigs { padding: 24px 26px 28px; border-top: 1px solid #e5e7eb; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 480px) { .cp-sigs { grid-template-columns: 1fr; } }
+  .cp-sig .rol { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2563eb; margin-bottom: 4px; }
+  .cp-sig .nom { font-weight: 700; font-size: 12.5px; }
+  .cp-sig .det { font-size: 11px; color: #777; margin-top: 3px; line-height: 1.5; }
+  .cp-sig .linia { margin-top: 44px; border-top: 1px solid #333; padding-top: 7px; font-family: 'Inter', sans-serif; font-size: 10.5px; color: #777; }
+  .cp-peu { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #aaa; text-align: center; padding: 16px 26px; border-top: 1px solid #f0f0f0; }
 
-  @media (max-width: 640px) {
-    .fields { grid-template-columns: 1fr; }
-    .card { padding: 20px; }
-    .cp-portada { padding: 28px 24px; }
-    .cp-parts { grid-template-columns: 1fr; }
-    .cp-body { padding: 28px 24px; }
-    .cp-sigs { padding: 24px; grid-template-columns: 1fr; }
-    .cp-peu { padding: 16px 24px; }
-  }
+  #wiz-submit-err { color: #dc2626; font-size: 12.5px; margin-top: 10px; display: none; }
+
+  /* Pas final */
+  .wiz-done { text-align: center; padding: 6px 4px; }
+  .wiz-done .ico { font-size: 38px; margin-bottom: 12px; }
+  .wiz-done h2 { margin-bottom: 8px; }
+  .wiz-done p { color: var(--ink-3); font-size: 13.5px; margin-bottom: 22px; line-height: 1.6; }
 
   @media print {
-    nav, .hero, .main > *:not(#success) { display: none !important; }
-    #success { display: block !important; }
-    .success-banner, .btn-print { display: none !important; }
+    body * { visibility: hidden; }
+    #contract-preview, #contract-preview * { visibility: visible; }
+    #contract-preview { position: absolute; left: 0; top: 0; width: 100%; max-height: none; overflow: visible; border: none; }
     body { background: #fff; }
-    #contract-preview { border: none; box-shadow: none; }
-    .cp-portada { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">HorariaPro</div>
-  <div class="nav-badge">Alta de centre</div>
-</nav>
+<div class="wiz-brand"><img src="/logo.svg" alt="HorariaPro" /></div>
+<div class="wiz-eyebrow">Alta de nou centre</div>
 
-<div class="hero">
-  <div class="tag">Incorporació</div>
-  <h1>Alta de nou centre educatiu</h1>
-  <p>Omple aquest formulari per formalitzar la incorporació a HorariaPro. Amb les dades introduïdes es generarà automàticament el contracte de servei llest per signar.</p>
-</div>
+<div class="wiz-card">
 
-<div class="main">
+  <div id="wiz-progress">
+    <div class="wiz-dot" data-dot="0"></div>
+    <div class="wiz-dot" data-dot="1"></div>
+    <div class="wiz-dot" data-dot="2"></div>
+    <div class="wiz-dot" data-dot="3"></div>
+    <span id="wiz-steplabel">Pas 1 de 4</span>
+  </div>
 
-<!-- ── FORMULARI ── -->
-<form id="form" novalidate>
-
-  <!-- A. Dades legals del centre -->
-  <div class="card">
-    <div class="card-title"><span>A</span> Identificació del centre · Dades legals</div>
+  <!-- PAS 0 — Dades del centre -->
+  <div class="wiz-step" data-step="0">
+    <h2>Dades del centre</h2>
+    <p class="wiz-sub">Identificació legal del centre i de la cap d'estudis que gestionarà HorariaPro.</p>
     <div class="fields">
       <div class="field">
         <label>Nom del centre educatiu <span class="req">*</span></label>
-        <input type="text" id="centre_nom" placeholder="CEIP / CEE / INS..." required />
+        <input type="text" id="centre_nom" placeholder="CEIP / CEE / INS..." />
       </div>
       <div class="field">
         <label>CIF / NIF del centre <span class="req">*</span></label>
-        <input type="text" id="centre_cif" placeholder="S0800000X" required />
+        <input type="text" id="centre_cif" placeholder="S0800000X" />
       </div>
       <div class="field field-full">
         <label>Adreça completa</label>
@@ -205,100 +194,36 @@
       </div>
       <div class="field">
         <label>Nom del representant legal <span class="req">*</span></label>
-        <input type="text" id="representant_nom" placeholder="Nom i cognoms" required />
+        <input type="text" id="representant_nom" placeholder="Nom i cognoms" />
       </div>
       <div class="field">
         <label>Càrrec del representant <span class="req">*</span></label>
-        <input type="text" id="representant_carrec" placeholder="Director/a, Secretari/a..." required />
+        <input type="text" id="representant_carrec" placeholder="Director/a, Secretari/a..." />
       </div>
       <div class="field">
         <label>Correu electrònic del centre <span class="req">*</span></label>
-        <input type="email" id="centre_email" placeholder="direccio@ceip..." required />
+        <input type="email" id="centre_email" placeholder="direccio@ceip..." />
       </div>
       <div class="field">
         <label>Correu electrònic de la cap d'estudis <span class="req">*</span></label>
-        <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." required />
-        <div class="hint">Amb este correu s'accedeix a l'app (Google Sign-In).</div>
+        <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
+        <div class="hint">Amb este correu s'accedeix a l'app.</div>
       </div>
       <div class="field">
         <label>Nom de la cap d'estudis <span class="req">*</span></label>
-        <input type="text" id="nom_jefa" placeholder="Nom i cognoms" required />
+        <input type="text" id="nom_jefa" placeholder="Nom i cognoms" />
       </div>
+    </div>
+    <p id="wiz-err0">Si us plau, omple tots els camps obligatoris (*).</p>
+    <div class="wiz-nav">
+      <button class="btn btn-primary" onclick="tryGoStep(1)">Continuar →</button>
     </div>
   </div>
 
-  <!-- B. Quota acordada -->
-  <div class="card">
-    <div class="card-title"><span>B</span> Pla contractat</div>
-
-    <div class="plans-toggle">
-      <button type="button" id="toggle-mensual" class="active" onclick="setModalitat('mensual')">Mensual</button>
-      <button type="button" id="toggle-anual" onclick="setModalitat('anual')">Anual (2 mesos gratis)</button>
-    </div>
-
-    <div class="plans-grid">
-
-      <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
-        <div class="plan-nom">Gratuït</div>
-        <div>
-          <span class="plan-preu" id="preu-gratuit">€0</span>
-          <span class="plan-preu-mes">/60 dies</span>
-        </div>
-        <div class="plan-lim">60 dies o 30 propostes IA — el que arribe primer</div>
-        <div class="plan-anual-info" id="anual-gratuit" style="display:none;">Sense targeta · sense compromís</div>
-        <ul class="plan-features">
-          <li>Notificacions automàtiques</li>
-          <li>Normes i context IA personalitzat</li>
-          <li>Historial i informes d'absències (ATRI)</li>
-          <li>Suport per email</li>
-        </ul>
-        <div class="plan-check"></div>
-      </div>
-
-      <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
-        <div class="plan-nom">Estàndard</div>
-        <div>
-          <span class="plan-preu" id="preu-basic">€59</span>
-          <span class="plan-preu-mes">/mes</span>
-        </div>
-        <div class="plan-lim">Fins a 25 docents</div>
-        <div class="plan-anual-info" id="anual-basic" style="display:none;">€590/any · estalvies €118</div>
-        <div class="plan-check"></div>
-      </div>
-
-      <div class="plan-card plan-pro" id="plan-pro" onclick="selectPlan('pro')">
-        <div class="plan-badge">El més popular</div>
-        <div class="plan-nom">Pro</div>
-        <div>
-          <span class="plan-preu" id="preu-pro">€79</span>
-          <span class="plan-preu-mes">/mes</span>
-        </div>
-        <div class="plan-lim">25–60 docents</div>
-        <div class="plan-anual-info" id="anual-pro" style="display:none;">€790/any · estalvies €158</div>
-        <div class="plan-check"></div>
-      </div>
-
-      <div class="plan-card" id="plan-centre" onclick="selectPlan('centre')">
-        <div class="plan-nom">Centre+</div>
-        <div>
-          <span class="plan-preu" id="preu-centre">€119</span>
-          <span class="plan-preu-mes">/mes</span>
-        </div>
-        <div class="plan-lim">+60 docents o institut</div>
-        <div class="plan-anual-info" id="anual-centre" style="display:none;">€1.190/any · estalvies €238</div>
-        <div class="plan-check"></div>
-      </div>
-
-    </div>
-
-    <input type="hidden" id="preu_mensual" />
-    <input type="hidden" id="modalitat_hidden" value="mensual" />
-    <p id="plan-error" style="display:none; color:#dc2626; font-size:13px; margin-top:12px;">Si us plau, selecciona un pla.</p>
-  </div>
-
-  <!-- C. Perfil operatiu bàsic -->
-  <div class="card">
-    <div class="card-title"><span>C</span> Perfil operatiu del centre</div>
+  <!-- PAS 1 — Perfil operatiu -->
+  <div class="wiz-step" data-step="1" hidden>
+    <h2>Perfil del centre</h2>
+    <p class="wiz-sub">Ajuda'ns a conèixer millor el centre — açò també servirà per personalitzar HorarIA.</p>
     <div class="fields">
       <div class="field">
         <label>Nombre aproximat de docents</label>
@@ -317,7 +242,7 @@
       </div>
       <div class="field field-full">
         <label>Serveis i recursos especials del centre</label>
-        <div class="check-group" style="margin-top:8px;">
+        <div class="check-group">
           <label class="check-opt"><input type="checkbox" id="te_siei" /><span>Aula SIEI o SIEI+</span></label>
           <label class="check-opt"><input type="checkbox" id="te_educadores" /><span>Educadores / Vetlladores</span></label>
           <label class="check-opt"><input type="checkbox" id="te_mesi" /><span>Personal MESI</span></label>
@@ -327,146 +252,209 @@
         </div>
       </div>
       <div class="field field-full">
-        <label>Particularitats del centre o notes per a la configuració</label>
-        <textarea id="notes" placeholder="Alumnes amb necessitats especials, personal compartit amb altres centres, règim especial, qualsevol cosa rellevant per a la gestió de cobertures..."></textarea>
+        <label>Particularitats del centre o notes</label>
+        <textarea id="notes" placeholder="Alumnes amb necessitats especials, personal compartit amb altres centres, règim especial..."></textarea>
         <div class="hint">Com més context, millor podrà configurar-se la IA de cobertures des del primer dia.</div>
       </div>
     </div>
-  </div>
-
-  <div class="submit-bar">
-    <button type="submit" class="btn-primary" id="btn-submit">Desar i generar contracte →</button>
-    <span class="form-note">Les dades es guarden de forma segura i s'utilitzen únicament per configurar HorariaPro.</span>
-  </div>
-</form>
-
-<!-- ── SUCCESS + CONTRACTE ── -->
-<div id="success">
-
-  <div class="success-banner">
-    <div class="ico">✅</div>
-    <div>
-      <h2>Incorporació registrada correctament</h2>
-      <p id="success-msg">Les dades del centre s'han desat. A continuació pots generar el contracte personalitzat i imprimir-lo en PDF.</p>
+    <div class="wiz-nav">
+      <button class="btn btn-ghost" onclick="showStep(0)">← Enrere</button>
+      <button class="btn btn-primary" onclick="showStep(2)">Continuar →</button>
     </div>
   </div>
 
-  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px;">
-    <button class="btn-print" onclick="window.print()" style="margin-bottom:0;">
-      🖨️ Imprimir contracte / Desar com a PDF
-    </button>
-    <a id="btn-configurar" href="https://app.horariapro.com" class="btn-print" style="margin-bottom:0; background:var(--blue); text-decoration:none;">
-      Creant el teu compte…
-    </a>
+  <!-- PAS 2 — Pla -->
+  <div class="wiz-step" data-step="2" hidden>
+    <h2>Tria el teu pla</h2>
+    <p class="wiz-sub">Pots començar gratis i canviar de pla quan vulgues.</p>
+
+    <div class="plans-toggle">
+      <button type="button" id="toggle-mensual" class="active" onclick="setModalitat('mensual')">Mensual</button>
+      <button type="button" id="toggle-anual" onclick="setModalitat('anual')">Anual (2 mesos gratis)</button>
+    </div>
+
+    <div class="plans-grid">
+      <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
+        <div class="plan-nom">Gratuït</div>
+        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/60 dies</span></div>
+        <div class="plan-lim">60 dies o 30 propostes IA</div>
+        <ul class="plan-features">
+          <li>Notificacions automàtiques</li>
+          <li>Normes i context IA personalitzat</li>
+          <li>Historial i informes (ATRI)</li>
+          <li>Suport per email</li>
+        </ul>
+      </div>
+      <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
+        <div class="plan-nom">Estàndard</div>
+        <div><span class="plan-preu" id="preu-basic">€59</span><span class="plan-preu-mes">/mes</span></div>
+        <div class="plan-lim">Fins a 25 docents</div>
+        <div class="plan-anual-info" id="anual-basic" style="display:none;">€590/any</div>
+        <ul class="plan-features">
+          <li>Proposta de cobertures amb IA</li>
+          <li>Notificacions automàtiques</li>
+          <li>Normes i context IA personalitzat</li>
+          <li>Historial i informes d'absències (ATRI)</li>
+          <li>Suport per email</li>
+          <li>Implantació gratuïta</li>
+        </ul>
+      </div>
+      <div class="plan-card plan-pro" id="plan-pro" onclick="selectPlan('pro')">
+        <div class="plan-badge">El més popular</div>
+        <div class="plan-nom">Pro</div>
+        <div><span class="plan-preu" id="preu-pro">€79</span><span class="plan-preu-mes">/mes</span></div>
+        <div class="plan-lim">25–60 docents</div>
+        <div class="plan-anual-info" id="anual-pro" style="display:none;">€790/any</div>
+        <ul class="plan-features">
+          <li>Proposta de cobertures amb IA</li>
+          <li>Notificacions automàtiques</li>
+          <li>Normes i context IA personalitzat</li>
+          <li>Historial i informes d'absències (ATRI)</li>
+          <li>Suport per email</li>
+          <li>Gestió torns del pati</li>
+          <li>Gestió sortides amb acompanyants</li>
+          <li>Gestió horaris jornada intensiva</li>
+          <li>Chat HorarIA per WhatsApp</li>
+          <li>Implantació gratuïta</li>
+        </ul>
+      </div>
+      <div class="plan-card" id="plan-centre" onclick="selectPlan('centre')">
+        <div class="plan-nom">Centre+</div>
+        <div><span class="plan-preu" id="preu-centre">€119</span><span class="plan-preu-mes">/mes</span></div>
+        <div class="plan-lim">+60 docents o institut</div>
+        <div class="plan-anual-info" id="anual-centre" style="display:none;">€1.190/any</div>
+        <ul class="plan-features">
+          <li>Proposta de cobertures amb IA</li>
+          <li>Notificacions automàtiques</li>
+          <li>Normes i context IA personalitzat</li>
+          <li>Historial i informes d'absències (ATRI)</li>
+          <li>Suport per email</li>
+          <li>Gestió torns del pati</li>
+          <li>Gestió sortides amb acompanyants</li>
+          <li>Gestió horaris jornada intensiva</li>
+          <li>Chat HorarIA per WhatsApp</li>
+          <li>Implantació gratuïta</li>
+        </ul>
+      </div>
+    </div>
+    <p id="plan-error">Si us plau, selecciona un pla.</p>
+    <input type="hidden" id="preu_mensual" />
+    <input type="hidden" id="modalitat_hidden" value="mensual" />
+    <div class="wiz-nav">
+      <button class="btn btn-ghost" onclick="showStep(1)">← Enrere</button>
+      <button class="btn btn-primary" onclick="tryGoStep(3)">Continuar →</button>
+    </div>
   </div>
 
-  <div id="contract-preview">
+  <!-- PAS 3 — Contracte -->
+  <div class="wiz-step" data-step="3" hidden>
+    <h2>Revisa el contracte</h2>
+    <p class="wiz-sub">Amb les dades introduïdes hem generat el contracte de servei. Pots imprimir-lo o desar-lo en PDF abans de continuar.</p>
 
-    <div class="cp-portada">
-      <div class="cp-logo">HorariaPro</div>
-      <div class="cp-titol">
-        <h1>Contracte de Prestació de Serveis<br>i Encàrrec de Tractament de Dades</h1>
-        <div class="sub">Versió 1.0 · <span id="cp-data"></span> · D'acord amb el RGPD (UE) 2016/679</div>
+    <div id="contract-preview">
+      <div class="cp-portada">
+        <div class="cp-logo">HorariaPro</div>
+        <div class="cp-titol">
+          <h1>Contracte de Prestació de Serveis<br>i Encàrrec de Tractament de Dades</h1>
+          <div class="sub">Versió 1.0 · <span id="cp-data"></span> · D'acord amb el RGPD (UE) 2016/679</div>
+        </div>
+        <div class="cp-parts">
+          <div class="cp-part">
+            <div class="rol">Proveïdor · Encarregat del Tractament</div>
+            <div class="nom">Jorge Villalba</div>
+            <div class="det">HorariaPro<br>horaria.admin@gmail.com<br>horariapro.com</div>
+          </div>
+          <div class="cp-part">
+            <div class="rol">Client · Responsable del Tractament</div>
+            <div class="nom" id="cp-centre-nom">—</div>
+            <div class="det" id="cp-centre-det">—</div>
+          </div>
+        </div>
       </div>
-      <div class="cp-parts">
-        <div class="cp-part">
+
+      <div class="cp-body">
+        <h2>Exposició prèvia</h2>
+        <p><strong>PRIMER.</strong> Jorge Villalba, d'ara endavant <strong>"el Proveïdor"</strong>, és el titular i desenvolupador de HorariaPro, una plataforma SaaS per a la gestió automatitzada d'absències i cobertures del personal docent en centres educatius.</p>
+        <p><strong>SEGON.</strong> <strong id="cp-centre-nom2">—</strong>, d'ara endavant <strong>"el Client"</strong>, és un centre educatiu que subscriu el servei HorariaPro per gestionar les absències del seu personal i l'assignació de cobertures.</p>
+        <p><strong>TERCER.</strong> En la prestació del servei, el Proveïdor tractarà dades del personal docent del Client com a encarregat del tractament (art. 28 RGPD). El present contracte regula tant les condicions comercials com les obligacions en matèria de protecció de dades.</p>
+
+        <h2>Part I — Condicions del Servei</h2>
+        <p><strong>Cl. 1. Objecte.</strong> El Proveïdor presta al Client accés a la plataforma HorariaPro / GDOCENT: registre d'absències, cobertures per IA, quadre en temps real, gestió del Treball Personal (TP), extracció d'horaris, historial i informes.</p>
+        <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. El primer mes és de prova sense cost.</p>
+        <p><strong>Cl. 3. Preu i forma de pagament.</strong></p>
+        <div class="hl"><p id="cp-preu">Quota mensual: — €/mes · Modalitat: —</p></div>
+        <p>Pagament per transferència o domiciliació els primers 10 dies de cada període. En cas d'impagament superior a 30 dies, el Proveïdor pot suspendre l'accés fins a regularització.</p>
+        <p><strong>Cl. 4. Obligacions del Proveïdor.</strong> Disponibilitat objectiu del 99% mensual; suport tècnic per email (48h hàbils); configuració inicial del centre; aïllament complet de dades; notificació d'incidents en 72h.</p>
+        <p><strong>Cl. 5. Obligacions del Client.</strong> Facilitar dades de configuració inicial (docents, horaris, grups); designar persona de contacte; custodiar els PINs d'accés; abonar les quotes en termini.</p>
+        <p><strong>Cl. 6. Propietat intel·lectual.</strong> El Proveïdor conserva tots els drets sobre HorariaPro. El contracte atorga al Client una llicència d'ús no exclusiva i intransferible durant la vigència.</p>
+        <p><strong>Cl. 7. Limitació de responsabilitat.</strong> La responsabilitat màxima del Proveïdor queda limitada a tres (3) mesos de quota. Les propostes de la IA tenen caràcter orientatiu i no vinculant.</p>
+        <p><strong>Cl. 8. Resolució.</strong> Per incompliment greu (preavís 15 dies hàbils per esmenar) o per mutu acord. Resolució unilateral del Client: 30 dies de preavís. A la resolució, les dades queden disponibles 30 dies en format exportable i posteriorment s'eliminen.</p>
+
+        <h2>Part II — Encàrrec de Tractament (Art. 28 RGPD)</h2>
+        <p><strong>Cl. 9. Parts.</strong> El Client actua com a <strong>Responsable del Tractament</strong>. El Proveïdor actua com a <strong>Encarregat del Tractament</strong>.</p>
+        <p><strong>Cl. 10. Descripció del tractament encarregat.</strong></p>
+        <table>
+          <tr><th>Element</th><th>Descripció</th></tr>
+          <tr><td>Finalitat</td><td>Gestió d'absències, cobertures i Treball Personal del personal docent</td></tr>
+          <tr><td>Tipus de dades</td><td>Nom, correu electrònic, horari lectiu, absències, cobertures, deutes TP</td></tr>
+          <tr><td>Interessats</td><td>Personal docent i de suport educatiu del centre</td></tr>
+          <tr><td>Durada</td><td>Durant la vigència del contracte + 30 dies per exportar</td></tr>
+        </table>
+        <p><strong>Cl. 11. Obligacions de l'Encarregat.</strong> Tractar dades únicament per instruccions documentades del Responsable; garantir confidencialitat; implementar mesures de seguretat (art. 32 RGPD); gestionar subencàrregats; assistir en drets dels interessats; notificar violacions en 72h; suprimir o retornar dades en finalitzar.</p>
+        <p><strong>Cl. 12. Subencàrregats autoritzats.</strong></p>
+        <table>
+          <tr><th>Subencàrregat</th><th>Servei</th><th>Ubicació</th></tr>
+          <tr><td>Supabase Inc.</td><td>Base de dades</td><td>UE (EU-West)</td></tr>
+          <tr><td>Anthropic PBC</td><td>IA de cobertures</td><td>EUA (clàusules contractuals UE)</td></tr>
+          <tr><td>Cloudflare Inc.</td><td>Proxy IA</td><td>EUA/UE (clàusules contractuals UE)</td></tr>
+          <tr><td>Google LLC</td><td>Notificacions email</td><td>EUA (clàusules contractuals UE)</td></tr>
+        </table>
+        <p><strong>Cl. 13. Mesures de seguretat.</strong> HTTPS/TLS en trànsit; xifrat en repòs; autenticació per PIN; aïllament per centre; còpies de seguretat automàtiques; control d'accés per rol; emmagatzemament a la UE.</p>
+        <p><strong>Cl. 14–16.</strong> Drets dels interessats: el Responsable és l'interlocutor principal. Eliminació de dades: 30 dies per exportar + 30 dies per eliminar + certificat d'eliminació opcional. Violacions: notificació en 72h amb detall de la incidència.</p>
+
+        <h2>Part III — Disposicions Finals</h2>
+        <p><strong>Cl. 17.</strong> Llei espanyola aplicable. Jurisdicció dels tribunals competents. <strong>Cl. 18.</strong> Modificacions per escrit i signades per ambdues parts. <strong>Cl. 19.</strong> Comunicacions per correu electrònic a les adreces indicades. <strong>Cl. 20.</strong> Document complet que substitueix acords anteriors. En cas de contradicció, prevaldrà la Part II en matèria de protecció de dades.</p>
+      </div>
+
+      <div class="cp-sigs">
+        <div class="cp-sig">
           <div class="rol">Proveïdor · Encarregat del Tractament</div>
           <div class="nom">Jorge Villalba</div>
-          <div class="det">HorariaPro<br>horaria.admin@gmail.com<br>horariapro.com</div>
+          <div class="det">HorariaPro · horaria.admin@gmail.com</div>
+          <div class="linia">Signatura i segell<br><br>Lloc: _________________ Data: _________________</div>
         </div>
-        <div class="cp-part">
+        <div class="cp-sig">
           <div class="rol">Client · Responsable del Tractament</div>
-          <div class="nom" id="cp-centre-nom">—</div>
-          <div class="det" id="cp-centre-det">—</div>
+          <div class="nom" id="cp-sig-nom">—</div>
+          <div class="det" id="cp-sig-det">—</div>
+          <div class="linia">Signatura i segell del centre<br><br>Lloc: _________________ Data: _________________</div>
         </div>
       </div>
+
+      <div class="cp-peu">HorariaPro · horaria.admin@gmail.com · horariapro.com · Contracte v1.0</div>
     </div>
 
-    <div class="cp-body">
-
-      <h2>Exposició prèvia</h2>
-      <p><strong>PRIMER.</strong> Jorge Villalba, d'ara endavant <strong>"el Proveïdor"</strong>, és el titular i desenvolupador de HorariaPro, una plataforma SaaS per a la gestió automatitzada d'absències i cobertures del personal docent en centres educatius.</p>
-      <p><strong>SEGON.</strong> <strong id="cp-centre-nom2">—</strong>, d'ara endavant <strong>"el Client"</strong>, és un centre educatiu que subscriu el servei HorariaPro per gestionar les absències del seu personal i l'assignació de cobertures.</p>
-      <p><strong>TERCER.</strong> En la prestació del servei, el Proveïdor tractarà dades del personal docent del Client com a encarregat del tractament (art. 28 RGPD). El present contracte regula tant les condicions comercials com les obligacions en matèria de protecció de dades.</p>
-
-      <h2>Part I — Condicions del Servei</h2>
-
-      <p><strong>Cl. 1. Objecte.</strong> El Proveïdor presta al Client accés a la plataforma HorariaPro / GDOCENT: registre d'absències, cobertures per IA, quadre en temps real, gestió del Treball Personal (TP), extracció d'horaris, historial i informes.</p>
-
-      <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. El primer mes és de prova sense cost.</p>
-
-      <p><strong>Cl. 3. Preu i forma de pagament.</strong></p>
-      <div class="hl">
-        <p id="cp-preu">Quota mensual: — €/mes · Modalitat: —</p>
-      </div>
-      <p>Pagament per transferència o domiciliació els primers 10 dies de cada període. En cas d'impagament superior a 30 dies, el Proveïdor pot suspendre l'accés fins a regularització.</p>
-
-      <p><strong>Cl. 4. Obligacions del Proveïdor.</strong> Disponibilitat objectiu del 99% mensual; suport tècnic per email (48h hàbils); configuració inicial del centre; aïllament complet de dades; notificació d'incidents en 72h.</p>
-
-      <p><strong>Cl. 5. Obligacions del Client.</strong> Facilitar dades de configuració inicial (docents, horaris, grups); designar persona de contacte; custodiar els PINs d'accés; abonar les quotes en termini.</p>
-
-      <p><strong>Cl. 6. Propietat intel·lectual.</strong> El Proveïdor conserva tots els drets sobre HorariaPro. El contracte atorga al Client una llicència d'ús no exclusiva i intransferible durant la vigència.</p>
-
-      <p><strong>Cl. 7. Limitació de responsabilitat.</strong> La responsabilitat màxima del Proveïdor queda limitada a tres (3) mesos de quota. Les propostes de la IA tenen caràcter orientatiu i no vinculant.</p>
-
-      <p><strong>Cl. 8. Resolució.</strong> Per incompliment greu (preavís 15 dies hàbils per esmenar) o per mutu acord. Resolució unilateral del Client: 30 dies de preavís. A la resolució, les dades queden disponibles 30 dies en format exportable i posteriorment s'eliminen.</p>
-
-      <h2>Part II — Encàrrec de Tractament (Art. 28 RGPD)</h2>
-
-      <p><strong>Cl. 9. Parts.</strong> El Client actua com a <strong>Responsable del Tractament</strong>. El Proveïdor actua com a <strong>Encarregat del Tractament</strong>.</p>
-
-      <p><strong>Cl. 10. Descripció del tractament encarregat.</strong></p>
-      <table>
-        <tr><th>Element</th><th>Descripció</th></tr>
-        <tr><td>Finalitat</td><td>Gestió d'absències, cobertures i Treball Personal del personal docent</td></tr>
-        <tr><td>Tipus de dades</td><td>Nom, correu electrònic, horari lectiu, absències, cobertures, deutes TP</td></tr>
-        <tr><td>Interessats</td><td>Personal docent i de suport educatiu del centre</td></tr>
-        <tr><td>Durada</td><td>Durant la vigència del contracte + 30 dies per exportar</td></tr>
-      </table>
-
-      <p><strong>Cl. 11. Obligacions de l'Encarregat.</strong> Tractar dades únicament per instruccions documentades del Responsable; garantir confidencialitat; implementar mesures de seguretat (art. 32 RGPD); gestionar subencàrregats; assistir en drets dels interessats; notificar violacions en 72h; suprimir o retornar dades en finalitzar.</p>
-
-      <p><strong>Cl. 12. Subencàrregats autoritzats.</strong></p>
-      <table>
-        <tr><th>Subencàrregat</th><th>Servei</th><th>Ubicació</th></tr>
-        <tr><td>Supabase Inc.</td><td>Base de dades</td><td>UE (EU-West)</td></tr>
-        <tr><td>Anthropic PBC</td><td>IA de cobertures</td><td>EUA (clàusules contractuals UE)</td></tr>
-        <tr><td>Cloudflare Inc.</td><td>Proxy IA</td><td>EUA/UE (clàusules contractuals UE)</td></tr>
-        <tr><td>Google LLC</td><td>Notificacions email</td><td>EUA (clàusules contractuals UE)</td></tr>
-      </table>
-
-      <p><strong>Cl. 13. Mesures de seguretat.</strong> HTTPS/TLS en trànsit; xifrat en repòs; autenticació per PIN; aïllament per centre; còpies de seguretat automàtiques; control d'accés per rol; emmagatzemament a la UE.</p>
-
-      <p><strong>Cl. 14–16.</strong> Drets dels interessats: el Responsable és l'interlocutor principal. Eliminació de dades: 30 dies per exportar + 30 dies per eliminar + certificat d'eliminació opcional. Violacions: notificació en 72h amb detall de la incidència.</p>
-
-      <h2>Part III — Disposicions Finals</h2>
-      <p><strong>Cl. 17.</strong> Llei espanyola aplicable. Jurisdicció dels tribunals competents. <strong>Cl. 18.</strong> Modificacions per escrit i signades per ambdues parts. <strong>Cl. 19.</strong> Comunicacions per correu electrònic a les adreces indicades. <strong>Cl. 20.</strong> Document complet que substitueix acords anteriors. En cas de contradicció, prevaldrà la Part II en matèria de protecció de dades.</p>
-
+    <div class="wiz-nav" style="margin-top:14px;">
+      <button class="btn btn-print" onclick="window.print()">🖨️ Generar / desar en PDF</button>
     </div>
-
-    <div class="cp-sigs">
-      <div class="cp-sig">
-        <div class="rol">Proveïdor · Encarregat del Tractament</div>
-        <div class="nom">Jorge Villalba</div>
-        <div class="det">HorariaPro · horaria.admin@gmail.com</div>
-        <div class="linia">Signatura i segell<br><br>Lloc: _________________ Data: _________________</div>
-      </div>
-      <div class="cp-sig">
-        <div class="rol">Client · Responsable del Tractament</div>
-        <div class="nom" id="cp-sig-nom">—</div>
-        <div class="det" id="cp-sig-det">—</div>
-        <div class="linia">Signatura i segell del centre<br><br>Lloc: _________________ Data: _________________</div>
-      </div>
+    <p id="wiz-submit-err"></p>
+    <div class="wiz-nav">
+      <button class="btn btn-ghost" onclick="showStep(2)">← Enrere</button>
+      <button class="btn btn-primary" id="btn-submit" onclick="confirmarICrear()">Confirmar i crear el compte →</button>
     </div>
+  </div>
 
-    <div class="cp-peu">
-      HorariaPro · horaria.admin@gmail.com · horariapro.com · Contracte v1.0
+  <!-- PAS 4 — Fet -->
+  <div class="wiz-step" data-step="4" hidden>
+    <div class="wiz-done">
+      <div class="ico">✅</div>
+      <h2>Ja ho tens tot a punt!</h2>
+      <p id="wiz-done-msg">El teu compte ja s'ha creat. També t'hem enviat un correu amb un enllaç per tornar a entrar sempre que vulgues.</p>
+      <a id="btn-configurar" href="https://app.horariapro.com" class="btn btn-primary" style="text-decoration:none; display:inline-block;">Creant el teu compte…</a>
     </div>
+  </div>
 
-  </div><!-- /contract-preview -->
-</div><!-- /success -->
-
-</div><!-- /main -->
+</div>
 
 <script>
 const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-incorporacio';
@@ -481,6 +469,51 @@ const PLANS = {
 
 let planSeleccionat = null;
 let modalitatActual = 'mensual';
+const TOTAL_STEPS = 4;
+
+function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+function chk(id) { return document.getElementById(id)?.checked || false; }
+function set(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+function txt(id, t) { const el = document.getElementById(id); if (el) el.textContent = t; }
+
+function updateDots(step) {
+  document.querySelectorAll('.wiz-dot').forEach((d, i) => {
+    d.classList.toggle('on', i <= step);
+    d.classList.toggle('cur', i === step);
+  });
+  document.getElementById('wiz-steplabel').textContent = `Pas ${step + 1} de ${TOTAL_STEPS}`;
+}
+
+function showStep(n) {
+  document.querySelectorAll('.wiz-step').forEach(el => { el.hidden = +el.dataset.step !== n; });
+  document.getElementById('wiz-progress').style.display = n < TOTAL_STEPS ? 'flex' : 'none';
+  if (n < TOTAL_STEPS) updateDots(n);
+  if (n === 3) fillContract();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function tryGoStep(n) {
+  if (n === 1) {
+    const camps = ['centre_nom', 'centre_cif', 'centre_email', 'representant_nom', 'representant_carrec', 'nom_jefa', 'email_jefa'];
+    let ok = true;
+    camps.forEach(id => {
+      const el = document.getElementById(id);
+      const buit = !el.value.trim();
+      el.classList.toggle('field-err', buit);
+      if (buit) ok = false;
+    });
+    document.getElementById('wiz-err0').style.display = ok ? 'none' : 'block';
+    if (!ok) return;
+  }
+  if (n === 3) {
+    if (!planSeleccionat) {
+      document.getElementById('plan-error').style.display = 'block';
+      document.getElementById('plan-basic').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+  showStep(n);
+}
 
 function setModalitat(m) {
   modalitatActual = m;
@@ -493,10 +526,10 @@ function setModalitat(m) {
     const anualEl = document.getElementById('anual-' + k);
     if (m === 'anual') {
       preuEl.textContent = '€' + (p.preu * 10 / 12).toFixed(0);
-      anualEl.style.display = 'inline-block';
+      if (anualEl) anualEl.style.display = 'inline-block';
     } else {
       preuEl.textContent = '€' + p.preu;
-      anualEl.style.display = 'none';
+      if (anualEl) anualEl.style.display = 'none';
     }
   });
   if (planSeleccionat) updatePreuHidden();
@@ -518,40 +551,7 @@ function updatePreuHidden() {
   document.getElementById('preu_mensual').value = preu;
 }
 
-function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
-function chk(id) { return document.getElementById(id)?.checked || false; }
-function set(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
-function txt(id, t) { const el = document.getElementById(id); if (el) el.textContent = t; }
-
-document.getElementById('form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const centreNom = v('centre_nom');
-  const centreCif = v('centre_cif');
-  const centreEmail = v('centre_email');
-  const repNom = v('representant_nom');
-  const repCarrec = v('representant_carrec');
-  const nomJefa = v('nom_jefa');
-  const emailJefa = v('email_jefa');
-
-  if (!centreNom || !centreCif || !centreEmail || !repNom || !repCarrec || !nomJefa || !emailJefa) {
-    alert('Si us plau, omple tots els camps obligatoris (*), incloent el nom i correu de la cap d\'estudis.');
-    return;
-  }
-
-  if (!planSeleccionat) {
-    document.getElementById('plan-error').style.display = 'block';
-    document.getElementById('plan-basic').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
-  const btn = document.getElementById('btn-submit');
-  btn.disabled = true;
-  btn.textContent = 'Desant...';
-
-  const modalitat = modalitatActual;
-  const preuMensual = parseFloat(v('preu_mensual')) || null;
-
+function collectPayload() {
   const serveis = [];
   if (chk('te_siei')) serveis.push('SIEI/SIEI+');
   if (chk('te_educadores')) serveis.push('Educadores/Vetlladores');
@@ -560,16 +560,16 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   if (chk('horari_tarda')) serveis.push('Horari tarda');
   if (chk('horari_intensiu')) serveis.push('Horari intensiu');
 
-  const payload = {
-    centre_nom: centreNom,
-    centre_cif: centreCif,
+  return {
+    centre_nom: v('centre_nom'),
+    centre_cif: v('centre_cif'),
     centre_adreca: v('centre_adreca'),
-    centre_email: centreEmail,
-    representant_nom: repNom,
-    representant_carrec: repCarrec,
-    preu_mensual: preuMensual,
-    modalitat,
-    pla: PLANS[planSeleccionat].nom,
+    centre_email: v('centre_email'),
+    representant_nom: v('representant_nom'),
+    representant_carrec: v('representant_carrec'),
+    preu_mensual: parseFloat(v('preu_mensual')) || null,
+    modalitat: modalitatActual,
+    pla: planSeleccionat ? PLANS[planSeleccionat].nom : '',
     num_docents: parseInt(v('num_docents')) || null,
     etapes: v('etapes'),
     te_siei: chk('te_siei'),
@@ -577,80 +577,26 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     horari_tarda: chk('horari_tarda'),
     nom_jefa: v('nom_jefa'),
     email_jefa: v('email_jefa'),
-    notes: [
-      v('notes'),
-      serveis.length ? 'Serveis: ' + serveis.join(', ') : ''
-    ].filter(Boolean).join('\n'),
+    notes: [v('notes'), serveis.length ? 'Serveis: ' + serveis.join(', ') : ''].filter(Boolean).join('\n'),
   };
+}
 
-  let incorporacioId = null;
-  try {
-    const res = await fetch(CREAR_INCORPORACIO_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (res.ok) incorporacioId = data.id;
-  } catch (_) {}
-
-  // Crea l'escola i el primer accés (la cap d'estudis) ara mateix — la resta
-  // de la configuració (franges, context, normes) la fa el propi wizard dins
-  // de l'app la primera vegada que hi entre.
-  const btnConfigurar = document.getElementById('btn-configurar');
-  try {
-    const escolaRes = await fetch(CREAR_ESCOLA_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nom: centreNom,
-        tipus: v('etapes') === 'Educació Especial' ? 'cee' : 'ordinaria',
-        director_nom: nomJefa,
-        director_email: emailJefa,
-        pla: PLANS[planSeleccionat].nom,
-        modalitat,
-        incorporacio_id: incorporacioId,
-      }),
-    });
-    const escolaData = await escolaRes.json();
-    if (escolaRes.ok && escolaData.magic_token) {
-      const magicUrl = 'https://app.horariapro.com?magic=' + encodeURIComponent(escolaData.magic_token);
-      btnConfigurar.textContent = '✓ Compte creat — anem-hi →';
-      btnConfigurar.href = magicUrl;
-      txt('success-msg', 'Les dades del centre s\'han desat. Quan vulgues, imprimeix o desa el contracte en PDF i després clica "Anem-hi" per configurar HorariaPro.');
-    } else if (escolaRes.ok) {
-      btnConfigurar.textContent = '✓ Compte creat — entra amb Google →';
-      btnConfigurar.href = 'https://app.horariapro.com';
-    } else {
-      btnConfigurar.textContent = '⚠️ ' + (escolaData.error || 'Error creant el compte — contacta amb nosaltres');
-      btnConfigurar.href = '#contacte';
-    }
-  } catch (err) {
-    btnConfigurar.textContent = '⚠️ Error de connexió — contacta amb nosaltres';
-    btnConfigurar.href = '#contacte';
-  }
-
-  fillContract(payload, modalitat, preuMensual, serveis);
-
-  document.getElementById('form').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  document.getElementById('success').scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-function fillContract(d, modalitat, preu, serveis) {
+function fillContract() {
+  if (!planSeleccionat) return;
+  const d = collectPayload();
   const avui = new Date().toLocaleDateString('ca', { day: 'numeric', month: 'long', year: 'numeric' });
   const plaDades = PLANS[planSeleccionat];
   let pretext;
-  if (modalitat === 'anual') {
+  if (modalitatActual === 'anual') {
     const anual = plaDades.preu * 10;
-    pretext = `Pla ${d.pla} · Quota anual: ${anual} €/any (equivalent a ${(anual/12).toFixed(2)} €/mes, 2 mesos de franc) · Modalitat: Anual`;
+    pretext = `Pla ${d.pla} · Quota anual: ${anual} €/any (equivalent a ${(anual / 12).toFixed(2)} €/mes, 2 mesos de franc) · Modalitat: Anual`;
   } else {
     pretext = `Pla ${d.pla} · Quota mensual: ${plaDades.preu} €/mes · ${plaDades.lim} · Modalitat: Mensual`;
   }
 
   set('cp-data', avui);
-  txt('cp-centre-nom', d.centre_nom);
-  txt('cp-centre-nom2', d.centre_nom);
+  txt('cp-centre-nom', d.centre_nom || '—');
+  txt('cp-centre-nom2', d.centre_nom || '—');
 
   const det = [
     d.centre_cif ? 'CIF: ' + d.centre_cif : '',
@@ -663,27 +609,70 @@ function fillContract(d, modalitat, preu, serveis) {
   set('cp-preu', pretext);
   txt('cp-sig-nom', d.representant_nom || '—');
 
-  const sigDet = [
-    d.centre_nom,
-    d.representant_carrec,
-    d.centre_cif ? 'CIF: ' + d.centre_cif : '',
-  ].filter(Boolean).join('<br>');
+  const sigDet = [d.centre_nom, d.representant_carrec, d.centre_cif ? 'CIF: ' + d.centre_cif : ''].filter(Boolean).join('<br>');
   set('cp-sig-det', sigDet);
+}
 
-  const infoAddicional = [
-    d.nom_jefa ? `Cap d'estudis: ${d.nom_jefa}${d.email_jefa ? ' · ' + d.email_jefa : ''}` : '',
-    d.num_docents ? `Docents aprox.: ${d.num_docents}` : '',
-    d.etapes ? `Etapes: ${d.etapes}` : '',
-    serveis.length ? `Serveis especials: ${serveis.join(', ')}` : '',
-  ].filter(Boolean);
+async function confirmarICrear() {
+  const btn = document.getElementById('btn-submit');
+  const errEl = document.getElementById('wiz-submit-err');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Creant el compte…';
 
-  if (infoAddicional.length) {
-    const nota = document.createElement('p');
-    nota.style.cssText = 'margin-top:16px; font-size:11px; color:#999; font-family:Inter,sans-serif; border-top:1px solid #f0f0f0; padding-top:12px;';
-    nota.innerHTML = '<strong>Configuració inicial acordada:</strong> ' + infoAddicional.join(' · ');
-    document.querySelector('.cp-peu').before(nota);
+  const payload = collectPayload();
+
+  let incorporacioId = null;
+  try {
+    const res = await fetch(CREAR_INCORPORACIO_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (res.ok) incorporacioId = data.id;
+  } catch (_) {}
+
+  try {
+    const escolaRes = await fetch(CREAR_ESCOLA_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom: payload.centre_nom,
+        tipus: payload.etapes === 'educació especial' ? 'cee' : 'ordinaria',
+        director_nom: payload.nom_jefa,
+        director_email: payload.email_jefa,
+        pla: payload.pla,
+        modalitat: payload.modalitat,
+        incorporacio_id: incorporacioId,
+      }),
+    });
+    const escolaData = await escolaRes.json();
+    const btnConfigurar = document.getElementById('btn-configurar');
+    if (escolaRes.ok && escolaData.magic_token) {
+      const magicUrl = 'https://app.horariapro.com?magic=' + encodeURIComponent(escolaData.magic_token);
+      btnConfigurar.textContent = 'Anem-hi →';
+      btnConfigurar.href = magicUrl;
+      showStep(4);
+    } else if (escolaRes.ok) {
+      btnConfigurar.textContent = 'Entra amb Google →';
+      btnConfigurar.href = 'https://app.horariapro.com';
+      showStep(4);
+    } else {
+      errEl.textContent = '⚠️ ' + (escolaData.error || 'Error creant el compte — contacta amb horaria.admin@gmail.com');
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Confirmar i crear el compte →';
+    }
+  } catch (err) {
+    errEl.textContent = '⚠️ Error de connexió — contacta amb horaria.admin@gmail.com';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Confirmar i crear el compte →';
   }
 }
+
+updateDots(0);
 </script>
 </body>
 </html>
