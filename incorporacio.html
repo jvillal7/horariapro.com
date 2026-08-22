@@ -211,12 +211,13 @@
         <input type="email" id="centre_email" placeholder="direccio@ceip..." required />
       </div>
       <div class="field">
-        <label>Correu electrònic de la cap d'estudis</label>
-        <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
+        <label>Correu electrònic de la cap d'estudis <span class="req">*</span></label>
+        <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." required />
+        <div class="hint">Amb este correu s'accedeix a l'app (Google Sign-In).</div>
       </div>
       <div class="field">
-        <label>Nom de la cap d'estudis</label>
-        <input type="text" id="nom_jefa" placeholder="Nom i cognoms" />
+        <label>Nom de la cap d'estudis <span class="req">*</span></label>
+        <input type="text" id="nom_jefa" placeholder="Nom i cognoms" required />
       </div>
     </div>
   </div>
@@ -332,8 +333,8 @@
     <button class="btn-print" onclick="window.print()" style="margin-bottom:0;">
       🖨️ Imprimir contracte / Desar com a PDF
     </button>
-    <a id="btn-configurar" href="onboarding-escola.html" class="btn-print" style="margin-bottom:0; background:var(--blue); text-decoration:none;">
-      ⚙️ Integra HorariaPro a la teva escola →
+    <a id="btn-configurar" href="https://app.horariapro.com" class="btn-print" style="margin-bottom:0; background:var(--blue); text-decoration:none;">
+      Creant el teu compte…
     </a>
   </div>
 
@@ -447,6 +448,7 @@
 
 <script>
 const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-incorporacio';
+const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
 const PLANS = {
   basic:  { nom: 'Estàndard', preu: 59,  lim: 'Fins a 25 docents' },
@@ -506,9 +508,11 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   const centreEmail = v('centre_email');
   const repNom = v('representant_nom');
   const repCarrec = v('representant_carrec');
+  const nomJefa = v('nom_jefa');
+  const emailJefa = v('email_jefa');
 
-  if (!centreNom || !centreCif || !centreEmail || !repNom || !repCarrec) {
-    alert('Si us plau, omple tots els camps obligatoris (*).');
+  if (!centreNom || !centreCif || !centreEmail || !repNom || !repCarrec || !nomJefa || !emailJefa) {
+    alert('Si us plau, omple tots els camps obligatoris (*), incloent el nom i correu de la cap d\'estudis.');
     return;
   }
 
@@ -567,15 +571,36 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     if (res.ok) incorporacioId = data.id;
   } catch (_) {}
 
-  const prefill = new URLSearchParams({
-    nom: centreNom, etapes: v('etapes'), num_docents: v('num_docents'),
-    te_siei: chk('te_siei') ? '1' : '', te_educadores: chk('te_educadores') ? '1' : '',
-    horari_tarda: chk('horari_tarda') ? '1' : '', horari_intensiu: chk('horari_intensiu') ? '1' : '',
-    nom_jefa: v('nom_jefa'), email_jefa: v('email_jefa'),
-  });
-  if (incorporacioId) prefill.set('incorporacio', incorporacioId);
+  // Crea l'escola i el primer accés (la cap d'estudis) ara mateix — la resta
+  // de la configuració (franges, context, normes) la fa el propi wizard dins
+  // de l'app la primera vegada que hi entre.
   const btnConfigurar = document.getElementById('btn-configurar');
-  btnConfigurar.href = `onboarding-escola.html?${prefill.toString()}`;
+  try {
+    const escolaRes = await fetch(CREAR_ESCOLA_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom: centreNom,
+        tipus: v('etapes') === 'Educació Especial' ? 'cee' : 'ordinaria',
+        director_nom: nomJefa,
+        director_email: emailJefa,
+        pla: PLANS[planSeleccionat].nom,
+        modalitat,
+        incorporacio_id: incorporacioId,
+      }),
+    });
+    const escolaData = await escolaRes.json();
+    if (escolaRes.ok) {
+      btnConfigurar.textContent = '✓ Compte creat — entra amb Google →';
+      btnConfigurar.href = 'https://app.horariapro.com';
+    } else {
+      btnConfigurar.textContent = '⚠️ ' + (escolaData.error || 'Error creant el compte — contacta amb nosaltres');
+      btnConfigurar.href = '#contacte';
+    }
+  } catch (err) {
+    btnConfigurar.textContent = '⚠️ Error de connexió — contacta amb nosaltres';
+    btnConfigurar.href = '#contacte';
+  }
 
   fillContract(payload, modalitat, preuMensual, serveis);
 
