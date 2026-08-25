@@ -341,6 +341,7 @@
     .feature-media-item.tp-docent { aspect-ratio: 970/2048; }
     .feature-media-item.pati-docent { aspect-ratio: 969/2048; }
     .feature-media-item.jornada-intensiva { aspect-ratio: 970/2048; }
+    .feature-media-item.baixes-shot { aspect-ratio: 919/2048; }
     .feature-media-item.pati-cap video { transform: scale(1.052) translateY(-2.47%); }
     /* "Manualment" manté la seua pròpia proporció (sense retallar contingut) i queda centrat verticalment respecte als altres */
     .feature-media-item.manual { aspect-ratio: 1006/1620; align-self: center; }
@@ -1224,10 +1225,15 @@
           <p>Registra qui està de baixa —d'un dia o de mesos— amb data d'inici i data de fi prevista. Assigna un substitut o substituta i la IA li genera l'horari i les cobertures com si fos el titular o la titular, des del primer dia.</p>
           <p>El substitut o substituta accedeix a l'aplicació amb el seu propi correu XTEC des del moment en què es dona d'alta la baixa, sense cap gestió manual addicional. Quan el titular es reincorpora, tanques la baixa i tot queda registrat automàticament a l'apartat d'Historial.</p>
         </div>
-        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/baixes.mp4','video')">
-          <video autoplay muted loop playsinline aria-label="Gestió de baixes, curtes i llargues">
-            <source src="videos/baixes.mp4" type="video/mp4" />
-          </video>
+        <div class="feature-media-pair" style="grid-template-columns:1fr 1fr;">
+          <div class="feature-media-item baixes-shot has-lightbox" onclick="openMediaLightbox('images/baixes-panell.jpeg','image')">
+            <img src="images/baixes-panell.jpeg" alt="Panell de registre i gestió de baixes" loading="lazy" />
+            <span class="feature-media-label">Panell de registre i gestió</span>
+          </div>
+          <div class="feature-media-item baixes-shot has-lightbox" onclick="openMediaLightbox('images/baixes-nova.jpeg','image')">
+            <img src="images/baixes-nova.jpeg" alt="Sistema de nova baixa" loading="lazy" />
+            <span class="feature-media-label">Sistema de nova baixa</span>
+          </div>
         </div>
       </div>
 
