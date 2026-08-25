@@ -715,6 +715,22 @@
       .whatsapp-float.raised { bottom: 130px; }
     }
 
+    /* ── INSTAGRAM FLOAT ── */
+    .instagram-float {
+      position: fixed; right: 88px; bottom: 20px; z-index: 997;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      transition: transform .15s ease, bottom .2s ease;
+    }
+    .instagram-float:hover { transform: scale(1.08); }
+    .instagram-float.raised { bottom: 96px; }
+    @media (max-width: 480px) {
+      .instagram-float { right: 76px; bottom: 16px; width: 50px; height: 50px; }
+      .instagram-float.raised { bottom: 130px; }
+    }
+
     /* ── MEDIA LIGHTBOX ── */
     .media-lightbox-overlay {
       display: none; position: fixed; inset: 0; z-index: 999;
@@ -1205,8 +1221,8 @@
         <div class="feature-row-text">
           <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:18px;">10</div>
           <h3>Gestió de baixes, curtes i llargues</h3>
-          <p>Registra qui està de baixa —d'un dia o de mesos— amb data d'inici i fi prevista. Assigna un substitut i la IA fa el seu horari i les seues cobertures com si fos el/la titular, des del primer dia.</p>
-          <p>El substitut accedeix a l'app amb el seu propi PIN des del moment que es dona d'alta la baixa, sense cap gestió manual addicional. Quan el titular es reincorpora, tanques la baixa i generes l'informe en PDF amb el resum de dies i cobertures fetes.</p>
+          <p>Registra qui està de baixa —d'un dia o de mesos— amb data d'inici i data de fi prevista. Assigna un substitut o substituta i la IA li genera l'horari i les cobertures com si fos el titular o la titular, des del primer dia.</p>
+          <p>El substitut o substituta accedeix a l'aplicació amb el seu propi correu XTEC des del moment en què es dona d'alta la baixa, sense cap gestió manual addicional. Quan el titular es reincorpora, tanques la baixa i tot queda registrat automàticament a l'apartat d'Historial.</p>
         </div>
         <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/baixes.mp4','video')">
           <video autoplay muted loop playsinline aria-label="Gestió de baixes, curtes i llargues">
@@ -1595,12 +1611,6 @@
       <button type="submit" class="btn-submit">Enviar sol·licitud →</button>
       <p class="form-note">Les teves dades s'utilitzen únicament per respondre la teva consulta. Mai es comparteixen amb tercers.</p>
     </form>
-    <div style="margin-top:28px; text-align:center;">
-      <a href="https://www.instagram.com/horariapro/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:13px; font-weight:600; text-decoration:none;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-        @horariapro
-      </a>
-    </div>
   </div>
 </section>
 
@@ -1618,6 +1628,11 @@
 <!-- WHATSAPP FLOAT -->
 <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/34651781289?text=Hola!%20Voldria%20m%C3%A9s%20informaci%C3%B3%20sobre%20HorariaPro" target="_blank" rel="noopener" aria-label="Contacta per WhatsApp">
   <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z"/></svg>
+</a>
+
+<!-- INSTAGRAM FLOAT -->
+<a class="instagram-float" id="instagramFloat" href="https://www.instagram.com/horariapro/" target="_blank" rel="noopener" aria-label="Segueix-nos a Instagram">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg>
 </a>
 
 <!-- MEDIA LIGHTBOX -->
@@ -1694,12 +1709,16 @@
     document.getElementById('cookieBanner').classList.remove('show');
     var wa = document.getElementById('whatsappFloat');
     if (wa) wa.classList.remove('raised');
+    var ig = document.getElementById('instagramFloat');
+    if (ig) ig.classList.remove('raised');
   }
   document.addEventListener('DOMContentLoaded', function() {
     if (!localStorage.getItem('hp_cookies_consent')) {
       document.getElementById('cookieBanner').classList.add('show');
       var wa = document.getElementById('whatsappFloat');
       if (wa) wa.classList.add('raised');
+      var ig = document.getElementById('instagramFloat');
+      if (ig) ig.classList.add('raised');
     }
   });
 
