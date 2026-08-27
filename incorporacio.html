@@ -216,7 +216,7 @@
     </div>
     <p id="wiz-err0">Si us plau, omple tots els camps obligatoris (*).</p>
     <div class="wiz-nav">
-      <button class="btn btn-primary" onclick="tryGoStep(1)">Continuar →</button>
+      <button class="btn btn-primary" onclick="tryGoStep(1)" data-track="incorp_step0_continuar">Continuar →</button>
     </div>
   </div>
 
@@ -259,7 +259,7 @@
     </div>
     <div class="wiz-nav">
       <button class="btn btn-ghost" onclick="showStep(0)">← Enrere</button>
-      <button class="btn btn-primary" onclick="showStep(2)">Continuar →</button>
+      <button class="btn btn-primary" onclick="showStep(2)" data-track="incorp_step1_continuar">Continuar →</button>
     </div>
   </div>
 
@@ -348,7 +348,7 @@
     <input type="hidden" id="modalitat_hidden" value="mensual" />
     <div class="wiz-nav">
       <button class="btn btn-ghost" onclick="showStep(1)">← Enrere</button>
-      <button class="btn btn-primary" onclick="tryGoStep(3)">Continuar →</button>
+      <button class="btn btn-primary" onclick="tryGoStep(3)" data-track="incorp_step2_continuar">Continuar →</button>
     </div>
   </div>
 
@@ -446,7 +446,7 @@
     <p id="wiz-submit-err"></p>
     <div class="wiz-nav">
       <button class="btn btn-ghost" onclick="showStep(2)">← Enrere</button>
-      <button class="btn btn-primary" id="btn-submit" onclick="confirmarICrear()">Confirmar i crear el compte →</button>
+      <button class="btn btn-primary" id="btn-submit" onclick="confirmarICrear()" data-track="incorp_confirmar_crear">Confirmar i crear el compte →</button>
     </div>
   </div>
 
@@ -456,7 +456,7 @@
       <div class="ico">✅</div>
       <h2>Ja ho tens tot a punt!</h2>
       <p id="wiz-done-msg">El teu compte ja s'ha creat. També t'hem enviat un correu amb un enllaç per tornar a entrar sempre que vulgues.</p>
-      <a id="btn-configurar" href="https://app.horariapro.com" class="btn btn-primary" style="text-decoration:none; display:inline-block;">Creant el teu compte…</a>
+      <a id="btn-configurar" href="https://app.horariapro.com" class="btn btn-primary" data-track="incorp_anar_app" style="text-decoration:none; display:inline-block;">Creant el teu compte…</a>
     </div>
   </div>
 
@@ -680,5 +680,7 @@ async function confirmarICrear() {
 
 updateDots(0);
 </script>
+
+<script src="/analytics.js" defer></script>
 </body>
 </html>

@@ -970,7 +970,7 @@
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
-    <a href="https://app.horariapro.com" class="nav-cta">Accedir a l'app →</a>
+    <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir a l'app →</a>
     <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -984,7 +984,7 @@
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
   <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
-  <a href="https://app.horariapro.com">Accedir a l'app →</a>
+  <a href="https://app.horariapro.com" data-track="cta_accedir_mobile">Accedir a l'app →</a>
 </div>
 
 <!-- HERO -->
@@ -1010,7 +1010,7 @@
     <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
     <p class="section-sub" style="margin-bottom:12px;">Prova l'aplicació real aquí baix — pas a pas, des de l'avís del docent fins a la confirmació per correu dels canvis d'horari als afectats. El mateix producte que ja fan servir els centres, amb dades fictícies.</p>
     <p class="demo-hint">⏱️ Comprova tu mateix quant de temps passa des de l'avís fins a la confirmació i gestió finalitzada, amb el cronòmetre de dalt a l'esquerra.</p>
-    <p class="demo-try-link">📱 En mòbil, toca ⛶ per veure-la en pantalla completa, o <a href="/demo/" target="_blank" rel="noopener">obri-la en una pestanya nova →</a></p>
+    <p class="demo-try-link">📱 En mòbil, toca ⛶ per veure-la en pantalla completa, o <a href="/demo/" target="_blank" rel="noopener" data-track="cta_demo_nova_pestanya">obri-la en una pestanya nova →</a></p>
 
     <div class="demo-toolbar">
       <button class="demo-fullscreen-fab" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ <span class="fs-label">Pantalla completa</span></button>
@@ -1364,7 +1364,7 @@
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants (1u)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió Treball Personal (1u)</li>
         </ul>
-        <a href="incorporacio.html" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
+        <a href="incorporacio.html" data-track="cta_preus_free" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
       </div>
 
       <!-- Estàndard -->
@@ -1387,7 +1387,7 @@
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
-        <button onclick="openDemoModal()" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
+        <button onclick="openDemoModal()" data-track="cta_preus_demo_estandard" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
       </div>
 
       <!-- Pro (destacat) -->
@@ -1416,7 +1416,7 @@
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
-        <button onclick="openDemoModal()" style="margin-top:auto; background:#fff; color:var(--black); border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
+        <button onclick="openDemoModal()" data-track="cta_preus_demo_pro" style="margin-top:auto; background:#fff; color:var(--black); border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
       </div>
 
       <!-- Centre+ -->
@@ -1445,7 +1445,7 @@
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
-        <button onclick="openDemoModal()" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
+        <button onclick="openDemoModal()" data-track="cta_preus_demo_centreplus" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
       </div>
 
     </div>
@@ -1630,17 +1630,17 @@
     <a href="/politica-privacitat.html" style="color:var(--ink-4); font-size:13px;">Política de Privacitat</a>
     <a href="/politica-cookies.html" style="color:var(--ink-4); font-size:13px;">Política de Cookies</a>
   </div>
-  <div>Desenvolupat per Jorge Villalba · <a href="mailto:horaria.admin@gmail.com" style="color:var(--blue)">horaria.admin@gmail.com</a></div>
+  <div>Desenvolupat per Jorge Villalba · <a href="mailto:horaria.admin@gmail.com" data-track="cta_email" style="color:var(--blue)">horaria.admin@gmail.com</a></div>
   <div>© 2026 HorariaPro. Tots els drets reservats.</div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/34651781289?text=Hola!%20Voldria%20m%C3%A9s%20informaci%C3%B3%20sobre%20HorariaPro" target="_blank" rel="noopener" aria-label="Contacta per WhatsApp">
+<a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/34651781289?text=Hola!%20Voldria%20m%C3%A9s%20informaci%C3%B3%20sobre%20HorariaPro" target="_blank" rel="noopener" aria-label="Contacta per WhatsApp" data-track="cta_whatsapp">
   <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#fff" d="M12 5.5a6.5 6.5 0 0 0-5.6 9.8L5.5 18.5l3.3-.9A6.5 6.5 0 1 0 12 5.5Zm0 1.3a5.2 5.2 0 1 1 0 10.4 5.1 5.1 0 0 1-2.6-.7l-.3-.2-1.9.5.5-1.8-.2-.3A5.2 5.2 0 0 1 12 6.8Zm-2.4 2.5c-.1 0-.3 0-.4.2-.2.2-.6.6-.6 1.4s.6 1.6.7 1.7c.1.1 1.2 1.9 3 2.6.4.2.8.3 1 .4.4.1.8.1 1.1 0 .3-.1.9-.4 1.1-.7.1-.3.1-.6.1-.7l-.1-.1c-.1-.1-.2-.1-.4-.2l-1.3-.6c-.2-.1-.3-.1-.4.1l-.5.7c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.6-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.3.1-.2c.1-.1 0-.2 0-.3l-.6-1.4c-.1-.3-.3-.3-.4-.3h-.4Z"/></svg>
 </a>
 
 <!-- INSTAGRAM FLOAT -->
-<a class="instagram-float" id="instagramFloat" href="https://www.instagram.com/horariapro/" target="_blank" rel="noopener" aria-label="Segueix-nos a Instagram">
+<a class="instagram-float" id="instagramFloat" href="https://www.instagram.com/horariapro/" target="_blank" rel="noopener" aria-label="Segueix-nos a Instagram" data-track="cta_instagram">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg>
 </a>
 
@@ -1675,7 +1675,7 @@
     </div>
     <div class="modal-body">
       <!-- Opció 1: Autoservei -->
-      <a class="modal-option" href="/incorporacio.html">
+      <a class="modal-option" href="/incorporacio.html" data-track="cta_modal_incorporacio">
         <div class="modal-option-icon" style="background:#EAF5EE;">⚡</div>
         <div class="modal-option-text">
           <strong>Integra HorariaPro ara mateix</strong>
@@ -1687,7 +1687,7 @@
       <div class="modal-divider">o</div>
 
       <!-- Opció 2: Calendly -->
-      <a class="modal-option" href="#" onclick="openCalendly(event)">
+      <a class="modal-option" href="#" onclick="openCalendly(event)" data-track="cta_modal_calendly">
         <div class="modal-option-icon cal">📅</div>
         <div class="modal-option-text">
           <strong>Reserva una demo en directe</strong>
@@ -2248,6 +2248,8 @@
     });
   })();
 </script>
+
+<script src="/analytics.js" defer></script>
 
 </body>
 </html>
