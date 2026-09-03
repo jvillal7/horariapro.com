@@ -546,8 +546,11 @@
     /* ── LEGAL ── */
     .legal-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: 1fr;
       gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .legal-grid { grid-template-columns: repeat(3, 1fr); }
     }
     .legal-card {
       background: var(--bg-2);
@@ -1543,8 +1546,8 @@
         <p>Tota la informació s'emmagatzema a servidors europeus (EU-West). Cap dada surt de la Unió Europea.</p>
       </div>
       <div class="legal-card">
-        <h4>🔒 Accés per PIN</h4>
-        <p>Cada docent accedeix amb el seu PIN personal. Cap contrasenya, cap compte d'usuari extern necessari.</p>
+        <h4>🔑 Accés amb Google (XTEC)</h4>
+        <p>Cada docent hi accedeix amb el seu compte corporatiu de Google del centre o el correu XTEC. Sense contrasenyes noves ni comptes externs.</p>
       </div>
       <div class="legal-card">
         <h4>🏫 Aïllament per centre</h4>
