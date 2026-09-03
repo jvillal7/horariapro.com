@@ -1327,19 +1327,37 @@
   <div class="section-inner">
     <div class="section-tag">Preus</div>
     <h2 class="section-title">Sense permanència. Sense sorpreses.</h2>
-    <p class="section-sub">Sense permanència · Suport directe inclòs · Cancel·la quan vulguis.</p>
+    <p class="section-sub">Paga 10 mesos · Juliol i agost, gratis · Suport directe inclòs · Cancel·la quan vulguis.</p>
 
-    <!-- Toggle Mensual/Anual -->
-    <div style="display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:36px;">
-      <span id="toggleLabelMensual" style="font-size:14px; font-weight:700; color:var(--black); cursor:pointer;" onclick="setPricingPeriod('mensual')">Mensual</span>
-      <button id="pricingToggleBtn" onclick="setPricingPeriod(document.body.getAttribute('data-pricing-period')==='anual' ? 'mensual' : 'anual')" aria-label="Canvia entre preu mensual i anual" style="position:relative; width:48px; height:26px; border-radius:100px; border:none; background:var(--blue); cursor:pointer; padding:0; flex-shrink:0;">
-        <span id="pricingToggleKnob" style="position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:transform .18s ease;"></span>
-      </button>
-      <span id="toggleLabelAnual" style="font-size:14px; font-weight:700; color:var(--ink-3); cursor:pointer; display:flex; align-items:center; gap:8px;" onclick="setPricingPeriod('anual')">
-        Anual
-        <span style="background:var(--blue-lt); color:var(--blue); font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; white-space:nowrap;">2 mesos gratis</span>
-      </span>
-    </div>
+    <style>
+      #calcSlider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:#fff; border:3px solid var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.35); cursor:pointer; }
+      #calcSlider::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:#fff; border:3px solid var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.35); cursor:pointer; }
+    </style>
+    <script>
+      function calcPla(n){
+        if(n<=25) return {nom:'Bàsic', preu:59, color:'#60a5fa'};
+        if(n<=60) return {nom:'Pro', preu:79, color:'#4ade80'};
+        return {nom:'Centre+', preu:119, color:'#c084fc'};
+      }
+      function updateCalculadora(val){
+        const n = parseInt(val,10);
+        const pla = calcPla(n);
+        document.getElementById('calcDocents').textContent = n;
+        document.getElementById('calcPlaNom').textContent = pla.nom;
+        const totalEl = document.getElementById('calcPreuTotal');
+        totalEl.textContent = '€'+pla.preu;
+        totalEl.style.color = pla.color;
+        document.getElementById('calcPreuUnitari').textContent = '≈ €'+(pla.preu/n).toFixed(2).replace('.',',')+'/professional de mitjana';
+        const slider = document.getElementById('calcSlider');
+        slider.style.setProperty('accent-color', pla.color);
+      }
+      (function(){
+        const slider = document.getElementById('calcSlider');
+        const min = 12, max = 100, p25 = (25-min)/(max-min)*100, p60 = (60-min)/(max-min)*100;
+        slider.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${p25}%, #22c55e ${p25}%, #22c55e ${p60}%, #a855f7 ${p60}%, #a855f7 100%)`;
+        updateCalculadora(slider.value);
+      })();
+    </script>
 
     <div class="pricing-grid">
 
@@ -1356,10 +1374,10 @@
         <div style="height:1px; background:var(--border);"></div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Proposta de cobertures amb IA (30u)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport 24h</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió torns del pati (1u)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants (1u)</li>
           <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió Treball Personal (1u)</li>
@@ -1367,48 +1385,42 @@
         <a href="incorporacio.html" data-track="cta_preus_free" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
       </div>
 
-      <!-- Estàndard -->
-      <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
+      <!-- Escola: la barra selecciona el pla fix segons la plantilla, no inventa un preu nou -->
+      <div style="background:var(--black); border:1px solid var(--black); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:20px; position:relative;">
+        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:100px; white-space:nowrap; letter-spacing:.04em;">EL PLA S'ADAPTA A LA TEUA PLANTILLA</div>
         <div>
-          <div style="font-size:13px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Estàndard</div>
+          <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Escola — <span id="calcPlaNom">Bàsic</span></div>
           <div style="display:flex; align-items:baseline; gap:4px;">
-            <span class="price-value" data-mensual="€59" data-anual="€590" style="font-size:40px; font-weight:800; color:var(--black); letter-spacing:-.03em;">€59</span>
-            <span class="price-period" data-mensual="/mes" data-anual="/any" style="font-size:14px; color:var(--ink-3);">/mes</span>
+            <span id="calcPreuTotal" style="font-size:40px; font-weight:800; color:#fff; letter-spacing:-.03em;">€50</span>
+            <span style="font-size:14px; color:rgba(255,255,255,.5);">/mes</span>
           </div>
-          <div class="price-savings" style="font-size:12px; color:var(--green); font-weight:700; margin-top:4px; visibility:hidden;">Estalvia €118/any</div>
-          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">Recomanat fins a 25 docents</div>
+          <div id="calcPreuUnitari" style="font-size:13px; color:rgba(255,255,255,.5); margin-top:4px;">€2,49/professional de mitjana</div>
         </div>
-        <div style="height:1px; background:var(--border);"></div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Proposta de cobertures amb IA</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
-        </ul>
-        <button onclick="openDemoModal()" data-track="cta_preus_demo_estandard" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
-      </div>
 
-      <!-- Pro (destacat) -->
-      <div style="background:var(--black); border:1px solid var(--black); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px; position:relative;">
-        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:100px; white-space:nowrap; letter-spacing:.04em;">EL MÉS POPULAR</div>
         <div>
-          <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Pro</div>
-          <div style="display:flex; align-items:baseline; gap:4px;">
-            <span class="price-value" data-mensual="€79" data-anual="€790" style="font-size:40px; font-weight:800; color:#fff; letter-spacing:-.03em;">€79</span>
-            <span class="price-period" data-mensual="/mes" data-anual="/any" style="font-size:14px; color:rgba(255,255,255,.5);">/mes</span>
+          <div style="text-align:center; margin-bottom:10px; color:#fff; font-size:14px; font-weight:700;"><span id="calcDocents">20</span> professionals</div>
+          <input type="range" id="calcSlider" min="12" max="100" value="20" step="1" oninput="updateCalculadora(this.value)"
+            style="-webkit-appearance:none; appearance:none; width:100%; height:10px; border-radius:6px; outline:none; cursor:pointer;">
+          <div style="position:relative; height:14px; margin-top:8px; font-size:11px; color:rgba(255,255,255,.5);">
+            <span style="position:absolute; left:0;">12</span>
+            <span style="position:absolute; left:14.77%; transform:translateX(-50%);">25</span>
+            <span style="position:absolute; left:54.55%; transform:translateX(-50%);">60</span>
+            <span style="position:absolute; right:0;">100+</span>
           </div>
-          <div class="price-savings" style="font-size:12px; color:#4ade80; font-weight:700; margin-top:4px; visibility:hidden;">Estalvia €158/any</div>
-          <div style="font-size:13px; color:rgba(255,255,255,.5); margin-top:4px;">Recomanat fins a 60 docents</div>
+          <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:11px; color:rgba(255,255,255,.6);">
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#60a5fa; margin-right:4px;"></span>Fins a 25 · Bàsic €59</span>
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#4ade80; margin-right:4px;"></span>26-60 · Pro €79</span>
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c084fc; margin-right:4px;"></span>61+ · Centre+ €119</span>
+          </div>
         </div>
+
         <div style="height:1px; background:rgba(255,255,255,.12);"></div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Proposta de cobertures amb IA</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Notificacions automàtiques</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Normes i context IA personalitzat</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Suport per email</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Suport 24h</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió torns del pati</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió Treball Personal</li>
@@ -1416,36 +1428,7 @@
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
           <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Implantació gratuïta</li>
         </ul>
-        <button onclick="openDemoModal()" data-track="cta_preus_demo_pro" style="margin-top:auto; background:#fff; color:var(--black); border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
-      </div>
-
-      <!-- Centre+ -->
-      <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
-        <div>
-          <div style="font-size:13px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Centre+</div>
-          <div style="display:flex; align-items:baseline; gap:4px;">
-            <span class="price-value" data-mensual="€119" data-anual="€1.190" style="font-size:40px; font-weight:800; color:var(--black); letter-spacing:-.03em;">€119</span>
-            <span class="price-period" data-mensual="/mes" data-anual="/any" style="font-size:14px; color:var(--ink-3);">/mes</span>
-          </div>
-          <div class="price-savings" style="font-size:12px; color:var(--green); font-weight:700; margin-top:4px; visibility:hidden;">Estalvia €238/any</div>
-          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">Pensat per a +60 docents o instituts</div>
-          <div style="font-size:12px; color:var(--ink-3); margin-top:6px; line-height:1.5;">Mateixes funcionalitats que Pro, pensat per a claustres grans amb més ús de la IA.</div>
-        </div>
-        <div style="height:1px; background:var(--border);"></div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Proposta de cobertures amb IA</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport per email</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió torns del pati</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió sortides amb acompanyants</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió Treball Personal</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió horaris jornada intensiva</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Implantació gratuïta</li>
-        </ul>
-        <button onclick="openDemoModal()" data-track="cta_preus_demo_centreplus" style="margin-top:auto; background:var(--bg-2); color:var(--ink); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:background .15s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--bg-2)'">Sol·licitar demo →</button>
+        <button onclick="openDemoModal()" data-track="cta_preus_demo_escola" style="margin-top:auto; background:#fff; color:var(--black); border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
       </div>
 
     </div>
