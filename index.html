@@ -1338,7 +1338,7 @@
     </style>
     <script>
       function calcPla(n){
-        if(n<=25) return {nom:'Bàsic', preu:59, color:'#60a5fa'};
+        if(n<=25) return {nom:'Estàndard', preu:59, color:'#60a5fa'};
         if(n<=60) return {nom:'Pro', preu:79, color:'#4ade80'};
         return {nom:'Centre+', preu:119, color:'#c084fc'};
       }
@@ -1392,7 +1392,7 @@
       <div style="background:var(--black); border:1px solid var(--black); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:20px; position:relative;">
         <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:100px; white-space:nowrap; letter-spacing:.04em;">EL PLA S'ADAPTA A LA TEUA PLANTILLA</div>
         <div>
-          <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;" id="calcPlaNom">Bàsic</div>
+          <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;" id="calcPlaNom">Estàndard</div>
           <div style="display:flex; align-items:baseline; gap:4px;">
             <span id="calcPreuTotal" style="font-size:40px; font-weight:800; color:#fff; letter-spacing:-.03em;">€50</span>
             <span style="font-size:14px; color:rgba(255,255,255,.5);">/mes</span>
@@ -1411,7 +1411,7 @@
             <span style="position:absolute; right:0;">100+</span>
           </div>
           <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:11px; color:rgba(255,255,255,.6);">
-            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#60a5fa; margin-right:4px;"></span>Fins a 25 · Bàsic €59</span>
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#60a5fa; margin-right:4px;"></span>Fins a 25 · Estàndard €59</span>
             <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#4ade80; margin-right:4px;"></span>26-60 · Pro €79</span>
             <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c084fc; margin-right:4px;"></span>61+ · Centre+ €119</span>
           </div>
