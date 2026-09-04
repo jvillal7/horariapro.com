@@ -259,7 +259,7 @@
     </div>
     <div class="wiz-nav">
       <button class="btn btn-ghost" onclick="showStep(0)">← Enrere</button>
-      <button class="btn btn-primary" onclick="showStep(2)" data-track="incorp_step1_continuar">Continuar →</button>
+      <button class="btn btn-primary" onclick="tryGoStep(2)" data-track="incorp_step1_continuar">Continuar →</button>
     </div>
   </div>
 
@@ -289,45 +289,11 @@
           <li>Gestió Treball Personal (1u)</li>
         </ul>
       </div>
-      <div class="plan-card" id="plan-basic" onclick="selectPlan('basic')">
-        <div class="plan-nom">Estàndard</div>
-        <div><span class="plan-preu" id="preu-basic">€59</span><span class="plan-preu-mes">/mes</span></div>
-        <div class="plan-lim">Fins a 25 docents</div>
-        <div class="plan-anual-info" id="anual-basic" style="display:none;">€590/any</div>
-        <ul class="plan-features">
-          <li>Proposta de cobertures amb IA</li>
-          <li>Notificacions automàtiques</li>
-          <li>Normes i context IA personalitzat</li>
-          <li>Historial i informes d'absències (ATRI)</li>
-          <li>Suport per email</li>
-          <li>Implantació gratuïta</li>
-        </ul>
-      </div>
-      <div class="plan-card plan-pro" id="plan-pro" onclick="selectPlan('pro')">
-        <div class="plan-badge">El més popular</div>
-        <div class="plan-nom">Pro</div>
-        <div><span class="plan-preu" id="preu-pro">€79</span><span class="plan-preu-mes">/mes</span></div>
-        <div class="plan-lim">25–60 docents</div>
-        <div class="plan-anual-info" id="anual-pro" style="display:none;">€790/any</div>
-        <ul class="plan-features">
-          <li>Proposta de cobertures amb IA</li>
-          <li>Notificacions automàtiques</li>
-          <li>Normes i context IA personalitzat</li>
-          <li>Historial i informes d'absències (ATRI)</li>
-          <li>Suport per email</li>
-          <li>Gestió torns del pati</li>
-          <li>Gestió sortides amb acompanyants</li>
-          <li>Gestió Treball Personal</li>
-          <li>Gestió horaris jornada intensiva</li>
-          <li>Chat HorarIA per WhatsApp</li>
-          <li>Implantació gratuïta</li>
-        </ul>
-      </div>
-      <div class="plan-card" id="plan-centre" onclick="selectPlan('centre')">
-        <div class="plan-nom">Centre+</div>
-        <div><span class="plan-preu" id="preu-centre">€119</span><span class="plan-preu-mes">/mes</span></div>
-        <div class="plan-lim">+60 docents o institut</div>
-        <div class="plan-anual-info" id="anual-centre" style="display:none;">€1.190/any</div>
+      <div class="plan-card plan-pro" id="plan-escola" onclick="selectPlan(planTierAuto)">
+        <div class="plan-nom">Escola — <span id="escola-nom">Bàsic</span></div>
+        <div><span class="plan-preu" id="preu-escola">€59</span><span class="plan-preu-mes">/mes</span></div>
+        <div class="plan-lim" id="escola-docents">Segons el nombre de docents del centre</div>
+        <div class="plan-anual-info" id="anual-escola" style="display:none;">€590/any</div>
         <ul class="plan-features">
           <li>Proposta de cobertures amb IA</li>
           <li>Notificacions automàtiques</li>
@@ -474,8 +440,42 @@ const PLANS = {
 };
 
 let planSeleccionat = null;
+let planTierAuto = 'basic';
 let modalitatActual = 'mensual';
 const TOTAL_STEPS = 4;
+
+// Mateixos trams que la calculadora de horariapro.com#preus — el preu varia
+// segons el nombre de docents, però totes les escoles tenen les mateixes
+// funcionalitats (no es limita per pla).
+function calcTier(n) {
+  if (!n || n <= 25) return 'basic';
+  if (n <= 60) return 'pro';
+  return 'centre';
+}
+
+function actualitzaPlaEscola() {
+  const n = parseInt(v('num_docents')) || null;
+  planTierAuto = calcTier(n);
+  const p = PLANS[planTierAuto];
+  txt('escola-nom', p.nom);
+  txt('escola-docents', n ? `${n} docents` : p.lim);
+  const preuEl = document.getElementById('preu-escola');
+  const anualEl = document.getElementById('anual-escola');
+  if (modalitatActual === 'anual') {
+    preuEl.textContent = '€' + (p.preu * 10 / 12).toFixed(0);
+    anualEl.textContent = '€' + (p.preu * 10) + '/any';
+    anualEl.style.display = 'inline-block';
+  } else {
+    preuEl.textContent = '€' + p.preu;
+    anualEl.style.display = 'none';
+  }
+  // Si ja hi havia un pla de pagament triat, actualitza'l al tram nou.
+  if (planSeleccionat && planSeleccionat !== 'gratuit') {
+    planSeleccionat = planTierAuto;
+    document.getElementById('plan-escola').classList.add('selected');
+    updatePreuHidden();
+  }
+}
 
 function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
 function chk(id) { return document.getElementById(id)?.checked || false; }
@@ -494,6 +494,7 @@ function showStep(n) {
   document.querySelectorAll('.wiz-step').forEach(el => { el.hidden = +el.dataset.step !== n; });
   document.getElementById('wiz-progress').style.display = n < TOTAL_STEPS ? 'flex' : 'none';
   if (n < TOTAL_STEPS) updateDots(n);
+  if (n === 2) actualitzaPlaEscola();
   if (n === 3) fillContract();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -511,10 +512,16 @@ function tryGoStep(n) {
     document.getElementById('wiz-err0').style.display = ok ? 'none' : 'block';
     if (!ok) return;
   }
+  if (n === 2) {
+    const el = document.getElementById('num_docents');
+    const buit = !el.value.trim() || +el.value <= 0;
+    el.classList.toggle('field-err', buit);
+    if (buit) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  }
   if (n === 3) {
     if (!planSeleccionat) {
       document.getElementById('plan-error').style.display = 'block';
-      document.getElementById('plan-basic').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('plan-escola').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
   }
@@ -526,26 +533,14 @@ function setModalitat(m) {
   document.getElementById('toggle-mensual').classList.toggle('active', m === 'mensual');
   document.getElementById('toggle-anual').classList.toggle('active', m === 'anual');
   document.getElementById('modalitat_hidden').value = m;
-  Object.keys(PLANS).forEach(k => {
-    const p = PLANS[k];
-    const preuEl = document.getElementById('preu-' + k);
-    const anualEl = document.getElementById('anual-' + k);
-    if (m === 'anual') {
-      preuEl.textContent = '€' + (p.preu * 10 / 12).toFixed(0);
-      if (anualEl) anualEl.style.display = 'inline-block';
-    } else {
-      preuEl.textContent = '€' + p.preu;
-      if (anualEl) anualEl.style.display = 'none';
-    }
-  });
+  actualitzaPlaEscola();
   if (planSeleccionat) updatePreuHidden();
 }
 
 function selectPlan(k) {
   planSeleccionat = k;
-  ['gratuit', 'basic', 'pro', 'centre'].forEach(id => {
-    document.getElementById('plan-' + id).classList.toggle('selected', id === k);
-  });
+  document.getElementById('plan-gratuit').classList.toggle('selected', k === 'gratuit');
+  document.getElementById('plan-escola').classList.toggle('selected', k !== 'gratuit');
   document.getElementById('plan-error').style.display = 'none';
   updatePreuHidden();
 }
