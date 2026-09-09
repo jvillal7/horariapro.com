@@ -353,8 +353,6 @@
     .feature-media-item.jornada-intensiva { aspect-ratio: 970/2048; }
     .feature-media-item.baixes-shot { aspect-ratio: 918/1936; }
     .feature-media-item.pati-cap video { transform: scale(1.052) translateY(-2.47%); }
-    /* "Manualment" manté la seva pròpia proporció (sense retallar contingut) i queda centrat verticalment respecte als altres */
-    .feature-media-item.manual { aspect-ratio: 1006/1620; align-self: center; }
     /* El video tp-cap ve amb marges negres per als 4 costats (edició pròpia); retall exacte mesurat píxel a píxel */
     .feature-media-item.tp-cap { aspect-ratio: 853/1823; }
     .feature-media-item.tp-cap video {
@@ -1085,8 +1083,10 @@
                 </video>
                 <span class="feature-media-label">Informació extra del dia</span>
               </div>
-              <div class="feature-media-item manual has-lightbox" onclick="openMediaLightbox('images/avis-manual.png','image')">
-                <img src="images/avis-manual.png" alt="Cobertura manual registrada per la cap d'estudis" loading="lazy" />
+              <div class="feature-media-item has-lightbox" onclick="openMediaLightbox('videos/avis-manual.mp4','video')">
+                <video autoplay muted loop playsinline aria-label="Cobertura manual registrada per la cap d'estudis">
+                  <source src="videos/avis-manual.mp4" type="video/mp4" />
+                </video>
                 <span class="feature-media-label">Cobertura manual</span>
               </div>
             </div>
