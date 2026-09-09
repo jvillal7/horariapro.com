@@ -276,17 +276,17 @@
     <div class="plans-grid">
       <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
         <div class="plan-nom">Gratuït</div>
-        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/30 dies</span></div>
-        <div class="plan-lim">30 dies o 30 propostes IA</div>
+        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/3 mesos</span></div>
+        <div class="plan-lim">3 mesos o 90 propostes IA</div>
         <ul class="plan-features">
-          <li>Proposta de cobertures amb IA (30u)</li>
+          <li>Proposta de cobertures amb IA (90u)</li>
           <li>Notificacions automàtiques</li>
           <li>Normes i context IA personalitzat</li>
           <li>Historial i informes (ATRI)</li>
           <li>Suport per email</li>
-          <li>Gestió torns del pati (1u)</li>
-          <li>Gestió sortides amb acompanyants (1u)</li>
-          <li>Gestió Treball Personal (1u)</li>
+          <li>Gestió torns del pati (3u)</li>
+          <li>Gestió sortides amb acompanyants (10u)</li>
+          <li>Gestió Treball Personal (10u)</li>
         </ul>
       </div>
       <div class="plan-card plan-pro" id="plan-escola" onclick="selectPlan(planTierAuto)">
@@ -352,7 +352,7 @@
 
         <h2>Part I — Condicions del Servei</h2>
         <p><strong>Cl. 1. Objecte.</strong> El Proveïdor presta al Client accés a la plataforma HorariaPro / GDOCENT: registre d'absències, cobertures per IA, quadre en temps real, gestió del Treball Personal (TP), extracció d'horaris, historial i informes.</p>
-        <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. El primer mes és de prova sense cost.</p>
+        <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. Els primers tres (3) mesos són de prova sense cost.</p>
         <p><strong>Cl. 3. Preu i forma de pagament.</strong></p>
         <div class="hl"><p id="cp-preu">Quota mensual: — €/mes · Modalitat: —</p></div>
         <p>Pagament per transferència o domiciliació els primers 10 dies de cada període. En cas d'impagament superior a 30 dies, el Proveïdor pot suspendre l'accés fins a regularització.</p>
@@ -433,7 +433,7 @@ const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functio
 const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
 const PLANS = {
-  gratuit: { nom: 'Gratuït',  preu: 0,   lim: "30 dies o 30 propostes IA" },
+  gratuit: { nom: 'Gratuït',  preu: 0,   lim: "3 mesos o 90 propostes IA" },
   basic:   { nom: 'Estàndard', preu: 59,  lim: 'Fins a 25 docents' },
   pro:     { nom: 'Pro',      preu: 79,  lim: '25–60 docents' },
   centre:  { nom: 'Centre+',  preu: 119, lim: '+60 docents o institut' },
