@@ -391,6 +391,7 @@
       margin-bottom: 12px;
     }
     .feature-media-picker-options { display: flex; flex-wrap: wrap; gap: 8px; }
+    .feature-media-picker-options + .feature-media-picker-title { margin-top: 16px; }
     .feature-media-picker-btn {
       background: #fff; color: var(--ink);
       border: 1px solid var(--border); border-radius: 8px;
@@ -1077,8 +1078,13 @@
           </div>
           <div class="feature-media-group">
             <div class="feature-media-group-title">Cap d'estudis avisa</div>
-            <!-- TODO: quan arribi el vídeo "Informació extra del dia", tornar a grid-template-columns:1fr 1fr i afegir-lo com a primer element -->
-            <div class="feature-media-pair" style="grid-template-columns:1fr; max-width:200px;">
+            <div class="feature-media-pair" style="grid-template-columns:1fr 1fr;">
+              <div class="feature-media-item has-lightbox" onclick="openMediaLightbox('videos/avis-info-extra.mp4','video')">
+                <video autoplay muted loop playsinline aria-label="Informació extra del dia registrada per la cap d'estudis">
+                  <source src="videos/avis-info-extra.mp4" type="video/mp4" />
+                </video>
+                <span class="feature-media-label">Informació extra del dia</span>
+              </div>
               <div class="feature-media-item manual has-lightbox" onclick="openMediaLightbox('images/avis-manual.png','image')">
                 <img src="images/avis-manual.png" alt="Cobertura manual registrada per la cap d'estudis" loading="lazy" />
                 <span class="feature-media-label">Cobertura manual</span>
@@ -1871,9 +1877,12 @@
         var m = el.getAttribute('onclick').match(/openMediaLightbox\('([^']+)','([^']+)'(?:,\s*([\d.]+))?\)/);
         if (!m) return null;
         var labelEl = el.querySelector('.feature-media-label');
+        var groupTitleEl = el.closest('.feature-media-group');
+        groupTitleEl = groupTitleEl ? groupTitleEl.querySelector('.feature-media-group-title') : null;
         return {
           src: m[1], type: m[2], label: labelEl ? labelEl.textContent : '',
-          startAt: m[3] ? parseFloat(m[3]) : undefined
+          startAt: m[3] ? parseFloat(m[3]) : undefined,
+          group: groupTitleEl ? groupTitleEl.textContent : null
         };
       }).filter(Boolean);
       if (!items.length) return;
@@ -1888,21 +1897,34 @@
       } else {
         var card = document.createElement('div');
         card.className = 'feature-media-picker';
-        var title = document.createElement('div');
-        title.className = 'feature-media-picker-title';
-        title.textContent = '▶ Veure com funciona';
-        card.appendChild(title);
-        var options = document.createElement('div');
-        options.className = 'feature-media-picker-options';
+
+        // Si els elements venen agrupats (p. ex. "Docent avisa" / "Cap d'estudis avisa"),
+        // es manté aquesta distinció també al selector mòbil.
+        var groups = [];
         items.forEach(function(item, idx) {
-          var obtn = document.createElement('button');
-          obtn.type = 'button';
-          obtn.className = 'feature-media-picker-btn';
-          obtn.textContent = item.label || ('Element ' + (idx + 1));
-          obtn.addEventListener('click', function() { openMediaLightboxGallery(items, idx); });
-          options.appendChild(obtn);
+          var g = groups.find(function(g) { return g.name === item.group; });
+          if (!g) { g = { name: item.group, entries: [] }; groups.push(g); }
+          g.entries.push({ item: item, idx: idx });
         });
-        card.appendChild(options);
+        var hasGroups = groups.length > 1 && groups.every(function(g) { return g.name; });
+
+        groups.forEach(function(g, gi) {
+          var title = document.createElement('div');
+          title.className = 'feature-media-picker-title';
+          title.textContent = hasGroups ? g.name : '▶ Veure com funciona';
+          card.appendChild(title);
+          var options = document.createElement('div');
+          options.className = 'feature-media-picker-options';
+          g.entries.forEach(function(entry) {
+            var obtn = document.createElement('button');
+            obtn.type = 'button';
+            obtn.className = 'feature-media-picker-btn';
+            obtn.textContent = entry.item.label || ('Element ' + (entry.idx + 1));
+            obtn.addEventListener('click', function() { openMediaLightboxGallery(items, entry.idx); });
+            options.appendChild(obtn);
+          });
+          card.appendChild(options);
+        });
         text.appendChild(card);
       }
     });
