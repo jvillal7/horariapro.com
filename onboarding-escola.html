@@ -158,7 +158,7 @@ nav {
 
 <div class="hero">
   <div class="tag">Onboarding</div>
-  <h1>Configuració de nova escola</h1>
+  <h1>Configuració d'una escola nova</h1>
   <p>Respon les preguntes amb el màxim detall possible. La IA analitzarà les respostes i generarà automàticament el Context IA i les Normes IA de l'escola, llestes per activar.</p>
   <div class="hero-steps">
     <div class="hero-step"><div class="num">1</div> Ompliu el formulari</div>
@@ -174,7 +174,7 @@ nav {
 <!-- ══ 0. HORARI DEL CENTRE (genera les franges reals de l'app) ══ -->
 <div class="card">
   <div class="card-title blue"><div class="num">0</div> Horari del centre</div>
-  <p style="font-size:13px; color:var(--ink-3); margin-bottom:16px;">Açò genera la graella d'horaris real que farà servir HorarIA per proposar cobertures — no cal escriure-la enlloc més.</p>
+  <p style="font-size:13px; color:var(--ink-3); margin-bottom:16px;">Això genera la graella d'horaris real que farà servir HorarIA per proposar cobertures — no cal escriure-la enlloc més.</p>
   <div class="fields">
     <div class="field">
       <label>Hora d'inici del matí</label>
@@ -193,7 +193,7 @@ nav {
       <label>Torns de pati</label>
       <select id="torns_pati" onchange="actualitzarPreview()">
         <option value="1" selected>1 torn (tothom alhora)</option>
-        <option value="2">2 torns (Infantil i Primària separats)</option>
+        <option value="2">2 torns (infantil i primària separats)</option>
       </select>
     </div>
     <div class="field">
@@ -232,18 +232,18 @@ nav {
     </div>
     <div class="field">
       <label>Codi curt <span class="req">*</span></label>
-      <input type="text" id="codi" placeholder="Ex: rivo, oriol, prats..." maxlength="14" required />
+      <input type="text" id="codi" placeholder="Ex.: rivo, oriol, prats..." maxlength="14" required />
       <div class="hint">Identificador intern de l'escola — es normalitza automàticament (minúscules, sense espais) i s'avisa si ja està en ús.</div>
     </div>
     <div class="field">
       <label>Etapes educatives <span class="req">*</span></label>
       <select id="etapes" required>
         <option value="">— Selecciona —</option>
-        <option value="Infantil i Primària">Infantil i Primària (CEIP)</option>
+        <option value="Infantil i Primària">Infantil i primària (CEIP)</option>
         <option value="Primària">Primària (CEP)</option>
-        <option value="Educació Especial">Educació Especial (CEE)</option>
+        <option value="Educació Especial">Educació especial (CEE)</option>
         <option value="Secundària">Secundària (INS)</option>
-        <option value="Infantil, Primària i Secundària">Infantil, Primària i Secundària (CFA/ZER)</option>
+        <option value="Infantil, Primària i Secundària">Infantil, primària i secundària (CFA/ZER)</option>
       </select>
     </div>
     <div class="field">
@@ -271,7 +271,7 @@ nav {
   <div class="card-title blue"><div class="num">B</div> Equip directiu</div>
   <div class="fields">
     <div class="field">
-      <label>Nom del/la director/a <span class="req">*</span></label>
+      <label>Nom del director o de la directora <span class="req">*</span></label>
       <input type="text" id="nom_director" placeholder="Nom i cognoms" required />
     </div>
     <div class="field">
@@ -279,13 +279,13 @@ nav {
       <input type="text" id="nom_jefa" placeholder="Nom i cognoms" required />
     </div>
     <div class="field">
-      <label>Nom del/la secretari/a</label>
+      <label>Nom del secretari o de la secretària</label>
       <input type="text" id="nom_secretaria" placeholder="Nom i cognoms" />
     </div>
     <div class="field">
-      <label>Email de la cap d'estudis <span class="req">*</span></label>
+      <label>Correu electrònic de la cap d'estudis <span class="req">*</span></label>
       <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." required />
-      <div class="hint">Amb este correu entrarà a l'app (Google Sign-In) — cal que siga vàlid.</div>
+      <div class="hint">Amb aquest correu entrarà a l'app (inici de sessió amb Google); cal que sigui vàlid.</div>
     </div>
   </div>
 </div>
@@ -296,29 +296,29 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>Llista de tots els grups/classes <span class="req">*</span></label>
-      <input type="text" id="grups" placeholder="Ex: I3A, I3B, I4A, I4B, I5A, I5B, 1rA, 1rB, 2nA, 2nB, 3rA, 3rB, 4tA, 4tB, 5eA, 5eB, 6eA, 6eB" required />
+      <input type="text" id="grups" placeholder="Ex.: I3A, I3B, I4A, I4B, I5A, I5B, 1rA, 1rB, 2nA, 2nB, 3rA, 3rB, 4tA, 4tB, 5eA, 5eB, 6eA, 6eB" required />
       <div class="hint">Separats per comes. Exactament com apareixeran a l'app.</div>
     </div>
     <div class="field field-full">
       <label>Organització en cicles</label>
-      <input type="text" id="cicles" placeholder="Ex: Infantil (I3-I5) · Cicle Inicial (1r-2n) · Cicle Mitjà (3r-4t) · Cicle Superior (5è-6è)" />
+      <input type="text" id="cicles" placeholder="Ex.: Infantil (I3-I5) · Cicle Inicial (1r-2n) · Cicle Mitjà (3r-4t) · Cicle Superior (5è-6è)" />
     </div>
     <div class="field field-full">
       <label>Coordinadors/es de cicle</label>
-      <input type="text" id="coordinadors" placeholder="Ex: Anna (Infantil), Carles (CI), Marta (CM), Lluís (CS)" />
+      <input type="text" id="coordinadors" placeholder="Ex.: Anna (Infantil), Carles (CI), Marta (CM), Lluís (CS)" />
     </div>
     <div class="field field-full">
       <label>Personal de suport especial (noms i funció)</label>
-      <textarea id="personal_suport" placeholder="Ex: Aurora i Clara (SIEI — alumnes amb NEE, no cobrien absències generals). Sònia i Leyre (educadores — suport a alumnes concrets, no fan docència general). Víctor (vetllador). Montse (MESI — última opció per cobrir)." ></textarea>
-      <div class="hint">Especifica nom i funció real de cada persona. Serà clau per les normes de cobertura.</div>
+      <textarea id="personal_suport" placeholder="Ex.: Aurora i Clara (SIEI — alumnes amb NEE, no cobreixen absències generals). Sònia i Leyre (educadores — suport a alumnes concrets, no fan docència general). Víctor (vetllador). Montse (MESI — última opció per cobrir)." ></textarea>
+      <div class="hint">Especifica nom i funció real de cada persona. Serà clau per a les normes de cobertura.</div>
     </div>
     <div class="field field-full">
       <label>Especialistes i les seves àrees</label>
-      <textarea id="especialistes" placeholder="Ex: Jordi (Educació Física), Laia (Anglès), Neus (Música), Anna M. (EI Suport). Tots imparteixen classe al centre però no tenen grup tutor fix." ></textarea>
+      <textarea id="especialistes" placeholder="Ex.: Jordi (Educació Física), Laia (Anglès), Neus (Música), Anna M. (EI Suport). Tots imparteixen classe al centre però no tenen grup tutor fix." ></textarea>
     </div>
     <div class="field field-full">
       <label>Docents a temps parcial o mitja jornada</label>
-      <input type="text" id="mitges_jornades" placeholder="Ex: Glòria (matins fins a les 12:30), Laura P. (tardes des de les 15:00)" />
+      <input type="text" id="mitges_jornades" placeholder="Ex.: Glòria (matins fins a les 12:30), Laura P. (tardes des de les 15:00)" />
     </div>
   </div>
 </div>
@@ -328,8 +328,8 @@ nav {
   <div class="card-title amber"><div class="num">D</div> Prioritats i lògica de cobertura</div>
   <div class="fields">
     <div class="field field-full">
-      <label>Quan reps un avís d'absència, quin és el primer que mires? Qui valores primer? <span class="req">*</span></label>
-      <textarea id="q_prioritats" placeholder="Ex: Primer miro si hi ha algú alliberat perquè el seu grup és de sortida. Després, qui fa suport al mateix grup o cicle. Si no, busco qui té TP aquella franja..." required></textarea>
+      <label>Quan reps un avís d'absència, què és el primer que mires? Qui valores primer? <span class="req">*</span></label>
+      <textarea id="q_prioritats" placeholder="Ex.: Primer miro si hi ha algú alliberat perquè el seu grup és de sortida. Després, qui fa suport al mateix grup o cicle. Si no, busco qui té TP aquella franja..." required></textarea>
     </div>
     <div class="field field-full">
       <label>Hi ha un ordre clar de prioritat? Descriu-lo pas a pas.</label>
@@ -337,27 +337,27 @@ nav {
     </div>
     <div class="field field-full">
       <label>Hi ha docents que MAI fas servir per cobrir? Per quina raó?</label>
-      <textarea id="q_mai_cobrir" placeholder="Ex: El personal SIEI (Aurora i Clara) mai cobreix perquè han d'atendre els alumnes NEE. Les vetlladores tampoc, per la mateixa raó. Els directius, en general, evitem trencar-los la feina de gestió..."></textarea>
+      <textarea id="q_mai_cobrir" placeholder="Ex.: El personal SIEI (Aurora i Clara) mai cobreix perquè han d'atendre els alumnes NEE. Les vetlladores tampoc, per la mateixa raó. Als directius, en general, evitem trencar-los la feina de gestió..."></textarea>
     </div>
     <div class="field">
       <label>Si tens dues opcions igual de bones, quin criteri desempata?</label>
-      <textarea id="q_desempat" placeholder="Ex: Trio la persona que porta menys cobertures aquell mes / la que no ha cobert aquell mateix dia / la que coneix millor el grup..."></textarea>
+      <textarea id="q_desempat" placeholder="Ex.: Trio la persona que porta menys cobertures aquell mes / la que no ha cobert aquell mateix dia / la que coneix millor el grup..."></textarea>
     </div>
     <div class="field">
       <label>Límit màxim de cobertures per docent en una mateixa jornada</label>
-      <input type="text" id="q_limit_jornada" placeholder="Ex: Màxim 2 hores (2 franges) per jornada" />
+      <input type="text" id="q_limit_jornada" placeholder="Ex.: Màxim 2 hores (2 franges) per jornada" />
     </div>
     <div class="field field-full">
       <label>Intentes repartir les cobertures equitativament? Com ho controles?</label>
-      <textarea id="q_equitat" placeholder="Ex: Sí, porto un recompte mental per mes. A partir de 3 cobertures en el mes, intento no posar-ne més a aquella persona si hi ha alternatives..."></textarea>
+      <textarea id="q_equitat" placeholder="Ex.: Sí, porto un recompte mental per mes. A partir de 3 cobertures en el mes, intento no posar-ne més a aquella persona si hi ha alternatives..."></textarea>
     </div>
     <div class="field field-full">
       <label>Tens en compte les cobertures que ja ha fet aquell mateix dia?</label>
-      <textarea id="q_mateix_dia" placeholder="Ex: Sí, si la Joan ja ha cobert la 1a franja del matí, evito posar-li també la 3a. Prefereixo distribuir..."></textarea>
+      <textarea id="q_mateix_dia" placeholder="Ex.: Sí, si el Joan ja ha cobert la 1a franja del matí, evito posar-li també la 3a. Prefereixo distribuir..."></textarea>
     </div>
     <div class="field field-full">
       <label>Prefereixes enviar algú que coneix el grup/cicle? Fins a quin punt és important?</label>
-      <textarea id="q_afinitat" placeholder="Ex: Per Infantil sí que ho prioritzo bastant, sobretot pels més petits (I3). Per Primària és menys crític. Si falta un especialista (EF, Música), que cobreixi el tutor del grup..."></textarea>
+      <textarea id="q_afinitat" placeholder="Ex.: Per a infantil sí que ho prioritzo bastant, sobretot per als més petits (I3). Per a primària és menys crític. Si falta un especialista (EF, Música), que cobreixi el tutor del grup..."></textarea>
     </div>
   </div>
 </div>
@@ -368,15 +368,15 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>Teniu desdoblaments, racons, tallers, o activitats on alumnes de grups diferents es barregen?</label>
-      <textarea id="q_activitats" placeholder="Ex: Sí, tenim Racons els dimarts al matí: un especialista agafa alumnes de dos grups del mateix nivell mentre les tutores es queden amb menys alumnes. Tenim Tallers els dijous a la tarda: alumnes del cicle barrellats per grups de 12-15..."></textarea>
+      <textarea id="q_activitats" placeholder="Ex.: Sí, tenim racons els dimarts al matí: un especialista agafa alumnes de dos grups del mateix nivell mentre les tutores es queden amb menys alumnes. Tenim tallers els dijous a la tarda: alumnes del cicle barrejats en grups de 12 a 15..."></textarea>
     </div>
     <div class="field field-full">
-      <label>Per a cada activitat especial: si falta el TUTOR, que passa? I si falta l'ESPECIALISTA?</label>
-      <textarea id="q_activitats_protocol" placeholder="Ex: Si falta el tutor el dia de racons → l'especialista del racó assumeix el grup complet, no cal cobrir a part. Si falta l'especialista → no es fan racons, cada tutora es queda el seu grup, no cal cobrir l'especialista..."></textarea>
+      <label>Per a cada activitat especial: si falta el TUTOR, què passa? I si falta l'ESPECIALISTA?</label>
+      <textarea id="q_activitats_protocol" placeholder="Ex.: Si falta el tutor el dia de racons → l'especialista del racó assumeix el grup complet, no cal cobrir a part. Si falta l'especialista → no es fan racons, cada tutora es queda amb el seu grup, no cal cobrir l'especialista..."></textarea>
     </div>
     <div class="field field-full" id="camp_intensiu" style="display:none;">
       <label>Com funciona la cobertura en horari intensiu/compactat?</label>
-      <textarea id="q_intensiu" placeholder="Ex: En intensiu no hi ha tarda. Les franges del matí s'amplien. Si falta algú, el criteri és el mateix però nomes fins a les 13:00-14:00..."></textarea>
+      <textarea id="q_intensiu" placeholder="Ex.: En intensiu no hi ha tarda. Les franges del matí s'amplien. Si falta algú, el criteri és el mateix però només fins a les 13:00–14:00..."></textarea>
     </div>
   </div>
 </div>
@@ -387,27 +387,27 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>Quan trenques el TP d'algú, com i quan ho comuniques?</label>
-      <textarea id="q_tp_comunicar" placeholder="Ex: Li aviso per WhatsApp o en persona just quan ho decideixo. Si l'absència és de la nit anterior, aviso per WhatsApp aquella nit..."></textarea>
+      <textarea id="q_tp_comunicar" placeholder="Ex.: L'aviso per WhatsApp o en persona just quan ho decideixo. Si l'absència és de la nit anterior, aviso per WhatsApp aquella nit..."></textarea>
     </div>
     <div class="field field-full">
       <label>Com es retorna el TP? Hi ha un termini o sistema concret?</label>
-      <textarea id="q_tp_retornar" placeholder="Ex: Intento retornar-lo la mateixa setmana o la següent. Busco una franja de pati, suport o reducció de grup on pugui alliberar la persona..."></textarea>
+      <textarea id="q_tp_retornar" placeholder="Ex.: Intento retornar-lo la mateixa setmana o la següent. Busco una franja de pati, suport o reducció de grup on pugui alliberar la persona..."></textarea>
     </div>
     <div class="field">
-      <label>Hi ha un límit de TPs acumulats que no pot superar cap docent?</label>
-      <input type="text" id="q_tp_limit" placeholder="Ex: Intentem que no s'acumulin més de 3-4 TPs pendents" />
+      <label>Hi ha un límit de TP acumulats que no pot superar cap docent?</label>
+      <input type="text" id="q_tp_limit" placeholder="Ex.: Intentem que no s'acumulin més de 3 o 4 TP pendents" />
     </div>
     <div class="field">
-      <label>Protegeixes els que acumulen molts TPs sense retornar?</label>
-      <textarea id="q_tp_protegir" placeholder="Ex: Sí, si algú porta 3 TPs sense retornar, procuro no trencar-li'n més si hi ha alternatives..."></textarea>
+      <label>Protegeixes els que acumulen molts TP sense retornar?</label>
+      <textarea id="q_tp_protegir" placeholder="Ex.: Sí, si algú porta 3 TP sense retornar, procuro no trencar-li'n més si hi ha alternatives..."></textarea>
     </div>
     <div class="field field-full">
       <label>Si l'única opció disponible és algú amb coordinació o càrrec aquella hora, li demanes?</label>
-      <textarea id="q_coordinacio" placeholder="Ex: Sí, però és el darrer recurs. Els coordinadors de cicle sí que els interrompo si cal. Al coordinador de riscos laborals, quasi mai, és molt crític. L'equip directiu en situació extrema..."></textarea>
+      <textarea id="q_coordinacio" placeholder="Ex.: Sí, però és el darrer recurs. Els coordinadors de cicle sí que els interrompo si cal. Al coordinador de riscos laborals, quasi mai, és molt crític. L'equip directiu en situació extrema..."></textarea>
     </div>
     <div class="field field-full">
       <label>Hi ha algun coordinador que mai interrompes perquè la seva funció és crítica?</label>
-      <input type="text" id="q_coordinacio_mai" placeholder="Ex: La coordinadora pedagògica (Clara) quasi mai. El coordinador TAC tampoc durant sessions amb alumnes..." />
+      <input type="text" id="q_coordinacio_mai" placeholder="Ex.: La coordinadora pedagògica (Clara) quasi mai. El coordinador TAC tampoc durant sessions amb alumnes..." />
     </div>
   </div>
 </div>
@@ -418,15 +418,15 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>El personal SIEI o MESI pot cobrir absències generals? En quines circumstàncies?</label>
-      <textarea id="q_siei" placeholder="Ex: El SIEI (Aurora i Clara) mai cobreix tutors, la seva funció és exclusivament els alumnes NEE. El MESI (Montse) pot cobrir com a ÚLTIM recurs si no hi ha absolutament ningú, però intentem no trencar-li la sessió..."></textarea>
+      <textarea id="q_siei" placeholder="Ex.: El SIEI (Aurora i Clara) mai cobreix tutors, la seva funció és exclusivament els alumnes NEE. El MESI (Montse) pot cobrir com a ÚLTIM recurs si no hi ha absolutament ningú, però intentem no trencar-li la sessió..."></textarea>
     </div>
     <div class="field field-full">
       <label>Les educadores/vetlladores poden cobrir un grup normal? Quin és el protocol EXACTE?</label>
-      <textarea id="q_educadores" placeholder="Ex: Les educadores (Sònia i Leyre) NO cobreixen tutors en cap cas, la seva funció és suport a alumnes concrets. Si no hi ha absolutament ningú, es reparteix el grup entre aules veïnes del mateix cicle..."></textarea>
+      <textarea id="q_educadores" placeholder="Ex.: Les educadores (Sònia i Leyre) NO cobreixen tutors en cap cas, la seva funció és suport a alumnes concrets. Si no hi ha absolutament ningú, es reparteix el grup entre aules veïnes del mateix cicle..."></textarea>
     </div>
     <div class="field field-full">
       <label>Els docents a temps parcial/mitja jornada, quan i com es fan servir per cobrir?</label>
-      <textarea id="q_mitja_jornada" placeholder="Ex: La Glòria (matins) pot cobrir qualsevol franja fins a les 12:30. La Laura P. (tardes) pot cobrir des de les 15:00. Mai se'ls posa cobertures fora del seu horari parcial..."></textarea>
+      <textarea id="q_mitja_jornada" placeholder="Ex.: La Glòria (matins) pot cobrir qualsevol franja fins a les 12:30. La Laura P. (tardes) pot cobrir des de les 15:00. Mai se'ls posa cobertures fora del seu horari parcial..."></textarea>
     </div>
   </div>
 </div>
@@ -437,23 +437,23 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>Si no hi ha absolutament ningú disponible, què fas? Com gestiones el grup?</label>
-      <textarea id="q_emergencia" placeholder="Ex: Divideixo el grup entre les aules veïnes del mateix cicle. Si és infantil, sempre intento que no quedin més de 30 alumnes per aula. Com a últim recurs entro jo (cap d'estudis) a fer-me càrrec..."></textarea>
+      <textarea id="q_emergencia" placeholder="Ex.: Divideixo el grup entre les aules veïnes del mateix cicle. Si és infantil, sempre intento que no quedin més de 30 alumnes per aula. Com a últim recurs entro jo (cap d'estudis) a fer-me càrrec..."></textarea>
     </div>
     <div class="field field-full">
       <label>Hi ha algun docent que funciona com a 'reserva' o coixí per a situacions extremes?</label>
-      <input type="text" id="q_reserva" placeholder="Ex: La Montse (MESI) és el nostre últim recurs. En alguns casos, el cap d'estudis entra directament." />
+      <input type="text" id="q_reserva" placeholder="Ex.: La Montse (MESI) és el nostre últim recurs. En alguns casos, el cap d'estudis entra directament." />
     </div>
     <div class="field">
       <label>Per a absències d'una sola franja, el criteri és el mateix que per a tot el dia?</label>
-      <textarea id="q_franja_unica" placeholder="Ex: Sí, el criteri és el mateix. Però per a una franja curta soc menys estricta amb el criteri d'afinitat de cicle..."></textarea>
+      <textarea id="q_franja_unica" placeholder="Ex.: Sí, el criteri és el mateix. Però per a una franja curta soc menys estricta amb el criteri d'afinitat de cicle..."></textarea>
     </div>
     <div class="field">
       <label>Per a absències de tot el dia, intentes que sigui el mateix docent tota la jornada?</label>
-      <textarea id="q_tot_dia" placeholder="Ex: Prefereixo que sigui el mateix, especialment a Infantil. Però si no és possible, que almenys el matí sigui una persona i la tarda una altra..."></textarea>
+      <textarea id="q_tot_dia" placeholder="Ex.: Prefereixo que sigui el mateix, especialment a Infantil. Però si no és possible, que almenys el matí sigui una persona i la tarda una altra..."></textarea>
     </div>
     <div class="field field-full">
       <label>Quan avises el docent que ha de cobrir? Al moment? La nit anterior?</label>
-      <input type="text" id="q_quan_avisar" placeholder="Ex: Si sé l'absència la nit anterior, aviso aquella nit per WhatsApp. Si és del matí, aviso just al principi de la jornada." />
+      <input type="text" id="q_quan_avisar" placeholder="Ex.: Si sé l'absència la nit anterior, aviso aquella nit per WhatsApp. Si és del matí, aviso just al principi de la jornada." />
     </div>
   </div>
 </div>
@@ -466,18 +466,18 @@ nav {
   <div class="exemple-bloc" id="ex1">
     <div class="exemple-num">Exemple 1</div>
     <div class="fields">
-      <div class="field"><label>Qui faltava i quan (dia, franja)</label><input type="text" id="ex1_qui" placeholder="Ex: La Marta (tutora 3rA) faltava un dimarts, franges f1a i f1b" /></div>
-      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex1_opcio" placeholder="Ex: La Laia (Anglès, tenia TP a f1a-f1b)" /></div>
-      <div class="field field-full"><label>Qui havia disponible i per qui vas optar — i per què</label><textarea id="ex1_pq" placeholder="Ex: Tenia el Joan (suport CI) però ja havia cobert 2 franges aquell matí. La Laia tenia TP i coneixia el cicle. La Marta (coordinadora CM) no la volia interrompre..." ></textarea></div>
+      <div class="field"><label>Qui faltava i quan (dia, franja)</label><input type="text" id="ex1_qui" placeholder="Ex.: La Marta (tutora 3rA) faltava un dimarts, franges f1a i f1b" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex1_opcio" placeholder="Ex.: La Laia (Anglès, tenia TP a f1a-f1b)" /></div>
+      <div class="field field-full"><label>Qui hi havia disponible i per qui vas optar — i per què</label><textarea id="ex1_pq" placeholder="Ex.: Tenia el Joan (suport CI) però ja havia cobert 2 franges aquell matí. La Laia tenia TP i coneixia el cicle. La Marta (coordinadora CM) no la volia interrompre..." ></textarea></div>
     </div>
   </div>
 
   <div class="exemple-bloc" id="ex2">
     <div class="exemple-num">Exemple 2</div>
     <div class="fields">
-      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex2_qui" placeholder="Ex: En Carles (EF) faltava tot el dijous" /></div>
-      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex2_opcio" placeholder="Ex: La tutora de cada grup va assumir la seva sessió d'EF" /></div>
-      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex2_pq" placeholder="Ex: En EF els tutors solen quedar-se amb el seu grup perquè ja el coneixen. Evitem posar un MESI que no té relació amb l'alumnat de primària..." ></textarea></div>
+      <div class="field"><label>Qui faltava i quan</label><input type="text" id="ex2_qui" placeholder="Ex.: En Carles (EF) faltava tot el dijous" /></div>
+      <div class="field"><label>Per qui vas optar</label><input type="text" id="ex2_opcio" placeholder="Ex.: La tutora de cada grup va assumir la seva sessió d'EF" /></div>
+      <div class="field field-full"><label>Per què i no una altra persona</label><textarea id="ex2_pq" placeholder="Ex.: En EF els tutors solen quedar-se amb el seu grup perquè ja el coneixen. Evitem posar un MESI que no té relació amb l'alumnat de primària..." ></textarea></div>
     </div>
   </div>
 
@@ -511,8 +511,8 @@ nav {
   <div class="exemple-bloc emergencia">
     <div class="exemple-num">🚨 Cas límit — quan no hi havia ningú disponible</div>
     <div class="fields">
-      <div class="field field-full"><label>Descriu la situació (qui faltava, quin dia, quantes franges)</label><textarea id="cas_limit_situacio" placeholder="Ex: Un dilluns de gener van faltar 4 docents alhora (grip). No teníem ningú disponible per la 3a franja de 3rB..."></textarea></div>
-      <div class="field field-full"><label>Exactament què vas fer</label><textarea id="cas_limit_solucio" placeholder="Ex: Vaig dividir 3rB entre 3rA i els dos grups de 4t. Vaig trucar al MESI perquè entrés a un dels grups. Jo mateixa vaig entrar a cobrir la darrera franja..."></textarea></div>
+      <div class="field field-full"><label>Descriu la situació (qui faltava, quin dia, quantes franges)</label><textarea id="cas_limit_situacio" placeholder="Ex.: Un dilluns de gener van faltar 4 docents alhora (grip). No teníem ningú disponible per a la 3a franja de 3rB..."></textarea></div>
+      <div class="field field-full"><label>Exactament què vas fer</label><textarea id="cas_limit_solucio" placeholder="Ex.: Vaig dividir 3rB entre 3rA i els dos grups de 4t. Vaig trucar al MESI perquè entrés a un dels grups. Jo mateixa vaig entrar a cobrir la darrera franja..."></textarea></div>
     </div>
   </div>
 </div>
@@ -523,15 +523,15 @@ nav {
   <div class="fields">
     <div class="field field-full">
       <label>Hi ha normes del centre que fa anys que es respecten però no estan escrites en cap lloc?</label>
-      <textarea id="q_normes_no_escrites" placeholder="Ex: Sempre evitem posar la Montse (MESI) a cobrir si té alumnes amb necessitats urgents aquella franja. Al Joan mai li trenquem el TP si ja n'ha acumulat 3 o més..."></textarea>
+      <textarea id="q_normes_no_escrites" placeholder="Ex.: Sempre evitem posar la Montse (MESI) a cobrir si té alumnes amb necessitats urgents aquella franja. Al Joan mai li trenquem el TP si ja n'ha acumulat 3 o més..."></textarea>
     </div>
     <div class="field field-full">
       <label>Hi ha docents o situacions que sempre generen conflicte o que has après a gestionar d'una manera especial?</label>
-      <textarea id="q_conflictes" placeholder="Ex: Quan falta la tutora d'I3A, el grup és molt difícil i hem après que cal posar algú que ja el conegui. Si falta l'especialista d'Anglès el dia d'avaluació, el criteri canvia..."></textarea>
+      <textarea id="q_conflictes" placeholder="Ex.: Quan falta la tutora d'I3A, el grup és molt difícil i hem après que cal posar algú que ja el conegui. Si falta l'especialista d'Anglès el dia d'avaluació, el criteri canvia..."></textarea>
     </div>
     <div class="field field-full">
       <label>Si poguessis explicar la teva lògica de cobertures en 3 frases a algú nou, com ho faries?</label>
-      <textarea id="q_resum" placeholder="Ex: Primer miro qui pot cobrir sense trencar res important. Després, qui conegui millor el grup. Finalment, reparteixo perquè ningú s'acarregui de tot..."></textarea>
+      <textarea id="q_resum" placeholder="Ex.: Primer miro qui pot cobrir sense trencar res important. Després, qui conegui millor el grup. Finalment, reparteixo perquè ningú no hagi de carregar amb tot..."></textarea>
     </div>
     <div class="field field-full">
       <label>Alguna cosa més que la IA hauria de saber sobre com gestioneu les cobertures?</label>
@@ -563,7 +563,7 @@ nav {
 <div id="preview">
   <div class="preview-header">
     <h2>Revisa la configuració generada</h2>
-    <p>Pots editar els dos documents directament abans de crear l'escola. Els canvis es guardaran tal com els veges aquí.</p>
+    <p>Pots editar els dos documents directament abans de crear l'escola. Els canvis es guardaran tal com els vegis aquí.</p>
   </div>
 
   <div class="preview-grid">
@@ -914,7 +914,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   if (!v('nom') || !v('codi') || !v('nom_director') || !v('nom_jefa') || !v('email_jefa') || !v('grups')) {
-    alert("Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu (incl. email de la cap d'estudis) i Grups.");
+    alert("Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu (incl. correu electrònic de la cap d'estudis) i Grups.");
     return;
   }
 
@@ -940,7 +940,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   } catch (err) {
     hide('loading');
     show('form');
-    alert('Error en el processament IA: ' + err.message + '\nTorna-ho a intentar.');
+    alert('Error en el processament de la IA: ' + err.message + '\nTorna-ho a intentar.');
   }
 });
 

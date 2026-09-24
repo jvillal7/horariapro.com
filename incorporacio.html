@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Alta de nou centre — HorariaPro</title>
+<title>Alta d'un centre nou — HorariaPro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet" />
 <style>
@@ -163,7 +163,7 @@
 <body>
 
 <div class="wiz-brand"><img src="/logo.svg" alt="HorariaPro" /></div>
-<div class="wiz-eyebrow">Alta de nou centre</div>
+<div class="wiz-eyebrow">Alta d'un centre nou</div>
 
 <div class="wiz-card">
 
@@ -207,7 +207,7 @@
       <div class="field">
         <label>Correu electrònic de la cap d'estudis <span class="req">*</span></label>
         <input type="email" id="email_jefa" placeholder="cap.estudis@ceip..." />
-        <div class="hint">Amb este correu s'accedeix a l'app.</div>
+        <div class="hint">Amb aquest correu s'accedeix a l'app.</div>
       </div>
       <div class="field">
         <label>Nom de la cap d'estudis <span class="req">*</span></label>
@@ -223,7 +223,7 @@
   <!-- PAS 1 — Perfil operatiu -->
   <div class="wiz-step" data-step="1" hidden>
     <h2>Perfil del centre</h2>
-    <p class="wiz-sub">Ajuda'ns a conèixer millor el centre — açò també servirà per personalitzar HorarIA.</p>
+    <p class="wiz-sub">Ajuda'ns a conèixer millor el centre — això també servirà per personalitzar HorarIA.</p>
     <div class="fields">
       <div class="field">
         <label>Nombre aproximat de docents</label>
@@ -233,9 +233,9 @@
         <label>Etapes educatives</label>
         <select id="etapes">
           <option value="infantil i primaria">Infantil i Primària</option>
-          <option value="primaria">Primària (sense Infantil)</option>
+          <option value="primaria">Primària (sense infantil)</option>
           <option value="infantil">Infantil</option>
-          <option value="educació especial">Educació Especial (CEE)</option>
+          <option value="educació especial">Educació especial (CEE)</option>
           <option value="secundaria">Secundària</option>
           <option value="altres">Altres</option>
         </select>
@@ -244,10 +244,10 @@
         <label>Serveis i recursos especials del centre</label>
         <div class="check-group">
           <label class="check-opt"><input type="checkbox" id="te_siei" /><span>Aula SIEI o SIEI+</span></label>
-          <label class="check-opt"><input type="checkbox" id="te_educadores" /><span>Educadores / Vetlladores</span></label>
+          <label class="check-opt"><input type="checkbox" id="te_educadores" /><span>Educadores / vetlladores</span></label>
           <label class="check-opt"><input type="checkbox" id="te_mesi" /><span>Personal MESI</span></label>
           <label class="check-opt"><input type="checkbox" id="te_acollida" /><span>Aula d'acollida</span></label>
-          <label class="check-opt"><input type="checkbox" id="horari_tarda" /><span>Horari de tarda (fins les 16:30)</span></label>
+          <label class="check-opt"><input type="checkbox" id="horari_tarda" /><span>Horari de tarda (fins a les 16:30)</span></label>
           <label class="check-opt"><input type="checkbox" id="horari_intensiu" /><span>Horari intensiu / compactat</span></label>
         </div>
       </div>
@@ -276,22 +276,22 @@
     <div class="plans-grid">
       <div class="plan-card plan-gratuit" id="plan-gratuit" onclick="selectPlan('gratuit')">
         <div class="plan-nom">Gratuït</div>
-        <div><span class="plan-preu" id="preu-gratuit">€0</span><span class="plan-preu-mes">/3 mesos</span></div>
+        <div><span class="plan-preu" id="preu-gratuit">0 €</span><span class="plan-preu-mes">/3 mesos</span></div>
         <div class="plan-lim">3 mesos o 90 propostes IA</div>
         <ul class="plan-features">
-          <li>Proposta de cobertures amb IA (90u)</li>
+          <li>Proposta de cobertures amb IA (90&nbsp;u.)</li>
           <li>Notificacions automàtiques</li>
           <li>Normes i context IA personalitzat</li>
           <li>Historial i informes (ATRI)</li>
-          <li>Suport per email</li>
-          <li>Gestió torns del pati (3u)</li>
-          <li>Gestió sortides amb acompanyants (10u)</li>
-          <li>Gestió Treball Personal (10u)</li>
+          <li>Suport per correu electrònic</li>
+          <li>Gestió dels torns del pati (3&nbsp;u.)</li>
+          <li>Gestió de sortides amb acompanyants (10&nbsp;u.)</li>
+          <li>Gestió del Treball Personal (10&nbsp;u.)</li>
         </ul>
       </div>
       <div class="plan-card plan-pro" id="plan-escola" onclick="selectPlan(planTierAuto)">
         <div class="plan-nom" id="escola-nom">Estàndard</div>
-        <div><span class="plan-preu" id="preu-escola">€59</span><span class="plan-preu-mes">/mes</span></div>
+        <div><span class="plan-preu" id="preu-escola">59 €</span><span class="plan-preu-mes">/mes</span></div>
         <div class="plan-lim" id="escola-docents">Segons el nombre de docents del centre</div>
         <div class="plan-anual-info" id="anual-escola" style="display:none;">€590/any</div>
         <ul class="plan-features">
@@ -299,11 +299,11 @@
           <li>Notificacions automàtiques</li>
           <li>Normes i context IA personalitzat</li>
           <li>Historial i informes d'absències (ATRI)</li>
-          <li>Suport per email</li>
-          <li>Gestió torns del pati</li>
-          <li>Gestió sortides amb acompanyants</li>
-          <li>Gestió Treball Personal</li>
-          <li>Gestió horaris jornada intensiva</li>
+          <li>Suport per correu electrònic</li>
+          <li>Gestió dels torns del pati</li>
+          <li>Gestió de sortides amb acompanyants</li>
+          <li>Gestió del Treball Personal</li>
+          <li>Gestió d'horaris de jornada intensiva</li>
           <li>Chat HorarIA per WhatsApp</li>
           <li>Implantació gratuïta</li>
         </ul>
@@ -327,7 +327,7 @@
       <div class="cp-portada">
         <div class="cp-logo">HorariaPro</div>
         <div class="cp-titol">
-          <h1>Contracte de Prestació de Serveis<br>i Encàrrec de Tractament de Dades</h1>
+          <h1>Contracte de prestació de serveis<br>i encàrrec de tractament de dades</h1>
           <div class="sub">Versió 1.0 · <span id="cp-data"></span> · D'acord amb el RGPD (UE) 2016/679</div>
         </div>
         <div class="cp-parts">
@@ -346,23 +346,23 @@
 
       <div class="cp-body">
         <h2>Exposició prèvia</h2>
-        <p><strong>PRIMER.</strong> Jorge Villalba, d'ara endavant <strong>"el Proveïdor"</strong>, és el titular i desenvolupador de HorariaPro, una plataforma SaaS per a la gestió automatitzada d'absències i cobertures del personal docent en centres educatius.</p>
+        <p><strong>PRIMER.</strong> Jorge Villalba, d'ara endavant <strong>"el Proveïdor"</strong>, és el titular i desenvolupador d'HorariaPro, una plataforma SaaS per a la gestió automatitzada d'absències i cobertures del personal docent en centres educatius.</p>
         <p><strong>SEGON.</strong> <strong id="cp-centre-nom2">—</strong>, d'ara endavant <strong>"el Client"</strong>, és un centre educatiu que subscriu el servei HorariaPro per gestionar les absències del seu personal i l'assignació de cobertures.</p>
-        <p><strong>TERCER.</strong> En la prestació del servei, el Proveïdor tractarà dades del personal docent del Client com a encarregat del tractament (art. 28 RGPD). El present contracte regula tant les condicions comercials com les obligacions en matèria de protecció de dades.</p>
+        <p><strong>TERCER.</strong> En la prestació del servei, el Proveïdor tractarà dades del personal docent del Client com a encarregat del tractament (art. 28 RGPD). Aquest contracte regula tant les condicions comercials com les obligacions en matèria de protecció de dades.</p>
 
-        <h2>Part I — Condicions del Servei</h2>
+        <h2>Part I — Condicions del servei</h2>
         <p><strong>Cl. 1. Objecte.</strong> El Proveïdor presta al Client accés a la plataforma HorariaPro / GDOCENT: registre d'absències, cobertures per IA, quadre en temps real, gestió del Treball Personal (TP), extracció d'horaris, historial i informes.</p>
         <p><strong>Cl. 2. Durada.</strong> El contracte entra en vigor en la data de signatura i té durada d'un (1) any, prorrogable automàticament. Les parts poden no renovar amb un preavís de 30 dies. Els primers tres (3) mesos són de prova sense cost.</p>
         <p><strong>Cl. 3. Preu i forma de pagament.</strong></p>
         <div class="hl"><p id="cp-preu">Quota mensual: — €/mes · Modalitat: —</p></div>
         <p>Pagament per transferència o domiciliació els primers 10 dies de cada període. En cas d'impagament superior a 30 dies, el Proveïdor pot suspendre l'accés fins a regularització.</p>
-        <p><strong>Cl. 4. Obligacions del Proveïdor.</strong> Disponibilitat objectiu del 99% mensual; suport tècnic per email (48h hàbils); configuració inicial del centre; aïllament complet de dades; notificació d'incidents en 72h.</p>
+        <p><strong>Cl. 4. Obligacions del Proveïdor.</strong> Disponibilitat objectiu del 99&nbsp;% mensual; suport tècnic per correu electrònic (48&nbsp;h hàbils); configuració inicial del centre; aïllament complet de dades; notificació d'incidents en 72&nbsp;h.</p>
         <p><strong>Cl. 5. Obligacions del Client.</strong> Facilitar dades de configuració inicial (docents, horaris, grups); designar persona de contacte; custodiar els PINs d'accés; abonar les quotes en termini.</p>
         <p><strong>Cl. 6. Propietat intel·lectual.</strong> El Proveïdor conserva tots els drets sobre HorariaPro. El contracte atorga al Client una llicència d'ús no exclusiva i intransferible durant la vigència.</p>
         <p><strong>Cl. 7. Limitació de responsabilitat.</strong> La responsabilitat màxima del Proveïdor queda limitada a tres (3) mesos de quota. Les propostes de la IA tenen caràcter orientatiu i no vinculant.</p>
         <p><strong>Cl. 8. Resolució.</strong> Per incompliment greu (preavís 15 dies hàbils per esmenar) o per mutu acord. Resolució unilateral del Client: 30 dies de preavís. A la resolució, les dades queden disponibles 30 dies en format exportable i posteriorment s'eliminen.</p>
 
-        <h2>Part II — Encàrrec de Tractament (Art. 28 RGPD)</h2>
+        <h2>Part II — Encàrrec de tractament (art. 28 RGPD)</h2>
         <p><strong>Cl. 9. Parts.</strong> El Client actua com a <strong>Responsable del Tractament</strong>. El Proveïdor actua com a <strong>Encarregat del Tractament</strong>.</p>
         <p><strong>Cl. 10. Descripció del tractament encarregat.</strong></p>
         <table>
@@ -372,17 +372,17 @@
           <tr><td>Interessats</td><td>Personal docent i de suport educatiu del centre</td></tr>
           <tr><td>Durada</td><td>Durant la vigència del contracte + 30 dies per exportar</td></tr>
         </table>
-        <p><strong>Cl. 11. Obligacions de l'Encarregat.</strong> Tractar dades únicament per instruccions documentades del Responsable; garantir confidencialitat; implementar mesures de seguretat (art. 32 RGPD); gestionar subencàrregats; assistir en drets dels interessats; notificar violacions en 72h; suprimir o retornar dades en finalitzar.</p>
+        <p><strong>Cl. 11. Obligacions de l'Encarregat.</strong> Tractar dades únicament per instruccions documentades del Responsable; garantir confidencialitat; implementar mesures de seguretat (art. 32 RGPD); gestionar subencàrregats; assistir en drets dels interessats; notificar violacions en 72&nbsp;h; suprimir o retornar dades en finalitzar.</p>
         <p><strong>Cl. 12. Subencàrregats autoritzats.</strong></p>
         <table>
           <tr><th>Subencàrregat</th><th>Servei</th><th>Ubicació</th></tr>
           <tr><td>Supabase Inc.</td><td>Base de dades</td><td>UE (EU-West)</td></tr>
           <tr><td>Anthropic PBC</td><td>IA de cobertures</td><td>EUA (clàusules contractuals UE)</td></tr>
           <tr><td>Cloudflare Inc.</td><td>Proxy IA</td><td>EUA/UE (clàusules contractuals UE)</td></tr>
-          <tr><td>Google LLC</td><td>Notificacions email</td><td>EUA (clàusules contractuals UE)</td></tr>
+          <tr><td>Google LLC</td><td>Notificacions per correu electrònic</td><td>EUA (clàusules contractuals UE)</td></tr>
         </table>
-        <p><strong>Cl. 13. Mesures de seguretat.</strong> HTTPS/TLS en trànsit; xifrat en repòs; autenticació per PIN; aïllament per centre; còpies de seguretat automàtiques; control d'accés per rol; emmagatzemament a la UE.</p>
-        <p><strong>Cl. 14–16.</strong> Drets dels interessats: el Responsable és l'interlocutor principal. Eliminació de dades: 30 dies per exportar + 30 dies per eliminar + certificat d'eliminació opcional. Violacions: notificació en 72h amb detall de la incidència.</p>
+        <p><strong>Cl. 13. Mesures de seguretat.</strong> HTTPS/TLS en trànsit; xifratge en repòs; autenticació per PIN; aïllament per centre; còpies de seguretat automàtiques; control d'accés per rol; emmagatzemament a la UE.</p>
+        <p><strong>Cl. 14–16.</strong> Drets dels interessats: el Responsable és l'interlocutor principal. Eliminació de dades: 30 dies per exportar + 30 dies per eliminar + certificat d'eliminació opcional. Violacions: notificació en 72&nbsp;h amb detall de la incidència.</p>
 
         <h2>Part III — Disposicions Finals</h2>
         <p><strong>Cl. 17.</strong> Llei espanyola aplicable. Jurisdicció dels tribunals competents. <strong>Cl. 18.</strong> Modificacions per escrit i signades per ambdues parts. <strong>Cl. 19.</strong> Comunicacions per correu electrònic a les adreces indicades. <strong>Cl. 20.</strong> Document complet que substitueix acords anteriors. En cas de contradicció, prevaldrà la Part II en matèria de protecció de dades.</p>
@@ -462,11 +462,11 @@ function actualitzaPlaEscola() {
   const preuEl = document.getElementById('preu-escola');
   const anualEl = document.getElementById('anual-escola');
   if (modalitatActual === 'anual') {
-    preuEl.textContent = '€' + (p.preu * 10 / 12).toFixed(0);
-    anualEl.textContent = '€' + (p.preu * 10) + '/any';
+    preuEl.textContent = (p.preu * 10 / 12).toFixed(0) + ' €';
+    anualEl.textContent = (p.preu * 10) + ' €/any';
     anualEl.style.display = 'inline-block';
   } else {
-    preuEl.textContent = '€' + p.preu;
+    preuEl.textContent = p.preu + ' €';
     anualEl.style.display = 'none';
   }
   // Si ja hi havia un pla de pagament triat, actualitza'l al tram nou.
@@ -660,7 +660,7 @@ async function confirmarICrear() {
       btnConfigurar.href = 'https://app.horariapro.com';
       showStep(4);
     } else {
-      errEl.textContent = '⚠️ ' + (escolaData.error || 'Error creant el compte — contacta amb horaria.admin@gmail.com');
+      errEl.textContent = '⚠️ ' + (escolaData.error || 'Error en crear el compte — contacta amb horaria.admin@gmail.com');
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'Confirmar i crear el compte →';
