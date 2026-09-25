@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestió de cobertures del professorat: guia per a caps d'estudis — HorariaPro</title>
+  <meta name="description" content="Com organitzar les cobertures i absències del professorat sense perdre hores cada matí: què fa malament l'Excel, com ho couvren Clickedu i Gescola, i com ho resol HorariaPro amb IA." />
+  <link rel="canonical" href="https://horariapro.com/guia-cobertures-professorat.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://horariapro.com/guia-cobertures-professorat.html" />
+  <meta property="og:site_name" content="HorariaPro" />
+  <meta property="og:title" content="Gestió de cobertures del professorat: guia per a caps d'estudis" />
+  <meta property="og:description" content="Com organitzar les cobertures i absències del professorat sense perdre hores cada matí." />
+  <meta property="og:image" content="https://horariapro.com/logo.png" />
+  <meta property="og:locale" content="ca_ES" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qui organitza les cobertures quan falta un mestre a un centre educatiu?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Normalment el cap d'estudis, que revisa qui té hores lliures o de suport en eixa franja i decideix qui cobreix el grup. En centres grans este procés es pot allargar bastant si es fa a mà (paper, Excel o WhatsApp)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Es pot automatitzar la gestió de cobertures internes del professorat?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí. Eines com HorariaPro fan servir intel·ligència artificial per proposar en segons qui pot cobrir cada franja, tenint en compte l'horari real de cada docent, sense haver de repassar-lo a mà." }
+      },
+      {
+        "@type": "Question",
+        "name": "Quina diferència hi ha entre HorariaPro i plataformes com Clickedu o Gescola?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Clickedu i Gescola són plataformes de gestió acadèmica completes (notes, famílies, facturació, etc.) on les substitucions són un mòdul més. HorariaPro és una eina especialitzada només en absències i cobertures, amb IA que proposa la solució en minuts, i es pot fer servir juntament amb la plataforma de gestió que ja tinga el centre." }
+      },
+      {
+        "@type": "Question",
+        "name": "Quant costa un programa de gestió de cobertures per a un centre educatiu?",
+        "acceptedAnswer": { "@type": "Answer", "text": "HorariaPro té plans des de 59€/mes per centre, amb prova gratuïta inicial. El preu depèn del nombre de funcionalitats que necessite el centre (vegeu horariapro.com/#preus)." }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:   #0a0a0a;
+      --ink:     #1a1a1a;
+      --ink-2:   #444;
+      --ink-3:   #777;
+      --ink-4:   #aaa;
+      --border:  #e8e8e8;
+      --bg:      #fff;
+      --bg-2:    #f7f7f7;
+      --green:    #1A7A4E;
+      --green-lt: #EAF5EE;
+      --r:       12px;
+      --shadow:  0 2px 16px rgba(0,0,0,.07);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; text-decoration: none; }
+    .nav-back { font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; }
+    .nav-back:hover { color: #fff; text-decoration: none; }
+
+    .page-hero {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 5% 40px;
+    }
+    .page-hero .tag {
+      display: inline-block;
+      background: var(--green-lt);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--ink); max-width: 780px; }
+    .page-hero .updated { font-size: 13px; color: var(--ink-3); margin-top: 10px; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 56px 5% 40px; }
+    .content h2 { font-size: 22px; font-weight: 800; color: var(--ink); margin: 44px 0 14px; }
+    .content h2:first-child { margin-top: 0; }
+    .content h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin: 24px 0 8px; }
+    .content p { color: var(--ink-2); margin-bottom: 14px; }
+    .content ul { color: var(--ink-2); padding-left: 20px; margin-bottom: 14px; }
+    .content ul li { margin-bottom: 6px; }
+
+    .callout {
+      background: var(--green-lt);
+      border-left: 4px solid var(--green);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 18px 22px;
+      margin: 28px 0;
+    }
+    .callout p { color: var(--ink); margin: 0 0 10px; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout strong { color: var(--green); }
+
+    .cta-box {
+      max-width: 760px; margin: 40px auto 0; padding: 0 5%;
+    }
+    .cta-inner {
+      background: var(--black); border-radius: 20px; padding: 40px 32px;
+      text-align: center; color: #fff;
+    }
+    .cta-inner h2 { color: #fff; margin: 0 0 8px; }
+    .cta-inner p { color: rgba(255,255,255,.65); margin-bottom: 22px; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #fff; color: var(--black); padding: 12px 24px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,.08); color: #fff; padding: 12px 24px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none; border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .faq-item { margin-bottom: 22px; }
+    .faq-item h3 { margin-bottom: 6px; }
+
+    footer {
+      background: var(--bg-2); border-top: 1px solid var(--border);
+      padding: 32px 5%; margin-top: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--ink-3);
+    }
+    .footer-logo { font-weight: 800; color: var(--ink); }
+    .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-legal a { color: var(--ink-3); font-size: 13px; }
+    .footer-legal a:hover { color: var(--green); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">HorariaPro</a>
+  <a href="/" class="nav-back">← Tornar a l'inici</a>
+</nav>
+
+<div class="page-hero">
+  <div style="max-width:780px; margin:0 auto;">
+    <div class="tag">Guia per a caps d'estudis</div>
+    <h1>Gestió de cobertures del professorat: com deixar de perdre-hi el matí sencer</h1>
+    <p class="updated">Actualitzat: setembre de 2026</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2>El problema de cada matí</h2>
+  <p>Falta un mestre. Cal repassar qui té hores lliures o de suport en eixa franja, comprovar que no coincidisca amb res més, avisar la persona, i fer-ho de nou si falta algú altre el mateix dia. En un centre de mida mitjana, este procés —fet a mà, amb l'horari en paper o en un Excel— es pot menjar fàcilment 30-60 minuts cada matí del cap d'estudis, just quan més falta fa eixe temps per a altres coses.</p>
+  <p>No és un problema d'organització: és un problema d'eina. Repassar un horari sencer per trobar qui pot cobrir una franja és exactament el tipus de tasca que no hauria de fer una persona a mà cada dia.</p>
+
+  <h2>Com ho couvren les plataformes de gestió de centres</h2>
+  <p>La majoria de centres ja tenen contractada alguna plataforma de gestió acadèmica —<strong>Clickedu</strong> o <strong>Gescola</strong> són les més esteses a Catalunya— per a notes, comunicació amb famílies, facturació, etc. Totes dues incorporen un mòdul de "guàrdies i substitucions": el cap d'estudis crea la incidència i assigna manualment qui cobreix.</p>
+  <p>Funciona, però és un mòdul secundari dins d'una eina molt més gran pensada per a tot el centre. L'assignació continua sent manual: la plataforma et deixa registrar-ho i que el substitut ho vege al seu horari, però no et diu <em>qui</em> hauria de cobrir cada franja. Eixa decisió —la part que realment consumeix temps— continua sent teua.</p>
+
+  <h2>Com ho fa HorariaPro</h2>
+  <p>HorariaPro no substitueix la plataforma de gestió acadèmica del centre (notes, famílies...) — és una eina especialitzada només en absències i cobertures, i es pot fer servir en paral·lel amb el que ja tingueu. La diferència és que la <strong>intel·ligència artificial proposa la cobertura en segons</strong>, analitzant l'horari real de tots els docents: qui té hores lliures, de suport o de substitució en eixa franja concreta, sense que ningú haja de repassar-ho a mà.</p>
+  <ul>
+    <li>El docent avisa de l'absència (des del mòbil o per WhatsApp) i la IA genera la proposta de cobertura a l'instant.</li>
+    <li>El cap d'estudis confirma amb un clic — o ajusta-la si cal.</li>
+    <li>Tothom afectat (el cobridor, el tutor, el coordinador de cicle) rep la notificació automàticament, sense haver d'avisar un per un.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>En xifres:</strong> el que abans eren 30-60 minuts repassant l'horari, amb HorariaPro són minuts, no hores.</p>
+  </div>
+
+  <h2>Preguntes freqüents</h2>
+
+  <div class="faq-item">
+    <h3>Qui organitza les cobertures quan falta un mestre a un centre educatiu?</h3>
+    <p>Normalment el cap d'estudis, que revisa qui té hores lliures o de suport en eixa franja i decideix qui cobreix el grup. En centres grans este procés es pot allargar bastant si es fa a mà.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Es pot automatitzar la gestió de cobertures internes del professorat?</h3>
+    <p>Sí. Eines com HorariaPro fan servir intel·ligència artificial per proposar en segons qui pot cobrir cada franja, tenint en compte l'horari real de cada docent.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Quina diferència hi ha entre HorariaPro i plataformes com Clickedu o Gescola?</h3>
+    <p>Clickedu i Gescola són plataformes de gestió acadèmica completes on les substitucions són un mòdul més, d'assignació manual. HorariaPro és una eina especialitzada només en absències i cobertures, amb IA que proposa la solució en minuts, i es pot fer servir juntament amb la plataforma que ja tinga el centre.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Quant costa un programa de gestió de cobertures per a un centre educatiu?</h3>
+    <p>HorariaPro té plans des de <a href="/#preus">59€/mes per centre</a>, amb prova gratuïta inicial.</p>
+  </div>
+
+</div>
+
+<div class="cta-box">
+  <div class="cta-inner">
+    <h2>Vols veure-ho amb el teu horari real?</h2>
+    <p>Prova gratuïta, configuració en minuts.</p>
+    <div class="cta-btns">
+      <a href="/incorporacio.html" class="btn-primary">Integra HorariaPro ara mateix</a>
+      <a href="/#preus" class="btn-secondary">Veure preus</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="/logo.png" alt="HorariaPro" style="height:24px; filter:brightness(0);" /></div>
+  <div class="footer-legal">
+    <a href="/avis-legal.html">Avís legal</a>
+    <a href="/politica-privacitat.html">Política de privacitat</a>
+    <a href="/politica-cookies.html">Política de galetes</a>
+  </div>
+  <div>© 2026 HorariaPro. Tots els drets reservats.</div>
+</footer>
+
+<script src="/analytics.js" defer></script>
+</body>
+</html>
