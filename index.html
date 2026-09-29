@@ -1371,7 +1371,7 @@
   <div class="section-inner">
     <div class="section-tag">Preus</div>
     <h2 class="section-title">Sense permanència. Sense sorpreses.</h2>
-    <p class="section-sub">Paga 10 mesos · Juliol i agost, gratis · Suport directe inclòs · Cancel·la quan vulguis.</p>
+    <p class="section-sub">Paga 10 mesos · Juliol i agost, gratis · Suport directe inclòs · Cancel·la quan vulguis. Preus sense IVA (21&nbsp;% a la factura).</p>
 
     <style>
       #calcSlider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:#fff; border:3px solid var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.35); cursor:pointer; }
@@ -1397,7 +1397,7 @@
         const totalEl = document.getElementById('calcPreuTotal');
         totalEl.textContent = fmtEur(total)+' €';
         totalEl.style.color = pla.color;
-        document.getElementById('calcPreuPeriode').textContent = anual ? '/any' : '/mes';
+        document.getElementById('calcPreuPeriode').textContent = anual ? '/any + IVA' : '/mes + IVA';
         document.getElementById('calcPreuNota').textContent = anual
           ? 'Un sol pagament i una sola factura · juliol i agost inclosos'
           : 'Es cobra 10 mesos a l’any · juliol i agost, gratis';
@@ -1457,7 +1457,7 @@
           <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;" id="calcPlaNom">Estàndard</div>
           <div style="display:flex; align-items:baseline; gap:4px;">
             <span id="calcPreuTotal" style="font-size:40px; font-weight:800; color:#fff; letter-spacing:-.03em;">59 €</span>
-            <span id="calcPreuPeriode" style="font-size:14px; color:rgba(255,255,255,.5);">/mes</span>
+            <span id="calcPreuPeriode" style="font-size:14px; color:rgba(255,255,255,.5);">/mes + IVA</span>
           </div>
           <div id="calcPreuNota" style="font-size:12.5px; color:#4ade80; font-weight:600; margin-top:6px;">Es cobra 10 mesos a l’any · juliol i agost, gratis</div>
           <div id="calcPreuUnitari" style="font-size:13px; color:rgba(255,255,255,.5); margin-top:4px;">≈ 2,95 €/professional de mitjana</div>
