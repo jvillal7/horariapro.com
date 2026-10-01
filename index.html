@@ -958,6 +958,17 @@
       .nav-logo img { height: 34px; }
       .nav-cta { padding: 7px 11px; font-size: 12px; }
     }
+    /* Portàtils de 14" (≈1280 px de viewport amb l'escalat de Windows): logo + 7 enllaços + botó
+       no hi caben i el text es trencava en dues línies. Compactem i, per sota de 1100 px, menú hamburguesa. */
+    .nav-links a, .nav-logo { white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 1360px) {
+      .nav-links { gap: 18px; font-size: 13.5px; }
+      .nav-logo img { height: 42px; }
+    }
+    @media (max-width: 1100px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+    }
     /* Targetes de preus: sempre 2x2, mai una targeta sola en una fila amb
        espai buit al costat (passava amb auto-fit en pantalles d'escriptori
        prou amples per a 3 columnes però no per a 4). */
