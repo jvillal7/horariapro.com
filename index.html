@@ -2043,23 +2043,12 @@
     const centre = form.querySelectorAll('input')[2].value;
     const rol   = form.querySelector('select').value;
     const msg   = form.querySelector('textarea').value;
-    fetch('https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/send-email', {
+    // contact-public: destinatari i plantilla es construeixen al servidor
+    // (mai lliures des d'ací) — veure supabase/functions/contact-public.
+    fetch('https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/contact-public', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': 'sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK',
-        'Authorization': 'Bearer sb_publishable_t3-NsA6e13wB0-kDuXvXGw_7b6vVllK',
-      },
-      body: JSON.stringify({
-        to: 'horaria.admin@gmail.com',
-        subject: `Nova sol·licitud — ${centre}`,
-        html: `<h2>Nova sol·licitud de demo</h2>
-               <p><strong>Nom:</strong> ${nom}</p>
-               <p><strong>Email:</strong> ${email}</p>
-               <p><strong>Centre:</strong> ${centre}</p>
-               <p><strong>Rol:</strong> ${rol}</p>
-               <p><strong>Missatge:</strong> ${msg || '—'}</p>`,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nom, email, centre, rol, msg }),
     })
     .then(() => {
       btn.textContent = '✓ Sol·licitud enviada!';
