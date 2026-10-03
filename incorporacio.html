@@ -269,7 +269,7 @@
     <p class="wiz-sub">Pots començar gratis i canviar de pla quan vulguis.</p>
 
     <div class="plans-toggle">
-      <button type="button" id="toggle-mensual" class="active" onclick="setModalitat('mensual')">Mensual (2 mesos gratis)</button>
+      <button type="button" id="toggle-mensual" class="active" onclick="setModalitat('mensual')">Mensual</button>
       <button type="button" id="toggle-anual" onclick="setModalitat('anual')">Anual (2 mesos gratis)</button>
     </div>
 
@@ -291,9 +291,9 @@
       </div>
       <div class="plan-card plan-pro" id="plan-escola" onclick="selectPlan(planTierAuto)">
         <div class="plan-nom" id="escola-nom">Estàndard</div>
-        <div><span class="plan-preu" id="preu-escola">59 €</span><span class="plan-preu-mes">/mes</span></div>
+        <div><span class="plan-preu" id="preu-escola">59 €</span><span class="plan-preu-mes" id="suf-escola">/mes</span></div>
         <div class="plan-lim" id="escola-docents">Segons el nombre de docents del centre</div>
-        <div class="plan-anual-info" id="anual-escola" style="display:none;">€590/any</div>
+        <div class="plan-anual-info" id="anual-escola" style="display:none;"></div>
         <ul class="plan-features">
           <li>Proposta de cobertures amb IA</li>
           <li>Notificacions automàtiques</li>
@@ -461,12 +461,15 @@ function actualitzaPlaEscola() {
   txt('escola-docents', n ? `${n} docents` : p.lim);
   const preuEl = document.getElementById('preu-escola');
   const anualEl = document.getElementById('anual-escola');
+  const sufEl = document.getElementById('suf-escola');
   if (modalitatActual === 'anual') {
-    preuEl.textContent = (p.preu * 10 / 12).toFixed(0) + ' €';
-    anualEl.textContent = (p.preu * 10) + ' €/any';
+    preuEl.textContent = (p.preu * 10) + ' €';
+    sufEl.textContent = '/any';
+    anualEl.textContent = `Equival a ${(p.preu * 10 / 12).toFixed(2).replace('.', ',')} €/mes`;
     anualEl.style.display = 'inline-block';
   } else {
     preuEl.textContent = p.preu + ' €';
+    sufEl.textContent = '/mes';
     anualEl.style.display = 'none';
   }
   // Si ja hi havia un pla de pagament triat, actualitza'l al tram nou.
