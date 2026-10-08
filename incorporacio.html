@@ -484,6 +484,9 @@ function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
 function chk(id) { return document.getElementById(id)?.checked || false; }
 function set(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
 function txt(id, t) { const el = document.getElementById(id); if (el) el.textContent = t; }
+// Escapa text lliure introduït per la persona abans d'inserir-lo com a HTML
+// (contracte-previsualitzat): evita que un camp amb marcatge s'execute al navegador.
+function escHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 
 function updateDots(step) {
   document.querySelectorAll('.wiz-dot').forEach((d, i) => {
@@ -603,17 +606,17 @@ function fillContract() {
   txt('cp-centre-nom2', d.centre_nom || '—');
 
   const det = [
-    d.centre_cif ? 'CIF: ' + d.centre_cif : '',
-    d.centre_adreca || '',
-    d.centre_email || '',
-    d.representant_nom ? d.representant_nom + (d.representant_carrec ? ', ' + d.representant_carrec : '') : '',
+    d.centre_cif ? 'CIF: ' + escHtml(d.centre_cif) : '',
+    d.centre_adreca ? escHtml(d.centre_adreca) : '',
+    d.centre_email ? escHtml(d.centre_email) : '',
+    d.representant_nom ? escHtml(d.representant_nom) + (d.representant_carrec ? ', ' + escHtml(d.representant_carrec) : '') : '',
   ].filter(Boolean).join('<br>');
   set('cp-centre-det', det);
 
   set('cp-preu', pretext);
   txt('cp-sig-nom', d.representant_nom || '—');
 
-  const sigDet = [d.centre_nom, d.representant_carrec, d.centre_cif ? 'CIF: ' + d.centre_cif : ''].filter(Boolean).join('<br>');
+  const sigDet = [d.centre_nom, d.representant_carrec, d.centre_cif ? 'CIF: ' + d.centre_cif : ''].filter(Boolean).map(escHtml).join('<br>');
   set('cp-sig-det', sigDet);
 }
 
