@@ -194,7 +194,7 @@
     .brand-word {
       font-family: 'Inter', sans-serif;
       display: inline-block;
-      animation: brandBlink 2s ease-in-out 2.6s 1;
+      animation: brandBlink 2s ease-in-out .6s 1;
     }
     .brand-word span { letter-spacing: -.01em; font-weight: 800; }
     .brand-word .bw-1, .brand-word .bw-3 { color: var(--black); }
@@ -229,23 +229,7 @@
     }
     .btn-secondary:hover { background: var(--border); }
 
-    /* ── HERO ENTRANCE ANIMATION ── */
-    @keyframes heroFadeUp {
-      from { opacity: 0; transform: translateY(90px) scale(.94); filter: blur(10px); }
-      to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    }
-    .hero-badge, .hero h1, .hero p, .hero-actions, .hero-trust {
-      opacity: 0;
-      animation: heroFadeUp 1.1s cubic-bezier(.16,1,.3,1) both;
-    }
-    .hero-badge { animation-delay: .05s; }
-    .hero h1    { animation-delay: .25s; }
-    .hero p     { animation-delay: .48s; }
-    .hero-actions { animation-delay: .72s; }
-    .hero-trust { animation-delay: .9s; margin-top: 20px; font-size: 13px; font-weight: 600; color: var(--ink-3); }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-badge, .hero h1, .hero p, .hero-actions, .hero-trust { animation: none; opacity: 1; }
-    }
+    .hero-trust { margin-top: 20px; font-size: 13px; font-weight: 600; color: var(--ink-3); }
 
     /* ── SECTIONS ── */
     section { padding: 80px 5%; }
@@ -988,6 +972,7 @@
   <a class="nav-logo" href="/" aria-label="Tornar a l'inici"><img src="/logo.svg" alt="HorariaPro" /></a>
   <div class="nav-links">
     <a href="#com-funciona">Veure demo</a>
+    <a href="incorporacio.html" data-track="cta_nav_prova">Prova gratuïta</a>
     <a href="#funcionalitats">Funcionalitats</a>
     <a href="#per-que-horariapro">Per què HorariaPro?</a>
     <a href="#preus">Preus</a>
@@ -1004,6 +989,7 @@
 </nav>
 <div class="nav-mobile-menu" id="navMobileMenu">
   <a href="#com-funciona" onclick="closeMobileMenu()">Veure demo</a>
+  <a href="incorporacio.html" data-track="cta_mobile_prova">Prova gratuïta</a>
   <a href="#funcionalitats" onclick="closeMobileMenu()">Funcionalitats</a>
   <a href="#per-que-horariapro" onclick="closeMobileMenu()">Per què HorariaPro?</a>
   <a href="#preus" onclick="closeMobileMenu()">Preus</a>
@@ -1020,11 +1006,10 @@
     <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
     <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
     <div class="hero-actions">
-      <a href="#com-funciona" class="btn-primary">Veure demo</a>
-      <a href="#funcionalitats" class="btn-secondary">Com funciona?</a>
-      <a href="#per-que-horariapro" class="btn-secondary">Per què HorariaPro?</a>
+      <a href="incorporacio.html" class="btn-primary" data-track="cta_hero_prova">Prova-ho gratis al teu centre</a>
+      <a href="#com-funciona" class="btn-secondary" data-track="cta_hero_demo">Veure demo</a>
     </div>
-    <p class="hero-trust">✓ Ja en marxa a 2 centres educatius</p>
+    <p class="hero-trust">✓ Ja en marxa a 2 centres educatius, de primària i d'educació especial · Implantació gratuïta · Sense permanència</p>
   </div>
 </div>
 
@@ -1655,23 +1640,23 @@
     <form class="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-row">
         <div class="form-group">
-          <label>Nom i cognoms</label>
-          <input type="text" placeholder="Verònica García" required />
+          <label for="cf-nom">Nom i cognoms</label>
+          <input id="cf-nom" type="text" placeholder="Verònica García" required />
         </div>
         <div class="form-group">
-          <label>Correu electrònic</label>
-          <input type="email" placeholder="direccio@escola.cat" required />
+          <label for="cf-email">Correu electrònic</label>
+          <input id="cf-email" type="email" placeholder="direccio@escola.cat" required />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Nom del centre</label>
-          <input type="text" placeholder="CEIP Sant Jordi" required />
+          <label for="cf-centre">Nom del centre</label>
+          <input id="cf-centre" type="text" placeholder="CEIP Sant Jordi" required />
         </div>
         <div class="form-group">
-          <label>Rol al centre</label>
-          <select required>
-            <option value="" disabled selected>Selecciona el teu rol</option>
+          <label for="cf-rol">Rol al centre (opcional)</label>
+          <select id="cf-rol">
+            <option value="" selected>Selecciona el teu rol</option>
             <option>Director/a</option>
             <option>Cap d'estudis</option>
             <option>Secretari/a</option>
@@ -1680,8 +1665,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label>Missatge (opcional)</label>
-        <textarea placeholder="Tenim 30 docents i busquem una solució per gestionar les cobertures..."></textarea>
+        <label for="cf-msg">Missatge (opcional)</label>
+        <textarea id="cf-msg" placeholder="Tenim 30 docents i busquem una solució per gestionar les cobertures..."></textarea>
       </div>
       <button type="submit" class="btn-submit">Enviar sol·licitud →</button>
       <p class="form-note">Les teves dades s'utilitzen únicament per respondre la teva consulta. Mai es comparteixen amb tercers.</p>
