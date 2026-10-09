@@ -167,12 +167,12 @@
     .hero {
       position: relative;
       z-index: 1;
-      padding: 100px 5% 80px;
+      padding: 84px 5% 56px;
       max-width: 960px; margin: 0 auto;
       text-align: center;
     }
     @media (min-width: 900px) {
-      .hero-wrap .hero { max-width: 1180px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; text-align: left; padding-top: 110px; padding-bottom: 70px; }
+      .hero-wrap .hero { max-width: 1180px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; text-align: left; padding-top: 84px; padding-bottom: 28px; gap: 48px; }
       .hero-wrap .hero p { margin-left: 0; margin-right: 0; }
       .hero-wrap .hero .hero-actions { justify-content: flex-start; }
     }
@@ -180,16 +180,15 @@
     @media (min-width: 900px) { .hero-video { margin-top: 0; } }
     .hero-video-card {
       position: relative; width: min(100%, 300px); aspect-ratio: 9 / 16;
-      border-radius: 28px; overflow: hidden; background: #dfe6f9;
-      box-shadow: 0 30px 70px -20px rgba(60,40,140,.35), 0 0 0 1px rgba(0,0,0,.06);
+      background: #fff;
     }
-    @media (min-width: 900px) { .hero-video-card { width: min(100%, 360px); } }
+    @media (min-width: 900px) { .hero-video-card { width: min(100%, 330px); } }
     .hero-video-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-video-sound {
-      position: absolute; right: 12px; bottom: 12px;
+    .hero-video-controls { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 8px; }
+    .hero-video-sound, .hero-video-pause {
       background: rgba(10,10,10,.78); color: #fff; border: none; cursor: pointer;
       padding: 8px 14px; border-radius: 100px; font-size: 13px; font-weight: 600;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px); font-family: inherit;
     }
     .hero-trust { text-align: inherit; }
     .hero-badge {
@@ -200,7 +199,7 @@
       margin-bottom: 28px;
     }
     .hero h1 {
-      font-size: clamp(36px, 5vw, 60px);
+      font-size: clamp(36px, 4.4vw, 54px);
       font-weight: 800; line-height: 1.1;
       letter-spacing: -.03em;
       color: var(--black);
@@ -1024,7 +1023,6 @@
 <div class="hero-wrap">
   <div class="hero">
    <div class="hero-text">
-    <div class="hero-badge">✦ Intel·ligència Artificial per a centres educatius</div>
     <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
     <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> automatitza la proposta de cobertures del professorat amb IA, notifica tothom afectat i elimina el caos de les substitucions.</p>
     <div class="hero-actions">
@@ -1038,7 +1036,10 @@
       <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="videos/hero-laura.jpg" aria-label="Vídeo: un dia de la Laura, cap d'estudis, amb HorariaPro">
         <source src="videos/hero-laura.mp4" type="video/mp4" />
       </video>
-      <button type="button" class="hero-video-sound" id="heroSound" aria-label="Activar el so" aria-pressed="false" onclick="toggleHeroSound()">🔇 Activar so</button>
+      <div class="hero-video-controls">
+        <button type="button" class="hero-video-pause" id="heroPause" aria-label="Pausar el vídeo" onclick="toggleHeroPlay()">⏸ Pausa</button>
+        <button type="button" class="hero-video-sound" id="heroSound" aria-label="Activar el so" aria-pressed="false" onclick="toggleHeroSound()">🔇 So</button>
+      </div>
     </div>
    </div>
   </div>
@@ -1872,11 +1873,18 @@
     vids.forEach(function(v) { io.observe(v); });
   })();
 
+  function toggleHeroPlay() {
+    var v = document.getElementById('heroVideo'), b = document.getElementById('heroPause');
+    if (v.paused) { v.play().catch(function(){}); b.textContent = '⏸ Pausa'; b.setAttribute('aria-label', 'Pausar el vídeo'); }
+    else { v.pause(); b.textContent = '▶ Reprodueix'; b.setAttribute('aria-label', 'Reproduir el vídeo'); }
+  }
+
   function toggleHeroSound() {
     var v = document.getElementById('heroVideo'), b = document.getElementById('heroSound');
     v.muted = !v.muted;
     if (!v.muted) { v.currentTime = 0; v.play().catch(function(){}); }
-    b.textContent = v.muted ? '🔇 Activar so' : '🔊 So activat';
+    b.textContent = v.muted ? '🔇 So' : '🔊 So';
+    b.setAttribute('aria-label', v.muted ? 'Activar el so' : 'Silenciar');
     b.setAttribute('aria-pressed', String(!v.muted));
   }
 
