@@ -45,9 +45,97 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Cal instal·lar alguna cosa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Funciona 100 % al navegador, des del mòbil, la tauleta o l'ordinador. Ni la cap d'estudis ni el professorat han d'instal·lar res."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Com accedeixen els docents? Necessiten contrasenya?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cada docent entra amb el seu correu XTEC o corporatiu del centre (si en teniu). Sense comptes externs ni contrasenyes innecessàries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Què passa amb les nostres dades si deixem d'utilitzar HorariaPro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tens dret a l'oblit: pots sol·licitar l'eliminació completa de totes les dades del centre en qualsevol moment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "On s'emmagatzemen les dades?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A servidors europeus (EU-West), seguint el RGPD i el reglament del Departament d'Educació. Cap dada surt de la Unió Europea."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quant triga la implantació?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entre uns dies i una setmana com a màxim, depenent de la mida del claustre (docents, educadors i altre personal). La implantació és gratuïta i inclou suport directe per configurar horaris i normes de cobertura."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "És compatible amb altres eines que ja utilitzem al centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. HorariaPro funciona de manera complementària a l'ecosistema de Google Workspace for Education (Gmail, Calendar) que ja fan servir la majoria de centres: les notificacions arriben directament al vostre correu, sense duplicar informació ni canviar cap altra eina."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Com decideix la IA qui cobreix cada franja?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Analitza horaris disponibles i deutes de Treball Personal (TP) acumulats, combinant-ho amb les normes de cobertura i el context personalitzat que cada centre defineix per a la IA — sempre repartint les cobertures de manera equitativa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I si la proposta de la IA no és la que voldríem?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La cap d'estudis pot editar-la abans de confirmar-la — és una proposta, no una decisió automàtica. A més, amb el Chat Horaria pots conversar directament amb la IA per afinar-la o corregir-la (\"i si en Carles no pot?\"), d'una manera senzilla i intuïtiva."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hi ha permanència o costos ocults?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Sense permanència, sense cost d'implantació, i es pot cancel·lar quan es vulgui."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Funciona per a instituts, o només per a primària?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Funciona per a qualsevol centre educatiu, sigui quin sigui el nivell: escoles d'educació infantil, CEIP o instituts."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -372,6 +460,7 @@
     .feature-video-wrap.portrait video { transform: scale(1.056) translateY(-2.37%); }
     .feature-video-wrap.portrait.sortides video { transform: scale(1.08) translateY(-3.7%); }
     .has-lightbox { cursor: pointer; }
+    .has-lightbox:focus-visible, .faq-question:focus-visible, .demo-mobile-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
     .feature-media-toggle-btn {
       display: none;
       align-items: center; gap: 8px;
@@ -1925,6 +2014,17 @@
   }
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDemoOverlay(); });
 
+  /* Elements multimèdia clicables: accessibles amb teclat i lector de pantalla */
+  document.querySelectorAll('.has-lightbox[onclick]').forEach(function(el) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    var lbl = el.querySelector('.feature-media-label');
+    el.setAttribute('aria-label', 'Ampliar: ' + (lbl ? lbl.textContent.trim() : 'contingut multimèdia'));
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+    });
+  });
+
   function toggleHeroPlay() {
     var v = document.getElementById('heroVideo'), b = document.getElementById('heroPause');
     if (v.paused) { v.play().catch(function(){}); b.textContent = '⏸ Pausa'; b.setAttribute('aria-label', 'Pausar el vídeo'); }
@@ -2105,6 +2205,9 @@
   var calendlyScriptLoaded = false;
   function loadCalendlyScript(callback) {
     if (calendlyScriptLoaded) { callback(); return; }
+    var css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
     var script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
