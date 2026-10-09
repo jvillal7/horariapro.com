@@ -898,9 +898,40 @@
     .demo-fullscreen-fab:hover { background: var(--bg-2); }
     .demo-try-link { text-align: center; font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
     .demo-try-link a { color: var(--blue); font-weight: 600; }
+    .demo-mobile-cta { display: none; }
     @media (max-width: 768px) {
       .demo-embed-body { height: min(680px, 74vh); }
+      .demo-toolbar, .demo-embed, .demo-try-link { display: none; }
+      .demo-mobile-cta {
+        display: block; text-align: center;
+        background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg);
+        padding: 22px 18px 18px; box-shadow: var(--shadow);
+      }
+      .demo-mobile-cta p { font-size: 15px; color: var(--ink-2); margin-bottom: 20px; line-height: 1.5; }
+      .demo-mobile-btn {
+        display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+        background: linear-gradient(135deg, #1A7A4E, #135c3a); color: #fff; border: none; cursor: pointer;
+        padding: 20px 24px; border-radius: 14px; font-family: inherit;
+        font-size: 18px; font-weight: 700; letter-spacing: -.01em;
+        box-shadow: 0 10px 26px -8px rgba(26,122,78,.55);
+      }
+      .demo-mobile-btn:active { transform: scale(.98); }
+      .demo-mobile-note { margin-top: 12px; font-size: 12.5px; color: var(--ink-3); }
     }
+    .demo-overlay {
+      position: fixed; inset: 0; z-index: 10000; background: #fff;
+      display: none; flex-direction: column;
+    }
+    .demo-overlay.open { display: flex; }
+    .demo-overlay-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; background: var(--black); color: #fff; font-size: 14px; font-weight: 600;
+    }
+    .demo-overlay-bar button {
+      background: #fff; color: var(--black); border: none; border-radius: 8px;
+      padding: 8px 14px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer;
+    }
+    .demo-overlay iframe { flex: 1; width: 100%; border: 0; }
     @media (max-width: 480px) {
       .demo-fullscreen-fab .fs-label { display: none; }
       .demo-fullscreen-fab { padding: 8px; }
@@ -1053,6 +1084,11 @@
     <p class="section-sub" style="margin-bottom:12px;">Prova l'aplicació real aquí baix — pas a pas, des de l'avís del docent fins a la confirmació per correu dels canvis d'horari als afectats. El mateix producte que ja fan servir els centres, amb dades fictícies.</p>
     <p class="demo-hint">⏱️ Comprova tu mateix quant de temps passa des de l'avís fins a la confirmació i gestió finalitzada, amb el cronòmetre de dalt a l'esquerra.</p>
     <p class="demo-try-link">📱 En mòbil, toca ⛶ per veure-la en pantalla completa, o <a href="/demo/" target="_blank" rel="noopener" data-track="cta_demo_nova_pestanya">obre-la en una pestanya nova →</a></p>
+
+    <div class="demo-mobile-cta">
+      <button type="button" class="demo-mobile-btn" data-track="cta_demo_mobile_simulador" onclick="openDemoOverlay()">▶ Entrar al simulador</button>
+      <div class="demo-mobile-note">S'obre a pantalla completa · pots tancar-lo quan vulguis</div>
+    </div>
 
     <div class="demo-toolbar">
       <button class="demo-fullscreen-fab" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ <span class="fs-label">Pantalla completa</span></button>
@@ -1728,6 +1764,11 @@
 </a>
 
 <!-- MEDIA LIGHTBOX -->
+<div class="demo-overlay" id="demoOverlay" role="dialog" aria-modal="true" aria-label="Simulador d'HorariaPro">
+  <div class="demo-overlay-bar"><span>Simulador HorariaPro</span><button type="button" onclick="closeDemoOverlay()">✕ Tancar</button></div>
+  <iframe id="demoOverlayFrame" title="Simulador d'HorariaPro"></iframe>
+</div>
+
 <div class="media-lightbox-overlay" id="mediaLightbox" onclick="handleLightboxBgClick(event)">
   <button class="media-lightbox-close" onclick="closeMediaLightbox()" aria-label="Tancar">✕</button>
   <button class="media-lightbox-arrow prev" onclick="lightboxPrev(event)" aria-label="Anterior">‹</button>
@@ -1871,6 +1912,18 @@
     }, { rootMargin: '150px', threshold: 0.1 });
     vids.forEach(function(v) { io.observe(v); });
   })();
+
+  function openDemoOverlay() {
+    var f = document.getElementById('demoOverlayFrame');
+    if (!f.getAttribute('src')) f.src = 'demo/index.html';
+    document.getElementById('demoOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDemoOverlay() {
+    document.getElementById('demoOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDemoOverlay(); });
 
   function toggleHeroPlay() {
     var v = document.getElementById('heroVideo'), b = document.getElementById('heroPause');
