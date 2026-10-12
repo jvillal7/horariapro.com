@@ -1085,16 +1085,26 @@
       .nav-logo img { height: 34px; }
       .nav-cta { padding: 7px 11px; font-size: 12px; }
     }
-    /* Portàtils de 14" (≈1280 px de viewport amb l'escalat de Windows): logo + 7 enllaços + botó
-       no hi caben i el text es trencava en dues línies. Compactem i, per sota de 1100 px, menú hamburguesa. */
+    /* Barra de navegació adaptativa (mòbil, tauleta, portàtils i escriptori):
+       - Escriptori ample (≥1340 px): tots els enllaços.
+       - 961–1339 px (tauletes en horitzontal, portàtils petits): només els enllaços essencials
+         (.nav-extra amagats) i espais/tipografia fluids, perquè el botó "Accedir a l'app" mai
+         es quede fora ni baixe de línia.
+       - ≤960 px (tauletes en vertical i mòbils): menú hamburguesa amb tots els enllaços. */
     .nav-links a, .nav-logo { white-space: nowrap; flex-shrink: 0; }
-    @media (max-width: 1360px) {
-      .nav-links { gap: 18px; font-size: 13.5px; }
-      .nav-logo img { height: 42px; }
+    nav { gap: 16px; }
+    .nav-links { gap: clamp(14px, 1.7vw, 28px); font-size: clamp(13px, 1.1vw, 14px); }
+    .nav-logo img { height: clamp(38px, 3.6vw, 52px); }
+    .nav-extra { display: none; }
+    @media (min-width: 1340px) {
+      .nav-extra { display: inline; }
     }
-    @media (max-width: 1100px) {
+    @media (max-width: 960px) {
       .nav-links { display: none; }
       .nav-burger { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .nav-logo img { height: 34px; }
     }
     /* Targetes de preus: sempre 2x2, mai una targeta sola en una fila amb
        espai buit al costat (passava amb auto-fit en pantalles d'escriptori
@@ -1114,10 +1124,10 @@
     <a href="#com-funciona">Veure demo</a>
     <a href="incorporacio.html" data-track="cta_nav_prova">Prova gratuïta</a>
     <a href="#funcionalitats">Funcionalitats</a>
-    <a href="#per-que-horariapro">Per què HorariaPro?</a>
+    <a href="#per-que-horariapro" class="nav-extra">Per què HorariaPro?</a>
     <a href="#preus">Preus</a>
     <a href="#faq">FAQ</a>
-    <a href="#legal">Privacitat</a>
+    <a href="#legal" class="nav-extra">Privacitat</a>
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
