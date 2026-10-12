@@ -284,16 +284,17 @@
     }
     .hero-video-card.hero-expanded video { width: auto; height: calc(100% - 84px); aspect-ratio: 9 / 16; margin-top: 12px; object-fit: contain; background: #fff; }
     .hero-video-card.hero-expanded .hero-video-controls { left: 0; right: 0; bottom: 16px; justify-content: center; gap: 12px; }
-    .hero-video-card.hero-expanded .hero-video-controls button { font-size: 15px; padding: 11px 20px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); }
+    .hero-video-card.hero-expanded .hero-video-controls button { width: 48px; height: 48px; padding: 0; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); }
     .hero-video-card.hero-expanded .hero-video-controls button:hover { background: rgba(255,255,255,.28); }
     .hero-video-card:fullscreen, .hero-video-card:-webkit-full-screen { width: 100vw; height: 100vh; max-width: none; aspect-ratio: auto; background: #000; }
     .hero-video-card:fullscreen video, .hero-video-card:-webkit-full-screen video { object-fit: contain; }
     .hero-video-card:fullscreen .hero-video-controls, .hero-video-card:-webkit-full-screen .hero-video-controls { bottom: max(16px, env(safe-area-inset-bottom)); right: 16px; left: 16px; }
-    .hero-video-card:fullscreen .hero-video-controls button, .hero-video-card:-webkit-full-screen .hero-video-controls button { font-size: 15px; padding: 11px 18px; }
+    .hero-video-card:fullscreen .hero-video-controls button, .hero-video-card:-webkit-full-screen .hero-video-controls button { width: 48px; height: 48px; }
     .hero-video-sound, .hero-video-pause, .hero-video-full {
-      background: rgba(10,10,10,.85); color: #fff; border: none; cursor: pointer;
-      padding: 8px 14px; border-radius: 100px; font-size: 13px; font-weight: 600;
-      font-family: inherit;
+      background: rgba(10,10,10,.72); color: #fff; border: none; cursor: pointer;
+      width: 36px; height: 36px; padding: 0; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: inherit; -webkit-tap-highlight-color: transparent;
     }
     .hero-trust { text-align: inherit; }
     .hero-badge {
@@ -1183,9 +1184,9 @@
         <source src="videos/hero-laura-v3.mp4" type="video/mp4" />
       </video>
       <div class="hero-video-controls">
-        <button type="button" class="hero-video-pause" id="heroPause" aria-label="Pausar el vídeo" onclick="toggleHeroPlay()">⏸ Pausa</button>
-        <button type="button" class="hero-video-sound" id="heroSound" aria-label="Activar el so" aria-pressed="false" onclick="toggleHeroSound()">🔇 So</button>
-        <button type="button" class="hero-video-full" id="heroFull" aria-label="Obrir el vídeo a pantalla completa" title="Pantalla completa" onclick="toggleHeroFullscreen()">⛶ Ampliar</button>
+        <button type="button" class="hero-video-pause" id="heroPause" aria-label="Pausar el vídeo" title="Pausa" onclick="toggleHeroPlay()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></svg></button>
+        <button type="button" class="hero-video-sound" id="heroSound" aria-label="Activar el so" title="So" aria-pressed="false" onclick="toggleHeroSound()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h4l5 4v-13l-5 4z" fill="currentColor" stroke="none"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></svg></button>
+        <button type="button" class="hero-video-full" id="heroFull" aria-label="Obrir el vídeo a pantalla completa" title="Pantalla completa" onclick="toggleHeroFullscreen()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div>
     </div>
    </div>
@@ -2055,8 +2056,9 @@
 
   function toggleHeroPlay() {
     var v = document.getElementById('heroVideo'), b = document.getElementById('heroPause');
-    if (v.paused) { v.play().catch(function(){}); b.textContent = '⏸ Pausa'; b.setAttribute('aria-label', 'Pausar el vídeo'); }
-    else { v.pause(); b.textContent = '▶ Reprodueix'; b.setAttribute('aria-label', 'Reproduir el vídeo'); }
+    var IC_PAUSE = "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"6\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"14\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\" fill=\"currentColor\" stroke=\"none\"/></svg>", IC_PLAY = "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 4.5v15l12-7.5z\" fill=\"currentColor\" stroke=\"none\"/></svg>";
+    if (v.paused) { v.play().catch(function(){}); b.innerHTML = IC_PAUSE; b.title = 'Pausa'; b.setAttribute('aria-label', 'Pausar el vídeo'); }
+    else { v.pause(); b.innerHTML = IC_PLAY; b.title = 'Reprodueix'; b.setAttribute('aria-label', 'Reproduir el vídeo'); }
   }
 
   function heroIsExpanded() {
@@ -2096,7 +2098,8 @@
   function syncHeroFullscreenBtn() {
     var b = document.getElementById('heroFull');
     var on = heroIsExpanded();
-    b.textContent = on ? '✕ Tancar' : '⛶ Ampliar';
+    b.innerHTML = on ? "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6L6 18\"/></svg>" : "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5\"/></svg>";
+    b.title = on ? 'Tancar' : 'Pantalla completa';
     b.setAttribute('aria-label', on ? 'Sortir de la pantalla completa' : 'Obrir el vídeo a pantalla completa');
   }
   document.addEventListener('fullscreenchange', syncHeroFullscreenBtn);
@@ -2109,7 +2112,7 @@
     var v = document.getElementById('heroVideo'), b = document.getElementById('heroSound');
     v.muted = !v.muted;
     if (!v.muted) { v.currentTime = 0; v.play().catch(function(){}); }
-    b.textContent = v.muted ? '🔇 So' : '🔊 So';
+    b.innerHTML = v.muted ? "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9.5v5h4l5 4v-13l-5 4z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M17 9.5l5 5M22 9.5l-5 5\"/></svg>" : "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9.5v5h4l5 4v-13l-5 4z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M16.5 9a4.5 4.5 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11\"/></svg>";
     b.setAttribute('aria-label', v.muted ? 'Activar el so' : 'Silenciar');
     b.setAttribute('aria-pressed', String(!v.muted));
   }
