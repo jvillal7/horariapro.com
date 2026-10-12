@@ -274,6 +274,16 @@
     .hero-video-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-video-controls { position: absolute; left: 8px; right: 8px; bottom: 8px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; z-index: 2; }
     .hero-video-controls button { white-space: nowrap; }
+    /* icones soltes: ombra fosca perquè es vegen sobre qualsevol fons del vídeo */
+    .hero-video-controls button svg { filter: drop-shadow(0 0 1.5px rgba(255,255,255,.95)); }
+    .hero-video-controls button:hover, .hero-video-controls button:focus-visible { opacity: 1; background: rgba(10,10,10,.08); }
+    /* vista ampliada / pantalla completa: fons negre → icones blanques */
+    .hero-video-card.hero-expanded .hero-video-controls button,
+    .hero-video-card:fullscreen .hero-video-controls button,
+    .hero-video-card:-webkit-full-screen .hero-video-controls button { color: #fff; }
+    .hero-video-card.hero-expanded .hero-video-controls button svg,
+    .hero-video-card:fullscreen .hero-video-controls button svg,
+    .hero-video-card:-webkit-full-screen .hero-video-controls button svg { filter: none; }
     /* Vista ampliada a PC: sense API de pantalla completa (peta Opera). El menú de dalt es manté fix i visible. */
     body.hero-expanded-open { overflow: hidden; }
     body.hero-expanded-open .hero { z-index: 95; }
@@ -284,15 +294,16 @@
     }
     .hero-video-card.hero-expanded video { width: auto; height: calc(100% - 84px); aspect-ratio: 9 / 16; margin-top: 12px; object-fit: contain; background: #fff; }
     .hero-video-card.hero-expanded .hero-video-controls { left: 0; right: 0; bottom: 16px; justify-content: center; gap: 12px; }
-    .hero-video-card.hero-expanded .hero-video-controls button { width: 48px; height: 48px; padding: 0; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); }
-    .hero-video-card.hero-expanded .hero-video-controls button:hover { background: rgba(255,255,255,.28); }
+    .hero-video-card.hero-expanded .hero-video-controls button { width: 48px; height: 48px; padding: 0; background: transparent; border: none; }
+    .hero-video-card.hero-expanded .hero-video-controls button:hover { background: rgba(255,255,255,.14); }
     .hero-video-card:fullscreen, .hero-video-card:-webkit-full-screen { width: 100vw; height: 100vh; max-width: none; aspect-ratio: auto; background: #000; }
     .hero-video-card:fullscreen video, .hero-video-card:-webkit-full-screen video { object-fit: contain; }
     .hero-video-card:fullscreen .hero-video-controls, .hero-video-card:-webkit-full-screen .hero-video-controls { bottom: max(16px, env(safe-area-inset-bottom)); right: 16px; left: 16px; }
     .hero-video-card:fullscreen .hero-video-controls button, .hero-video-card:-webkit-full-screen .hero-video-controls button { width: 48px; height: 48px; }
     .hero-video-sound, .hero-video-pause, .hero-video-full {
-      background: rgba(10,10,10,.72); color: #fff; border: none; cursor: pointer;
-      width: 36px; height: 36px; padding: 0; border-radius: 50%;
+      background: transparent; color: #1a1a1a; border: none; cursor: pointer;
+      width: 34px; height: 34px; padding: 0; border-radius: 50%;
+      opacity: .85; transition: opacity .15s, background .15s;
       display: inline-flex; align-items: center; justify-content: center;
       font-family: inherit; -webkit-tap-highlight-color: transparent;
     }
