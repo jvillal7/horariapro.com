@@ -337,21 +337,26 @@
   T.forEach(function (row) { MAP[norm(row[0])] = row; });
 
   var current = 'ca';
+  var explicitChoice = false;
 
   function translateString(ca, lang) {
     var row = MAP[norm(ca)];
     if (!row || lang === 'ca') return null;
     var out = row[IDX[lang]];
+    if (out === undefined || out === null) out = row[0]; // sense variant: es manté el català
     // Manté l'espai dur davant del símbol de percentatge i de l'abreviatura "u."
     return out.replace(/ %/g, ' %').replace(/ u\.\)/g, ' u.)');
   }
 
   // API pública per al JS de la pàgina (calculadora de preus, formulari...).
   // t('text en català') → text a l'idioma actual (o el mateix si no hi ha traducció).
-  function t(ca) {
+  function t(ca, vars) {
     var r = translateString(ca, current);
-    return r === null ? ca : r;
+    var s = r === null ? ca : r;
+    if (vars) s = s.replace(/\{(\w+)\}/g, function (m, k) { return vars[k] !== undefined ? vars[k] : m; });
+    return s;
   }
+  function add(rows) { rows.forEach(function (row) { MAP[norm(row[0])] = row; }); }
 
   var ATTRS = ['alt', 'title', 'aria-label', 'placeholder'];
 
@@ -468,22 +473,43 @@
     applyAttrs(document);
     applyMeta();
     syncSelectors();
-    if (persist) { try { localStorage.setItem('hp_lang', lang); } catch (e) {} }
+    if (persist) { explicitChoice = true; try { localStorage.setItem('hp_lang', lang); } catch (e) {} }
     // La calculadora de preus escriu textos dinàmics: es refresquen en l'idioma nou
     try {
       var slider = document.getElementById('calcSlider');
       if (slider && typeof window.updateCalculadora === 'function') window.updateCalculadora(slider.value);
     } catch (e) {}
+    tagLinks();
     try { document.dispatchEvent(new CustomEvent('hp:langchange', { detail: { lang: lang } })); } catch (e) {}
   }
 
-  window.HPI18N = { t: t, setLang: function (l) { setLang(l, true); }, get lang() { return current; } };
+  // Enllaços cap a l'app i a les pàgines d'alta: porten ?lang= perquè hi continue l'idioma triat.
+  var LINK_SEL = 'a[href^="https://app.horariapro.com"],a[href*="incorporacio.html"],a[href*="onboarding-escola.html"],a[href*="accedir.html"]';
+  function tagLinks() {
+    var links = document.querySelectorAll(LINK_SEL);
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      var base = a.getAttribute('data-href-base');
+      if (base === null) { base = a.getAttribute('href'); a.setAttribute('data-href-base', base); }
+      try {
+        var u = new URL(base, location.href);
+        if (current === 'ca' && !explicitChoice) { a.setAttribute('href', base); continue; }
+        u.searchParams.set('lang', current);
+        var rel = base.split('#')[0].split('?')[0];
+        var hash = base.indexOf('#') > -1 ? '#' + base.split('#')[1] : '';
+        a.setAttribute('href', /^https?:/i.test(base) ? u.toString() : rel + u.search + hash);
+      } catch (e) {}
+    }
+  }
+
+  window.HPI18N = { t: t, add: add, setLang: function (l) { setLang(l, true); }, get lang() { return current; } };
 
   function init() {
     var d = detect();
+    explicitChoice = !!d.explicit;
     initSwitch();
     if (d.lang !== 'ca' || d.explicit) setLang(d.lang, false);
-    else syncSelectors();
+    else { syncSelectors(); tagLinks(); }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

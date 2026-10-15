@@ -252,6 +252,15 @@
         </div>
       </div>
       <div class="field field-full">
+        <label for="idioma">Idioma de l'app per al centre</label>
+        <select id="idioma">
+          <option value="ca">Català</option>
+          <option value="va">Valencià</option>
+          <option value="es">Castellano</option>
+        </select>
+        <div class="hint">Serà l'idioma per defecte de l'equip. Cada persona el pot canviar quan vulga des de l'app.</div>
+      </div>
+      <div class="field field-full">
         <label>Particularitats del centre o notes</label>
         <textarea id="notes" placeholder="Alumnes amb necessitats especials, personal compartit amb altres centres, règim especial..."></textarea>
         <div class="hint">Com més context, millor podrà configurar-se la IA de cobertures des del primer dia.</div>
@@ -429,6 +438,7 @@
 </div>
 
 <script>
+const T = (s, v) => (window.HPI18N ? HPI18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] !== undefined ? v[k] : m)));
 const CREAR_INCORPORACIO_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-incorporacio';
 const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
@@ -458,14 +468,14 @@ function actualitzaPlaEscola() {
   planTierAuto = calcTier(n);
   const p = PLANS[planTierAuto];
   txt('escola-nom', p.nom);
-  txt('escola-docents', n ? `${n} docents` : p.lim);
+  txt('escola-docents', n ? T('{n} docents', { n: n }) : T(p.lim));
   const preuEl = document.getElementById('preu-escola');
   const anualEl = document.getElementById('anual-escola');
   const sufEl = document.getElementById('suf-escola');
   if (modalitatActual === 'anual') {
     preuEl.textContent = (p.preu * 10) + ' €';
-    sufEl.textContent = '/any';
-    anualEl.textContent = `Equival a ${(p.preu * 10 / 12).toFixed(2).replace('.', ',')} €/mes`;
+    sufEl.textContent = T('/any');
+    anualEl.textContent = `${T('Equival a')} ${(p.preu * 10 / 12).toFixed(2).replace('.', ',')} €/mes`;
     anualEl.style.display = 'inline-block';
   } else {
     preuEl.textContent = p.preu + ' €';
@@ -493,10 +503,12 @@ function updateDots(step) {
     d.classList.toggle('on', i <= step);
     d.classList.toggle('cur', i === step);
   });
-  document.getElementById('wiz-steplabel').textContent = `Pas ${step + 1} de ${TOTAL_STEPS}`;
+  document.getElementById('wiz-steplabel').textContent = T('Pas {n} de {m}', { n: step + 1, m: TOTAL_STEPS });
 }
 
+let _wizStep = 0;
 function showStep(n) {
+  _wizStep = n;
   document.querySelectorAll('.wiz-step').forEach(el => { el.hidden = +el.dataset.step !== n; });
   document.getElementById('wiz-progress').style.display = n < TOTAL_STEPS ? 'flex' : 'none';
   if (n < TOTAL_STEPS) updateDots(n);
@@ -584,6 +596,7 @@ function collectPayload() {
     horari_tarda: chk('horari_tarda'),
     nom_jefa: v('nom_jefa'),
     email_jefa: v('email_jefa'),
+    idioma: v('idioma') || 'ca',
     notes: [v('notes'), serveis.length ? 'Serveis: ' + serveis.join(', ') : ''].filter(Boolean).join('\n'),
   };
 }
@@ -591,14 +604,14 @@ function collectPayload() {
 function fillContract() {
   if (!planSeleccionat) return;
   const d = collectPayload();
-  const avui = new Date().toLocaleDateString('ca', { day: 'numeric', month: 'long', year: 'numeric' });
+  const avui = new Date().toLocaleDateString(({ es: 'es', va: 'ca', ca: 'ca' })[(window.HPI18N && HPI18N.lang) || 'ca'], { day: 'numeric', month: 'long', year: 'numeric' });
   const plaDades = PLANS[planSeleccionat];
   let pretext;
   if (modalitatActual === 'anual') {
     const anual = plaDades.preu * 10;
-    pretext = `Pla ${d.pla} · Quota anual: ${anual} €/any (equivalent a ${(anual / 12).toFixed(2)} €/mes, 2 mesos de franc) · Modalitat: Anual`;
+    pretext = T('Pla {pla} · Quota anual: {anual} €/any (equivalent a {mes} €/mes, 2 mesos de franc) · Modalitat: Anual', { pla: T(d.pla), anual: anual, mes: (anual / 12).toFixed(2) });
   } else {
-    pretext = `Pla ${d.pla} · Quota mensual: ${plaDades.preu} €/mes · ${plaDades.lim} · Modalitat: Mensual`;
+    pretext = T('Pla {pla} · Quota mensual: {preu} €/mes · {lim} · Modalitat: Mensual', { pla: T(d.pla), preu: plaDades.preu, lim: T(plaDades.lim) });
   }
 
   set('cp-data', avui);
@@ -625,7 +638,7 @@ async function confirmarICrear() {
   const errEl = document.getElementById('wiz-submit-err');
   errEl.style.display = 'none';
   btn.disabled = true;
-  btn.textContent = 'Creant el compte…';
+  btn.textContent = T('Creant el compte…');
 
   const payload = collectPayload();
 
@@ -652,36 +665,53 @@ async function confirmarICrear() {
         pla: payload.pla,
         modalitat: payload.modalitat,
         incorporacio_id: incorporacioId,
+        idioma: payload.idioma,
       }),
     });
     const escolaData = await escolaRes.json();
     const btnConfigurar = document.getElementById('btn-configurar');
     if (escolaRes.ok && escolaData.magic_token) {
-      const magicUrl = 'https://app.horariapro.com?magic=' + encodeURIComponent(escolaData.magic_token);
-      btnConfigurar.textContent = 'Anem-hi →';
+      const magicUrl = 'https://app.horariapro.com/?lang=' + encodeURIComponent(payload.idioma) + '&magic=' + encodeURIComponent(escolaData.magic_token);
+      btnConfigurar.textContent = T('Anem-hi →');
       btnConfigurar.href = magicUrl;
       showStep(4);
     } else if (escolaRes.ok) {
-      btnConfigurar.textContent = 'Entra amb Google →';
-      btnConfigurar.href = 'https://app.horariapro.com';
+      btnConfigurar.textContent = T('Entra amb Google →');
+      btnConfigurar.href = 'https://app.horariapro.com/?lang=' + encodeURIComponent(payload.idioma);
       showStep(4);
     } else {
-      errEl.textContent = '⚠️ ' + (escolaData.error || 'Error en crear el compte — contacta amb horaria.admin@gmail.com');
+      errEl.textContent = '⚠️ ' + (escolaData.error || T('Error en crear el compte — contacta amb horaria.admin@gmail.com'));
       errEl.style.display = 'block';
       btn.disabled = false;
-      btn.textContent = 'Confirmar i crear el compte →';
+      btn.textContent = T('Confirmar i crear el compte →');
     }
   } catch (err) {
-    errEl.textContent = '⚠️ Error de connexió — contacta amb horaria.admin@gmail.com';
+    errEl.textContent = '⚠️ ' + T('Error de connexió — contacta amb horaria.admin@gmail.com');
     errEl.style.display = 'block';
     btn.disabled = false;
-    btn.textContent = 'Confirmar i crear el compte →';
+    btn.textContent = T('Confirmar i crear el compte →');
   }
 }
 
 updateDots(0);
+
+// En canviar d'idioma, refresca els textos que es construeixen amb JavaScript
+document.addEventListener('hp:langchange', function () {
+  if (_wizStep < TOTAL_STEPS) updateDots(_wizStep);
+  if (_wizStep === 2) actualitzaPlaEscola();
+  if (_wizStep === 3) fillContract();
+});
 </script>
 
+<script src="/i18n.js?v=4"></script>
+<script src="/i18n-alta.js?v=1"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var s = document.getElementById('idioma');
+  if (s && window.HPI18N) { s.value = HPI18N.lang; s.addEventListener('change', function () { HPI18N.setLang(s.value); }); }
+  document.addEventListener('hp:langchange', function (e) { if (s) s.value = e.detail.lang; });
+});
+</script>
 <script src="/analytics.js" defer></script>
 </body>
 </html>
