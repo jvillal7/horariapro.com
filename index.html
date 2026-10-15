@@ -231,7 +231,18 @@
       max-height: 0; overflow: hidden;
       transition: max-height .3s ease, background .4s ease, backdrop-filter .4s ease, border-color .4s ease;
     }
-    .nav-mobile-menu.open { max-height: 420px; }
+    .nav-mobile-menu.open { max-height: 560px; }
+    .lang-select {
+      appearance: none; -webkit-appearance: none;
+      background: rgba(255,255,255,.1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 9px center;
+      color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 8px;
+      padding: 8px 26px 8px 10px; font: 600 13px/1 inherit; font-family: inherit; cursor: pointer;
+    }
+    .lang-select option { color: #0a0a0a; background: #fff; }
+    .lang-menu { padding: 12px 5% 0; display: none; }
+    .lang-menu .lang-select { width: 100%; padding: 12px 30px 12px 14px; font-size: 15px; }
+    @media (max-width: 480px) { .lang-nav { display: none; } .lang-menu { display: block; } }
+    @media (min-width: 481px) and (max-width: 768px) { .lang-nav { display: block; } }
     /* Ha de coincidir amb l'estil de la barra (nav.nav-glass) quan es fa scroll, perquè no quede més fosc que la barra de dalt */
     nav.nav-glass ~ .nav-mobile-menu {
       background: rgba(10,10,10,.5);
@@ -1160,6 +1171,7 @@
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
+    <select class="lang-select lang-nav" aria-label="Idioma" title="Idioma"><option value="ca">CA · Català</option><option value="va">VA · Valencià</option><option value="es">ES · Castellano</option></select>
     <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir a l'app →</a>
     <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1175,6 +1187,7 @@
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
   <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
+  <div class="lang-menu"><select class="lang-select lang-mobile" aria-label="Idioma" title="Idioma"><option value="ca">CA · Català</option><option value="va">VA · Valencià</option><option value="es">ES · Castellano</option></select></div>
   <a href="https://app.horariapro.com" data-track="cta_accedir_mobile">Accedir a l'app →</a>
 </div>
 
@@ -1581,23 +1594,24 @@
       // Mensual: quota/mes durant 10 mesos (juliol i agost gratis). Anual: un sol
       // pagament de 10 quotes (mateix Stripe price `<pla>_anual` = 10x mensual).
       let pricingPeriod = 'mensual';
-      const fmtEur = x => x.toLocaleString('ca-ES', {maximumFractionDigits:0});
+      const tr = s => (window.HPI18N ? window.HPI18N.t(s) : s);
+      const fmtEur = x => x.toLocaleString({es:'es-ES',va:'ca-ES',ca:'ca-ES'}[window.HPI18N ? window.HPI18N.lang : 'ca'], {maximumFractionDigits:0});
       function updateCalculadora(val){
         const n = parseInt(val,10);
         const pla = calcPla(n);
         const anual = pricingPeriod === 'anual';
         const total = anual ? pla.preu*10 : pla.preu;
         document.getElementById('calcDocents').textContent = n;
-        document.getElementById('calcPlaNom').textContent = pla.nom;
+        document.getElementById('calcPlaNom').textContent = tr(pla.nom);
         const totalEl = document.getElementById('calcPreuTotal');
         totalEl.textContent = fmtEur(total)+' €';
         totalEl.style.color = pla.color;
-        document.getElementById('calcPreuPeriode').textContent = anual ? '/any + IVA' : '/mes + IVA';
+        document.getElementById('calcPreuPeriode').textContent = anual ? tr('/any + IVA') : tr('/mes + IVA');
         document.getElementById('calcPreuNota').textContent = anual
-          ? 'Un sol pagament i una sola factura · juliol i agost inclosos'
-          : 'Es cobra 10 mesos a l’any · juliol i agost, gratis';
-        document.getElementById('calcPreuUnitari').textContent = '≈ '+(pla.preu*10/n/ (anual?1:10)).toFixed(2).replace('.',',')+(anual?' €/professional i any':' €/professional de mitjana');
-        document.getElementById('calcLegendEst').textContent = 'Fins a 25 · Estàndard '+fmtEur(anual?590:59)+' €';
+          ? tr('Un sol pagament i una sola factura · juliol i agost inclosos')
+          : tr('Es cobra 10 mesos a l’any · juliol i agost, gratis');
+        document.getElementById('calcPreuUnitari').textContent = '≈ '+(pla.preu*10/n/ (anual?1:10)).toFixed(2).replace('.',',')+(anual?' '+tr('€/professional i any'):' '+tr('€/professional de mitjana'));
+        document.getElementById('calcLegendEst').textContent = tr('Fins a 25')+' · '+tr('Estàndard')+' '+fmtEur(anual?590:59)+' €';
         document.getElementById('calcLegendPro').textContent = '26–60 · Pro '+fmtEur(anual?790:79)+' €';
         document.getElementById('calcLegendCen').textContent = '61+ · Centre+ '+fmtEur(anual?1190:119)+' €';
         const slider = document.getElementById('calcSlider');
@@ -2342,7 +2356,7 @@
     })
     .then(res => {
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      btn.textContent = '✓ Sol·licitud enviada!';
+      btn.textContent = (window.HPI18N ? window.HPI18N.t('✓ Sol·licitud enviada!') : '✓ Sol·licitud enviada!');
       btn.style.background = '#22c55e';
       form.reset();
     })
@@ -2350,7 +2364,7 @@
       btn.textContent = "No s'ha pogut enviar. Escriu-nos a horaria.admin@gmail.com";
       btn.style.background = '#ef4444';
       btn.disabled = false;
-      setTimeout(() => { btn.textContent = 'Enviar sol·licitud →'; btn.style.background = ''; }, 8000);
+      setTimeout(() => { btn.textContent = (window.HPI18N ? window.HPI18N.t('Enviar sol·licitud →') : 'Enviar sol·licitud →'); btn.style.background = ''; }, 8000);
     });
   }
 
@@ -2602,6 +2616,7 @@
   })();
 </script>
 
+<script src="/i18n.js"></script>
 <script src="/analytics.js" defer></script>
 
 </body>
