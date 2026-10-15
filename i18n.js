@@ -432,8 +432,32 @@
   }
 
   function syncSelectors() {
-    var sels = document.querySelectorAll('.lang-select');
-    for (var i = 0; i < sels.length; i++) sels[i].value = current;
+    var cur = document.querySelectorAll('[data-lang-current]');
+    for (var i = 0; i < cur.length; i++) cur[i].textContent = current.toUpperCase();
+    var opts = document.querySelectorAll('[data-set-lang]');
+    for (var k = 0; k < opts.length; k++) {
+      var on = opts[k].getAttribute('data-set-lang') === current;
+      opts[k].classList.toggle('is-active', on);
+      opts[k].setAttribute('aria-selected', on ? 'true' : 'false');
+    }
+  }
+
+  // Desplegable: obri/tanca amb el botó, tanca en triar, fora o Esc
+  function initSwitch() {
+    var sw = document.getElementById('langSwitch');
+    if (!sw) return;
+    var trigger = sw.querySelector('.lang-switch__trigger');
+    function setOpen(o) {
+      if (o) sw.setAttribute('data-open', ''); else sw.removeAttribute('data-open');
+      trigger.setAttribute('aria-expanded', o ? 'true' : 'false');
+    }
+    trigger.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!sw.hasAttribute('data-open')); });
+    sw.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-set-lang]');
+      if (b) { setLang(b.getAttribute('data-set-lang'), true); setOpen(false); }
+    });
+    document.addEventListener('click', function (e) { if (!sw.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setOpen(false); trigger.focus(); } });
   }
 
   function setLang(lang, persist) {
@@ -457,10 +481,7 @@
 
   function init() {
     var d = detect();
-    var sels = document.querySelectorAll('.lang-select');
-    for (var i = 0; i < sels.length; i++) {
-      sels[i].addEventListener('change', function (e) { setLang(e.target.value, true); });
-    }
+    initSwitch();
     if (d.lang !== 'ca' || d.explicit) setLang(d.lang, false);
     else syncSelectors();
   }

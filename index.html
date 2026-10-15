@@ -232,19 +232,34 @@
       transition: max-height .3s ease, background .4s ease, backdrop-filter .4s ease, border-color .4s ease;
     }
     .nav-mobile-menu.open { max-height: 560px; }
-    .lang-select {
-      appearance: none; -webkit-appearance: none;
-      background: transparent; color: rgba(255,255,255,.7);
-      border: 1px solid rgba(255,255,255,.18); border-radius: 6px;
-      padding: 4px 6px; font: 600 11px/1 inherit; font-family: inherit; letter-spacing: .04em;
-      cursor: pointer; text-align: center; text-align-last: center;
+    /* Selector d'idioma: text mínim + desplegable */
+    .lang-switch { position: relative; display: inline-flex; flex-shrink: 0; user-select: none; }
+    .lang-switch__trigger {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: transparent; border: 0; cursor: pointer; font-family: inherit;
+      font-size: 13px; font-weight: 600; letter-spacing: .02em;
+      color: rgba(255,255,255,.6); padding: 6px 4px; border-radius: 100px;
+      transition: color .2s ease; -webkit-tap-highlight-color: transparent;
     }
-    .lang-select:hover, .lang-select:focus { color: #fff; border-color: rgba(255,255,255,.4); outline: none; }
-    .lang-select option { color: #0a0a0a; background: #fff; }
-    .lang-menu { padding: 12px 5% 0; display: none; }
-    .lang-menu .lang-select { padding: 6px 12px; font-size: 13px; }
-    @media (max-width: 480px) { .lang-nav { display: none; } .lang-menu { display: block; } }
-    @media (min-width: 481px) and (max-width: 768px) { .lang-nav { display: block; } }
+    .lang-switch__trigger:hover, .lang-switch[data-open] .lang-switch__trigger { color: #fff; }
+    .lang-switch__current { line-height: 1; }
+    .lang-switch__caret { transition: transform .25s ease; margin-top: 1px; }
+    .lang-switch[data-open] .lang-switch__caret { transform: rotate(180deg); }
+    .lang-switch__menu {
+      position: absolute; top: calc(100% + 10px); right: 0; min-width: 8.5rem; padding: 5px; list-style: none;
+      background: rgba(18,18,18,.97); border: 1px solid rgba(255,255,255,.12); border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.35);
+      opacity: 0; visibility: hidden; transform: translateY(-4px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease; z-index: 1200;
+    }
+    .lang-switch[data-open] .lang-switch__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-switch__opt {
+      display: block; width: 100%; text-align: left; background: transparent; border: 0; cursor: pointer;
+      font: 500 14px/1.2 inherit; font-family: inherit; color: rgba(255,255,255,.75);
+      border-radius: 6px; padding: 9px 11px; transition: color .15s ease, background .15s ease;
+    }
+    .lang-switch__opt:hover { color: #fff; background: rgba(255,255,255,.08); }
+    .lang-switch__opt.is-active { color: #fff; font-weight: 700; }
     /* Ha de coincidir amb l'estil de la barra (nav.nav-glass) quan es fa scroll, perquè no quede més fosc que la barra de dalt */
     nav.nav-glass ~ .nav-mobile-menu {
       background: rgba(10,10,10,.5);
@@ -1173,7 +1188,17 @@
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
-    <select class="lang-select lang-nav" aria-label="Idioma" title="Idioma"><option value="ca">CA</option><option value="va">VA</option><option value="es">ES</option></select>
+    <div class="lang-switch" id="langSwitch">
+      <button type="button" class="lang-switch__trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Idioma" title="Idioma">
+        <span class="lang-switch__current" data-lang-current>CA</span>
+        <svg class="lang-switch__caret" width="9" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-switch__menu" role="listbox">
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="ca">Català</button></li>
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="va">Valencià</button></li>
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="es">Castellano</button></li>
+      </ul>
+    </div>
     <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir a l'app →</a>
     <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1189,7 +1214,6 @@
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
   <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
-  <div class="lang-menu"><select class="lang-select lang-mobile" aria-label="Idioma" title="Idioma"><option value="ca">CA</option><option value="va">VA</option><option value="es">ES</option></select></div>
   <a href="https://app.horariapro.com" data-track="cta_accedir_mobile">Accedir a l'app →</a>
 </div>
 
