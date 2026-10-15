@@ -234,13 +234,15 @@
     .nav-mobile-menu.open { max-height: 560px; }
     .lang-select {
       appearance: none; -webkit-appearance: none;
-      background: rgba(255,255,255,.1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 9px center;
-      color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 8px;
-      padding: 8px 26px 8px 10px; font: 600 13px/1 inherit; font-family: inherit; cursor: pointer;
+      background: transparent; color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.18); border-radius: 6px;
+      padding: 4px 6px; font: 600 11px/1 inherit; font-family: inherit; letter-spacing: .04em;
+      cursor: pointer; text-align: center; text-align-last: center;
     }
+    .lang-select:hover, .lang-select:focus { color: #fff; border-color: rgba(255,255,255,.4); outline: none; }
     .lang-select option { color: #0a0a0a; background: #fff; }
     .lang-menu { padding: 12px 5% 0; display: none; }
-    .lang-menu .lang-select { width: 100%; padding: 12px 30px 12px 14px; font-size: 15px; }
+    .lang-menu .lang-select { padding: 6px 12px; font-size: 13px; }
     @media (max-width: 480px) { .lang-nav { display: none; } .lang-menu { display: block; } }
     @media (min-width: 481px) and (max-width: 768px) { .lang-nav { display: block; } }
     /* Ha de coincidir amb l'estil de la barra (nav.nav-glass) quan es fa scroll, perquè no quede més fosc que la barra de dalt */
@@ -1171,7 +1173,7 @@
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
-    <select class="lang-select lang-nav" aria-label="Idioma" title="Idioma"><option value="ca">CA · Català</option><option value="va">VA · Valencià</option><option value="es">ES · Castellano</option></select>
+    <select class="lang-select lang-nav" aria-label="Idioma" title="Idioma"><option value="ca">CA</option><option value="va">VA</option><option value="es">ES</option></select>
     <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir a l'app →</a>
     <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1187,7 +1189,7 @@
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
   <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
-  <div class="lang-menu"><select class="lang-select lang-mobile" aria-label="Idioma" title="Idioma"><option value="ca">CA · Català</option><option value="va">VA · Valencià</option><option value="es">ES · Castellano</option></select></div>
+  <div class="lang-menu"><select class="lang-select lang-mobile" aria-label="Idioma" title="Idioma"><option value="ca">CA</option><option value="va">VA</option><option value="es">ES</option></select></div>
   <a href="https://app.horariapro.com" data-track="cta_accedir_mobile">Accedir a l'app →</a>
 </div>
 
