@@ -178,6 +178,15 @@
     ['Pro', 'Pro'],
     ['Centre+', 'Centro+'],
 
+    // Errors del servidor
+    ['Falten dades obligatòries del centre.', 'Faltan datos obligatorios del centro.'],
+    ['Falta el nom del centre.', 'Falta el nombre del centro.'],
+    ["Falta el nom de la cap d'estudis o director/a.", 'Falta el nombre de la jefatura de estudios o director/a.'],
+    ['Email de contacte no vàlid.', 'Correo de contacto no válido.'],
+    ["No s'ha pogut generar un codi vàlid per al centre.", 'No se ha podido generar un código válido para el centro.'],
+    ["Massa escoles creades des d'ací en poc temps. Contacta amb horaria.admin@gmail.com.", 'Demasiados centros creados desde aquí en poco tiempo. Contacta con horaria.admin@gmail.com.'],
+    ["Massa sol·licituds des d'ací en poc temps. Torna-ho a provar més tard.", 'Demasiadas solicitudes desde aquí en poco tiempo. Vuelve a probar más tarde.'],
+
     // Placeholders
     ['CEIP / CEE / INS...', 'CEIP / CEE / IES...'],
     ['Carrer, número, municipi, codi postal', 'Calle, número, municipio, código postal'],

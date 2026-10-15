@@ -680,7 +680,7 @@ async function confirmarICrear() {
       btnConfigurar.href = 'https://app.horariapro.com/?lang=' + encodeURIComponent(payload.idioma);
       showStep(4);
     } else {
-      errEl.textContent = '⚠️ ' + (escolaData.error || T('Error en crear el compte — contacta amb horaria.admin@gmail.com'));
+      errEl.textContent = '⚠️ ' + (T(escolaData.error || '') || T('Error en crear el compte — contacta amb horaria.admin@gmail.com'));
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.textContent = T('Confirmar i crear el compte →');
@@ -704,7 +704,7 @@ document.addEventListener('hp:langchange', function () {
 </script>
 
 <script src="/i18n.js?v=4"></script>
-<script src="/i18n-alta.js?v=1"></script>
+<script src="/i18n-alta.js?v=2"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   var s = document.getElementById('idioma');
