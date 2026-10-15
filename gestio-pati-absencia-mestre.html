@@ -179,6 +179,17 @@
     .nav-guides-menu a { display: block; padding: 8px 16px; font-size: 13.5px; color: var(--ink); }
     .nav-guides-menu a:hover { background: var(--bg-2); color: var(--green); text-decoration: none; }
     .nav-guides-menu a.current { color: var(--green); font-weight: 700; }
+
+    .lang-switch { position: relative; display: inline-flex; flex-shrink: 0; user-select: none; }
+    .lang-switch__trigger { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .02em; color: rgba(255,255,255,.6); padding: 6px 4px; border-radius: 100px; transition: color .2s ease; }
+    .lang-switch__trigger:hover, .lang-switch[data-open] .lang-switch__trigger { color: #fff; }
+    .lang-switch__caret { transition: transform .25s ease; margin-top: 1px; }
+    .lang-switch[data-open] .lang-switch__caret { transform: rotate(180deg); }
+    .lang-switch__menu { position: absolute; top: calc(100% + 10px); right: 0; min-width: 8.5rem; padding: 5px; list-style: none; background: rgba(18,18,18,.97); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.35); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease, visibility .2s ease; z-index: 1200; }
+    .lang-switch[data-open] .lang-switch__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-switch__opt { display: block; width: 100%; text-align: left; background: transparent; border: 0; cursor: pointer; font: 500 14px/1.2 inherit; font-family: inherit; color: rgba(255,255,255,.75); border-radius: 6px; padding: 9px 11px; }
+    .lang-switch__opt:hover { color: #fff; background: rgba(255,255,255,.08); }
+    .lang-switch__opt.is-active { color: #fff; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -195,6 +206,17 @@
         <a href="/gestio-pati-absencia-mestre.html" class="current">Qui vigila el pati si falta un mestre?</a>
       </div>
     </details>
+    <div class="lang-switch" id="langSwitch">
+      <button type="button" class="lang-switch__trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Idioma" title="Idioma">
+        <span class="lang-switch__current" data-lang-current>CA</span>
+        <svg class="lang-switch__caret" width="9" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-switch__menu" role="listbox">
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="ca">Català</button></li>
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="va">Valencià</button></li>
+        <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="es">Castellano</button></li>
+      </ul>
+    </div>
     <a href="/" class="nav-back">← Tornar a l'inici</a>
   </div>
 </nav>
@@ -231,6 +253,7 @@
   <div class="related">
     <span>Relacionat</span>
     <a href="/guia-cobertures-professorat.html">Gestió de cobertures del professorat: guia completa →</a>
+    <a href="/presentacio-seminari-caps-estudis.html" style="display:block; margin-top:6px;">Presentat al seminari de caps d'estudis del Vallès Occidental →</a>
   </div>
 
   <h2>Preguntes freqüents</h2>
@@ -273,6 +296,8 @@
   <div>© 2026 HorariaPro. Tots els drets reservats.</div>
 </footer>
 
+<script src="/i18n.js?v=5"></script>
+<script src="/i18n-guies.js?v=1"></script>
 <script src="/analytics.js" defer></script>
 </body>
 </html>

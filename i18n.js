@@ -484,7 +484,7 @@
   }
 
   // Enllaços cap a l'app i a les pàgines d'alta: porten ?lang= perquè hi continue l'idioma triat.
-  var LINK_SEL = 'a[href^="https://app.horariapro.com"],a[href*="incorporacio.html"],a[href*="onboarding-escola.html"],a[href*="accedir.html"]';
+  var LINK_SEL = 'a[href^="https://app.horariapro.com"],a[href*="incorporacio.html"],a[href*="onboarding-escola.html"],a[href*="accedir.html"],a[href*="guia-cobertures-professorat.html"],a[href*="gestio-pati-absencia-mestre.html"],a[href*="presentacio-seminari-caps-estudis.html"]';
   function tagLinks() {
     var links = document.querySelectorAll(LINK_SEL);
     for (var i = 0; i < links.length; i++) {
