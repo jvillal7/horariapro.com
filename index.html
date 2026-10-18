@@ -1923,9 +1923,9 @@
               <label for="roiCost">Cost per hora de direcció <span>(INE)</span></label>
               <button type="button" class="roi-info" id="roiInfoBtn" aria-expanded="false" aria-controls="roiPop" aria-label="Més informació sobre el cost per hora">i</button>
             </div>
-            <div class="roi-input"><input type="number" id="roiCost" inputmode="numeric" min="10" max="100" value="25"><span>€/h</span></div>
+            <div class="roi-input"><input type="number" id="roiCost" inputmode="numeric" min="10" max="100" value="28"><span>€/h</span></div>
             <div class="roi-pop" id="roiPop" role="note" hidden>
-              <span>Cost per hora orientatiu, proper al cost laboral per hora efectiva de l'INE (24,88 €/h a l'1T 2026 i 26,18 €/h al 2T 2026, mitjana de tots els sectors). Canvia'l pel del teu centre.</span><br>
+              <span>Cost per hora orientatiu, basat en el cost laboral per hora efectiva de l'INE per al sector Educació (27,67 €/h a l'1T 2026 i 30,39 €/h al 2T 2026; mitjana de tots els sectors: 24,88 i 26,18 €/h). Canvia'l pel del teu centre.</span><br>
               <a href="https://www.ine.es/dyngs/Prensa/ETCL2T26.htm" target="_blank" rel="noopener">Font: INE, Encuesta Trimestral de Coste Laboral</a>
             </div>
           </div>
@@ -1941,7 +1941,7 @@
         <div class="roi-result" aria-live="polite">
           <div class="roi-big"><span id="roiHores">7</span> <small>h/mes</small></div>
           <div class="roi-lbl">d'estalvi de temps de direcció</div>
-          <div class="roi-euros" id="roiEuros">≈ 172 € al mes</div>
+          <div class="roi-euros" id="roiEuros">≈ 193 € al mes</div>
           <div class="roi-pla" id="roiPla"></div>
           <button type="button" class="roi-go" id="roiGo" data-track="cta_roi_veure_pla">Veure el pla ↓</button>
         </div>
@@ -2062,7 +2062,7 @@
           if (!cobEditada) $('roiCob').value = Math.max(1, Math.round(n * 0.6));
           const cob = val('roiCob', 12, 1, 200);
           const min = val('roiMin', 10, 3, 60);
-          const cost = val('roiCost', 25, 10, 100);
+          const cost = val('roiCost', 28, 10, 100);
           const hores = Math.max(0, cob * (min - MIN_HP) * SETMANES / 60);
           const euros = hores * cost;
           const pla = calcPla(n);
