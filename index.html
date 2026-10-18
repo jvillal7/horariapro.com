@@ -1838,12 +1838,14 @@
         const slider = document.getElementById('calcSlider');
         slider.style.setProperty('accent-color', pla.color);
       }
-      (function(){
+      // El slider està més avall a la pàgina: cal esperar que el DOM estiga carregat
+      document.addEventListener('DOMContentLoaded', function(){
         const slider = document.getElementById('calcSlider');
+        if (!slider) return;
         const min = 12, max = 100, p25 = (25-min)/(max-min)*100, p60 = (60-min)/(max-min)*100;
         slider.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${p25}%, #22c55e ${p25}%, #22c55e ${p60}%, #a855f7 ${p60}%, #a855f7 100%)`;
         updateCalculadora(slider.value);
-      })();
+      });
     </script>
 
     <!-- Calculadora ROI: estalvi de temps en cobertures; comparteix la plantilla amb el slider de preus -->
