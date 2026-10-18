@@ -290,7 +290,7 @@
     @media (min-width: 900px) {
       .hero-wrap .hero { max-width: 1180px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; text-align: left; padding-top: 84px; padding-bottom: 28px; gap: 48px; }
       .hero-wrap .hero p { margin-left: 0; margin-right: 0; }
-      .hero-wrap .hero .hero-actions { justify-content: flex-start; }
+      .hero-wrap .hero .hero-actions { margin: 0; }
     }
     .hero-video { display: flex; justify-content: center; margin-top: 40px; }
     @media (min-width: 900px) { .hero-video { margin-top: 0; } }
@@ -299,6 +299,15 @@
       background: #fff;
     }
     @media (min-width: 900px) { .hero-video-card { width: min(100%, 330px); } }
+    /* Vídeo horitzontal (PC/tauleta): targeta 16:9 més ampla */
+    .hero-video-card.is-h { aspect-ratio: 16 / 9; width: min(100%, 720px); }
+    @media (min-width: 900px) {
+      /* PC/tauleta: vídeo gran (fons blanc, integrat a la pàgina) i text més reduït a l'esquerra */
+      .hero-wrap .hero:has(.hero-video-card.is-h) { max-width: 1360px; grid-template-columns: .62fr 1.38fr; gap: 24px; }
+      .hero-wrap .hero:has(.hero-video-card.is-h) h1 { font-size: clamp(28px, 2.9vw, 40px); margin-bottom: 18px; }
+      .hero-wrap .hero:has(.hero-video-card.is-h) p { font-size: clamp(15px, 1.35vw, 18px); margin-bottom: 28px; }
+      .hero-video-card.is-h { width: min(100%, 860px); }
+    }
     .hero-video-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-video-controls { position: absolute; left: 8px; right: 8px; bottom: 8px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; z-index: 2; }
     .hero-video-controls button { white-space: nowrap; }
@@ -321,6 +330,8 @@
       background: #0a0a0a; display: flex; justify-content: center; align-items: flex-start; z-index: 1;
     }
     .hero-video-card.hero-expanded video { width: auto; height: calc(100% - 84px); aspect-ratio: 9 / 16; margin-top: 12px; object-fit: contain; background: #fff; }
+    .hero-video-card.is-h.hero-expanded { border-radius: 0; overflow: visible; box-shadow: none; }
+    .hero-video-card.is-h.hero-expanded video { aspect-ratio: 16 / 9; max-width: calc(100% - 32px); height: auto; max-height: calc(100% - 84px); }
     .hero-video-card.hero-expanded .hero-video-controls { left: 0; right: 0; bottom: 16px; justify-content: center; gap: 12px; }
     .hero-video-card.hero-expanded .hero-video-controls button { width: 48px; height: 48px; padding: 0; background: transparent; border: none; }
     .hero-video-card.hero-expanded .hero-video-controls button:hover { background: rgba(255,255,255,.14); }
@@ -376,7 +387,8 @@
     @media (prefers-reduced-motion: reduce) {
       .brand-word { animation: none; }
     }
-    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-actions { display: grid; grid-template-columns: 1fr; gap: 12px; width: max-content; max-width: 100%; margin: 0 auto; }
+    .hero-actions > a { display: block; text-align: center; }
     .btn-primary {
       background: var(--black); color: #fff;
       padding: 14px 28px; border-radius: 10px;
@@ -1226,7 +1238,7 @@
         <li role="presentation"><button type="button" role="option" class="lang-switch__opt" data-set-lang="es">Castellano</button></li>
       </ul>
     </div>
-    <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir a l'app →</a>
+    <a href="https://app.horariapro.com" class="nav-cta" data-track="cta_accedir_nav">Accedir</a>
     <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Obrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1252,14 +1264,54 @@
     <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> proposa cobertures, notifica tothom afectat i elimina l'estrès de cada matí.</p>
     <div class="hero-actions">
       <a href="incorporacio.html" class="btn-primary" data-track="cta_hero_prova">Prova-ho gratis al teu centre</a>
-      <a href="#contacte" class="btn-secondary" data-track="cta_hero_implantacio">Implantació gratuïta</a>
+      <a href="#contacte" class="btn-secondary" data-track="cta_hero_implantacio" onclick="event.preventDefault(); openDemoModal();">Implantació gratuïta, en parlem?</a>
     </div>
    </div>
    <div class="hero-video">
     <div class="hero-video-card">
-      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="videos/hero-laura-v3.jpg" aria-label="Vídeo: un dia de la Laura, cap d'estudis, amb HorariaPro">
-        <source src="videos/hero-laura-v3.mp4" type="video/mp4" />
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="videos/hero-demo-h-ca.jpg" aria-label="Vídeo: com gestiona HorariaPro una absència, de l'avís a la cobertura">
+        <source src="videos/hero-demo-h-ca.mp4" type="video/mp4" />
       </video>
+      <script>
+        /* Tria el vídeo segons dispositiu (PC/tauleta = horitzontal, mòbil = vertical) i idioma. Abans del primer càrrec, perquè no baixe el que no toca. */
+        (function () {
+          var v = document.getElementById('heroVideo'), card = v.parentNode;
+          function lang() {
+            var l = (window.HPI18N && window.HPI18N.lang) || null;
+            if (!l) { try { l = localStorage.getItem('hp_lang'); } catch (e) {} }
+            if (!l) {
+              try { var q = new URLSearchParams(location.search).get('lang'); if (q) l = q.toLowerCase() === 'val' ? 'va' : q.toLowerCase(); } catch (e) {}
+            }
+            if (!l) {
+              var p = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''])[0] || '';
+              p = String(p).toLowerCase();
+              l = /valencia/.test(p) ? 'va' : p.indexOf('es') === 0 ? 'es' : 'ca';
+            }
+            return /^(ca|va|es)$/.test(l) ? l : 'ca';
+          }
+          function isPhone() {
+            var small = Math.min(screen.width || 9999, screen.height || 9999) < 600;
+            var touch = window.matchMedia('(pointer: coarse)').matches;
+            return window.innerWidth < 700 || (touch && small);
+          }
+          function pick() {
+            var o = isPhone() ? 'v' : 'h', key = o + '-' + lang();
+            if (v.getAttribute('data-key') === key) return;
+            var first = !v.getAttribute('data-key'), t = first ? 0 : v.currentTime, wasPaused = v.paused && !first;
+            v.setAttribute('data-key', key);
+            card.classList.toggle('is-h', o === 'h');
+            v.poster = 'videos/hero-demo-' + key + '.jpg';
+            v.src = 'videos/hero-demo-' + key + '.mp4';
+            v.load();
+            if (t > 0.2) v.addEventListener('loadedmetadata', function f() { v.removeEventListener('loadedmetadata', f); try { v.currentTime = t; } catch (e) {} }); 
+            if (!wasPaused) v.play().catch(function () {});
+          }
+          pick();
+          document.addEventListener('DOMContentLoaded', pick);
+          document.addEventListener('hp:langchange', pick);
+          var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(pick, 250); });
+        })();
+      </script>
       <div class="hero-video-controls">
         <button type="button" class="hero-video-pause" id="heroPause" aria-label="Pausar el vídeo" title="Pausa" onclick="toggleHeroPlay()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></svg></button>
         <button type="button" class="hero-video-sound" id="heroSound" aria-label="Activar el so" title="So" aria-pressed="false" onclick="toggleHeroSound()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h4l5 4v-13l-5 4z" fill="currentColor" stroke="none"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></svg></button>
