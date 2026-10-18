@@ -28,6 +28,9 @@ nav {
   position: sticky; top: 0; z-index: 100;
 }
 .nav-logo { font-weight: 800; font-size: 18px; color: #fff; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.lang-select { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; padding: 5px 8px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+.lang-select option { color: #1a1a1a; }
 .nav-badge { background: var(--purple); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; letter-spacing: .04em; text-transform: uppercase; }
 
 .hero { background: var(--ink); color: #fff; padding: 48px 5% 40px; }
@@ -154,7 +157,14 @@ nav {
 
 <nav>
   <div class="nav-logo">HorariaPro</div>
-  <div class="nav-badge">Configuració escola</div>
+  <div class="nav-right">
+    <select id="obLang" class="lang-select" aria-label="Idioma">
+      <option value="ca">Català</option>
+      <option value="va">Valencià</option>
+      <option value="es">Español</option>
+    </select>
+    <div class="nav-badge">Configuració escola</div>
+  </div>
 </nav>
 
 <div class="hero">
@@ -624,6 +634,8 @@ nav {
 </div><!-- /main -->
 
 <script>
+// Traducció de textos que escriu el JavaScript (el català és la clau; si falta i18n es queda igual)
+const tr = (s, vars) => (window.HPI18N ? HPI18N.t(s, vars) : (vars ? s.replace(/\{(\w+)\}/g, (m, k) => vars[k]) : s));
 const WORKER_URL      = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/onboarding-ia';
 const CREAR_ESCOLA_URL = 'https://mtrylcazzwolgzfzmbrn.supabase.co/functions/v1/crear-escola';
 
@@ -713,12 +725,17 @@ function buildFranjesReals() {
   return franjes;
 }
 
+// Només el text visible del xip es tradueix; f.label / f.hora (les dades que es guarden) continuen en català.
+function etiquetaXip(f) {
+  const m = f.label.match(/^(\d+)a hora$/);
+  return m ? tr('{n}a hora', { n: m[1] }) : tr(f.label);
+}
 function actualitzarPreview() {
   const franjes = buildFranjesReals();
   const el = document.getElementById('franja-preview');
   el.innerHTML = franjes.map(f => `
     <div class="franja-chip ${f.patio ? 'pati' : ''} ${f.lliure ? 'dinar' : ''}">
-      <b>${f.label}</b><span>${f.sub}</span>
+      <b>${etiquetaXip(f)}</b><span>${f.sub}</span>
     </div>`).join('');
 }
 
@@ -915,7 +932,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   if (!v('nom') || !v('codi') || !v('nom_director') || !v('nom_jefa') || !v('email_jefa') || !v('grups')) {
-    alert("Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu (incl. correu electrònic de la cap d'estudis) i Grups.");
+    alert(tr("Si us plau, omple els camps obligatoris: Nom del centre, Codi, Equip directiu (incl. correu electrònic de la cap d'estudis) i Grups."));
     return;
   }
 
@@ -941,7 +958,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   } catch (err) {
     hide('loading');
     show('form');
-    alert('Error en el processament de la IA: ' + err.message + '\nTorna-ho a intentar.');
+    alert(tr('Error en el processament de la IA: {msg}\nTorna-ho a intentar.', { msg: err.message }));
   }
 });
 
@@ -949,7 +966,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
 async function createSchool() {
   const btn = document.getElementById('btn-crear');
   btn.disabled = true;
-  btn.querySelector('span').textContent = 'Creant escola…';
+  btn.querySelector('span').textContent = tr('Creant escola…');
 
   const nom          = v('nom');
   const codi         = v('codi');
@@ -982,10 +999,22 @@ async function createSchool() {
 
   } catch (err) {
     btn.disabled = false;
-    btn.querySelector('span').textContent = '✓ Crear escola a HorariaPro';
-    alert('Error en crear l\'escola: ' + err.message);
+    btn.querySelector('span').textContent = tr('✓ Crear escola a HorariaPro');
+    alert(tr("Error en crear l'escola: {msg}", { msg: err.message }));
   }
 }
+</script>
+
+<script src="/i18n.js?v=5"></script>
+<script src="/i18n-onboarding.js?v=1"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var s = document.getElementById('obLang');
+  if (!s || !window.HPI18N) return;
+  s.value = HPI18N.lang;
+  s.addEventListener('change', function () { HPI18N.setLang(s.value); }); actualitzarPreview();
+  document.addEventListener('hp:langchange', function (e) { s.value = e.detail.lang; actualitzarPreview(); });
+});
 </script>
 
 </body>
