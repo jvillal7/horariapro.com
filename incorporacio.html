@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Alta d'un centre nou — HorariaPro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -13,12 +13,12 @@
     --border: #e8e8e8; --border-2: #ddd; --bg-2: #f7f7f7; --surface: #fff;
     --blue: #2563eb; --blue-lt: #eff6ff;
     --green: #16a34a; --green-lt: #f0fdf4;
-    --purple: #7c3aed; --purple-lt: #a78bfa;
+    --purple: #1A7A4E; --purple-lt: #A8DDB5;
     --r: 18px; --r-sm: 8px;
     --sh-lg: 0 30px 80px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.2);
   }
   body {
-    font-family: 'Inter', sans-serif; color: var(--ink); font-size: 15px; line-height: 1.6;
+    font-family: 'Geist', sans-serif; color: var(--ink); font-size: 15px; line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     background: radial-gradient(1100px 700px at 18% -8%, #241a3d, #0a0a0f 62%);
@@ -30,8 +30,8 @@
   .wiz-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
   .wiz-brand img { height: 22px; width: auto; display: block; }
   .wiz-eyebrow {
-    color: rgba(255,255,255,.5); font-size: 12px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; margin-bottom: 26px; text-align: center;
+    color: rgba(255,255,255,.5); font-size: 12px; font-weight: 600; letter-spacing: 0;
+    margin-bottom: 26px; text-align: center;
   }
 
   .wiz-card {
@@ -46,13 +46,13 @@
   .wiz-dot.cur { width: 22px; }
   #wiz-steplabel { font-size: 12px; color: var(--ink-3); margin-left: 4px; }
 
-  .wiz-step h2 { font-family: Georgia, serif; font-weight: 400; font-size: 23px; margin: 0 0 4px; color: var(--ink); }
+  .wiz-step h2 { font-weight: 600; letter-spacing: -.02em; font-size: 23px; margin: 0 0 4px; color: var(--ink); }
   .wiz-step > p.wiz-sub { color: var(--ink-3); font-size: 13.5px; margin: 0 0 22px; }
 
   .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 6px; }
   .field-full { grid-column: 1 / -1; }
   @media (max-width: 640px) { .fields { grid-template-columns: 1fr; } }
-  .field label { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .02em; text-transform: uppercase; }
+  .field label { display: block; font-size: 11.5px; font-weight: 600; color: var(--ink-3); margin-bottom: 5px; letter-spacing: .02em; }
   .field label .req { color: var(--blue); }
   .field input, .field select, .field textarea {
     width: 100%; border: 1.5px solid var(--border); border-radius: var(--r-sm);
@@ -84,24 +84,24 @@
   .plan-card.plan-pro { border-color: var(--ink); background: var(--ink); color: #fff; }
   .plan-card.plan-pro:hover { border-color: #374151; }
   .plan-card.plan-pro.selected { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.35); }
-  .plan-badge { position: absolute; top: -9px; left: 16px; background: var(--blue); color: #fff; font-size: 9.5px; font-weight: 700; padding: 2px 10px; border-radius: 100px; white-space: nowrap; letter-spacing: .04em; }
-  .plan-nom { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 5px; }
+  .plan-badge { position: absolute; top: -9px; left: 16px; background: var(--blue); color: #fff; font-size: 9.5px; font-weight: 600; padding: 2px 10px; border-radius: 100px; white-space: nowrap; letter-spacing: 0; }
+  .plan-nom { font-size: 10.5px; font-weight: 600; letter-spacing: 0; color: var(--ink-3); margin-bottom: 5px; }
   .plan-card.plan-pro .plan-nom { color: rgba(255,255,255,.5); }
-  .plan-preu { font-size: 26px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+  .plan-preu { font-size: 26px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
   .plan-card.plan-pro .plan-preu { color: #fff; }
   .plan-preu-mes { font-size: 12px; color: var(--ink-3); font-weight: 400; }
   .plan-card.plan-pro .plan-preu-mes { color: rgba(255,255,255,.5); }
   .plan-lim { font-size: 11px; color: var(--ink-4); margin-top: 3px; }
   .plan-card.plan-pro .plan-lim { color: rgba(255,255,255,.4); }
   .plan-anual-info { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 5px; background: var(--green-lt); border-radius: 4px; padding: 2px 7px; display: inline-block; }
-  .plan-card.plan-pro .plan-anual-info { color: #4ade80; background: rgba(74,222,128,.15); }
+  .plan-card.plan-pro .plan-anual-info { color: #A8DDB5; background: rgba(168,221,181,.15); }
   .plan-features { list-style: none; padding: 0; margin: 8px 0 0; font-size: 10.5px; color: var(--ink-3); line-height: 1.6; }
-  .plan-features li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+  .plan-features li::before { content: "✓ "; color: var(--green); font-weight: 600; }
   #plan-error { display: none; color: #dc2626; font-size: 12.5px; margin-top: 10px; }
 
   /* Navegació de passos */
   .wiz-nav { display: flex; gap: 10px; margin-top: 24px; }
-  .btn { border: none; border-radius: var(--r-sm); padding: 12px 20px; font-size: 14.5px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s, background .15s; }
+  .btn { border: none; border-radius: var(--r-sm); padding: 12px 20px; font-size: 14.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity .15s, background .15s; }
   .btn-primary { background: var(--ink); color: #fff; flex: 1; }
   .btn-primary:hover { opacity: .88; }
   .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
@@ -114,35 +114,35 @@
     max-height: 46vh; overflow-y: auto;
   }
   .cp-portada { background: var(--ink); color: #fff; padding: 28px 26px 24px; border-radius: 11px 11px 0 0; }
-  .cp-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 17px; color: #93c5fd; letter-spacing: -.3px; margin-bottom: 20px; }
-  .cp-titol h1 { font-size: 17px; font-weight: 800; line-height: 1.3; }
+  .cp-logo { font-family: 'Geist', sans-serif; font-weight: 600; font-size: 17px; color: #93c5fd; letter-spacing: -.3px; margin-bottom: 20px; }
+  .cp-titol h1 { font-size: 17px; font-weight: 600; line-height: 1.3; }
   .cp-titol .sub { color: rgba(255,255,255,.55); font-size: 11.5px; margin-top: 6px; }
   .cp-parts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); }
   @media (max-width: 480px) { .cp-parts { grid-template-columns: 1fr; } }
   .cp-part { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 13px 15px; }
-  .cp-part .rol { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 5px; }
-  .cp-part .nom { font-size: 13px; font-weight: 700; }
+  .cp-part .rol { font-size: 9.5px; font-weight: 600; letter-spacing: 0; color: #93c5fd; margin-bottom: 5px; }
+  .cp-part .nom { font-size: 13px; font-weight: 600; }
   .cp-part .det { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 3px; line-height: 1.6; }
 
   .cp-body { padding: 24px 26px; font-family: Georgia, serif; font-size: 10.5pt; line-height: 1.65; color: #333; }
-  .cp-body h2 { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: #1e40af; text-transform: uppercase; letter-spacing: .06em; margin: 24px 0 8px; padding-bottom: 5px; border-bottom: 2px solid #dbeafe; }
+  .cp-body h2 { font-family: 'Geist', sans-serif; font-size: 12px; font-weight: 600; color: #1e40af; letter-spacing: 0; margin: 24px 0 8px; padding-bottom: 5px; border-bottom: 2px solid #dbeafe; }
   .cp-body h2:first-child { margin-top: 0; }
   .cp-body p { color: #555; margin-bottom: 9px; }
   .cp-body ul { color: #555; padding-left: 18px; margin-bottom: 10px; }
   .cp-body ul li { margin-bottom: 4px; }
   .cp-body .hl { background: #eff6ff; border-left: 4px solid #2563eb; padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 12px; }
-  .cp-body .hl p { margin: 0; color: #1e3a8a; font-family: 'Inter', sans-serif; font-size: 12px; }
-  .cp-body table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 11px; margin-bottom: 14px; }
+  .cp-body .hl p { margin: 0; color: #1e3a8a; font-family: 'Geist', sans-serif; font-size: 12px; }
+  .cp-body table { width: 100%; border-collapse: collapse; font-family: 'Geist', sans-serif; font-size: 11px; margin-bottom: 14px; }
   .cp-body table th { background: #1e3a8a; color: #fff; padding: 7px 9px; text-align: left; }
   .cp-body table td { padding: 7px 9px; border: 1px solid #e5e7eb; color: #555; vertical-align: top; }
   .cp-body table tr:nth-child(even) td { background: #f8fafc; }
   .cp-sigs { padding: 24px 26px 28px; border-top: 1px solid #e5e7eb; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   @media (max-width: 480px) { .cp-sigs { grid-template-columns: 1fr; } }
-  .cp-sig .rol { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2563eb; margin-bottom: 4px; }
-  .cp-sig .nom { font-weight: 700; font-size: 12.5px; }
+  .cp-sig .rol { font-family: 'Geist', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0; color: #2563eb; margin-bottom: 4px; }
+  .cp-sig .nom { font-weight: 600; font-size: 12.5px; }
   .cp-sig .det { font-size: 11px; color: #777; margin-top: 3px; line-height: 1.5; }
-  .cp-sig .linia { margin-top: 44px; border-top: 1px solid #333; padding-top: 7px; font-family: 'Inter', sans-serif; font-size: 10.5px; color: #777; }
-  .cp-peu { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #aaa; text-align: center; padding: 16px 26px; border-top: 1px solid #f0f0f0; }
+  .cp-sig .linia { margin-top: 44px; border-top: 1px solid #333; padding-top: 7px; font-family: 'Geist', sans-serif; font-size: 10.5px; color: #777; }
+  .cp-peu { font-family: 'Geist', sans-serif; font-size: 10.5px; color: #aaa; text-align: center; padding: 16px 26px; border-top: 1px solid #f0f0f0; }
 
   #wiz-submit-err { color: #dc2626; font-size: 12.5px; margin-top: 10px; display: none; }
 
@@ -159,10 +159,11 @@
     body { background: #fff; }
   }
 </style>
+  <link rel="stylesheet" href="/marca.css" />
 </head>
-<body>
+<body class="on-pissarra">
 
-<div class="wiz-brand"><img src="/logo.svg" alt="HorariaPro" /></div>
+<div class="wiz-brand"><img src="/marca/logo/horaria-pro-sobre-pissarra.svg" alt="Horaria Pro" /></div>
 <div class="wiz-eyebrow">Alta d'un centre nou</div>
 
 <div class="wiz-card">
@@ -703,7 +704,7 @@ document.addEventListener('hp:langchange', function () {
 });
 </script>
 
-<script src="/i18n.js?v=5"></script>
+<script src="/i18n.js?v=6"></script>
 <script src="/i18n-alta.js?v=2"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -713,5 +714,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script src="/analytics.js" defer></script>
+<script src="/marca.js" defer></script>
 </body>
 </html>

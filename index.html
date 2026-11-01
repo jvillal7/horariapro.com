@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HorariaPro — Gestió intel·ligent de cobertures per a centres educatius</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/marca/icona/favicon.svg" />
+  <link rel="apple-touch-icon" href="/marca/icona/favicon.svg" />
   <meta name="description" content="HorariaPro automatitza la gestió d'absències i cobertures del professorat amb intel·ligència artificial. Dissenyat per a equips directius de centres educatius." />
   <link rel="canonical" href="https://horariapro.com/" />
 
@@ -135,12 +135,12 @@
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0a0a0a;
+      --black:   #14271F;
       --ink:     #1a1a1a;
       --ink-2:   #444;
       --ink-3:   #777;
@@ -165,13 +165,13 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Geist', sans-serif;
       color: var(--ink);
       background: var(--bg);
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow-x: clip; /* clip (no hidden): hidden fa del body un scroll container i trenca el position:sticky de la demo guiada */
       max-width: 100vw;
       padding-top: 72px;
     }
@@ -181,7 +181,7 @@
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-      background: rgba(10,10,10,.96);
+      background: rgba(30,58,47,.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,.08);
@@ -191,7 +191,7 @@
       transition: background .4s ease, backdrop-filter .4s ease, border-color .4s ease, box-shadow .4s ease;
     }
     nav.nav-glass {
-      background: rgba(10,10,10,.5);
+      background: rgba(30,58,47,.5);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(255,255,255,.14);
@@ -201,7 +201,7 @@
     .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.6); }
     .nav-links a:hover { color: #fff; }
     .nav-cta {
-      background: #fff; color: #0a0a0a;
+      background: #fff; color: #14271F;
       padding: 9px 20px; border-radius: 8px;
       font-size: 14px; font-weight: 600;
       transition: opacity .15s;
@@ -224,7 +224,7 @@
     .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .nav-mobile-menu {
       position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
-      background: rgba(10,10,10,.96);
+      background: rgba(30,58,47,.96);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,.08);
       display: flex; flex-direction: column;
@@ -259,10 +259,10 @@
       border-radius: 6px; padding: 9px 11px; transition: color .15s ease, background .15s ease;
     }
     .lang-switch__opt:hover { color: #fff; background: rgba(255,255,255,.08); }
-    .lang-switch__opt.is-active { color: #fff; font-weight: 700; }
+    .lang-switch__opt.is-active { color: #fff; font-weight: 600; }
     /* Ha de coincidir amb l'estil de la barra (nav.nav-glass) quan es fa scroll, perquè no quede més fosc que la barra de dalt */
     nav.nav-glass ~ .nav-mobile-menu {
-      background: rgba(10,10,10,.5);
+      background: rgba(30,58,47,.5);
       backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(255,255,255,.14);
     }
@@ -271,7 +271,7 @@
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .nav-mobile-menu a:last-child {
-      border-bottom: none; color: #0a0a0a; background: #fff;
+      border-bottom: none; color: #14271F; background: #fff;
       margin: 12px 5% 16px; border-radius: 8px; text-align: center;
     }
 
@@ -313,7 +313,7 @@
     .hero-video-controls button { white-space: nowrap; }
     /* icones soltes: ombra fosca perquè es vegen sobre qualsevol fons del vídeo */
     .hero-video-controls button svg { filter: drop-shadow(0 0 1.5px rgba(255,255,255,.95)); }
-    .hero-video-controls button:hover, .hero-video-controls button:focus-visible { opacity: 1; background: rgba(10,10,10,.08); }
+    .hero-video-controls button:hover, .hero-video-controls button:focus-visible { opacity: 1; background: rgba(30,58,47,.08); }
     /* vista ampliada / pantalla completa: fons negre → icones blanques */
     .hero-video-card.hero-expanded .hero-video-controls button,
     .hero-video-card:fullscreen .hero-video-controls button,
@@ -327,7 +327,7 @@
     body.hero-expanded-open .whatsapp-float, body.hero-expanded-open .instagram-float, body.hero-expanded-open .cookie-banner { display: none !important; }
     .hero-video-card.hero-expanded {
       position: fixed; top: 72px; left: 0; right: 0; bottom: 0; width: auto; max-width: none; aspect-ratio: auto;
-      background: #0a0a0a; display: flex; justify-content: center; align-items: flex-start; z-index: 1;
+      background: #14271F; display: flex; justify-content: center; align-items: flex-start; z-index: 1;
     }
     .hero-video-card.hero-expanded video { width: auto; height: calc(100% - 84px); aspect-ratio: 9 / 16; margin-top: 12px; object-fit: contain; background: #fff; }
     .hero-video-card.is-h.hero-expanded { border-radius: 0; overflow: visible; box-shadow: none; }
@@ -356,7 +356,7 @@
     }
     .hero h1 {
       font-size: clamp(36px, 4.4vw, 54px);
-      font-weight: 800; line-height: 1.1;
+      font-weight: 600; line-height: 1.1;
       letter-spacing: -.03em;
       color: var(--black);
       margin-bottom: 24px;
@@ -368,20 +368,20 @@
       margin: 0 auto 40px;
     }
     .brand-word {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Geist', sans-serif;
       display: inline-block;
       animation: brandBlink 2s ease-in-out .6s 1;
     }
-    .brand-word span { letter-spacing: -.01em; font-weight: 800; }
+    .brand-word span { letter-spacing: -.01em; font-weight: 600; }
     .brand-word .bw-1, .brand-word .bw-3 { color: var(--black); }
-    .brand-word .bw-ia { color: #a78bfa; }
+    .brand-word .bw-ia { color: #A8DDB5; }
     @keyframes brandBlink {
       0%   { opacity: 1; text-shadow: none; }
       12%  { opacity: .35; text-shadow: none; }
-      24%  { opacity: 1; text-shadow: 0 0 16px rgba(167,139,250,.55); }
+      24%  { opacity: 1; text-shadow: 0 0 16px rgba(168,221,181,.55); }
       40%  { opacity: 1; text-shadow: none; }
       52%  { opacity: .35; text-shadow: none; }
-      64%  { opacity: 1; text-shadow: 0 0 16px rgba(167,139,250,.55); }
+      64%  { opacity: 1; text-shadow: 0 0 16px rgba(168,221,181,.55); }
       100% { opacity: 1; text-shadow: none; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -412,13 +412,13 @@
     section { padding: 80px 5%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-tag {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--blue);
+      font-size: 12px; font-weight: 600; letter-spacing: 0;
+      color: var(--blue);
       margin-bottom: 12px;
     }
     .section-title {
       font-size: clamp(28px, 3.5vw, 40px);
-      font-weight: 800; letter-spacing: -.02em;
+      font-weight: 600; letter-spacing: -.02em;
       color: var(--black); margin-bottom: 16px;
     }
     .section-sub {
@@ -443,7 +443,7 @@
     .feature-row.reverse > * { direction: ltr; }
 
     /* ── LÍNIES CONNECTORS ENTRE FUNCIONALITATS (lila del logo + verd corporatiu, alternats) ── */
-    .feature-rows { position: relative; --fr-lilac: #a78bfa; --fr-green: var(--blue); }
+    .feature-rows { position: relative; --fr-lilac: #A8DDB5; --fr-green: var(--blue); }
     .feature-row { position: relative; z-index: 1; --lc: var(--fr-lilac); }
     .feature-row:nth-child(odd) { --lc: var(--fr-green); } /* el svg és el 1r fill, així la fila 1 és lila */
     .fr-lines { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
@@ -481,12 +481,11 @@
     .beta-badge {
       display: inline-block; vertical-align: middle; margin-left: 8px;
       background: #fff7ed; color: #c2410c;
-      font-size: 11px; font-weight: 700; letter-spacing: .02em;
+      font-size: 11px; font-weight: 600; letter-spacing: .02em;
       padding: 3px 10px; border-radius: 100px;
-      text-transform: uppercase;
-    }
+      }
     .feature-row-text h3 {
-      font-size: 22px; font-weight: 800;
+      font-size: 22px; font-weight: 600;
       letter-spacing: -.02em; margin-bottom: 12px;
       color: var(--black);
     }
@@ -522,8 +521,8 @@
     /* Sub-grups "Docent avisa" / "Cap d'estudis avisa" (bloc 1 de Funcionalitats) */
     .feature-media-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .feature-media-group-title {
-      font-size: 12px; font-weight: 700; color: var(--ink-2);
-      text-transform: uppercase; letter-spacing: .04em;
+      font-size: 12px; font-weight: 600; color: var(--ink-2);
+      letter-spacing: 0;
       margin-bottom: 10px;
     }
     @media (max-width: 560px) {
@@ -556,13 +555,13 @@
     .feature-video-wrap.portrait video { transform: scale(1.056) translateY(-2.37%); }
     .feature-video-wrap.portrait.sortides video { transform: scale(1.08) translateY(-3.7%); }
     .has-lightbox { cursor: pointer; }
-    .has-lightbox:focus-visible, .faq-question:focus-visible, .demo-mobile-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .has-lightbox:focus-visible, .faq-question:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
     .feature-media-toggle-btn {
       display: none;
       align-items: center; gap: 8px;
       background: var(--bg-2); color: var(--ink);
       border: 1px solid var(--border); border-radius: 10px;
-      padding: 12px 18px; font-size: 14px; font-weight: 700;
+      padding: 12px 18px; font-size: 14px; font-weight: 600;
       margin-top: 18px; cursor: pointer; font-family: inherit;
     }
     @media (max-width: 768px) {
@@ -577,7 +576,7 @@
       background: var(--bg-2); padding: 16px;
     }
     .feature-media-picker-title {
-      font-size: 13px; font-weight: 700; color: var(--ink-2);
+      font-size: 13px; font-weight: 600; color: var(--ink-2);
       margin-bottom: 12px;
     }
     .feature-media-picker-options { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -585,7 +584,7 @@
     .feature-media-picker-btn {
       background: #fff; color: var(--ink);
       border: 1px solid var(--border); border-radius: 8px;
-      padding: 10px 14px; font-size: 13px; font-weight: 700;
+      padding: 10px 14px; font-size: 13px; font-weight: 600;
       cursor: pointer; font-family: inherit; transition: background .15s;
     }
     .feature-media-picker-btn:hover { background: var(--border); }
@@ -596,15 +595,15 @@
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--bg-2); color: var(--ink);
       border: 1px solid var(--border); border-radius: 10px;
-      padding: 10px 16px; font-size: 13px; font-weight: 700;
+      padding: 10px 16px; font-size: 13px; font-weight: 600;
       text-decoration: none; transition: background .15s;
       margin-top: 6px;
     }
     .doc-sample-link:hover { background: var(--border); }
     .feature-media-label {
       position: absolute; bottom: 10px; left: 10px;
-      background: rgba(10,10,10,.75); color: #fff;
-      font-size: 11px; font-weight: 700;
+      background: rgba(30,58,47,.75); color: #fff;
+      font-size: 11px; font-weight: 600;
       padding: 4px 10px; border-radius: 100px;
     }
     @media (max-width: 560px) {
@@ -623,7 +622,7 @@
       margin-bottom: 4px;
     }
     .mock-screen-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .mock-screen-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); margin-left: 4px; }
+    .mock-screen-title { font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--ink-3); margin-left: 4px; }
 
     /* Reuse existing mock components */
     .mock-row {
@@ -671,8 +670,8 @@
     }
     .mock-grid-body { display: flex; flex-direction: column; gap: 4px; }
     .mock-grid-row { display: grid; grid-template-columns: 48px repeat(5, 1fr); gap: 4px; }
-    .mock-gh { font-size: 10px; font-weight: 700; color: var(--ink-3); text-align: center; padding: 4px 2px; }
-    .mock-gl { font-size: 10px; font-weight: 700; color: var(--ink-3); display: flex; align-items: center; padding: 2px 4px; }
+    .mock-gh { font-size: 10px; font-weight: 600; color: var(--ink-3); text-align: center; padding: 4px 2px; }
+    .mock-gl { font-size: 10px; font-weight: 600; color: var(--ink-3); display: flex; align-items: center; padding: 2px 4px; }
     .mock-gc {
       border-radius: 6px; height: 28px;
       display: flex; align-items: center; justify-content: center;
@@ -688,7 +687,7 @@
     .mock-tb {
       flex: 1; border-radius: 6px; height: 32px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 700;
+      font-size: 9px; font-weight: 600;
     }
     .mock-tb.blue { background: var(--blue-lt); color: var(--blue); }
     .mock-tb.green { background: var(--green-lt); color: var(--green); }
@@ -713,8 +712,8 @@
       display: flex; flex-direction: column; gap: 12px;
     }
     .rol-visual-title {
-      font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .06em;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0;
       color: var(--ink-3); margin-bottom: 8px;
     }
     .rol-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
@@ -722,7 +721,7 @@
     .rol-list li::before {
       content: '✓';
       color: var(--green);
-      font-weight: 700; flex-shrink: 0;
+      font-weight: 600; flex-shrink: 0;
       margin-top: 1px;
     }
 
@@ -738,33 +737,17 @@
       width: 48px; height: 48px; border-radius: 50%;
       background: var(--black); color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 800; flex-shrink: 0;
+      font-size: 16px; font-weight: 600; flex-shrink: 0;
       position: relative; z-index: 1;
     }
-    .step-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .step-body h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
     .step-body p { font-size: 14px; color: var(--ink-2); }
 
     /* ── LEGAL ── */
-    .legal-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 768px) {
-      .legal-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    .legal-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 24px;
-    }
-    .legal-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-    .legal-card p { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
 
     /* ── CONTACT ── */
     .contact-section {
-      background: linear-gradient(180deg, var(--black) 0%, #0a1a0f 100%);
+      background: linear-gradient(180deg, var(--black) 0%, #1E3A2F 100%);
       color: #fff;
       padding: 80px 5%;
     }
@@ -785,7 +768,7 @@
       border-radius: 8px;
       padding: 12px 14px;
       font-size: 14px; color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Geist', sans-serif;
       outline: none;
       transition: border-color .15s;
     }
@@ -799,7 +782,7 @@
     .btn-submit {
       background: #fff; color: var(--black);
       padding: 14px; border-radius: 10px;
-      font-size: 15px; font-weight: 700;
+      font-size: 15px; font-weight: 600;
       border: none; cursor: pointer;
       transition: opacity .15s; width: 100%;
     }
@@ -833,7 +816,7 @@
       border-bottom: 1px solid var(--border);
       display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
     }
-    .modal-header-text h3 { font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+    .modal-header-text h3 { font-size: 20px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
     .modal-header-text p { font-size: 14px; color: var(--ink-3); }
     .modal-close {
       background: var(--bg-2); border: none; cursor: pointer;
@@ -866,7 +849,7 @@
     .modal-option-icon.cal { background: var(--blue-lt); }
     .modal-option-icon.form { background: var(--bg-2); }
     .modal-option-text { flex: 1; }
-    .modal-option-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+    .modal-option-text strong { display: block; font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
     .modal-option-text span { font-size: 13px; color: var(--ink-3); }
     .modal-option-arrow { color: var(--ink-4); font-size: 18px; }
 
@@ -885,7 +868,7 @@
     .faq-question {
       width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
       padding: 18px 20px; background: none; border: none; cursor: pointer; text-align: left;
-      font-size: 15px; font-weight: 700; color: var(--black); font-family: inherit;
+      font-size: 15px; font-weight: 600; color: var(--black); font-family: inherit;
     }
     .faq-icon { font-size: 22px; font-weight: 400; color: var(--ink-4); transition: transform .2s ease; flex-shrink: 0; line-height: 1; }
     .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--blue); }
@@ -898,7 +881,7 @@
     .role-picker-btn {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
       padding: 18px 20px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r);
-      font-size: 15px; font-weight: 700; color: var(--black); text-align: left;
+      font-size: 15px; font-weight: 600; color: var(--black); text-align: left;
       transition: background .15s ease, border-color .15s ease, color .15s ease;
     }
     .role-picker-btn .role-picker-arrow { font-size: 18px; color: var(--ink-4); transition: transform .15s ease, color .15s ease; flex-shrink: 0; }
@@ -939,7 +922,7 @@
     /* ── MEDIA LIGHTBOX ── */
     .media-lightbox-overlay {
       display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(10,10,10,.9);
+      background: rgba(30,58,47,.9);
       align-items: center; justify-content: center;
       padding: 32px;
     }
@@ -976,9 +959,9 @@
     .media-lightbox-counter {
       display: none;
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
-      background: rgba(10,10,10,.9); color: #fff;
+      background: rgba(30,58,47,.9); color: #fff;
       border: 1px solid rgba(255,255,255,.15);
-      font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 100px;
+      font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 100px;
       box-shadow: 0 4px 16px rgba(0,0,0,.3);
     }
     .media-lightbox-overlay.gallery .media-lightbox-counter { display: block; }
@@ -986,9 +969,9 @@
       display: none;
       position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 1000;
       max-width: calc(100vw - 140px);
-      background: rgba(10,10,10,.9); color: #fff;
+      background: rgba(30,58,47,.9); color: #fff;
       border: 1px solid rgba(255,255,255,.15);
-      font-size: 14px; font-weight: 700; padding: 8px 20px; border-radius: 100px;
+      font-size: 14px; font-weight: 600; padding: 8px 20px; border-radius: 100px;
       box-shadow: 0 4px 16px rgba(0,0,0,.3);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       text-align: center;
@@ -1019,7 +1002,7 @@
     .cookie-banner-actions { display: flex; gap: 10px; flex-shrink: 0; }
     .cookie-btn-accept {
       background: #fff; color: var(--black); border: none;
-      padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
       cursor: pointer; transition: opacity .15s; white-space: nowrap;
     }
     .cookie-btn-accept:hover { opacity: .85; }
@@ -1045,63 +1028,293 @@
       flex-wrap: wrap; gap: 12px;
       font-size: 13px; color: var(--ink-3);
     }
-    .footer-logo { font-weight: 800; color: var(--ink); }
+    .footer-logo { font-weight: 600; color: var(--ink); }
 
-    /* ── DEMO EMBED (app real, sense finestra falsa) ── */
-    .demo-hint {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-lt); color: var(--blue);
-      padding: 10px 16px; border-radius: 100px;
-      font-size: 13px; font-weight: 600;
-      margin-bottom: 24px;
+    /* ── COM FUNCIONA: recorregut cinemàtic per scroll (#com-funciona) ──
+       L'escenari queda fix (sticky) i el scroll mou una "càmera" sobre un món de 1400×820
+       (mòbil + portàtil + correus). Els estats puntuals s'activen amb [data-at] → .on. */
+    .fx-sec { background: #0b0d0c; color: #f5f5f4; padding: 96px 0 80px; }
+    .fx-head { max-width: 1100px; margin: 0 auto; padding: 0 5%; text-align: center; }
+    .fx-head .section-tag { background: rgba(168,221,181,.12); color: #A8DDB5; }
+    .fx-head .section-title { color: #fff; margin-bottom: 0; }
+    .fx-track { position: relative; height: 1000vh; }
+    .fx-stage {
+      position: sticky; top: 72px; height: calc(100vh - 72px); overflow: hidden;
+      display: grid; grid-template-rows: auto minmax(0, 1fr); padding: 26px 0 34px;
+      background: radial-gradient(ellipse 70% 55% at 50% 62%, rgba(26,122,78,.22), transparent 70%);
     }
-    .demo-toolbar { display: flex; justify-content: flex-end; margin-bottom: 10px; }
-    .demo-embed {
-      background: var(--bg-2); border-radius: var(--r-lg);
-      overflow: hidden; position: relative;
+    @supports (height: 100svh) { .fx-stage { height: calc(100svh - 72px); } }
+
+    .fx-caps { position: relative; height: 150px; max-width: 980px; width: 90%; margin: 0 auto; text-align: center; }
+    .fx-cap { position: absolute; inset: 0; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+    .fx-cap.on { opacity: 1; transform: none; }
+    .fx-eye { font-size: 13px; font-weight: 600; letter-spacing: 0; color: #A8DDB5; margin-bottom: 12px; }
+    .fx-cap h3 { font-size: clamp(26px, 3.4vw, 46px); line-height: 1.08; font-weight: 600; letter-spacing: -.03em; color: #fff; }
+    .fx-cap h3 span { color: #7c847f; }
+    .fx-clock {
+      position: absolute; right: 0; top: -6px; display: flex; align-items: center; gap: 8px;
+      font: 600 13px 'Geist', sans-serif; color: #d6d3d1;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 6px 12px; border-radius: 100px;
+      transition: opacity .4s;
     }
-    .demo-embed-body { position: relative; height: 640px; overscroll-behavior: contain; }
-    .demo-embed:fullscreen .demo-embed-body { height: 100vh; }
-    .demo-embed iframe { width: 100%; height: 100%; border: 0; display: block; overscroll-behavior: contain; }
-    .demo-embed-loading {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
-      color: var(--ink-4); font-size: 13px; background: var(--bg-2);
+    .fx-clock-dot { width: 7px; height: 7px; border-radius: 50%; background: #f87171; box-shadow: 0 0 0 4px rgba(248,113,113,.18); animation: fxBlink 1.4s infinite; }
+    @keyframes fxBlink { 50% { opacity: .35; } }
+
+    .fx-view { position: relative; overflow: hidden; transition: opacity .6s ease; }
+    .fx-world { position: absolute; left: 0; top: 0; width: 1400px; height: 820px; transform-origin: 0 0; }
+
+    /* Mòbil */
+    .fx-phone {
+      position: absolute; left: 70px; top: 100px; width: 300px; height: 620px; padding: 10px;
+      background: #1c1c1e; border-radius: 50px; box-shadow: 0 0 0 2px #3a3a3c, 0 40px 80px -20px rgba(0,0,0,.7);
+      opacity: 0; transform: translateY(60px); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1);
     }
-    .demo-embed-spinner {
-      width: 28px; height: 28px; border: 3px solid var(--border);
-      border-top-color: var(--blue); border-radius: 50%;
-      animation: iaSpinner .8s linear infinite;
+    .fx-phone.on { opacity: 1; transform: none; }
+    .fx-phone-screen { position: relative; height: 100%; background: #fafaf9; border-radius: 40px; overflow: hidden; color: #1a1a1a; }
+    .fx-ph-status { display: flex; align-items: center; justify-content: space-between; padding: 14px 26px 6px; font-size: 13px; }
+    .fx-ph-island { width: 92px; height: 26px; background: #000; border-radius: 20px; }
+    .fx-ph-bat { width: 24px; height: 11px; border: 1.5px solid #1a1a1a; border-radius: 3px; position: relative; }
+    .fx-ph-bat::after { content: ''; position: absolute; inset: 1.5px 5px 1.5px 1.5px; background: #1a1a1a; border-radius: 1px; }
+    .fx-ph-body { padding: 10px 16px; }
+    .fx-ph-hero { background: #14271F; color: #fff; border-radius: 16px; padding: 14px 16px; margin-bottom: 14px; }
+    .fx-ph-hero small { display: block; font-size: 10px; letter-spacing: 0; color: #a8a29e; }
+    .fx-ph-hero strong { display: block; font-size: 19px; letter-spacing: -.02em; margin: 2px 0 3px; }
+    .fx-ph-hero em { font-style: normal; font-size: 11px; color: #a8a29e; }
+    .fx-ph-label { font-size: 10px; font-weight: 600; letter-spacing: 0; color: #78716c; margin: 0 2px 7px; }
+    .fx-ph-franges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 14px; }
+    .fx-ph-franges span { background: #fff; border: 1px solid #e7e5e4; border-radius: 10px; padding: 7px 4px; text-align: center; font-size: 11.5px; font-weight: 600; transition: all .3s; }
+    .fx-ph-franges span i { display: block; font-style: normal; font-size: 9.5px; color: #a8a29e; font-weight: 500; }
+    .fx-ph-franges.on span { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
+    .fx-ph-franges.on span:nth-child(2) { transition-delay: .04s; } .fx-ph-franges.on span:nth-child(3) { transition-delay: .08s; }
+    .fx-ph-franges.on span:nth-child(4) { transition-delay: .12s; } .fx-ph-franges.on span:nth-child(5) { transition-delay: .16s; }
+    .fx-ph-franges.on span:nth-child(6) { transition-delay: .2s; }
+    .fx-ph-motiu { background: #fff; border: 1px solid #e7e5e4; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 18px; }
+    .fx-ph-btn {
+      position: relative; overflow: hidden; background: #dc2626; color: #fff; text-align: center; font-weight: 600; font-size: 15px;
+      padding: 16px; border-radius: 14px; box-shadow: 0 10px 24px -10px rgba(220,38,38,.7); transition: transform .15s;
     }
-    .demo-fullscreen-fab {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #fff;
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--ink);
-      cursor: pointer; box-shadow: var(--shadow); transition: background .15s;
+    .fx-ph-btn.on { transform: scale(.97); }
+    .fx-tap { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px; border-radius: 50%; background: rgba(255,255,255,.5); transform: scale(0); opacity: 0; }
+    .fx-ph-btn.on .fx-tap { animation: fxTap .7s ease-out; }
+    @keyframes fxTap { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(9); opacity: 0; } }
+    .fx-ph-sent {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      background: #fafaf9; text-align: center; opacity: 0; transition: opacity .45s ease;
     }
-    .demo-fullscreen-fab:hover { background: var(--bg-2); }
-    .demo-try-link { text-align: center; font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
-    .demo-try-link a { color: var(--blue); font-weight: 600; }
-    .demo-mobile-cta { display: none; }
-    @media (max-width: 768px) {
-      .demo-embed-body { height: min(680px, 74vh); }
-      .demo-toolbar, .demo-embed, .demo-try-link { display: none; }
-      .demo-mobile-cta {
-        display: block; text-align: center;
-        background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg);
-        padding: 22px 18px 18px; box-shadow: var(--shadow);
-      }
-      .demo-mobile-cta p { font-size: 15px; color: var(--ink-2); margin-bottom: 20px; line-height: 1.5; }
-      .demo-mobile-btn {
-        display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
-        background: linear-gradient(135deg, #1A7A4E, #135c3a); color: #fff; border: none; cursor: pointer;
-        padding: 20px 24px; border-radius: 14px; font-family: inherit;
-        font-size: 18px; font-weight: 700; letter-spacing: -.01em;
-        box-shadow: 0 10px 26px -8px rgba(26,122,78,.55);
-      }
-      .demo-mobile-btn:active { transform: scale(.98); }
-      .demo-mobile-note { margin-top: 12px; font-size: 12.5px; color: var(--ink-3); }
+    .fx-ph-sent.on { opacity: 1; }
+    .fx-ph-sent strong { font-size: 22px; letter-spacing: -.02em; }
+    .fx-ph-sent span { font-size: 13px; color: #78716c; line-height: 1.5; }
+    .fx-check { width: 72px; height: 72px; border-radius: 50%; background: #1A7A4E; display: grid; place-items: center; transform: scale(.6); transition: transform .5s cubic-bezier(.3,1.6,.5,1) .1s; }
+    .fx-ph-sent.on .fx-check { transform: scale(1); }
+    .fx-check svg { width: 36px; height: 36px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .45s ease .35s; }
+    .fx-ph-sent.on .fx-check svg { stroke-dashoffset: 0; }
+
+    /* Portàtil */
+    .fx-laptop { position: absolute; left: 430px; top: 80px; width: 940px; opacity: 0; transform: translateY(40px) scale(.96); transition: opacity .8s ease, transform 1s cubic-bezier(.2,.7,.2,1), filter .6s; }
+    .fx-laptop.on { opacity: 1; transform: none; }
+    .fx-lid { background: #1c1c1e; border-radius: 22px 22px 6px 6px; padding: 14px; box-shadow: 0 0 0 2px #3a3a3c, 0 50px 100px -30px rgba(0,0,0,.8); }
+    .fx-base { height: 22px; margin: 0 -60px; background: linear-gradient(#3a3a3c, #232325); border-radius: 0 0 18px 18px; position: relative; }
+    .fx-base::before { content: ''; position: absolute; left: 50%; top: 0; width: 140px; height: 8px; margin-left: -70px; background: #18181a; border-radius: 0 0 8px 8px; }
+    .fx-screen { position: relative; height: 560px; background: #fafaf9; border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 172px 1fr; color: #1a1a1a; font-size: 13px; }
+    .fx-side { background: #f5f5f4; border-right: 1px solid #e7e5e4; padding: 18px 12px; display: flex; flex-direction: column; gap: 22px; }
+    .fx-school b { display: block; font-size: 13px; } .fx-school small { color: #a8a29e; font-size: 11px; }
+    .fx-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .fx-nav span { padding: 8px 10px; border-radius: 8px; font-size: 13px; color: #57534e; display: flex; justify-content: space-between; align-items: center; }
+    .fx-nav span.on { background: #e7e5e4; color: #1a1a1a; font-weight: 600; }
+    .fx-nav i { font-style: normal; background: #dc2626; color: #fff; font-size: 10px; font-weight: 600; border-radius: 10px; padding: 1px 6px; }
+    .fx-user { display: flex; gap: 8px; align-items: center; background: #fff; border: 1px solid #e7e5e4; border-radius: 10px; padding: 8px; }
+    .fx-user b { display: block; font-size: 12px; } .fx-user small { font-size: 10.5px; color: #a8a29e; }
+    .fx-av { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 12px; }
+    .fx-main { position: relative; }
+    .fx-layer { position: absolute; inset: 0; padding: 18px 24px; transition: opacity .5s ease, transform .6s ease; }
+    .fx-crumb { font-size: 11.5px; color: #a8a29e; margin-bottom: 14px; }
+    .fx-layer h4 { font-size: 26px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 16px; }
+    .fx-toast {
+      position: absolute; left: 24px; right: 24px; top: 14px; display: flex; gap: 12px; align-items: center;
+      background: #14271F; color: #fff; border-radius: 12px; padding: 11px 14px; box-shadow: 0 16px 34px -14px rgba(0,0,0,.5);
+      opacity: 0; transform: translateY(-120%); transition: opacity .4s, transform .55s cubic-bezier(.2,.9,.3,1.2);
+    }
+    .fx-toast.on { opacity: 1; transform: none; animation: fxToastOut .5s ease 2.6s forwards; }
+    @keyframes fxToastOut { to { opacity: 0; transform: translateY(-120%); } }
+    .fx-toast b { display: block; font-size: 12.5px; } .fx-toast small { color: #a8a29e; font-size: 12px; }
+    .fx-pulse { width: 10px; height: 10px; border-radius: 50%; background: #f87171; box-shadow: 0 0 0 0 rgba(248,113,113,.6); animation: fxPulse 1.4s infinite; }
+    @keyframes fxPulse { 70% { box-shadow: 0 0 0 10px rgba(248,113,113,0); } 100% { box-shadow: 0 0 0 0 rgba(248,113,113,0); } }
+    .fx-card { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+    .fx-card-new { opacity: 0; transform: translateY(-10px); transition: opacity .4s, transform .5s, box-shadow .4s, border-color .4s; }
+    .fx-card-new.on { opacity: 1; transform: none; border-color: #fca5a5; box-shadow: 0 0 0 4px rgba(248,113,113,.12); }
+    .fx-date { width: 40px; height: 42px; border-radius: 8px; background: #fef2f2; color: #b91c1c; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+    .fx-date b { font-size: 16px; } .fx-date small { font-size: 9px; font-weight: 600; margin-top: 2px; }
+    .fx-card-old .fx-date { background: #f0fdf4; color: #15803d; }
+    .fx-card-t { flex: 1; } .fx-card-t b { display: block; font-size: 14px; } .fx-card-t small { color: #78716c; font-size: 12px; }
+    .fx-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; background: #fee2e2; color: #b91c1c; }
+    .fx-badge.ok { background: #dcfce7; color: #15803d; }
+    .fx-ia-btn {
+      margin: 0 0 14px; padding: 12px; border-radius: 10px; text-align: center; font-weight: 600; font-size: 13.5px; color: #fff;
+      background: linear-gradient(90deg, #1A7A4E, #1A7A4E 50%, #1A7A4E); background-size: 200% 100%; transition: transform .2s, box-shadow .3s;
+    }
+    .fx-ia-btn.on { transform: scale(.98); box-shadow: 0 0 0 4px rgba(26,122,78,.25); animation: fxShine 1.6s linear infinite; }
+    @keyframes fxShine { to { background-position: -200% 0; } }
+    .fx-avui { opacity: 0; transform: translateY(12px); background: #fafaf9; }
+    .fx-avui.on { opacity: 1; transform: none; }
+    .fx-grid { display: grid; grid-template-columns: 52px repeat(5, 1fr); gap: 3px; font-size: 11.5px; }
+    .fx-grid span { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 6px; text-align: center; }
+    .fx-grid .h { height: 28px; font-weight: 600; color: #57534e; }
+    .fx-grid .t { color: #a8a29e; font-size: 11px; justify-content: flex-start; }
+    .fx-grid .c { background: #ecfdf3; color: #166534; font-weight: 600; }
+    .fx-grid .c.x { background: #fee2e2; color: #b91c1c; position: relative; }
+    .fx-grid .c.x b { font-weight: 600; opacity: 0; }
+    .fx-grid .c.x::after { content: 'Sense cobrir'; position: absolute; font-size: 10px; font-weight: 600; letter-spacing: 0; transition: opacity .25s var(--d); }
+    .fx-grid.on .c.x { background: #fef3c7; color: #92400e; transition: background .4s var(--d), color .4s var(--d); }
+    .fx-grid.on .c.x b { opacity: 1; transition: opacity .35s calc(var(--d) + .1s); }
+    .fx-grid.on .c.x::after { opacity: 0; }
+    .fx-saved { margin-top: 14px; display: inline-block; font-size: 12.5px; font-weight: 600; color: #15803d; background: #dcfce7; padding: 7px 12px; border-radius: 20px; opacity: 0; transform: translateY(6px); transition: all .4s; }
+    .fx-saved.on { opacity: 1; transform: none; }
+    .fx-chat {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 340px; background: #fff; border-left: 1px solid #e7e5e4;
+      box-shadow: -20px 0 40px -20px rgba(0,0,0,.18); display: flex; flex-direction: column;
+      transform: translateX(105%); transition: transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+    .fx-chat.on { transform: none; }
+    .fx-stage[data-ch="5"] .fx-chat, .fx-stage[data-ch="6"] .fx-chat, .fx-stage[data-ch="7"] .fx-chat { transform: translateX(105%); }
+    .fx-chat-h { display: flex; gap: 10px; align-items: center; padding: 14px 16px; border-bottom: 1px solid #f5f5f4; }
+    .fx-chat-h b { display: block; color: #1A7A4E; } .fx-chat-h small { font-size: 11px; color: #a8a29e; }
+    .fx-blob { width: 30px; height: 30px; border-radius: 46% 54% 52% 48% / 55% 45% 55% 45%; background: radial-gradient(circle at 35% 35%, #A8DDB5, #1A7A4E); animation: fxMorph 4s ease-in-out infinite; }
+    @keyframes fxMorph { 50% { border-radius: 55% 45% 40% 60% / 45% 58% 42% 55%; transform: rotate(8deg); } }
+    .fx-chat-b { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; font-size: 12.5px; line-height: 1.5; color: #44403c; position: relative; }
+    .fx-typing { display: flex; gap: 4px; padding: 10px 12px; background: #E1EEE3; border-radius: 12px; width: max-content; opacity: 0; transition: opacity .3s; }
+    .fx-typing.on { opacity: 1; animation: fxGone .3s ease 1.1s forwards; }
+    @keyframes fxGone { to { opacity: 0; height: 0; padding: 0; margin-bottom: -10px; } }
+    .fx-typing i { width: 6px; height: 6px; border-radius: 50%; background: #A8DDB5; animation: fxDot 1s infinite; }
+    .fx-typing i:nth-child(2) { animation-delay: .15s; } .fx-typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes fxDot { 50% { transform: translateY(-4px); opacity: .5; } }
+    .fx-msg, .fx-prop { opacity: 0; transform: translateY(8px); transition: opacity .45s, transform .5s; }
+    .fx-msg.on, .fx-prop.on { opacity: 1; transform: none; }
+    .fx-msg { background: #f5f5f4; border-radius: 12px; padding: 9px 12px; }
+    .fx-msg b { color: #1a1a1a; }
+    .fx-prop { border: 1.5px solid #A8DDB5; background: #f0fdf4; border-radius: 12px; padding: 10px 12px; color: #166534; font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
+    .fx-prop small { font: 600 10px 'Geist', sans-serif; letter-spacing: 0; color: #15803d; }
+
+    /* La proposta en gran (capítol 4): la càmera hi fa zoom i el portàtil queda de fons */
+    .fx-pz {
+      position: absolute; left: 380px; top: 96px; width: 1040px; background: #fff; color: #1a1a1a; border-radius: 22px; overflow: hidden; z-index: 3;
+      box-shadow: 0 50px 100px -30px rgba(0,0,0,.75), 0 0 0 1px rgba(168,221,181,.5);
+      opacity: 0; visibility: hidden; transform: translate(170px, 16px) scale(.62); transform-origin: 100% 60%;
+      transition: opacity .45s ease, transform .75s cubic-bezier(.2,.8,.2,1), visibility 0s .75s;
+    }
+    .fx-stage[data-ch="4"] .fx-pz { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease, transform .75s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+    .fx-laptop, .fx-phone { transition: opacity .8s ease, transform 1s cubic-bezier(.2,.7,.2,1), filter .6s; }
+    .fx-stage[data-ch="4"] .fx-laptop, .fx-stage[data-ch="4"] .fx-phone { filter: brightness(.35) blur(2px); }
+    /* Mentre la proposta és protagonista, el títol es plega i la vista guanya tota l'alçada */
+    .fx-stage[data-ch="4"] .fx-caps { height: 0 !important; opacity: 0; overflow: hidden; }
+    .fx-pz-h { display: flex; align-items: center; gap: 14px; padding: 20px 28px; background: #E1EEE3; }
+    .fx-pz-h small { display: block; font-size: 15px; font-weight: 600; color: #1A7A4E; }
+    .fx-pz-h b { display: block; font-size: 24px; font-weight: 600; letter-spacing: -.02em; color: #14271F; }
+    .fx-pz-ok { margin-left: auto; font-size: 16px; font-weight: 600; color: #fff; background: #1A7A4E; padding: 8px 16px; border-radius: 99px; white-space: nowrap; }
+    .fx-pz-body { display: grid; grid-template-columns: 1fr 340px; }
+    .fx-pz-rows { padding: 10px 28px 12px; }
+    .fx-pz-row { display: grid; grid-template-columns: 136px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ECE9DF; }
+    .fx-pz-row:last-child { border-bottom: 0; }
+    .fx-pz-t { font-size: 16px; font-weight: 600; color: #4E5E56; padding-top: 3px; font-variant-numeric: tabular-nums; }
+    .fx-pz-row b { display: block; font-size: 21px; font-weight: 600; letter-spacing: -.015em; color: #14271F; }
+    .fx-pz-row em { display: block; font-style: normal; font-size: 16px; line-height: 1.35; color: #4E5E56; margin-top: 2px; }
+    .fx-pz-side { background: #F4F2EA; padding: 22px 24px; display: flex; flex-direction: column; gap: 20px; }
+    .fx-pz-side small { display: block; font-size: 15px; font-weight: 600; color: #1A7A4E; margin-bottom: 6px; }
+    .fx-pz-side p { font-size: 15px; line-height: 1.35; color: #33463D; margin-bottom: 6px; }
+    .fx-pz-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; border-top: 1px solid #ECE9DF; font-size: 16px; color: #4E5E56; }
+    .fx-pz-apply { flex: none; background: #1A7A4E; color: #fff; font-size: 19px; font-weight: 600; padding: 13px 26px; border-radius: 12px; transition: transform .15s, box-shadow .3s, background .2s; }
+    .fx-pz-apply.on { transform: scale(.95); background: #156640; box-shadow: 0 0 0 7px rgba(26,122,78,.28); }
+    .fx-pz-row, .fx-pz-side > div, .fx-pz-foot { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
+    .fx-pz-row.on, .fx-pz-side > div.on, .fx-pz-foot.on { opacity: 1; transform: none; }
+
+    /* Correus */
+    .fx-mail {
+      position: absolute; width: 380px; display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; border-radius: 16px;
+      background: rgba(255,255,255,.96); color: #1a1a1a; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.4);
+      opacity: 0; transform: translate(var(--fx-x, 0), var(--fx-y, 0)) scale(.8);
+      transition: opacity .5s ease calc(var(--i) * .14s), transform .8s cubic-bezier(.2,.8,.2,1) calc(var(--i) * .14s);
+    }
+    .fx-mails.on .fx-mail { opacity: 1; transform: none; }
+    .fx-mail small { display: block; font-size: 12.5px; color: #a8a29e; }
+    .fx-mail b { display: block; font-size: 18px; letter-spacing: -.01em; margin: 1px 0 2px; }
+    .fx-mail em { font-style: normal; font-size: 14.5px; color: #57534e; }
+    .fx-mail:nth-child(1) { left: 230px; top: 50px; --fx-x: 300px; --fx-y: 220px; }
+    .fx-mail:nth-child(2) { left: 1020px; top: 60px; --fx-x: -300px; --fx-y: 220px; }
+    .fx-mail:nth-child(3) { left: 230px; top: 320px; --fx-x: 300px; }
+    .fx-mail:nth-child(4) { left: 1020px; top: 330px; --fx-x: -300px; }
+    .fx-mail:nth-child(5) { left: 230px; top: 590px; --fx-x: 300px; --fx-y: -200px; }
+    .fx-mail:nth-child(6) { left: 1020px; top: 600px; --fx-x: -300px; --fx-y: -200px; }
+    .fx-world:has(.fx-mails.on) .fx-laptop, .fx-world:has(.fx-mails.on) .fx-phone { filter: brightness(.45) blur(1px); }
+
+    /* Final */
+    .fx-outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 6%; opacity: 0; transform: scale(.96); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+    .fx-outro.on { opacity: 1; transform: none; }
+    .fx-outro p { font-size: clamp(20px, 2.6vw, 34px); font-weight: 600; color: #a8a29e; letter-spacing: -.02em; }
+    .fx-outro strong { font-size: clamp(72px, 13vw, 190px); line-height: .95; font-weight: 600; letter-spacing: -.06em; background: linear-gradient(120deg, #A8DDB5, #A8DDB5 40%, #1A7A4E); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .04em .08em; }
+    .fx-outro span { font-size: clamp(15px, 1.5vw, 19px); color: #a8a29e; margin-top: 10px; }
+    .fx-outro .fx-outro-final { font-style: normal; font-size: clamp(20px, 2.4vw, 32px); font-weight: 500; letter-spacing: -.015em; color: #F4F2EA; margin-top: 22px; }
+    .fx-stage:has(.fx-outro.on) .fx-view { opacity: .06; }
+    .fx-stage:has(.fx-outro.on) .fx-caps { opacity: 0; }
+    .fx-caps { transition: height .6s cubic-bezier(.2,.8,.2,1), opacity .4s ease; }
+
+    .fx-foot { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(420px, 70%); display: flex; align-items: center; gap: 14px; }
+    .fx-bar { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden; }
+    .fx-bar i { display: block; height: 100%; background: #A8DDB5; transform-origin: left; transform: scaleX(0); }
+    .fx-skip { font-size: 12.5px; font-weight: 600; color: #a8a29e; white-space: nowrap; }
+    .fx-skip:hover { color: #fff; }
+    .fx-hint { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); font-size: 12.5px; font-weight: 600; color: #d6d3d1; background: rgba(255,255,255,.08); padding: 7px 14px; border-radius: 100px; animation: tourNudge 1.6s ease-in-out infinite; transition: opacity .3s; pointer-events: none; }
+    .fx-hint.is-hidden { opacity: 0; animation: none; }
+    @keyframes tourNudge { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 5px); } }
+
+    .fx-sec .tour-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; margin: 40px auto 0; max-width: 1100px; padding: 0 5%; }
+    .tour-try {
+      display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer; font-family: inherit;
+      background: linear-gradient(135deg, #1A7A4E, #135c3a); color: #fff; font-size: 16px; font-weight: 600;
+      padding: 15px 26px; border-radius: 14px; box-shadow: 0 10px 26px -8px rgba(26,122,78,.55);
+    }
+    .tour-try:active { transform: scale(.98); }
+    .fx-sec .demo-hint { display: inline-flex; align-items: center; gap: 8px; background: rgba(168,221,181,.1); color: #A8DDB5; padding: 10px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; }
+    .fx-sec .demo-try-link { font-size: 13.5px; color: #a8a29e; }
+    .fx-sec .demo-try-link a { color: #A8DDB5; font-weight: 600; }
+    /* Mentre l'escenari està fixat, els botons flotants no tapen la pantalla */
+    .whatsapp-float, .instagram-float { transition: opacity .25s; }
+    body.tour-pinned .whatsapp-float, body.tour-pinned .instagram-float { opacity: 0; pointer-events: none; }
+
+    @media (max-width: 760px) {
+      .fx-sec { padding: 64px 0 56px; }
+      .fx-track { height: 930vh; }
+      .fx-stage { padding: 14px 0 34px; }
+      .fx-caps { height: 118px; width: 92%; }
+      .fx-eye { font-size: 11px; margin-bottom: 8px; padding-right: 64px; text-align: left; }
+      .fx-cap { text-align: left; }
+      .fx-cap h3 { font-size: clamp(21px, 6vw, 28px); }
+      .fx-clock { top: -4px; font-size: 11px; padding: 4px 9px; }
+      /* Al mòbil els correus s'apilen en columna sobre el portàtil (la càmera hi enfoca) */
+      .fx-mail { width: 360px; --fx-x: 0px !important; --fx-y: 60px !important; }
+      .fx-mail { padding: 13px 16px; }
+      .fx-mail:nth-child(1) { left: 620px; top: 60px; }
+      .fx-mail:nth-child(2) { left: 620px; top: 172px; }
+      .fx-mail:nth-child(3) { left: 620px; top: 284px; }
+      .fx-mail:nth-child(4) { left: 620px; top: 396px; }
+      .fx-mail:nth-child(5) { left: 620px; top: 508px; }
+      .fx-mail:nth-child(6) { left: 620px; top: 620px; }
+      /* Al mòbil la proposta va en una sola columna i sense els descartats */
+      .fx-pz { left: 620px; top: 30px; width: 500px; transform: translate(120px, 16px) scale(.7); }
+      .fx-pz-h { padding: 14px 18px; flex-wrap: wrap; }
+      .fx-pz-h b { font-size: 19px; }
+      .fx-pz-ok { display: none; }
+      .fx-pz-body { grid-template-columns: 1fr; }
+      .fx-pz-rows { padding: 4px 18px; }
+      .fx-pz-row { grid-template-columns: 1fr; gap: 0; padding: 10px 0; }
+      .fx-pz-row b { font-size: 19px; }
+      .fx-pz-side { padding: 12px 18px; gap: 0; }
+      .fx-pz-side > div:last-child { display: none; }
+      .fx-pz-foot { padding: 12px 18px; }
+      .fx-pz-foot > span:first-child { display: none; }
+      .fx-pz-apply { width: 100%; text-align: center; }
+      .fx-mail b { font-size: 17px; } .fx-mail em { font-size: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fx-sec *, .fx-sec *::before, .fx-sec *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
     }
     .demo-overlay {
       position: fixed; inset: 0; z-index: 10000; background: #fff;
@@ -1114,28 +1327,24 @@
     }
     .demo-overlay-bar button {
       background: #fff; color: var(--black); border: none; border-radius: 8px;
-      padding: 8px 14px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer;
+      padding: 8px 14px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer;
     }
     .demo-overlay iframe { flex: 1; width: 100%; border: 0; }
-    @media (max-width: 480px) {
-      .demo-fullscreen-fab .fs-label { display: none; }
-      .demo-fullscreen-fab { padding: 8px; }
-    }
 
     /* ── MOCK ANIMATIONS ── */
     .feature-mock[id] { transition: opacity 0.2s ease; }
 
     /* Pati mock */
     .mock-pati-grid { display: grid; grid-template-columns: 40px 1fr 1fr; gap: 4px; font-size: 11px; }
-    .mock-pati-gh { font-weight: 700; color: var(--ink-3); text-align: center; padding: 5px 2px; }
+    .mock-pati-gh { font-weight: 600; color: var(--ink-3); text-align: center; padding: 5px 2px; }
     .mock-pati-day { font-weight: 600; color: var(--ink-3); display: flex; align-items: center; padding-left: 2px; }
     .mock-pati-cell {
       border-radius: 6px; padding: 6px 8px; text-align: center;
       background: var(--bg); border: 1px solid var(--border);
     }
     .mock-pati-cell.mine { background: var(--blue-lt); border-color: #bfe4cf; color: var(--blue); font-weight: 600; }
-    .mock-pati-cell.today-mine { background: var(--blue); color: #fff; font-weight: 700; }
-    .mock-pati-row-today .mock-pati-day { color: var(--black); font-weight: 800; }
+    .mock-pati-cell.today-mine { background: var(--blue); color: #fff; font-weight: 600; }
+    .mock-pati-row-today .mock-pati-day { color: var(--black); font-weight: 600; }
 
     /* Animation keyframes */
     @keyframes slideUp {
@@ -1210,20 +1419,20 @@
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
+  <link rel="stylesheet" href="/marca.css" />
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/" aria-label="Tornar a l'inici"><img src="/logo.svg" alt="HorariaPro" /></a>
+  <a class="nav-logo" href="/" aria-label="Tornar a l'inici"><img src="/marca/logo/horaria-pro-sobre-pissarra.svg" alt="HorariaPro" /></a>
   <div class="nav-links">
     <a href="#com-funciona">Veure demo</a>
     <a href="incorporacio.html" data-track="cta_nav_prova">Prova gratuïta</a>
-    <a href="#funcionalitats">Funcionalitats</a>
+    <a href="#funcionalitats" data-vista="funcionalitats">Funcionalitats</a>
     <a href="#per-que-horariapro" class="nav-extra">Per què HorariaPro?</a>
     <a href="#preus">Preus</a>
     <a href="#faq">FAQ</a>
-    <a href="#legal" class="nav-extra">Privacitat</a>
     <a href="#contacte">Contacte</a>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
@@ -1247,11 +1456,10 @@
 <div class="nav-mobile-menu" id="navMobileMenu">
   <a href="#com-funciona" onclick="closeMobileMenu()">Veure demo</a>
   <a href="incorporacio.html" data-track="cta_mobile_prova">Prova gratuïta</a>
-  <a href="#funcionalitats" onclick="closeMobileMenu()">Funcionalitats</a>
+  <a href="#funcionalitats" data-vista="funcionalitats" onclick="closeMobileMenu()">Funcionalitats</a>
   <a href="#per-que-horariapro" onclick="closeMobileMenu()">Per què HorariaPro?</a>
   <a href="#preus" onclick="closeMobileMenu()">Preus</a>
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-  <a href="#legal" onclick="closeMobileMenu()">Privacitat</a>
   <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
   <a href="https://app.horariapro.com" data-track="cta_accedir_mobile">Accedir a l'app →</a>
 </div>
@@ -1261,11 +1469,15 @@
   <div class="hero">
    <div class="hero-text">
     <h1>Gestiona absències i cobertures <em>en minuts,</em> no en hores</h1>
-    <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">IA</span><span class="bw-3">Pro</span></span> proposa cobertures, notifica tothom afectat i elimina l'estrès de cada matí.</p>
+    <p><span class="brand-word"><span class="bw-1">Horar</span><span class="bw-ia">ia</span><span class="bw-3">Pro</span></span> proposa cobertures, notifica tothom afectat i elimina l'estrès de cada matí.</p>
     <div class="hero-actions">
       <a href="incorporacio.html" class="btn-primary" data-track="cta_hero_prova">Prova-ho gratis al teu centre</a>
       <a href="#contacte" class="btn-secondary" data-track="cta_hero_implantacio" onclick="event.preventDefault(); openDemoModal();">Implantació gratuïta, en parlem?</a>
     </div>
+    <a class="hero-aval" href="https://serveiseducatius.xtec.cat/vallesoccidental3/general/sem-c-e-pri-s1-14-10-26/" target="_blank" rel="noopener" data-track="cta_noticia_xtec">
+      <img src="images/sev-vallesoccidental3-seminari.png" alt="" width="48" height="48" />
+      <span><b>Presentat al Servei Educatiu Vallès Occidental III</b><small>Seminari de caps d'estudis · setembre de 2026 →</small></span>
+    </a>
    </div>
    <div class="hero-video">
     <div class="hero-video-card">
@@ -1323,40 +1535,185 @@
 </div>
 
 
-<!-- COM FUNCIONA (interactiu) -->
-<section id="com-funciona" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="section-inner">
+<!-- COM FUNCIONA (recorregut cinemàtic per scroll) -->
+<section id="com-funciona" class="fx-sec">
+  <div class="fx-head">
     <div class="section-tag">Com funciona</div>
     <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
-    <p class="section-sub" style="margin-bottom:12px;">Prova l'aplicació real aquí baix — pas a pas, des de l'avís del docent fins a la confirmació per correu dels canvis d'horari als afectats. El mateix producte que ja fan servir els centres, amb dades fictícies.</p>
-    <p class="demo-hint">⏱️ Comprova tu mateix quant de temps passa des de l'avís fins a la confirmació i gestió finalitzada, amb el cronòmetre de dalt a l'esquerra.</p>
-    <p class="demo-try-link">📱 En mòbil, toca ⛶ per veure-la en pantalla completa, o <a href="/demo/" target="_blank" rel="noopener" data-track="cta_demo_nova_pestanya">obre-la en una pestanya nova →</a></p>
+  </div>
 
-    <div class="demo-mobile-cta">
-      <button type="button" class="demo-mobile-btn" data-track="cta_demo_mobile_simulador" onclick="openDemoOverlay()">▶ Entrar al simulador</button>
-      <div class="demo-mobile-note">S'obre a pantalla completa · pots tancar-lo quan vulguis</div>
-    </div>
-
-    <div class="demo-toolbar">
-      <button class="demo-fullscreen-fab" id="demoFullscreenBtn" type="button" onclick="toggleDemoFullscreen()">⛶ <span class="fs-label">Pantalla completa</span></button>
-    </div>
-
-    <!-- Demo real incrustada, sense finestra falsa -->
-    <div class="demo-embed" id="demoPanel">
-      <div class="demo-embed-body">
-        <div class="demo-embed-loading" id="demoPanelLoading">
-          <div class="demo-embed-spinner"></div>
-          <span>Carregant la demo interactiva…</span>
-        </div>
-        <iframe id="demoIframe" title="Demo interactiva d'HorariaPro" loading="lazy"></iframe>
+  <div class="fx-track" id="fx">
+    <div class="fx-stage" id="fxStage">
+      <div class="fx-caps" aria-live="polite">
+        <div class="fx-clock"><span class="fx-clock-dot"></span><span id="fxClock">8:47</span></div>
+        <div class="fx-cap" data-c="0"><p class="fx-eye">Dilluns, 8:47</p><h3>La Marta es lleva amb febre. <span>El seu grup entra a les 9.</span></h3></div>
+        <div class="fx-cap" data-c="1"><p class="fx-eye">1 · El docent avisa</p><h3>Un toc des del mòbil. <span>Per l'app, per WhatsApp o des de direcció.</span></h3></div>
+        <div class="fx-cap" data-c="2"><p class="fx-eye">2 · La cap d'estudis ho veu</p><h3>L'avís arriba a l'instant. <span>Amb les franges afectades i el motiu.</span></h3></div>
+        <div class="fx-cap" data-c="3"><p class="fx-eye">3 · Horaria IA proposa</p><h3>La millor cobertura, raonada. <span>Creua horaris, deutes de TP i normes del centre.</span></h3></div>
+        <div class="fx-cap" data-c="4"></div><!-- Capítol sense títol: la proposta ocupa tota la pantalla -->
+        <div class="fx-cap" data-c="5"><p class="fx-eye">4 · Un clic</p><h3>L'horari del dia s'actualitza. <span>I queda registrat a l'historial.</span></h3></div>
+        <div class="fx-cap" data-c="6"><p class="fx-eye">5 · Tothom notificat</p><h3>Cada persona rep el seu correu. <span>Qui cobreix, la coordinació i la mateixa Marta.</span></h3></div>
       </div>
+
+      <div class="fx-view" id="fxView">
+        <div class="fx-world" id="fxWorld" aria-hidden="true">
+
+          <!-- Mòbil del docent -->
+          <div class="fx-phone" data-at=".04">
+            <div class="fx-phone-screen">
+              <div class="fx-ph-status"><b>8:48</b><span class="fx-ph-island"></span><span class="fx-ph-bat"></span></div>
+              <div class="fx-ph-body">
+                <div class="fx-ph-hero"><small>Hola, Marta</small><strong>Avisa la teva absència</strong><em>Rebràs confirmació quan estigui organitzat.</em></div>
+                <div class="fx-ph-label">Franges afectades</div>
+                <div class="fx-ph-franges" data-at=".155">
+                  <span>1a hora<i>9:00</i></span><span>2a hora<i>10:00</i></span><span>3a hora<i>11:30</i></span>
+                  <span>4a hora<i>12:00</i></span><span>Tarda<i>15:00</i></span><span>Tarda<i>15:30</i></span>
+                </div>
+                <div class="fx-ph-label">Motiu</div>
+                <div class="fx-ph-motiu">Malaltia</div>
+                <div class="fx-ph-btn" data-at=".17">Falto avui tot el dia<span class="fx-tap"></span></div>
+              </div>
+              <div class="fx-ph-sent" data-at=".2">
+                <div class="fx-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                <strong>Avís enviat</strong>
+                <span>La cap d'estudis ja ho sap.<br>Ara descansa.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portàtil de la cap d'estudis -->
+          <div class="fx-laptop" data-at=".24">
+            <div class="fx-lid"><div class="fx-screen">
+              <aside class="fx-side">
+                <div class="fx-school"><b>Escola El Pinar</b><small>HorariaPro</small></div>
+                <div class="fx-nav"><span>Avui</span><span class="on">Avisos rebuts <i>1</i></span><span>Treball personal</span><span>Historial</span></div>
+                <div class="fx-user"><span class="fx-av" style="background:#1A7A4E">V</span><div><b>Vero</b><small>Cap d'estudis</small></div></div>
+              </aside>
+
+              <main class="fx-main">
+                <div class="fx-layer fx-avisos">
+                  <div class="fx-crumb">Escola El Pinar / Avisos rebuts</div>
+                  <h4>Avisos rebuts</h4>
+                  <div class="fx-toast" data-at=".27"><span class="fx-pulse"></span><div><b>Nou avís · ara mateix</b><small>Marta Puig no vindrà avui</small></div></div>
+                  <div class="fx-card fx-card-new" data-at=".28">
+                    <div class="fx-date"><b>15</b><small>DL</small></div>
+                    <div class="fx-card-t"><b>Marta Puig</b><small>Tot el dia · Malaltia · 1r A</small></div>
+                    <span class="fx-badge">Nou</span>
+                  </div>
+                  <div class="fx-ia-btn" data-at=".35">✦ Proposa cobertura amb Horaria</div>
+                  <div class="fx-card fx-card-old">
+                    <div class="fx-date"><b>15</b><small>DL</small></div>
+                    <div class="fx-card-t"><b>David Roig</b><small>Visita mèdica · 11:30–12:30</small></div>
+                    <span class="fx-badge ok">Cobert</span>
+                  </div>
+                </div>
+
+                <div class="fx-layer fx-avui" data-at=".675">
+                  <div class="fx-crumb">Escola El Pinar / Avui</div>
+                  <h4>Avui · dilluns 15</h4>
+                  <div class="fx-grid" data-at=".705">
+                    <span class="h"></span><span class="h">1r A</span><span class="h">1r B</span><span class="h">2n A</span><span class="h">2n B</span><span class="h">3r A</span>
+                    <span class="t">9:00</span><span class="c x" style="--d:0s"><b>Jordi Camps</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Anna Torres</span><span class="c">Carles Mas</span>
+                    <span class="t">10:00</span><span class="c x" style="--d:.08s"><b>Jordi Camps</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Núria Pons</span><span class="c">Carles Mas</span>
+                    <span class="t">11:30</span><span class="c x" style="--d:.16s"><b>Núria Pons</b></span><span class="c">Joan Rius</span><span class="c">Pere Soler</span><span class="c">Anna Torres</span><span class="c">Sílvia Mir</span>
+                    <span class="t">12:00</span><span class="c x" style="--d:.24s"><b>Núria Pons</b></span><span class="c">Laia Vidal</span><span class="c">Rosa Grau</span><span class="c">Anna Torres</span><span class="c">Carles Mas</span>
+                    <span class="t">15:00</span><span class="c x" style="--d:.32s"><b>Elena Ribes</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Núria Pons</span><span class="c">Sílvia Mir</span>
+                    <span class="t">15:30</span><span class="c x" style="--d:.40s"><b>Elena Ribes</b></span><span class="c">Joan Rius</span><span class="c">Pere Soler</span><span class="c">Anna Torres</span><span class="c">Carles Mas</span>
+                  </div>
+                  <div class="fx-saved" data-at=".74">✓ Cobertura aplicada i registrada</div>
+                </div>
+              </main>
+
+              <!-- Xat d'Horaria IA -->
+              <div class="fx-chat" data-at=".37">
+                <div class="fx-chat-h"><span class="fx-blob"></span><div><b>Horaria</b><small>Marta Puig · avui</small></div></div>
+                <div class="fx-chat-b">
+                  <div class="fx-typing" data-at=".38"><i></i><i></i><i></i></div>
+                  <p class="fx-msg" data-at=".40">He revisat <b>24 horaris</b>, els <b>deutes de TP</b> i les <b>normes del centre</b>.</p>
+                  <p class="fx-msg" data-at=".425">Cap tutor amb grup es mou. Reparteixo el dia entre <b>4 docents</b> per no carregar ningú.</p>
+                  <div class="fx-prop" data-at=".45">
+                    <small>Proposta IA</small>
+                    <div>6 franges · <b>4 docents</b></div>
+                    <div>Cap grup sense cobrir ✓</div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+            <div class="fx-base"></div>
+          </div>
+
+          <!-- La proposta, en gran: protagonista uns segons abans d'aplicar-la -->
+          <div class="fx-pz">
+            <div class="fx-pz-h">
+              <span class="fx-blob"></span>
+              <div><small>Proposta d'Horaria</small><b>Marta Puig · 1r A · Tot el dia</b></div>
+              <span class="fx-pz-ok">6 franges cobertes</span>
+            </div>
+            <div class="fx-pz-body">
+              <div class="fx-pz-rows">
+                <div class="fx-pz-row" data-at=".485"><span class="fx-pz-t">9:00–11:00</span><div><b>Jordi Camps</b><em>Feia suport a 3r, que es pot ajornar. No genera deute de TP.</em></div></div>
+                <div class="fx-pz-row" data-at=".505"><span class="fx-pz-t">11:00–11:30</span><div><b>Carles Mas · Pati</b><em>Agafa el torn de la Marta. Aquesta setmana encara no n'ha fet cap d'extra.</em></div></div>
+                <div class="fx-pz-row" data-at=".525"><span class="fx-pz-t">11:30–12:30</span><div><b>Núria Pons</b><em>Tenia TP, però és qui menys ha cobert aquest mes.</em></div></div>
+                <div class="fx-pz-row" data-at=".545"><span class="fx-pz-t">15:00–16:30</span><div><b>Elena Ribes</b><em>El suport a 2n es pot moure sense deixar ningú sol.</em></div></div>
+              </div>
+              <aside class="fx-pz-side">
+                <div data-at=".57">
+                  <small>Què canvia</small>
+                  <p>El suport de 3r passa a dimecres, 10:00.</p>
+                  <p>La Núria suma 1 h de TP a recuperar.</p>
+                </div>
+                <div data-at=".59">
+                  <small>Descartats</small>
+                  <p>Laia Vidal: tutora, amb el seu grup.</p>
+                  <p>Joan Rius: anglès a 1r B a les 11:30.</p>
+                  <p>Anna Torres: ja ha cobert 2 cops aquesta setmana.</p>
+                </div>
+              </aside>
+            </div>
+            <div class="fx-pz-foot" data-at=".615">
+              <span>Pots canviar qualsevol franja abans d'aplicar-la.</span>
+              <span class="fx-pz-apply" data-at=".65">✓ Aplicar proposta</span>
+            </div>
+          </div>
+
+          <!-- Correus que reben els implicats -->
+          <div class="fx-mails" data-at=".81">
+            <div class="fx-mail" style="--i:0"><span class="fx-av" style="background:#2563eb">J</span><div><small>Per a Jordi Camps</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 9:00–11:00</em></div></div>
+            <div class="fx-mail" style="--i:1"><span class="fx-av" style="background:#7c3aed">N</span><div><small>Per a Núria Pons</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 11:30–12:30</em></div></div>
+            <div class="fx-mail" style="--i:2"><span class="fx-av" style="background:#db2777">E</span><div><small>Per a Elena Ribes</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 15:00–16:30</em></div></div>
+            <div class="fx-mail" style="--i:3"><span class="fx-av" style="background:#0d9488">C</span><div><small>Per a Carles Mas</small><b>Torn de pati</b><em>Avui fas el pati de les 11:00</em></div></div>
+            <div class="fx-mail" style="--i:4"><span class="fx-av" style="background:#d97706">C</span><div><small>Per a la coordinació</small><b>Canvi d'organització</b><em>La Marta no vindrà avui. Tot cobert.</em></div></div>
+            <div class="fx-mail" style="--i:5"><span class="fx-av" style="background:#1A7A4E">M</span><div><small>Per a Marta Puig</small><b>Ja està tot organitzat</b><em>Que et milloris!</em></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fx-outro" data-at=".91">
+        <p>De l'avís a la cobertura</p>
+        <strong>2 minuts.</strong>
+        <span>Sense trucades, sense graelles, sense ningú sol amb el grup.</span>
+        <em class="fx-outro-final">Ara ja et pots dedicar al que realment importa.</em>
+      </div>
+
+      <div class="fx-foot">
+        <div class="fx-bar" aria-hidden="true"><i id="fxBar"></i></div>
+        <a class="fx-skip" href="#per-que-horariapro">Saltar ↓</a>
+      </div>
+      <div class="fx-hint" id="fxHint">Fes scroll ↓</div>
     </div>
+  </div>
+
+  <div class="tour-cta">
+    <button type="button" class="tour-try" data-track="cta_demo_prova_tu" onclick="openDemoOverlay()">▶ Prova-ho tu mateix</button>
+    <p class="demo-hint">⏱️ Cronometra't des de l'avís fins a la confirmació i gestió finalitzada.</p>
+    <p class="demo-try-link">o <a href="/demo/" target="_blank" rel="noopener" data-track="cta_demo_nova_pestanya">obre-la en una pestanya nova →</a></p>
   </div>
 </section>
 
 <!-- FUNCIONALITATS -->
-<section id="funcionalitats" style="background: var(--bg);">
+<section id="funcionalitats" class="vista-func" style="background: var(--bg);">
   <div class="section-inner">
+    <a class="vista-back" href="#">← Tornar a la pàgina principal</a>
     <div class="section-tag">Funcionalitats</div>
     <h2 class="section-title">Les 10 funcionalitats que necessita el teu centre</h2>
     <p class="section-sub">Una sola eina per a tota la gestió d'absències, cobertures i horaris de tot el claustre.</p>
@@ -1366,7 +1723,7 @@
       <!-- 1. Avís des del mòbil -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">1</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">1</div>
           <h3>Avís d'absència des del mòbil</h3>
           <p>Senzill i ràpid — els docents ho adopten sense formació. Centralitza tots els avisos (WhatsApp, correu electrònic, trucades) en un sol canal per a la cap d'estudis.</p>
           <p>La cap d'estudis també pot avisar i gestionar l'absència directament des d'Horaria, de dues maneres: amb <strong>Informació extra del dia</strong>, afegint context sense registrar encara la cobertura, o amb <strong>Cobertura manual</strong>, registrant-la ella mateixa des del primer moment.</p>
@@ -1410,7 +1767,7 @@
       <!-- 2. IA cobertures + Chat Horaria (fusionat) -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon highlight" style="font-weight:800; color:#fff; font-size:20px;">2</div>
+          <div class="feature-row-icon highlight" style="font-weight: 600; color:#fff; font-size:20px;">2</div>
           <h3>Proposta de cobertures amb IA</h3>
           <p>La IA fa el 90&nbsp;% de la feina intel·lectual. Analitza horaris, deutes de TP i normes del centre per proposar qui cobreix cada franja. El 10&nbsp;% restant és la teva confirmació.</p>
           <p>Amb el Chat Horaria, l'assistent expert en cobertures, explica-li qui s'absenta i la IA raona en veu alta: consulta els horaris, comprova els deutes de TP i proposa qui cobreix cada franja.</p>
@@ -1430,7 +1787,7 @@
       <!-- 3. Graella grups × franges -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">3</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">3</div>
           <h3>Graella grups × franges</h3>
           <p>La visió exacta que necessita la cap d'estudis a primera hora del matí: tots els grups, totes les franges, d'un cop d'ull. Veus immediatament quins grups queden sense cobrir.</p>
         </div>
@@ -1453,7 +1810,7 @@
       <!-- 4. Registre i informes -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">4</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">4</div>
           <h3>Registre d'absències i informes</h3>
           <p>Classificació per criteris ATRI. Genera registre automàtic mensual i anual en format visual, amb taules i gràfiques. També es pot descarregar en format PDF o Excel per a la PGA, presa de decisions i inspeccions.</p>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -1471,7 +1828,7 @@
       <!-- 5. Personal substitut -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">5</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">5</div>
           <h3>Gestió del personal substitut</h3>
           <p>HorarIAPro digitalitza l'horari diari i setmanal, sempre a mà per a tot el claustre. La cap d'estudis edita els horaris i els canvis s'actualitzen a l'instant, de manera que qualsevol membre interí o substitut té accés al seu horari actualitzat des del primer minut a l'escola. Així, tot el claustre disposa sempre de la versió més recent, des de qualsevol dispositiu.</p>
           <p>També es pot descarregar en format PDF per tenir l'última versió del teu horari enganxada a la teva aula.</p>
@@ -1486,7 +1843,7 @@
       <!-- 6. Deutes TP -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">6</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">6</div>
           <h3>Seguiment de deutes de TP</h3>
           <p>Tant la cap d'estudis com cada docent tenen control total sobre el Treball Personal acumulat. HorarIA el té en compte per repartir cobertures de forma equitativa.</p>
         </div>
@@ -1507,7 +1864,7 @@
       <!-- 7. Sortides -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">7</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">7</div>
           <h3>Gestió de sortides i acompanyants</h3>
           <p>Organitza qui acompanya una sortida i gestiona automàticament les cobertures dels mestres que aquella sortida genera al centre.</p>
           <p>Hi ha dues categories d'acompanyants a les sortides:</p>
@@ -1526,7 +1883,7 @@
       <!-- 8. Torns de pati -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">8</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">8</div>
           <h3>Torns de pati</h3>
           <p>Cada docent veu els seus torns de pati de la setmana des del mòbil. Com a cap d'estudis pots configurar l'assignació setmanal en un sol lloc amb ajuda de la IA. Els torns s'actualitzen per cada baixa/substitut que entra a l'escola automàticament.</p>
         </div>
@@ -1547,7 +1904,7 @@
       <!-- 9. Compactació (jornada intensiva) -->
       <div class="feature-row">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:20px;">9</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:20px;">9</div>
           <h3>Compactació per jornada intensiva <span class="beta-badge">Beta</span></h3>
           <p>Genera automàticament els horaris compactats per a les jornades intensives d'inici i fi de curs, sense haver-los de recalcular manualment. Permet establir normes, pautes i regles noves personalitzades.</p>
         </div>
@@ -1566,7 +1923,7 @@
       <!-- 10. Gestió de baixes -->
       <div class="feature-row reverse">
         <div class="feature-row-text">
-          <div class="feature-row-icon" style="font-weight:800; color:var(--blue); font-size:18px;">10</div>
+          <div class="feature-row-icon" style="font-weight: 600; color:var(--blue); font-size:18px;">10</div>
           <h3>Gestió de baixes, curtes i llargues</h3>
           <p>Registra qui està de baixa —d'un dia o de mesos— amb data d'inici i data de fi prevista. Assigna un substitut o substituta i la IA li genera l'horari i les cobertures com si fos el titular o la titular, des del primer dia.</p>
           <p>El substitut o substituta accedeix a l'aplicació amb el seu propi correu XTEC des del moment en què es dona d'alta la baixa, sense cap gestió manual addicional. Quan el titular es reincorpora, tanques la baixa i tot queda registrat automàticament a l'apartat d'Historial.</p>
@@ -1593,7 +1950,7 @@
         if (!wrap) return;
         var NS = 'http://www.w3.org/2000/svg';
         var rows = Array.prototype.slice.call(wrap.querySelectorAll(':scope > .feature-row'));
-        var COLORS = ['#a78bfa', '#1A7A4E'];
+        var COLORS = ['#A8DDB5', '#1A7A4E'];
         var svg = document.createElementNS(NS, 'svg');
         svg.setAttribute('class', 'fr-lines');
         svg.setAttribute('aria-hidden', 'true');
@@ -1680,116 +2037,67 @@
   </div>
 </section>
 
-<!-- PER QUÈ HORARIAPRO (selector de rol) -->
-<section id="per-que-horariapro" style="background: var(--bg-2); border-top: 1px solid var(--border);">
-  <div class="section-inner" style="text-align:center;">
-    <div class="section-tag" style="text-align:center; color:var(--ink);">Tria el teu perfil</div>
-    <h2 class="section-title" style="color:var(--blue);">Per què HorariaPro?</h2>
-    <p class="section-sub" style="margin-left:auto; margin-right:auto;">Descobreix en un clic com t'ajuda HorariaPro segons el teu rol al centre.</p>
-    <div class="role-picker-options">
-      <a href="#cap-estudis" class="role-picker-btn">Com a cap d'estudis... <span class="role-picker-arrow">→</span></a>
-      <a href="#equip-directiu" class="role-picker-btn">Com a equip directiu... <span class="role-picker-arrow">→</span></a>
-      <a href="#docents" class="role-picker-btn">Com a docent... <span class="role-picker-arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- CAP D'ESTUDIS -->
-<section id="cap-estudis" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<!-- PER QUÈ HORARIAPRO: un perfil per pestanya, amb el vídeo real de l'app al mòbil -->
+<section id="per-que-horariapro" class="rols-sec">
   <div class="section-inner">
-    <div class="section-tag">Com a cap d'estudis</div>
-    <div class="rol-section text-only">
-      <div>
-        <h2 class="section-title">Oblida't dels papers i les trucades</h2>
-        <p style="color:var(--blue); font-size:17px; font-weight:700; font-style:italic; margin-top:-6px; margin-bottom:16px;">El primer generador d'horaris que et retorna les tardes lliures.</p>
-        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Rep l'avís, consulta la proposta de la IA i confirma la cobertura en dos clics. HorariaPro fa la feina administrativa perquè tu et puguis centrar en la pedagògica.</p>
-        <ul class="rol-list">
-          <li>Rep el correu d'avís en el moment que el docent envia l'absència</li>
-          <li>La IA proposa qui cobreix cada franja segons les normes del centre</li>
-          <li>Confirma o modifica la proposta amb un sol clic</li>
-          <li>Els docents afectats reben la notificació automàticament</li>
-          <li>Defineix les teves pròpies normes de cobertura per a la IA</li>
-          <li>Gestiona horaris i altes/baixes de personal des de l'app</li>
-          <li><strong>100&nbsp;% al navegador — ni tu ni cap docent heu d'instal·lar res. Funciona des del mòbil, la tauleta o l'ordinador, en línia.</strong></li>
-        </ul>
-        <a href="/guia-cobertures-professorat.html" class="modal-option" style="max-width:480px; margin-top:28px; background:var(--bg);">
-          <div class="modal-option-icon" style="background:#f2edfe; width:52px; height:52px;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 6.5C10.3 5 7.7 4.5 4.5 4.5v13c3.2 0 5.8.5 7.5 2 1.7-1.5 4.3-2 7.5-2v-13c-3.2 0-5.8.5-7.5 2Z"/>
-              <path d="M12 6.5v13"/>
-            </svg>
-          </div>
-          <div class="modal-option-text">
-            <strong>Guia HorariaPro</strong>
-            <span>Com organitzar les cobertures del professorat — guia completa</span>
-          </div>
-          <div class="modal-option-arrow" style="color:#7c3aed;">→</div>
-        </a>
+    <div class="rols-head">
+      <div class="section-tag">Tria el teu perfil</div>
+      <h2 class="section-title">Per què HorariaPro?</h2>
+      <p class="section-sub">Descobreix en un clic com t'ajuda HorariaPro segons el teu rol al centre.</p>
+    </div>
+
+    <div class="rols-tabs" role="tablist" aria-label="Perfils">
+      <button type="button" role="tab" class="rols-tab" id="rolTab0" aria-controls="cap-estudis" aria-selected="true">Cap d'estudis<i></i></button>
+      <button type="button" role="tab" class="rols-tab" id="rolTab1" aria-controls="equip-directiu" aria-selected="false" tabindex="-1">Equip directiu<i></i></button>
+      <button type="button" role="tab" class="rols-tab" id="rolTab2" aria-controls="docents" aria-selected="false" tabindex="-1">Docents<i></i></button>
+    </div>
+
+    <div class="rols-panels">
+      <div class="rols-panel is-on" id="cap-estudis" role="tabpanel" aria-labelledby="rolTab0">
+        <div class="rols-phone"><video src="videos/chat-horaria.mp4" poster="videos/chat-horaria.jpg" muted loop playsinline preload="none" aria-label="La cap d'estudis demana una proposta de cobertura al xat d'Horaria"></video></div>
+        <div class="rols-text">
+          <div class="rols-stat"><b>2 clics</b><span>per confirmar una cobertura</span></div>
+          <h3>Oblida't dels papers i les trucades</h3>
+          <p class="rols-accent">L'app que organitza les cobertures i et retorna les tardes lliures.</p>
+          <p>Rep l'avís, consulta la proposta de la IA i confirma la cobertura en dos clics. HorariaPro fa la feina administrativa perquè tu et puguis centrar en la pedagògica.</p>
+          <ul class="rols-list">
+            <li>Rep el correu d'avís en el moment que el docent envia l'absència</li>
+            <li>La IA proposa qui cobreix cada franja segons les normes del centre</li>
+            <li>Confirma o modifica la proposta amb un sol clic</li>
+            <li>Els docents afectats reben la notificació automàticament</li>
+          </ul>
+          <a class="rols-link" href="/guia-cobertures-professorat.html">Com organitzar les cobertures del professorat — guia completa</a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- EQUIP DIRECTIU -->
-<section id="equip-directiu" style="background: var(--bg);">
-  <div class="section-inner">
-    <div class="section-tag">Com a equip directiu</div>
-    <div class="rol-section text-only">
-      <div>
-        <h2 class="section-title">Visibilitat total del centre en temps real</h2>
-        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Director/a i secretaria tenen accés als informes d'absències, el registre de cobertures i els deutes de TP de tot el claustre.</p>
-        <ul class="rol-list">
-          <li>Resum diari, setmanal, mensual i anual de l'estat del centre</li>
-          <li>Historial complet per docent, motiu i data</li>
-          <li>Control de permisos ATRI amb avís integrat al formulari</li>
-          <li>Registre de justificants mèdics requerits</li>
-          <li>Accés al panell d'administració de normes de la IA</li>
-          <li>Tot en un mateix lloc, en format PDF o Excel per complementar les dades per a la inspecció o per elaborar la memòria del curs</li>
-        </ul>
+      <div class="rols-panel" id="equip-directiu" role="tabpanel" aria-labelledby="rolTab1" hidden>
+        <div class="rols-phone"><video src="videos/historial.mp4" poster="videos/historial.jpg" muted loop playsinline preload="none" aria-label="Historial d'absències i cobertures del centre"></video></div>
+        <div class="rols-text">
+          <div class="rols-stat"><b>PDF i Excel</b><span>per a la inspecció i la memòria del curs</span></div>
+          <h3>Visibilitat total del centre en temps real</h3>
+          <p>Director/a i secretaria tenen accés als informes d'absències, el registre de cobertures i els deutes de TP de tot el claustre.</p>
+          <ul class="rols-list">
+            <li>Resum diari, setmanal, mensual i anual de l'estat del centre</li>
+            <li>Historial complet per docent, motiu i data</li>
+            <li>Control de permisos ATRI amb avís integrat al formulari</li>
+            <li>Registre de justificants mèdics requerits</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- DOCENTS -->
-<section id="docents" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="section-inner">
-    <div class="section-tag">Com a docent</div>
-    <div class="rol-section text-only">
-      <div>
-        <h2 class="section-title">Avisar una absència: 30 segons des del mòbil</h2>
-        <p style="color:var(--ink-2); font-size:15px; margin-bottom:28px;">Sense trucades, sense paper, sense esperar. El docent selecciona les franges, el motiu i envia. Punt.</p>
-        <ul class="rol-list">
-          <li>Formulari simplificat, accessible des de qualsevol dispositiu</li>
-          <li>Consulta les teves cobertures del dia en temps real</li>
-          <li>Historial de les teves absències i deutes de TP</li>
-          <li>Avís automàtic si el motiu requereix gestió per ATRI</li>
-          <li>Accés directe amb enllaç personalitzat per escola</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- PRESENTAT AL SEMINARI DE CAPS D'ESTUDIS (Servei Educatiu Vallès Occidental III) -->
-<section id="seminari-caps-estudis" style="background: var(--bg); border-top: 1px solid var(--border);">
-  <div class="section-inner">
-    <div style="display:flex; flex-wrap:wrap; gap:36px; align-items:center; justify-content:center;">
-      <a href="https://serveiseducatius.xtec.cat/vallesoccidental3/general/sem-c-e-pri-s1-14-10-26/" target="_blank" rel="noopener" data-track="cta_noticia_xtec" style="flex:0 1 380px; display:block; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border);">
-        <img src="images/sev-vallesoccidental3-seminari.png" width="940" height="707" loading="lazy" alt="Seminari de caps d'estudis, sessió 1 del 30/09/2026, Servei Educatiu Vallès Occidental III" style="display:block; width:100%; height:auto;">
-      </a>
-      <div style="flex:1 1 360px; max-width:560px;">
-        <div class="section-tag">Presentat al seminari de caps d'estudis</div>
-        <h2 class="section-title" style="color:var(--blue);">Les caps d'estudis del Vallès Occidental ja coneixen HorariaPro</h2>
-        <blockquote style="margin:18px 0; padding:4px 0 4px 18px; border-left:4px solid var(--blue); font-size:18px; line-height:1.5; color:var(--ink); font-weight:600;">
-          «Aquesta eina està dissenyada per ajudar les caps d'estudis a millorar i agilitzar el seu dia a dia.»
-        </blockquote>
-        <p style="font-size:15px; color:var(--ink-3); line-height:1.6; margin:0 0 18px;">
-          Notícia del Servei Educatiu Vallès Occidental III sobre la presentació d'HorariaPro a la primera sessió del seminari de caps d'estudis de primària (30 de setembre de 2026).
-        </p>
-        <a href="https://serveiseducatius.xtec.cat/vallesoccidental3/general/sem-c-e-pri-s1-14-10-26/" target="_blank" rel="noopener" data-track="cta_noticia_xtec" style="display:inline-block; font-weight:700; color:var(--blue); text-decoration:none; border-bottom:2px solid var(--blue);">Llegeix la notícia al web del Servei Educatiu →</a>
-        <a href="/presentacio-seminari-caps-estudis.html" data-track="cta_cronica_seminari" style="display:block; margin-top:14px; font-weight:600; color:var(--ink-2); font-size:14px;">Com va anar la presentació: la crònica →</a>
+      <div class="rols-panel" id="docents" role="tabpanel" aria-labelledby="rolTab2" hidden>
+        <div class="rols-phone"><video src="videos/avis-app.mp4" poster="videos/avis-app.jpg" muted loop playsinline preload="none" aria-label="Un docent avisa d'una absència des del mòbil"></video></div>
+        <div class="rols-text">
+          <div class="rols-stat"><b>30 s</b><span>per avisar una absència</span></div>
+          <h3>Avisar una absència: 30 segons des del mòbil</h3>
+          <p>Sense trucades, sense paper, sense esperar. El docent selecciona les franges, el motiu i envia. Punt.</p>
+          <ul class="rols-list">
+            <li>Formulari simplificat, accessible des de qualsevol dispositiu</li>
+            <li>Consulta les teves cobertures del dia en temps real</li>
+            <li>Historial de les teves absències i deutes de TP</li>
+            <li>Avís automàtic si el motiu requereix gestió per ATRI</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1808,9 +2116,9 @@
     </style>
     <script>
       function calcPla(n){
-        if(n<=25) return {nom:'Estàndard', preu:59, color:'#60a5fa'};
-        if(n<=60) return {nom:'Pro', preu:79, color:'#4ade80'};
-        return {nom:'Centre+', preu:119, color:'#c084fc'};
+        if(n<=25) return {nom:'Estàndard', preu:59, color:'#C8CEC5'};
+        if(n<=60) return {nom:'Pro', preu:79, color:'#A8DDB5'};
+        return {nom:'Centre+', preu:119, color:'#F4F2EA'};
       }
       // Mensual: quota/mes durant 10 mesos (juliol i agost gratis). Anual: un sol
       // pagament de 10 quotes (mateix Stripe price `<pla>_anual` = 10x mensual).
@@ -1843,16 +2151,106 @@
         const slider = document.getElementById('calcSlider');
         if (!slider) return;
         const min = 12, max = 100, p25 = (25-min)/(max-min)*100, p60 = (60-min)/(max-min)*100;
-        slider.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${p25}%, #22c55e ${p25}%, #22c55e ${p60}%, #a855f7 ${p60}%, #a855f7 100%)`;
+        slider.style.background = `linear-gradient(to right, #C8CEC5 0%, #C8CEC5 ${p25}%, #A8DDB5 ${p25}%, #A8DDB5 ${p60}%, #F4F2EA ${p60}%, #F4F2EA 100%)`;
         updateCalculadora(slider.value);
       });
     </script>
 
+    <!-- Commutador mensual / anual -->
+    <div style="display:flex; justify-content:center; margin-bottom:28px;">
+      <div role="group" aria-label="Període de facturació" style="display:inline-flex; background:var(--bg); border:1px solid var(--border); border-radius:100px; padding:4px; gap:4px;">
+        <button type="button" id="togglePreuMensual" onclick="setPricingPeriod('mensual')" data-track="preus_toggle_mensual" style="border:none; cursor:pointer; padding:9px 20px; border-radius:100px; font-size:14px; font-weight: 600; background:var(--black); color:#fff;">Mensual</button>
+        <button type="button" id="togglePreuAnual" onclick="setPricingPeriod('anual')" data-track="preus_toggle_anual" style="border:none; cursor:pointer; padding:9px 20px; border-radius:100px; font-size:14px; font-weight: 600; background:transparent; color:var(--ink-3);">Anual <span style="font-size:11px; font-weight: 600; color:var(--green);">1 sola factura</span></button>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Gratuït -->
+      <div class="plan plan-free" style="background:var(--bg); border:1.5px dashed var(--green); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <div style="font-size:13px; font-weight: 600; color:var(--green); letter-spacing: 0; margin-bottom:8px;">Gratuït</div>
+          <div style="display:flex; align-items:baseline; gap:4px;">
+            <span style="font-size:40px; font-weight: 600; color:var(--black); letter-spacing:-.03em;">0 €</span>
+          </div>
+          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">3 mesos o 90 propostes IA — el que arribi primer</div>
+          <div style="font-size:12.5px; color:var(--green); font-weight: 600; margin-top:6px;">✓ Sense introduir la targeta de crèdit</div>
+        </div>
+        <div style="height:1px; background:var(--border);"></div>
+        <ul class="plan-list" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Proposta de cobertures amb IA (90&nbsp;u.)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Normes i context IA personalitzat</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Historial i informes d'absències (ATRI)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Suport 24&nbsp;h</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Gestió dels torns del pati (3&nbsp;u.)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Gestió de sortides amb acompanyants (10&nbsp;u.)</li>
+          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight: 600;">✓</span> Gestió del Treball Personal (10&nbsp;u.)</li>
+        </ul>
+        <a href="incorporacio.html" data-track="cta_preus_free" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight: 600; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
+      </div>
+
+      <!-- Escola: la barra selecciona el pla fix segons la plantilla, no inventa un preu nou -->
+      <div id="preuCardEscola" class="plan plan-pro" style="background:var(--black); border:1px solid var(--black); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:20px; position:relative;">
+        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight: 600; padding:4px 14px; border-radius:100px; white-space:nowrap; letter-spacing: 0;">El pla s'adapta a la teva plantilla</div>
+        <div>
+          <div style="font-size:13px; font-weight: 600; color:rgba(255,255,255,.5); letter-spacing: 0; margin-bottom:8px;" id="calcPlaNom">Estàndard</div>
+          <div style="display:flex; align-items:baseline; gap:4px;">
+            <span id="calcPreuTotal" style="font-size:40px; font-weight: 600; color:#fff; letter-spacing:-.03em;">59 €</span>
+            <span id="calcPreuPeriode" style="font-size:14px; color:rgba(255,255,255,.5);">/mes + IVA</span>
+          </div>
+          <div id="calcPreuNota" style="font-size:12.5px; color:#A8DDB5; font-weight:600; margin-top:6px;">Es cobra 10 mesos a l’any · juliol i agost, gratis</div>
+          <div id="calcPreuUnitari" style="font-size:13px; color:rgba(255,255,255,.5); margin-top:4px;">≈ 2,95 €/professional de mitjana</div>
+        </div>
+
+        <div>
+          <div style="text-align:center; margin-bottom:10px; color:#fff; font-size:14px; font-weight: 600;"><span id="calcDocents">20</span> professionals</div>
+          <input type="range" id="calcSlider" min="12" max="100" value="20" step="1" oninput="updateCalculadora(this.value)"
+            style="-webkit-appearance:none; appearance:none; width:100%; height:10px; border-radius:6px; outline:none; cursor:pointer;">
+          <div style="position:relative; height:14px; margin-top:8px; font-size:11px; color:rgba(255,255,255,.5);">
+            <span style="position:absolute; left:0;">12</span>
+            <span style="position:absolute; left:14.77%; transform:translateX(-50%);">25</span>
+            <span style="position:absolute; left:54.55%; transform:translateX(-50%);">60</span>
+            <span style="position:absolute; right:0;">100+</span>
+          </div>
+          <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:11px; color:rgba(255,255,255,.6);">
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#C8CEC5; margin-right:4px;"></span><span id="calcLegendEst">Fins a 25 · Estàndard 59 €</span></span>
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#A8DDB5; margin-right:4px;"></span><span id="calcLegendPro">26–60 · Pro 79 €</span></span>
+            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#F4F2EA; margin-right:4px;"></span><span id="calcLegendCen">61+ · Centre+ 119 €</span></span>
+          </div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,.12);"></div>
+        <ul class="plan-list" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Proposta de cobertures amb IA</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Normes i context IA personalitzat</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Historial i informes d'absències (ATRI)</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Suport 24&nbsp;h</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Gestió dels torns del pati</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Gestió de sortides amb acompanyants</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Gestió del Treball Personal</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Gestió d'horaris de jornada intensiva</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Chat HorarIA per WhatsApp</li>
+          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#A8DDB5; font-weight: 600;">✓</span> Implantació gratuïta</li>
+        </ul>
+        <div style="margin-top:auto; display:flex; border-radius:10px; overflow:hidden;">
+          <button onclick="openDemoModal()" data-track="cta_preus_demo_escola" style="flex:1; background:#fff; color:var(--black); border:none; border-right:1px solid rgba(0,0,0,.12); padding:12px 8px; font-size:13.5px; font-weight: 600; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
+          <a href="incorporacio.html" data-track="cta_preus_escola_integra" style="flex:1; text-align:center; text-decoration:none; background:var(--green); color:#fff; padding:12px 8px; font-size:13.5px; font-weight: 600; cursor:pointer; transition:opacity .15s; display:flex; align-items:center; justify-content:center;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">⚡ Integra ara</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="roi-toggle-wrap">
+      <button type="button" class="roi-toggle" id="roiToggle" aria-expanded="false" aria-controls="roiWrap" data-track="cta_roi_obrir">Calcula l'estalvi de fer servir HorariaPro al teu centre</button>
+    </div>
+    <div class="roi-wrap" id="roiWrap" hidden>
     <!-- Calculadora ROI: estalvi de temps en cobertures; comparteix la plantilla amb el slider de preus -->
     <style>
       .roi { background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:32px; margin-bottom:40px; }
-      .roi-tag { font-size:12px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
-      .roi-title { font-size:24px; font-weight:800; color:var(--black); letter-spacing:-.02em; line-height:1.25; margin:0 0 6px; }
+      .roi-tag { font-size:12px; font-weight: 600; color:var(--blue); letter-spacing: 0; margin-bottom:6px; }
+      .roi-title { font-size:24px; font-weight: 600; color:var(--black); letter-spacing:-.02em; line-height:1.25; margin:0 0 6px; }
       .roi-sub { font-size:14px; color:var(--ink-3); margin:0 0 24px; }
       .roi-body { display:grid; grid-template-columns:1fr; gap:24px; }
       .roi-body { grid-template-areas: "inputs" "result" "quali"; }
@@ -1863,41 +2261,41 @@
       .roi-field label { display:block; font-size:13px; font-weight:600; color:var(--ink-2); margin-bottom:6px; }
       .roi-input { display:flex; align-items:center; border:1.5px solid var(--border); border-radius:10px; background:var(--bg); padding:0 12px; transition:border-color .15s; }
       .roi-input:focus-within { border-color:var(--blue); }
-      .roi-input input { flex:1; min-width:0; border:none; outline:none; background:transparent; font:inherit; font-size:18px; font-weight:700; color:var(--black); padding:10px 0; }
+      .roi-input input { flex:1; min-width:0; border:none; outline:none; background:transparent; font:inherit; font-size:18px; font-weight: 600; color:var(--black); padding:10px 0; }
       .roi-input span { font-size:13px; color:var(--ink-3); font-weight:600; }
       .roi-result { background:var(--black); color:#fff; border-radius:var(--r); padding:24px; display:flex; flex-direction:column; gap:8px; }
-      .roi-big { font-size:48px; font-weight:800; letter-spacing:-.03em; line-height:1; color:#4ade80; }
-      .roi-big small { font-size:18px; font-weight:700; color:rgba(255,255,255,.6); letter-spacing:0; }
+      .roi-big { font-size:48px; font-weight: 600; letter-spacing:-.03em; line-height:1; color:#A8DDB5; }
+      .roi-big small { font-size:18px; font-weight: 600; color:rgba(255,255,255,.6); letter-spacing:0; }
       .roi-lbl { font-size:13px; color:rgba(255,255,255,.6); }
-      .roi-euros { font-size:20px; font-weight:700; }
+      .roi-euros { font-size:20px; font-weight: 600; }
       .roi-pla { font-size:13.5px; color:rgba(255,255,255,.85); border-top:1px solid rgba(255,255,255,.14); padding-top:12px; margin-top:6px; line-height:1.5; }
       .roi-pla strong { color:#fff; }
-      .roi-go { align-self:flex-start; margin-top:4px; background:#fff; color:var(--black); border:none; border-radius:10px; padding:10px 16px; font-size:13.5px; font-weight:700; cursor:pointer; }
+      .roi-go { align-self:flex-start; margin-top:4px; background:#fff; color:var(--black); border:none; border-radius:10px; padding:10px 16px; font-size:13.5px; font-weight: 600; cursor:pointer; }
       .roi-cmp { display:grid; grid-template-columns:1fr; gap:12px; margin-top:24px; }
       @media (min-width: 820px) { .roi-cmp { grid-template-columns:1fr 1fr; gap:16px; } }
       .roi-cmp > div { border-radius:var(--r); padding:16px 18px; font-size:14.5px; line-height:1.55; color:var(--ink); }
       .roi-cmp-ara { background:#fef2f2; border:1px solid #fecaca; }
-      .roi-cmp-hp { background:#f0fdf4; border:1px solid #bbf7d0; }
-      .roi-cmp strong { font-weight:800; }
+      .roi-cmp-hp { background:#f0fdf4; border:1px solid #A8DDB5; }
+      .roi-cmp strong { font-weight: 600; }
       .roi-cmp-ara strong { color:#dc2626; }
       .roi-cmp-hp strong { color:var(--green); }
-      .roi-quali-t { font-size:13px; font-weight:700; color:var(--ink-2); margin:0 0 8px; }
+      .roi-quali-t { font-size:13px; font-weight: 600; color:var(--ink-2); margin:0 0 8px; }
       .roi-quali { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
       .roi-quali li { display:flex; gap:10px; font-size:14px; color:var(--ink-2); }
-      .roi-quali li::before { content:"✓"; color:var(--green); font-weight:700; }
+      .roi-quali li::before { content:"✓"; color:var(--green); font-weight: 600; }
       .roi-field { position:relative; }
       .roi-lblrow { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
       .roi-lblrow label { margin:0; }
-      .roi-info { width:1.1em; height:1.1em; flex:none; border:1.5px solid var(--ink-3); border-radius:50%; background:transparent; color:var(--ink-3); font:inherit; font-size:12px; font-weight:700; line-height:1; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; }
+      .roi-info { width:1.1em; height:1.1em; flex:none; border:1.5px solid var(--ink-3); border-radius:50%; background:transparent; color:var(--ink-3); font:inherit; font-size:12px; font-weight: 600; line-height:1; display:inline-flex; align-items:center; justify-content:center; padding:0; cursor:pointer; }
       .roi-info:hover, .roi-info[aria-expanded="true"] { background:var(--blue); border-color:var(--blue); color:#fff; }
       .roi-pop { position:absolute; right:0; top:calc(100% + 4px); z-index:5; width:300px; max-width:calc(100vw - 64px); background:var(--black); color:#fff; border-radius:10px; padding:12px 14px; font-size:12.5px; line-height:1.5; box-shadow:0 8px 24px rgba(0,0,0,.25); }
       .roi-pop[hidden] { display:none; }
-      .roi-pop a { display:inline-block; margin-top:6px; color:#4ade80; font-weight:600; }
+      .roi-pop a { display:inline-block; margin-top:6px; color:#A8DDB5; font-weight:600; }
       .roi details { margin-top:20px; font-size:13px; color:var(--ink-3); }
       .roi summary { cursor:pointer; font-weight:600; color:var(--ink-2); }
       .roi details p { margin:8px 0 0; line-height:1.55; }
-      .roi-cta { display:inline-block; margin-top:20px; text-decoration:none; background:var(--green); color:#fff; padding:12px 20px; border-radius:10px; font-size:14px; font-weight:700; }
-      @keyframes roiPulse { 0% { box-shadow:0 0 0 0 rgba(74,222,128,.7); } 100% { box-shadow:0 0 0 22px rgba(74,222,128,0); } }
+      .roi-cta { display:inline-block; margin-top:20px; text-decoration:none; background:var(--green); color:#fff; padding:12px 20px; border-radius:10px; font-size:14px; font-weight: 600; }
+      @keyframes roiPulse { 0% { box-shadow:0 0 0 0 rgba(168,221,181,.7); } 100% { box-shadow:0 0 0 22px rgba(168,221,181,0); } }
       .roi-pulse { animation: roiPulse 1.1s ease-out 2; }
     </style>
     <div class="roi" id="calculadora-roi">
@@ -1957,92 +2355,7 @@
       <a class="roi-cta" href="incorporacio.html" data-track="cta_roi_prova">Prova-ho amb el teu centre, gratis</a>
     </div>
 
-    <!-- Commutador mensual / anual -->
-    <div style="display:flex; justify-content:center; margin-bottom:28px;">
-      <div role="group" aria-label="Període de facturació" style="display:inline-flex; background:var(--bg); border:1px solid var(--border); border-radius:100px; padding:4px; gap:4px;">
-        <button type="button" id="togglePreuMensual" onclick="setPricingPeriod('mensual')" data-track="preus_toggle_mensual" style="border:none; cursor:pointer; padding:9px 20px; border-radius:100px; font-size:14px; font-weight:700; background:var(--black); color:#fff;">Mensual</button>
-        <button type="button" id="togglePreuAnual" onclick="setPricingPeriod('anual')" data-track="preus_toggle_anual" style="border:none; cursor:pointer; padding:9px 20px; border-radius:100px; font-size:14px; font-weight:700; background:transparent; color:var(--ink-3);">Anual <span style="font-size:11px; font-weight:700; color:var(--green);">1 sola factura</span></button>
-      </div>
     </div>
-
-    <div class="pricing-grid">
-
-      <!-- Gratuït -->
-      <div style="background:var(--bg); border:1.5px dashed var(--green); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:16px;">
-        <div>
-          <div style="font-size:13px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;">Gratuït</div>
-          <div style="display:flex; align-items:baseline; gap:4px;">
-            <span style="font-size:40px; font-weight:800; color:var(--black); letter-spacing:-.03em;">0 €</span>
-          </div>
-          <div style="font-size:13px; color:var(--ink-3); margin-top:4px;">3 mesos o 90 propostes IA — el que arribi primer</div>
-          <div style="font-size:12.5px; color:var(--green); font-weight:700; margin-top:6px;">✓ Sense introduir la targeta de crèdit</div>
-        </div>
-        <div style="height:1px; background:var(--border);"></div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Proposta de cobertures amb IA (90&nbsp;u.)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Normes i context IA personalitzat</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Suport 24&nbsp;h</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió dels torns del pati (3&nbsp;u.)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió de sortides amb acompanyants (10&nbsp;u.)</li>
-          <li style="display:flex; gap:10px; font-size:14px;"><span style="color:var(--green); font-weight:700;">✓</span> Gestió del Treball Personal (10&nbsp;u.)</li>
-        </ul>
-        <a href="incorporacio.html" data-track="cta_preus_free" style="margin-top:auto; text-align:center; text-decoration:none; background:var(--green); color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">⚡ Integra HorariaPro ara mateix</a>
-      </div>
-
-      <!-- Escola: la barra selecciona el pla fix segons la plantilla, no inventa un preu nou -->
-      <div id="preuCardEscola" style="background:var(--black); border:1px solid var(--black); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:20px; position:relative;">
-        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:100px; white-space:nowrap; letter-spacing:.04em;">EL PLA S'ADAPTA A LA TEVA PLANTILLA</div>
-        <div>
-          <div style="font-size:13px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;" id="calcPlaNom">Estàndard</div>
-          <div style="display:flex; align-items:baseline; gap:4px;">
-            <span id="calcPreuTotal" style="font-size:40px; font-weight:800; color:#fff; letter-spacing:-.03em;">59 €</span>
-            <span id="calcPreuPeriode" style="font-size:14px; color:rgba(255,255,255,.5);">/mes + IVA</span>
-          </div>
-          <div id="calcPreuNota" style="font-size:12.5px; color:#4ade80; font-weight:600; margin-top:6px;">Es cobra 10 mesos a l’any · juliol i agost, gratis</div>
-          <div id="calcPreuUnitari" style="font-size:13px; color:rgba(255,255,255,.5); margin-top:4px;">≈ 2,95 €/professional de mitjana</div>
-        </div>
-
-        <div>
-          <div style="text-align:center; margin-bottom:10px; color:#fff; font-size:14px; font-weight:700;"><span id="calcDocents">20</span> professionals</div>
-          <input type="range" id="calcSlider" min="12" max="100" value="20" step="1" oninput="updateCalculadora(this.value)"
-            style="-webkit-appearance:none; appearance:none; width:100%; height:10px; border-radius:6px; outline:none; cursor:pointer;">
-          <div style="position:relative; height:14px; margin-top:8px; font-size:11px; color:rgba(255,255,255,.5);">
-            <span style="position:absolute; left:0;">12</span>
-            <span style="position:absolute; left:14.77%; transform:translateX(-50%);">25</span>
-            <span style="position:absolute; left:54.55%; transform:translateX(-50%);">60</span>
-            <span style="position:absolute; right:0;">100+</span>
-          </div>
-          <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:11px; color:rgba(255,255,255,.6);">
-            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#60a5fa; margin-right:4px;"></span><span id="calcLegendEst">Fins a 25 · Estàndard 59 €</span></span>
-            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#4ade80; margin-right:4px;"></span><span id="calcLegendPro">26–60 · Pro 79 €</span></span>
-            <span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c084fc; margin-right:4px;"></span><span id="calcLegendCen">61+ · Centre+ 119 €</span></span>
-          </div>
-        </div>
-
-        <div style="height:1px; background:rgba(255,255,255,.12);"></div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Proposta de cobertures amb IA</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Notificacions automàtiques amb Gmail (XTEC)</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Normes i context IA personalitzat</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Historial i informes d'absències (ATRI)</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Suport 24&nbsp;h</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió dels torns del pati</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió de sortides amb acompanyants</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió del Treball Personal</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Gestió d'horaris de jornada intensiva</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Chat HorarIA per WhatsApp</li>
-          <li style="display:flex; gap:10px; font-size:14px; color:#fff;"><span style="color:#4ade80; font-weight:700;">✓</span> Implantació gratuïta</li>
-        </ul>
-        <div style="margin-top:auto; display:flex; border-radius:10px; overflow:hidden;">
-          <button onclick="openDemoModal()" data-track="cta_preus_demo_escola" style="flex:1; background:#fff; color:var(--black); border:none; border-right:1px solid rgba(0,0,0,.12); padding:12px 8px; font-size:13.5px; font-weight:700; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Sol·licitar demo →</button>
-          <a href="incorporacio.html" data-track="cta_preus_escola_integra" style="flex:1; text-align:center; text-decoration:none; background:var(--green); color:#fff; padding:12px 8px; font-size:13.5px; font-weight:700; cursor:pointer; transition:opacity .15s; display:flex; align-items:center; justify-content:center;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">⚡ Integra ara</a>
-        </div>
-      </div>
-
-    </div>
-
     <script>
       (function(){
         const $ = id => document.getElementById(id);
@@ -2091,6 +2404,12 @@
         ['roiMin', 'roiCost'].forEach(id => $(id).addEventListener('input', render));
         const slider = $('calcSlider');
         if (slider) slider.addEventListener('input', () => { $('roiDocents').value = slider.value; render(); });
+        $('roiToggle').addEventListener('click', () => {
+          const w = $('roiWrap'), obre = w.hidden;
+          w.hidden = !obre;
+          $('roiToggle').setAttribute('aria-expanded', obre ? 'true' : 'false');
+          if (obre) w.scrollIntoView({behavior: 'smooth', block: 'start'});
+        });
         $('roiGo').addEventListener('click', () => {
           const card = $('preuCardEscola');
           card.scrollIntoView({behavior: 'smooth', block: 'center'});
@@ -2200,42 +2519,6 @@
   </div>
 </section>
 
-<!-- LEGAL -->
-<section id="legal" style="background: var(--bg-2); border-top: 1px solid var(--border);">
-  <div class="section-inner">
-    <div class="section-tag">Privacitat i compliment legal</div>
-    <h2 class="section-title">Dissenyat per complir el RGPD</h2>
-    <p class="section-sub">Les dades dels teus docents estan protegides i gestionades d'acord amb la normativa europea de protecció de dades.</p>
-    <p style="max-width:720px; color:var(--ink-2); font-size:14px; line-height:1.7; margin-top:-8px; margin-bottom:32px;">El <strong>RGPD (Reglament General de Protecció de Dades)</strong> és la llei europea que obliga qualsevol servei que tracti dades personals —com els noms, horaris o correus dels docents— a protegir-les, a explicar clarament per a què s'utilitzen i a garantir que el centre en manté sempre el control: pot consultar-les, corregir-les o demanar-ne l'eliminació en qualsevol moment. HorariaPro compleix aquesta llei des del disseny, no com un afegit.</p>
-    <div class="legal-grid">
-      <div class="legal-card">
-        <h4>🇪🇺 Dades a Europa</h4>
-        <p>Tota la informació s'emmagatzema a servidors europeus (EU-West). Cap dada surt de la Unió Europea.</p>
-      </div>
-      <div class="legal-card">
-        <h4>🔑 Accés amb Google (XTEC)</h4>
-        <p>Cada docent hi accedeix amb el seu compte corporatiu de Google del centre o el correu XTEC. Sense contrasenyes noves ni comptes externs.</p>
-      </div>
-      <div class="legal-card">
-        <h4>🏫 Aïllament per centre</h4>
-        <p>Les dades de cada escola estan completament separades. Cap centre pot accedir a la informació d'un altre.</p>
-      </div>
-      <div class="legal-card">
-        <h4>📄 Dades mínimes</h4>
-        <p>Només es recullen les dades estrictament necessàries: nom, horari i correu electrònic dels docents.</p>
-      </div>
-      <div class="legal-card">
-        <h4>🗑️ Dret a l'oblit</h4>
-        <p>Qualsevol centre pot sol·licitar l'eliminació completa de les seves dades en qualsevol moment.</p>
-      </div>
-      <div class="legal-card">
-        <h4>🔐 Connexions xifrades</h4>
-        <p>Totes les comunicacions van per HTTPS. Les dades en repòs estan xifrades a la base de dades.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contacte" class="contact-section">
   <div class="contact-inner">
@@ -2282,7 +2565,8 @@
 <!-- FOOTER -->
 <footer>
   <div style="display:flex; gap:20px; flex-wrap:wrap;">
-    <a href="/guia-cobertures-professorat.html" style="color:var(--ink-4); font-size:13px;">Guia: gestió de cobertures</a>
+    <a href="/blog.html" data-track="cta_blog" style="color:var(--ink-4); font-size:13px;">Blog</a>
+    <a href="/rgpd.html" style="color:var(--ink-4); font-size:13px;">RGPD</a>
     <a href="/avis-legal.html" style="color:var(--ink-4); font-size:13px;">Avís legal</a>
     <a href="/politica-privacitat.html" style="color:var(--ink-4); font-size:13px;">Política de privacitat</a>
     <a href="/politica-cookies.html" style="color:var(--ink-4); font-size:13px;">Política de galetes</a>
@@ -2764,67 +3048,90 @@
   }
 
   /* ═══════════════════════════════════════════════
-     DEMO EMBED — càrrega diferida + pantalla completa
+     COM FUNCIONA — recorregut cinemàtic: el scroll mou la càmera sobre el món (#fxWorld)
+     i activa els estats puntuals ([data-at] → .on)
   ═══════════════════════════════════════════════ */
   (function() {
-    var loaded = false;
-
-    function loadDemo() {
-      if (loaded) return;
-      loaded = true;
-      var iframe = document.getElementById('demoIframe');
-      var loading = document.getElementById('demoPanelLoading');
-      iframe.addEventListener('load', function() {
-        if (loading) loading.style.display = 'none';
-        // Injectem la regla anti-scroll-chaining DINS del document de la demo
-        // (des de fora no funciona: cal aplicar-la a l'element que fa scroll de veritat).
-        try {
-          var doc = iframe.contentDocument;
-          var style = doc.createElement('style');
-          style.textContent = 'html, body { overscroll-behavior-y: contain !important; }';
-          doc.head.appendChild(style);
-        } catch (e) {}
-      });
-      iframe.src = 'demo/index.html';
-    }
-
-    window.toggleDemoFullscreen = function() {
-      var panel = document.getElementById('demoPanel');
-      var btn = document.getElementById('demoFullscreenBtn');
-      // iOS Safari no suporta la Fullscreen API sobre elements arbitraris — obrim la demo en una pestanya nova.
-      var supportsFullscreen = document.fullscreenEnabled && panel.requestFullscreen;
-      if (!supportsFullscreen) {
-        loadDemo();
-        window.open('https://horariapro.com/demo/', '_blank');
-        return;
-      }
-      if (!document.fullscreenElement) {
-        loadDemo();
-        panel.requestFullscreen().catch(function() {
-          window.open('https://horariapro.com/demo/', '_blank');
-        });
-      } else {
-        document.exitFullscreen();
-      }
-      document.addEventListener('fullscreenchange', function onChange() {
-        document.removeEventListener('fullscreenchange', onChange);
-        btn.innerHTML = document.fullscreenElement
-          ? '✕ <span class="fs-label">Tancar</span>'
-          : '⛶ <span class="fs-label">Pantalla completa</span>';
-      });
-    };
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var panel = document.getElementById('demoPanel');
-      if (!panel) return;
-      var obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-          loadDemo();
-          obs.disconnect();
-        }
-      }, { threshold: 0.2 });
-      obs.observe(panel);
+    var track = document.getElementById('fx');
+    if (!track) return;
+    var stage = document.getElementById('fxStage');
+    var view = document.getElementById('fxView');
+    var world = document.getElementById('fxWorld');
+    var bar = document.getElementById('fxBar');
+    var hint = document.getElementById('fxHint');
+    var clock = document.getElementById('fxClock');
+    var caps = [].slice.call(stage.querySelectorAll('.fx-cap'));
+    var acts = [].slice.call(stage.querySelectorAll('[data-at]')).map(function(el) {
+      return { el: el, at: parseFloat(el.getAttribute('data-at')) };
     });
+    var NAV = 72;
+    // Capítols: on comença cadascun (0 = obertura, 4 = proposta en gran, 7 = final) i l'hora del rellotge
+    var CH = [0, .06, .23, .36, .47, .665, .79, .91];
+    var HORA = ['8:47', '8:48', '8:48', '8:49', '8:49', '8:49', '8:50', '8:50'];
+    // Càmera: rectangle del món que ha d'omplir la vista (d = escriptori, m = mòbil)
+    var TOT = { cx: 700, cy: 420, w: 1400, h: 820 };
+    var PROP = { d: { cx: 900, cy: 384, w: 1080, h: 610 }, m: { cx: 870, cy: 380, w: 520, h: 720 } };
+    var CAM = [
+      { p: 0,    d: TOT,                                   m: { cx: 220, cy: 410, w: 330, h: 660 } },
+      { p: .066, d: { cx: 220, cy: 410, w: 400, h: 650 },  m: { cx: 220, cy: 410, w: 330, h: 660 } },
+      { p: .22,  d: { cx: 220, cy: 410, w: 400, h: 650 },  m: { cx: 220, cy: 410, w: 330, h: 660 } },
+      { p: .26,  d: { cx: 760, cy: 410, w: 1340, h: 700 }, m: { cx: 868, cy: 330, w: 490, h: 420 } },
+      { p: .36,  d: { cx: 760, cy: 410, w: 1340, h: 700 }, m: { cx: 868, cy: 330, w: 490, h: 420 } },
+      { p: .395, d: { cx: 1150, cy: 380, w: 640, h: 600 }, m: { cx: 1186, cy: 374, w: 350, h: 570 } },
+      { p: .455, d: { cx: 1150, cy: 380, w: 640, h: 600 }, m: { cx: 1186, cy: 374, w: 350, h: 570 } },
+      { p: .49,  d: PROP.d, m: PROP.m },
+      { p: .655, d: PROP.d, m: PROP.m },
+      { p: .69,  d: { cx: 900, cy: 390, w: 1000, h: 660 }, m: { cx: 810, cy: 350, w: 400, h: 420 } },
+      { p: .77,  d: { cx: 900, cy: 390, w: 1000, h: 660 }, m: { cx: 810, cy: 350, w: 400, h: 420 } },
+      { p: .82,  d: { cx: 815, cy: 420, w: 1220, h: 760 }, m: { cx: 800, cy: 400, w: 400, h: 720 } },
+      { p: 1,    d: { cx: 815, cy: 420, w: 1220, h: 760 }, m: { cx: 800, cy: 400, w: 400, h: 720 } }
+    ];
+    var vw = 0, vh = 0, narrow = false, ch = -1, raf = 0;
+
+    function ease(t) { return t * t * (3 - 2 * t); }
+    function mida() {
+      vw = view.clientWidth; vh = view.clientHeight;
+      narrow = vw < 640;
+    }
+    function camera(p) {
+      var k = 1;
+      while (k < CAM.length - 1 && CAM[k].p < p) k++;
+      var a = CAM[k - 1], b = CAM[k];
+      var t = ease(Math.min(1, Math.max(0, (p - a.p) / ((b.p - a.p) || 1))));
+      var ra = narrow ? a.m : a.d, rb = narrow ? b.m : b.d;
+      var r = {};
+      ['cx', 'cy', 'w', 'h'].forEach(function(q) { r[q] = ra[q] + (rb[q] - ra[q]) * t; });
+      var s = Math.min(vw / r.w, vh / r.h);
+      world.style.transform = 'translate(' + (vw / 2 - r.cx * s).toFixed(1) + 'px,' + (vh / 2 - r.cy * s).toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+    }
+    function capitol(p) {
+      var c = 0;
+      while (c < CH.length - 1 && p >= CH[c + 1]) c++;
+      if (c === ch) return;
+      ch = c;
+      stage.setAttribute('data-ch', c);
+      caps.forEach(function(el, i) { el.classList.toggle('on', i === c); });
+      clock.textContent = HORA[c];
+    }
+    function update() {
+      raf = 0;
+      var range = Math.max(1, track.offsetHeight - stage.offsetHeight);
+      var p = Math.min(1, Math.max(0, (NAV - track.getBoundingClientRect().top) / range));
+      bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+      hint.classList.toggle('is-hidden', p > .015);
+      document.body.classList.toggle('tour-pinned', p > 0 && p < 1);
+      acts.forEach(function(a) { a.el.classList.toggle('on', p >= a.at); });
+      capitol(p);
+      camera(p);
+    }
+    function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
+
+    mida();
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { mida(); onScroll(); });
+    // La vista canvia d'alçada quan el títol es plega: la càmera s'hi adapta a cada pas
+    if (window.ResizeObserver) new ResizeObserver(function() { mida(); onScroll(); }).observe(view);
   })();
 
   /* ═══════════════════════════════════════════════
@@ -2853,10 +3160,10 @@
         { d: 600, h: '<div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-4);font-size:13px;">Carregant deutes...</div>' },
         { d: 4000, h:
           '<div style="display:flex;flex-direction:column;gap:6px;">' +
-            '<div class="mock-row" style="animation:slideUp .3s ease .0s both;"><span style="font-size:10px;font-weight:800;color:var(--ink-4);width:18px;text-align:center;">1</span><span class="mock-label" style="font-size:12px;">Laia Vidal</span><span class="mock-badge orange">3 TP</span></div>' +
-            '<div class="mock-row" style="animation:slideUp .3s ease .1s both;"><span style="font-size:10px;font-weight:800;color:var(--ink-4);width:18px;text-align:center;">2</span><span class="mock-label" style="font-size:12px;">Pere Soler</span><span class="mock-badge orange">2 TP</span></div>' +
-            '<div class="mock-row" style="animation:slideUp .3s ease .2s both;"><span style="font-size:10px;font-weight:800;color:var(--ink-4);width:18px;text-align:center;">3</span><span class="mock-label" style="font-size:12px;">Anna Torres</span><span class="mock-badge blue">1 TP</span></div>' +
-            '<div class="mock-row" style="animation:slideUp .3s ease .3s both;"><span style="font-size:10px;font-weight:800;color:var(--ink-4);width:18px;text-align:center;">4</span><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge green">0 TP</span></div>' +
+            '<div class="mock-row" style="animation:slideUp .3s ease .0s both;"><span style="font-size:10px;font-weight: 600;color:var(--ink-4);width:18px;text-align:center;">1</span><span class="mock-label" style="font-size:12px;">Laia Vidal</span><span class="mock-badge orange">3 TP</span></div>' +
+            '<div class="mock-row" style="animation:slideUp .3s ease .1s both;"><span style="font-size:10px;font-weight: 600;color:var(--ink-4);width:18px;text-align:center;">2</span><span class="mock-label" style="font-size:12px;">Pere Soler</span><span class="mock-badge orange">2 TP</span></div>' +
+            '<div class="mock-row" style="animation:slideUp .3s ease .2s both;"><span style="font-size:10px;font-weight: 600;color:var(--ink-4);width:18px;text-align:center;">3</span><span class="mock-label" style="font-size:12px;">Anna Torres</span><span class="mock-badge blue">1 TP</span></div>' +
+            '<div class="mock-row" style="animation:slideUp .3s ease .3s both;"><span style="font-size:10px;font-weight: 600;color:var(--ink-4);width:18px;text-align:center;">4</span><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge green">0 TP</span></div>' +
           '</div>' +
           ia('🤖 La IA prioritzarà <strong>Laia Vidal</strong> i <strong>Pere Soler</strong> en les pròximes cobertures')
         },
@@ -2864,7 +3171,7 @@
 
       'mock-compactacio': { title: 'Compactació de jornada', frames: [
         { d: 4500, h:
-          '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Horari normal · Curs 2025–26</div>' +
+          '<div style="font-size:10px;font-weight: 600;color:var(--ink-3);letter-spacing: 0;margin-bottom:6px;">Horari normal · Curs 2025–26</div>' +
           '<div style="display:flex;flex-direction:column;gap:2px;font-size:10px;">' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:00</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">1a hora</div></div>' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">9:30</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">1a hora</div></div>' +
@@ -2874,22 +3181,22 @@
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:30</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">3a hora</div></div>' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:00</span><div style="flex:1;background:#dbeafe;border-radius:3px;padding:3px 7px;color:var(--blue);font-weight:600;">3a hora</div></div>' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:30</span><div style="flex:1;background:var(--bg-2);border-radius:3px;padding:3px 7px;color:var(--ink-4);font-weight:600;">🍽️ Dinar</div></div>' +
-            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:00</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
-            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:30</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
-            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">16:00</span><div style="flex:1;background:#ede9fe;border-radius:3px;padding:3px 7px;color:#7c3aed;font-weight:600;">Tarda</div></div>' +
-            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight:700;">16:30</span><span style="color:var(--ink-4);">Fi de jornada</span></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:00</span><div style="flex:1;background:#E1EEE3;border-radius:3px;padding:3px 7px;color:#1A7A4E;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">15:30</span><div style="flex:1;background:#E1EEE3;border-radius:3px;padding:3px 7px;color:#1A7A4E;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">16:00</span><div style="flex:1;background:#E1EEE3;border-radius:3px;padding:3px 7px;color:#1A7A4E;font-weight:600;">Tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight: 600;">16:30</span><span style="color:var(--ink-4);">Fi de jornada</span></div>' +
           '</div>'
         },
         { d: 4800, h:
           '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:10px;">' +
             '<div style="width:36px;height:36px;border:3px solid var(--blue-lt);border-top-color:var(--blue);border-radius:50%;animation:iaSpinner .8s linear infinite;"></div>' +
-            '<div style="font-size:13px;font-weight:700;color:var(--blue);text-align:center;">HorarIA generant jornada intensiva...</div>' +
+            '<div style="font-size:13px;font-weight: 600;color:var(--blue);text-align:center;">HorarIA generant jornada intensiva...</div>' +
             '<div style="font-size:11px;color:var(--ink-3);text-align:center;">Compactant franges de 15 min · Eliminant la tarda</div>' +
           '</div>'
         },
         { d: 5200, h:
           '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
-            '<div style="font-size:10px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;">Gestió d\'horaris de jornada intensiva · HorarIA ⚡</div>' +
+            '<div style="font-size:10px;font-weight: 600;color:var(--ink-3);letter-spacing: 0;">Gestió d\'horaris de jornada intensiva · HorarIA ⚡</div>' +
             '<span class="mock-badge green" style="animation:scaleIn .3s ease both;">Generat ✓</span>' +
           '</div>' +
           '<div style="display:flex;flex-direction:column;gap:2px;font-size:10px;animation:slideUp .4s ease both;">' +
@@ -2903,7 +3210,7 @@
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">11:45</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:00</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
             '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--ink-4);width:38px;flex-shrink:0;">12:15</span><div style="flex:1;background:#d1fae5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:600;">3a hora (15 min)</div></div>' +
-            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight:800;">13:00</span><div style="flex:1;background:var(--green-lt);border:1px solid #86efac;border-radius:3px;padding:3px 7px;color:var(--green);font-weight:700;">✓ Fi — Sense tarda</div></div>' +
+            '<div style="display:flex;gap:5px;align-items:center;"><span style="color:var(--black);width:38px;flex-shrink:0;font-weight: 600;">13:00</span><div style="flex:1;background:var(--green-lt);border:1px solid #A8DDB5;border-radius:3px;padding:3px 7px;color:var(--green);font-weight: 600;">✓ Fi — Sense tarda</div></div>' +
           '</div>' +
           '<div style="margin-top:auto;font-size:11px;color:var(--ink-3);text-align:center;padding-top:6px;border-top:1px solid var(--border);">Exporta en PDF · Disponible a l\'app</div>'
         },
@@ -2912,28 +3219,28 @@
       'mock-sortides': { title: 'Sortida — 4t cicle', frames: [
         { d: 4200, h:
           '<div style="background:var(--blue-lt);border-radius:10px;padding:12px 14px;animation:slideUp .4s ease both;">' +
-            '<div style="font-size:13px;font-weight:700;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
+            '<div style="font-size:13px;font-weight: 600;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
             '<div style="font-size:11px;color:var(--blue);opacity:.8;">Dijous 29/05 · 9:00–14:00 · 4tA + 4tB</div>' +
           '</div>' +
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
+          '<div style="font-size:11px;font-weight: 600;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
           '<div class="mock-row"><div class="mock-dot gray"></div><span class="mock-label" style="font-size:12px;">Marta Puig</span><span class="mock-badge gray">Pendent</span></div>' +
           '<div class="mock-row"><div class="mock-dot gray"></div><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge gray">Pendent</span></div>'
         },
         { d: 4000, h:
           '<div style="background:var(--blue-lt);border-radius:10px;padding:12px 14px;">' +
-            '<div style="font-size:13px;font-weight:700;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
+            '<div style="font-size:13px;font-weight: 600;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
             '<div style="font-size:11px;color:var(--blue);opacity:.8;">Dijous 29/05 · 9:00–14:00 · 4tA + 4tB</div>' +
           '</div>' +
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
+          '<div style="font-size:11px;font-weight: 600;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
           '<div class="mock-row" style="animation:scaleIn .3s ease both;"><div class="mock-dot green"></div><span class="mock-label" style="font-size:12px;">Marta Puig</span><span class="mock-badge green">Confirmat ✓</span></div>' +
           '<div class="mock-row"><div class="mock-dot gray"></div><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge gray">Pendent</span></div>'
         },
         { d: 4000, h:
           '<div style="background:var(--blue-lt);border-radius:10px;padding:12px 14px;">' +
-            '<div style="font-size:13px;font-weight:700;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
+            '<div style="font-size:13px;font-weight: 600;color:var(--blue);">🎒 Visita Museu Ciències</div>' +
             '<div style="font-size:11px;color:var(--blue);opacity:.8;">Dijous 29/05 · 9:00–14:00 · 4tA + 4tB</div>' +
           '</div>' +
-          '<div style="font-size:11px;font-weight:700;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
+          '<div style="font-size:11px;font-weight: 600;color:var(--ink-3);margin:6px 0 4px;">ACOMPANYANTS</div>' +
           '<div class="mock-row"><div class="mock-dot green"></div><span class="mock-label" style="font-size:12px;">Marta Puig</span><span class="mock-badge green">Confirmat ✓</span></div>' +
           '<div class="mock-row" style="animation:scaleIn .3s ease both;"><div class="mock-dot green"></div><span class="mock-label" style="font-size:12px;">Carles Mas</span><span class="mock-badge green">Confirmat ✓</span></div>' +
           ia('🤖 <strong>4 cobertures</strong> generades automàticament per les franges buides')
@@ -2943,8 +3250,8 @@
       'mock-pati': { title: 'Els meus torns de pati', frames: [
         { d: 4800, h:
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">' +
-            '<div style="background:var(--blue-lt);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight:800;color:var(--blue);">2</div><div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.04em;">torns/set.</div></div>' +
-            '<div style="background:#FFF3E0;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight:800;color:#E65100;">1</div><div style="font-size:10px;color:#E65100;text-transform:uppercase;letter-spacing:.04em;">avui</div></div>' +
+            '<div style="background:var(--blue-lt);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight: 600;color:var(--blue);">2</div><div style="font-size:10px;color:var(--blue);letter-spacing: 0;">torns/set.</div></div>' +
+            '<div style="background:#FFF3E0;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight: 600;color:#E65100;">1</div><div style="font-size:10px;color:#E65100;letter-spacing: 0;">avui</div></div>' +
           '</div>' +
           '<div class="mock-pati-grid">' +
             '<div></div><div class="mock-pati-gh">Torn A</div><div class="mock-pati-gh">Torn B</div>' +
@@ -2955,12 +3262,12 @@
         },
         { d: 4000, h:
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">' +
-            '<div style="background:var(--blue-lt);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight:800;color:var(--blue);">2</div><div style="font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.04em;">torns/set.</div></div>' +
-            '<div style="background:#FFF3E0;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight:800;color:#E65100;">1</div><div style="font-size:10px;color:#E65100;text-transform:uppercase;letter-spacing:.04em;">avui</div></div>' +
+            '<div style="background:var(--blue-lt);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight: 600;color:var(--blue);">2</div><div style="font-size:10px;color:var(--blue);letter-spacing: 0;">torns/set.</div></div>' +
+            '<div style="background:#FFF3E0;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:22px;font-weight: 600;color:#E65100;">1</div><div style="font-size:10px;color:#E65100;letter-spacing: 0;">avui</div></div>' +
           '</div>' +
           '<div class="mock-pati-grid">' +
             '<div></div><div class="mock-pati-gh">Torn A</div><div class="mock-pati-gh">Torn B</div>' +
-            '<div class="mock-pati-day mock-pati-row-today" style="color:var(--black);font-weight:800;animation:fadeIn .3s ease both;">Dl ●</div>' +
+            '<div class="mock-pati-day mock-pati-row-today" style="color:var(--black);font-weight: 600;animation:fadeIn .3s ease both;">Dl ●</div>' +
             '<div class="mock-pati-cell today-mine" style="animation:scaleIn .4s ease .1s both;">Jo ☀️</div>' +
             '<div class="mock-pati-cell" style="animation:fadeIn .3s ease .1s both;">Anna T.</div>' +
             '<div class="mock-pati-day" style="color:var(--ink-4);">Dt</div><div class="mock-pati-cell mine">Jo</div><div class="mock-pati-cell">Pere S.</div>' +
@@ -3011,9 +3318,68 @@
   })();
 </script>
 
-<script src="/i18n.js?v=5"></script>
-<script src="/i18n-guies.js?v=1"></script>
+<script src="/i18n.js?v=6"></script>
+<script src="/i18n-guies.js?v=2"></script>
 <script src="/analytics.js" defer></script>
 
+<script src="/marca.js" defer></script>
+<script>
+  /* Funcionalitats: no surt a la landing; és una vista pròpia que s'obri des del menú (#funcionalitats) */
+  (function () {
+    function aplica() {
+      var on = location.hash === '#funcionalitats';
+      document.body.classList.toggle('vista-funcionalitats', on);
+      if (on) { window.scrollTo(0, 0); return; }
+      var t = location.hash && document.getElementById(location.hash.slice(1));
+      if (t) t.scrollIntoView(); else if (!location.hash) window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', aplica);
+    aplica();
+  })();
+</script>
+<script>
+  /* Per què HorariaPro: pestanyes de perfil; només es reprodueix el vídeo del perfil visible */
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('.rols-tab'));
+    if (!tabs.length) return;
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+    var sec = document.getElementById('per-que-horariapro');
+    var cur = 0, visible = false, manual = false, timer = 0, quiet = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function mostra(i, focus) {
+      cur = i;
+      tabs.forEach(function (t, k) {
+        var on = k === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        t.classList.remove('is-auto');
+        panels[k].hidden = !on;
+        panels[k].classList.toggle('is-on', on);
+        var v = panels[k].querySelector('video');
+        if (on && visible) { v.play().catch(function () {}); } else { v.pause(); }
+      });
+      if (focus) tabs[i].focus();
+      programa();
+    }
+    function programa() {
+      clearTimeout(timer);
+      if (manual || quiet || !visible) return;
+      void tabs[cur].offsetWidth;
+      tabs[cur].classList.add('is-auto');
+      timer = setTimeout(function () { mostra((cur + 1) % tabs.length); }, 9000);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { manual = true; mostra(i); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); manual = true; mostra((i + d + tabs.length) % tabs.length, true); }
+      });
+    });
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      var v = panels[cur].querySelector('video');
+      if (visible) { v.play().catch(function () {}); programa(); } else { v.pause(); clearTimeout(timer); tabs[cur].classList.remove('is-auto'); }
+    }, { threshold: .35 }).observe(sec);
+  })();
+</script>
 </body>
 </html>

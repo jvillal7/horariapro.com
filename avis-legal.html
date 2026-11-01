@@ -6,11 +6,11 @@
   <title>Avís legal — HorariaPro</title>
   <meta name="description" content="Avís legal i condicions d'ús d'HorariaPro, plataforma de gestió intel·ligent de cobertures per a centres educatius." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black:   #0a0a0a;
+      --black:   #14271F;
       --ink:     #1a1a1a;
       --ink-2:   #444;
       --ink-3:   #777;
@@ -25,7 +25,7 @@
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Geist', sans-serif;
       color: var(--ink);
       background: var(--bg);
       font-size: 16px;
@@ -37,14 +37,14 @@
 
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,.96);
+      background: rgba(30,58,47,.96);
       backdrop-filter: blur(12px);
       padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; text-decoration: none; }
+    .nav-logo { font-weight: 600; font-size: 18px; color: #fff; text-decoration: none; }
     .nav-back { font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; }
     .nav-back:hover { color: #fff; text-decoration: none; }
 
@@ -58,14 +58,13 @@
       background: var(--blue-lt);
       color: var(--blue);
       font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0;
       padding: 4px 12px;
       border-radius: 100px;
       margin-bottom: 16px;
     }
-    .page-hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--ink); }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 600; color: var(--ink); }
     .page-hero .updated { font-size: 13px; color: var(--ink-3); margin-top: 8px; }
 
     .content {
@@ -75,7 +74,7 @@
     }
     .content h2 {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--ink);
       margin: 40px 0 12px;
       padding-bottom: 8px;
@@ -103,16 +102,17 @@
       flex-wrap: wrap; gap: 12px;
       font-size: 13px; color: var(--ink-3);
     }
-    .footer-logo { font-weight: 800; color: var(--ink); }
+    .footer-logo { font-weight: 600; color: var(--ink); }
     .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-legal a { color: var(--ink-3); font-size: 13px; }
     .footer-legal a:hover { color: var(--blue); text-decoration: none; }
   </style>
+  <link rel="stylesheet" href="/marca.css" />
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">HorariaPro</a>
+  <a href="/" class="nav-logo" aria-label="Tornar a l'inici"><img src="/marca/logo/horaria-pro-sobre-pissarra.svg" alt="Horaria Pro" style="height:24px;display:block" /></a>
   <a href="/" class="nav-back">← Tornar a l'inici</a>
 </nav>
 
@@ -178,8 +178,10 @@
 </div>
 
 <footer>
-  <div class="footer-logo"><img src="/logo.png" alt="HorariaPro" style="height:24px; filter:brightness(0);" /></div>
+  <div class="footer-logo"><img src="/marca/logo/horaria-pro-sobre-clar.svg" alt="Horaria Pro" style="height:24px;" /></div>
   <div class="footer-legal">
+    <a href="/blog.html">Blog</a>
+    <a href="/rgpd.html">RGPD</a>
     <a href="/avis-legal.html">Avís legal</a>
     <a href="/politica-privacitat.html">Política de privacitat</a>
     <a href="/politica-cookies.html">Política de galetes</a>
@@ -188,5 +190,6 @@
 </footer>
 
 <script src="/analytics.js" defer></script>
+<script src="/marca.js" defer></script>
 </body>
 </html>

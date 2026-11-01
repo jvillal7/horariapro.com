@@ -158,6 +158,22 @@
     ["Gestió de cobertures del professorat: guia per a caps d'estudis →", 'Gestión de sustituciones del profesorado: guía para jefaturas de estudios →'],
     ['La notícia original al web del Servei Educatiu Vallès Occidental III →', 'La noticia original en la web del Servicio Educativo Vallès Occidental III →'],
 
+    // ── Blog ──
+    ['Blog — HorariaPro', 'Blog — HorariaPro'],
+    ['Guies i cròniques per a equips directius', 'Guías y crónicas para equipos directivos'],
+    ['El que anem aprenent amb els centres, explicat perquè et servisca encara que no faces servir HorariaPro.', 'Lo que vamos aprendiendo con los centros, explicado para que te sirva aunque no uses HorariaPro.'],
+    ['Crònica · Octubre de 2026', 'Crónica · Octubre de 2026'],
+    ['Guia · Setembre de 2026', 'Guía · Septiembre de 2026'],
+    ["Què vam explicar a la primera sessió del seminari, què en va sortir i què hem après de les converses amb les caps d'estudis.", 'Qué explicamos en la primera sesión del seminario, qué salió de ella y qué hemos aprendido de las conversaciones con las jefas de estudios.'],
+    ["Què fa malament l'Excel, com ho cobreixen Clickedu i Gescola, i com ho resol HorariaPro amb IA.", 'Qué hace mal el Excel, cómo lo cubren Clickedu y Gescola, y cómo lo resuelve HorariaPro con IA.'],
+    ["Com organitzar els torns de pati quan falta un mestre sense deixar el pati descobert ni recórrer a l'últim moment a qui passi pel passadís.", 'Cómo organizar los turnos de patio cuando falta un maestro sin dejar el patio descubierto ni recurrir en el último momento a quien pase por el pasillo.'],
+    ['Llegir la crònica →', 'Leer la crónica →'],
+    ['Llegir la guia →', 'Leer la guía →'],
+    ['Començant per on comença tot: a les 8:39, algú truca dient que no ve.', 'Empezando por donde empieza todo: a las 8:39, alguien llama diciendo que no viene.'],
+    ['Una proposta de cobertura, en directe i raonada franja a franja.', 'Una propuesta de sustitución, en directo y razonada franja a franja.'],
+    ["← Tornar a l'inici", '← Volver al inicio'],
+    ['RGPD — HorariaPro', 'RGPD — HorariaPro'],
+
     // ── Secció de la landing (#seminari-caps-estudis) ──
     ["Presentat al seminari de caps d'estudis", 'Presentado en el seminario de jefaturas de estudios'],
     ["Les caps d'estudis del Vallès Occidental ja coneixen HorariaPro", 'Las jefas de estudios del Vallès Occidental ya conocen HorariaPro'],

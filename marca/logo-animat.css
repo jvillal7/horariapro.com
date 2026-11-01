@@ -1,0 +1,21 @@
+/* Logo animat d'Horaria — moviment de marca "el traç de guix" */
+.hl-anim { --hl-text: #1E3A2F; --hl-accent: #1A7A4E; display: block; overflow: visible; }
+.hl-anim g { stroke: var(--hl-accent); }
+.hl-anim .hl-word { fill: var(--hl-text); }
+.hl-anim .hl-pro { fill: var(--hl-accent); }
+.hl-anim path[pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.hl-anim.is-playing .hl-s1 { animation: hl-draw 340ms cubic-bezier(.65,0,.35,1) 0ms forwards; }
+.hl-anim.is-playing .hl-s2 { animation: hl-draw 420ms cubic-bezier(.65,0,.35,1) 300ms forwards; }
+.hl-anim.is-playing .hl-s3 { animation: hl-draw 170ms cubic-bezier(.22,1,.36,1) 720ms forwards; }
+.hl-anim .hl-wipe { transform-box: fill-box; transform-origin: left; transform: scaleX(0); }
+.hl-anim.is-playing .hl-wipe { animation: hl-wipe 560ms cubic-bezier(.22,1,.36,1) 640ms forwards; }
+.hl-anim .hl-pro { opacity: 0; transform: translateY(6px); transform-box: fill-box; }
+.hl-anim.is-playing .hl-pro { animation: hl-pro 360ms cubic-bezier(.22,1,.36,1) 1080ms forwards; }
+@keyframes hl-draw { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes hl-wipe { to { transform: scaleX(1); } }
+@keyframes hl-pro { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hl-anim path[pathLength] { stroke-dashoffset: 0; opacity: 1; animation: none !important; }
+  .hl-anim .hl-wipe { transform: none; animation: none !important; }
+  .hl-anim .hl-pro { opacity: 1; transform: none; animation: none !important; }
+}
