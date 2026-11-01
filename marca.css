@@ -194,14 +194,11 @@ body.vista-funcionalitats section:not(.vista-func) { display: none !important; }
 .rols-tab { position: relative; overflow: hidden; font: 500 15px 'Geist', sans-serif; color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 11px 22px; cursor: pointer; transition: color .15s, background .2s var(--ease-out); }
 .rols-tab:hover { color: var(--fosca); }
 .rols-tab[aria-selected="true"] { background: var(--pissarra); color: var(--guix); }
-.rols-tab i { position: absolute; left: 18px; right: 18px; bottom: 5px; height: 2px; border-radius: 2px; background: var(--guix-verd); transform: scaleX(0); transform-origin: left; opacity: 0; }
-.rols-tab.is-auto i { opacity: 1; animation: rolsProg 9s linear forwards; }
-@keyframes rolsProg { to { transform: scaleX(1); } }
 .rols-panel { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 72px; align-items: center; max-width: 980px; margin: 0 auto; }
 .rols-panel.is-on { animation: rolsIn .52s var(--ease-out); }
 @keyframes rolsIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 .rols-phone { position: relative; padding: 10px; background: var(--fosca); border-radius: 46px; box-shadow: 0 0 0 2px #2c4a3e, var(--shadow-lg); }
-.rols-phone video { display: block; width: 100%; aspect-ratio: 360 / 810; object-fit: cover; border-radius: 36px; background: #fff; }
+.rols-phone video { display: block; width: 100%; aspect-ratio: 576 / 1248; object-fit: cover; border-radius: 36px; background: #fff; }
 .rols-stat { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .rols-stat b { font-size: clamp(44px, 5vw, 64px); font-weight: 600; letter-spacing: -.05em; line-height: 1; color: var(--verd); }
 .rols-stat span { font-size: 15px; color: var(--muted); }
@@ -237,3 +234,7 @@ body.vista-funcionalitats section:not(.vista-func) { display: none !important; }
   .hero-aval b, .hero-aval small { white-space: nowrap; font-size: 12.5px; }
   .hero-aval small { font-size: 11.5px; }
 }
+
+/* Vídeos gravats amb la marca nova: ja no porten la barra negra del navegador que calia retallar */
+.feature-media-item.v-marca, .feature-video-wrap.portrait.v-marca { aspect-ratio: 576 / 1248; }
+.feature-media-item.v-marca video, .feature-video-wrap.portrait.v-marca video { transform: none; }

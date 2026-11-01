@@ -1732,8 +1732,8 @@
           <div class="feature-media-group">
             <div class="feature-media-group-title">Docent avisa</div>
             <div class="feature-media-pair" style="grid-template-columns:1fr 1fr;">
-              <div class="feature-media-item has-lightbox" onclick="openMediaLightbox('videos/avis-app.mp4','video')">
-                <video muted loop playsinline preload="none" poster="videos/avis-app.jpg" aria-label="Avís d'absència des de l'app">
+              <div class="feature-media-item v-marca has-lightbox" onclick="openMediaLightbox(vLang('avis-app'),'video')">
+                <video data-v="avis-app" muted loop playsinline preload="none" poster="videos/avis-app.jpg" aria-label="Avís d'absència des de l'app">
                   <source src="videos/avis-app.mp4" type="video/mp4" />
                 </video>
                 <span class="feature-media-label">Des de l'app</span>
@@ -1777,8 +1777,8 @@
             <li><strong>Notificació automàtica:</strong> les persones afectades pels canvis queden notificades per correu electrònic, amb els canvis i el que han de fer.</li>
           </ul>
         </div>
-        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/chat-horaria.mp4','video')">
-          <video muted loop playsinline preload="none" poster="videos/chat-horaria.jpg" aria-label="Chat Horaria — proposta de cobertures amb IA">
+        <div class="feature-video-wrap portrait v-marca has-lightbox" onclick="openMediaLightbox(vLang('chat-horaria'),'video')">
+          <video data-v="chat-horaria" muted loop playsinline preload="none" poster="videos/chat-horaria.jpg" aria-label="Chat Horaria — proposta de cobertures amb IA">
             <source src="videos/chat-horaria.mp4" type="video/mp4" />
           </video>
         </div>
@@ -1818,8 +1818,8 @@
             <a href="docs/historial-absencies-exemple.xlsx" download class="doc-sample-link">📊 Descarregar Excel d'exemple</a>
           </div>
         </div>
-        <div class="feature-video-wrap portrait has-lightbox" onclick="openMediaLightbox('videos/historial.mp4','video')">
-          <video muted loop playsinline preload="none" poster="videos/historial.jpg" aria-label="Historial d'absències i informes">
+        <div class="feature-video-wrap portrait v-marca has-lightbox" onclick="openMediaLightbox(vLang('historial'),'video')">
+          <video data-v="historial" muted loop playsinline preload="none" poster="videos/historial.jpg" aria-label="Historial d'absències i informes">
             <source src="videos/historial.mp4" type="video/mp4" />
           </video>
         </div>
@@ -2047,14 +2047,14 @@
     </div>
 
     <div class="rols-tabs" role="tablist" aria-label="Perfils">
-      <button type="button" role="tab" class="rols-tab" id="rolTab0" aria-controls="cap-estudis" aria-selected="true">Cap d'estudis<i></i></button>
-      <button type="button" role="tab" class="rols-tab" id="rolTab1" aria-controls="equip-directiu" aria-selected="false" tabindex="-1">Equip directiu<i></i></button>
-      <button type="button" role="tab" class="rols-tab" id="rolTab2" aria-controls="docents" aria-selected="false" tabindex="-1">Docents<i></i></button>
+      <button type="button" role="tab" class="rols-tab" id="rolTab0" aria-controls="cap-estudis" aria-selected="true">Cap d'estudis</button>
+      <button type="button" role="tab" class="rols-tab" id="rolTab1" aria-controls="equip-directiu" aria-selected="false" tabindex="-1">Equip directiu</button>
+      <button type="button" role="tab" class="rols-tab" id="rolTab2" aria-controls="docents" aria-selected="false" tabindex="-1">Docents</button>
     </div>
 
     <div class="rols-panels">
       <div class="rols-panel is-on" id="cap-estudis" role="tabpanel" aria-labelledby="rolTab0">
-        <div class="rols-phone"><video src="videos/chat-horaria.mp4" poster="videos/chat-horaria.jpg" muted loop playsinline preload="none" aria-label="La cap d'estudis demana una proposta de cobertura al xat d'Horaria"></video></div>
+        <div class="rols-phone"><video data-v="chat-horaria" src="videos/chat-horaria.mp4" poster="videos/chat-horaria.jpg" muted loop playsinline preload="none" aria-label="La cap d'estudis demana una proposta de cobertura al xat d'Horaria"></video></div>
         <div class="rols-text">
           <div class="rols-stat"><b>2 clics</b><span>per confirmar una cobertura</span></div>
           <h3>Oblida't dels papers i les trucades</h3>
@@ -2071,7 +2071,7 @@
       </div>
 
       <div class="rols-panel" id="equip-directiu" role="tabpanel" aria-labelledby="rolTab1" hidden>
-        <div class="rols-phone"><video src="videos/historial.mp4" poster="videos/historial.jpg" muted loop playsinline preload="none" aria-label="Historial d'absències i cobertures del centre"></video></div>
+        <div class="rols-phone"><video data-v="historial" src="videos/historial.mp4" poster="videos/historial.jpg" muted loop playsinline preload="none" aria-label="Historial d'absències i cobertures del centre"></video></div>
         <div class="rols-text">
           <div class="rols-stat"><b>PDF i Excel</b><span>per a la inspecció i la memòria del curs</span></div>
           <h3>Visibilitat total del centre en temps real</h3>
@@ -2086,7 +2086,7 @@
       </div>
 
       <div class="rols-panel" id="docents" role="tabpanel" aria-labelledby="rolTab2" hidden>
-        <div class="rols-phone"><video src="videos/avis-app.mp4" poster="videos/avis-app.jpg" muted loop playsinline preload="none" aria-label="Un docent avisa d'una absència des del mòbil"></video></div>
+        <div class="rols-phone"><video data-v="avis-app" src="videos/avis-app.mp4" poster="videos/avis-app.jpg" muted loop playsinline preload="none" aria-label="Un docent avisa d'una absència des del mòbil"></video></div>
         <div class="rols-text">
           <div class="rols-stat"><b>30 s</b><span>per avisar una absència</span></div>
           <h3>Avisar una absència: 30 segons des del mòbil</h3>
@@ -2735,9 +2735,36 @@
     vids.forEach(function(v) { io.observe(v); });
   })();
 
+  /* Vídeos amb versió per idioma: ca (sense sufix), va i es */
+  function vIdioma() {
+    var l = window.HPI18N && window.HPI18N.lang;
+    if (!l) { try { l = localStorage.getItem('hp_lang'); } catch (e) {} }
+    if (!l) l = /valencia/i.test(document.documentElement.lang) ? 'va' : document.documentElement.lang;
+    l = String(l || 'ca').slice(0, 2).toLowerCase();
+    return l === 'va' || l === 'es' ? l : 'ca';
+  }
+  function vLang(nom) { var l = vIdioma(); return 'videos/' + nom + (l === 'ca' ? '' : '-' + l) + '.mp4'; }
+  (function () {
+    function aplica() {
+      [].forEach.call(document.querySelectorAll('video[data-v]'), function (v) {
+        var url = vLang(v.getAttribute('data-v'));
+        if (v.getAttribute('data-actual') === url) return;
+        var anava = !v.paused, font = v.querySelector('source');
+        v.setAttribute('data-actual', url);
+        v.poster = url.replace('.mp4', '.jpg');
+        if (font) font.src = url; else v.src = url;
+        if (anava || v.currentSrc) { v.load(); if (anava) v.play().catch(function () {}); }
+      });
+    }
+    aplica();
+    document.addEventListener('DOMContentLoaded', aplica);
+    document.addEventListener('hp:langchange', aplica);
+  })();
+
   function openDemoOverlay() {
     var f = document.getElementById('demoOverlayFrame');
-    if (!f.getAttribute('src')) f.src = 'demo/index.html';
+    var u = 'demo/index.html?lang=' + vIdioma();
+    if (f.getAttribute('src') !== u) f.src = u;
     document.getElementById('demoOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -3344,40 +3371,31 @@
     if (!tabs.length) return;
     var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
     var sec = document.getElementById('per-que-horariapro');
-    var cur = 0, visible = false, manual = false, timer = 0, quiet = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cur = 0, visible = false;
     function mostra(i, focus) {
       cur = i;
       tabs.forEach(function (t, k) {
         var on = k === i;
         t.setAttribute('aria-selected', on ? 'true' : 'false');
         t.tabIndex = on ? 0 : -1;
-        t.classList.remove('is-auto');
         panels[k].hidden = !on;
         panels[k].classList.toggle('is-on', on);
         var v = panels[k].querySelector('video');
         if (on && visible) { v.play().catch(function () {}); } else { v.pause(); }
       });
       if (focus) tabs[i].focus();
-      programa();
-    }
-    function programa() {
-      clearTimeout(timer);
-      if (manual || quiet || !visible) return;
-      void tabs[cur].offsetWidth;
-      tabs[cur].classList.add('is-auto');
-      timer = setTimeout(function () { mostra((cur + 1) % tabs.length); }, 9000);
     }
     tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { manual = true; mostra(i); });
+      t.addEventListener('click', function () { mostra(i); });
       t.addEventListener('keydown', function (e) {
         var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (d) { e.preventDefault(); manual = true; mostra((i + d + tabs.length) % tabs.length, true); }
+        if (d) { e.preventDefault(); mostra((i + d + tabs.length) % tabs.length, true); }
       });
     });
     new IntersectionObserver(function (es) {
       visible = es[0].isIntersecting;
       var v = panels[cur].querySelector('video');
-      if (visible) { v.play().catch(function () {}); programa(); } else { v.pause(); clearTimeout(timer); tabs[cur].classList.remove('is-auto'); }
+      if (visible) { v.play().catch(function () {}); } else { v.pause(); }
     }, { threshold: .35 }).observe(sec);
   })();
 </script>
