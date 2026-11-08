@@ -83,6 +83,7 @@ nav.nav-glass { background: rgba(30,58,47,.82) !important; border-bottom-color: 
 .hero-trust { color: var(--pols) !important; font-weight: 500 !important; }
 .hero-video-card { background: #fff !important; border-radius: 22px; overflow: hidden; box-shadow: 0 40px 80px -36px rgba(0,0,0,.55), 0 0 0 1px rgba(244,242,234,.08); }
 .hero-video-card.hero-expanded { border-radius: 0; background: var(--fosca) !important; }
+.hero-video-card.hero-fs { border-radius: 0; background: #14271F !important; box-shadow: none; }
 
 /* ── Peu ── */
 footer { background: var(--guix) !important; color: var(--muted); border-top: 1px solid var(--linia) !important; }

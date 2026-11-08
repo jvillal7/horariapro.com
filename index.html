@@ -335,10 +335,19 @@
     .hero-video-card.hero-expanded .hero-video-controls { left: 0; right: 0; bottom: 16px; justify-content: center; gap: 12px; }
     .hero-video-card.hero-expanded .hero-video-controls button { width: 48px; height: 48px; padding: 0; background: transparent; border: none; }
     .hero-video-card.hero-expanded .hero-video-controls button:hover { background: rgba(255,255,255,.14); }
-    .hero-video-card:fullscreen, .hero-video-card:-webkit-full-screen { width: 100vw; height: 100vh; max-width: none; aspect-ratio: auto; background: #000; }
-    .hero-video-card:fullscreen video, .hero-video-card:-webkit-full-screen video { object-fit: contain; }
-    .hero-video-card:fullscreen .hero-video-controls, .hero-video-card:-webkit-full-screen .hero-video-controls { bottom: max(16px, env(safe-area-inset-bottom)); right: 16px; left: 16px; }
-    .hero-video-card:fullscreen .hero-video-controls button, .hero-video-card:-webkit-full-screen .hero-video-controls button { width: 48px; height: 48px; }
+    /* Pantalla completa (mòbil/tauleta): fons verd corporatiu, vídeo a dalt i controls blancs en una franja a baix.
+       La classe .hero-fs la posa el JS (els selectors :fullscreen i :-webkit-full-screen junts invaliden la regla en alguns navegadors). */
+    .hero-video-card.hero-fs {
+      width: 100vw; height: 100vh; height: 100dvh; max-width: none; aspect-ratio: auto; border-radius: 0; box-shadow: none;
+      background: #14271F; display: flex; align-items: center; justify-content: center;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) calc(92px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    }
+    .hero-video-card.hero-fs video { width: auto; height: 100%; max-width: 100%; aspect-ratio: 9 / 16; object-fit: contain; border-radius: 18px; background: #F4F2EA; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+    .hero-video-card.is-h.hero-fs video { width: 100%; height: auto; max-height: 100%; aspect-ratio: 16 / 9; }
+    .hero-video-card.hero-fs .hero-video-controls { left: 0; right: 0; bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)); justify-content: center; gap: 16px; }
+    .hero-video-card.hero-fs .hero-video-controls button { width: 52px; height: 52px; color: #fff; opacity: 1; background: rgba(255,255,255,.1); border: 1px solid rgba(168,221,181,.35); }
+    .hero-video-card.hero-fs .hero-video-controls button svg { filter: none; width: 22px; height: 22px; }
+    .hero-video-card.hero-fs .hero-video-controls button:active { background: rgba(168,221,181,.25); }
     .hero-video-sound, .hero-video-pause, .hero-video-full {
       background: transparent; color: #1a1a1a; border: none; cursor: pointer;
       width: 34px; height: 34px; padding: 0; border-radius: 50%;
@@ -1030,38 +1039,160 @@
     }
     .footer-logo { font-weight: 600; color: var(--ink); }
 
-    /* ── COM FUNCIONA: recorregut cinemàtic per scroll (#com-funciona) ──
-       L'escenari queda fix (sticky) i el scroll mou una "càmera" sobre un món de 1400×820
-       (mòbil + portàtil + correus). Els estats puntuals s'activen amb [data-at] → .on. */
-    .fx-sec { background: #0b0d0c; color: #f5f5f4; padding: 96px 0 80px; }
+    /* ── COM FUNCIONA: demo guiada clic a clic (#com-funciona) ──
+       Una "càmera" enfoca cada pas sobre un món de 1400×820 (mòbil + portàtil + correus).
+       El panell de guia explica què passa i on cal clicar; l'element a clicar polsa (.gd-target). */
+    .fx-sec { background: #0b0d0c; color: #f5f5f4; padding: 96px 0 88px; }
     .fx-head { max-width: 1100px; margin: 0 auto; padding: 0 5%; text-align: center; }
     .fx-head .section-tag { background: rgba(168,221,181,.12); color: #A8DDB5; }
-    .fx-head .section-title { color: #fff; margin-bottom: 0; }
-    .fx-track { position: relative; height: 1000vh; }
-    .fx-stage {
-      position: sticky; top: 72px; height: calc(100vh - 72px); overflow: hidden;
-      display: grid; grid-template-rows: auto minmax(0, 1fr); padding: 26px 0 34px;
-      background: radial-gradient(ellipse 70% 55% at 50% 62%, rgba(26,122,78,.22), transparent 70%);
-    }
-    @supports (height: 100svh) { .fx-stage { height: calc(100svh - 72px); } }
+    .fx-head .section-title { color: #fff; margin-bottom: 12px; }
+    .fx-head .gd-sub { color: #a8a29e; font-size: 17px; line-height: 1.5; max-width: 620px; margin: 0 auto; }
 
-    .fx-caps { position: relative; height: 150px; max-width: 980px; width: 90%; margin: 0 auto; text-align: center; }
-    .fx-cap { position: absolute; inset: 0; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
-    .fx-cap.on { opacity: 1; transform: none; }
-    .fx-eye { font-size: 13px; font-weight: 600; letter-spacing: 0; color: #A8DDB5; margin-bottom: 12px; }
-    .fx-cap h3 { font-size: clamp(26px, 3.4vw, 46px); line-height: 1.08; font-weight: 600; letter-spacing: -.03em; color: #fff; }
-    .fx-cap h3 span { color: #7c847f; }
-    .fx-clock {
-      position: absolute; right: 0; top: -6px; display: flex; align-items: center; gap: 8px;
+    .gd {
+      --gd-mint: #A8DDB5; --gd-green: #1A7A4E;
+      position: relative; max-width: 1240px; width: calc(100% - 32px); margin: 40px auto 0;
+      height: clamp(560px, calc(100svh - 120px), 780px);
+      display: grid; grid-template-columns: minmax(0, 1fr) 340px; grid-template-rows: auto minmax(0, 1fr);
+      background: radial-gradient(ellipse 70% 60% at 40% 60%, rgba(26,122,78,.2), transparent 70%), #101312;
+      border: 1px solid rgba(255,255,255,.08); border-radius: 24px; overflow: hidden;
+      box-shadow: 0 40px 90px -40px rgba(0,0,0,.8);
+    }
+    .gd-top {
+      grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; padding: 12px 16px 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.07); font-size: 13px; color: #a8a29e;
+    }
+    .gd-dots { display: flex; gap: 6px; flex: 1; max-width: 420px; }
+    .gd-dots button {
+      flex: 1; height: 5px; border: 0; padding: 0; border-radius: 4px; background: rgba(255,255,255,.12);
+      cursor: default; transition: background .35s;
+    }
+    .gd-dots button.done { background: var(--gd-green); cursor: pointer; }
+    .gd-dots button.cur { background: var(--gd-mint); }
+    .gd-count { font-weight: 600; color: #d6d3d1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .gd-clock {
+      margin-left: auto; display: flex; align-items: center; gap: 8px; white-space: nowrap;
       font: 600 13px 'Geist', sans-serif; color: #d6d3d1;
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 6px 12px; border-radius: 100px;
-      transition: opacity .4s;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 5px 12px; border-radius: 100px;
     }
-    .fx-clock-dot { width: 7px; height: 7px; border-radius: 50%; background: #f87171; box-shadow: 0 0 0 4px rgba(248,113,113,.18); animation: fxBlink 1.4s infinite; }
+    .gd-clock i { width: 7px; height: 7px; border-radius: 50%; background: #f87171; box-shadow: 0 0 0 4px rgba(248,113,113,.18); animation: fxBlink 1.4s infinite; }
+    .gd-clock.ok i { background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.18); animation: none; }
     @keyframes fxBlink { 50% { opacity: .35; } }
+    .gd-icon-btn {
+      flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: #d6d3d1; font: 600 16px/1 'Geist', sans-serif;
+    }
+    .gd-icon-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
 
-    .fx-view { position: relative; overflow: hidden; transition: opacity .6s ease; }
-    .fx-world { position: absolute; left: 0; top: 0; width: 1400px; height: 820px; transform-origin: 0 0; }
+    .fx-view { position: relative; overflow: hidden; min-height: 0; }
+    .fx-world { position: absolute; left: 0; top: 0; width: 1400px; height: 820px; transform-origin: 0 0; transition: transform .9s cubic-bezier(.65,0,.25,1); }
+
+    /* Panell de guia */
+    .gd-guide {
+      position: relative; display: flex; flex-direction: column; gap: 14px; padding: 26px 24px 20px;
+      border-left: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.025); overflow-y: auto; min-height: 0;
+    }
+    .gd-who { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-size: 12.5px; font-weight: 600; color: var(--gd-mint); background: rgba(168,221,181,.1); padding: 5px 11px; border-radius: 100px; }
+    .gd-who svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gd-guide h3 { font-size: 25px; line-height: 1.15; font-weight: 600; letter-spacing: -.025em; color: #fff; }
+    .gd-guide p { font-size: 15.5px; line-height: 1.55; color: #c3c8c5; }
+    .gd-anim { animation: gdIn .45s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes gdIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .gd-do {
+      display: flex; align-items: center; gap: 12px; margin-top: 4px; padding: 13px 14px; border-radius: 14px;
+      background: rgba(168,221,181,.1); border: 1px solid rgba(168,221,181,.28); color: #e7f5ea; font-size: 14.5px; font-weight: 600; line-height: 1.35;
+    }
+    .gd-do svg { flex: none; width: 22px; height: 22px; fill: none; stroke: var(--gd-mint); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .gd-do.wait { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); color: #a8a29e; }
+    .gd-do.wait svg { animation: gdSpin 1.1s linear infinite; stroke: #a8a29e; }
+    @keyframes gdSpin { to { transform: rotate(360deg); } }
+    .gd-do.nudge { animation: gdNudge .45s ease; }
+    @keyframes gdNudge { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    .gd-nav { display: flex; gap: 10px; margin-top: auto; padding-top: 10px; }
+    .gd-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px; border-radius: 12px;
+      font: 600 15px 'Geist', sans-serif; cursor: pointer; border: 1px solid rgba(255,255,255,.12); background: transparent; color: #d6d3d1;
+      transition: background .2s, color .2s, box-shadow .3s, opacity .2s;
+    }
+    .gd-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .gd-btn[disabled] { opacity: .35; pointer-events: none; }
+    .gd-btn.next { flex: 1; }
+    .gd-btn.primary { background: var(--gd-green); border-color: var(--gd-green); color: #fff; }
+    .gd-btn.primary:hover { background: #156640; }
+    .gd-btn.pulse { background: var(--gd-green); border-color: var(--gd-green); color: #fff; animation: gdRing 1.6s ease-out infinite; }
+    .gd-btn:focus-visible, .gd-icon-btn:focus-visible, .gd-target:focus-visible { outline: 3px solid var(--gd-mint); outline-offset: 3px; }
+
+    /* Element on s'ha de clicar: anell que polsa + etiqueta flotant */
+    .gd-target { cursor: pointer; position: relative; animation: gdRing 1.6s ease-out infinite; border-radius: 14px; }
+    .fx-ph-franges.gd-target { border-radius: 12px; }
+    @keyframes gdRing { 0% { box-shadow: 0 0 0 0 rgba(168,221,181,.85); } 70% { box-shadow: 0 0 0 14px rgba(168,221,181,0); } 100% { box-shadow: 0 0 0 0 rgba(168,221,181,0); } }
+    .gd-tip {
+      position: absolute; left: 0; top: 0; z-index: 6; pointer-events: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 100px;
+      background: #fff; color: #14271F; font: 600 13.5px 'Geist', sans-serif; box-shadow: 0 12px 30px -8px rgba(0,0,0,.55);
+      opacity: 0; transition: opacity .3s;
+    }
+    .gd-tip.on { opacity: 1; animation: gdBob 1.5s ease-in-out infinite; }
+    .gd-tip::after { content: ''; position: absolute; left: var(--ax, 50%); top: 100%; margin-left: -7px; border: 7px solid transparent; border-top-color: #fff; }
+    .gd-tip.below::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #fff; }
+    .gd-tip svg { width: 17px; height: 17px; fill: none; stroke: var(--gd-green); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gd-tip.shake { animation: gdNudge .45s ease; }
+    @keyframes gdBob { 50% { translate: 0 -4px; } }
+
+    /* Portada i final, damunt de tota la demo */
+    .gd-cover {
+      position: absolute; inset: 0; z-index: 8; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+      padding: 24px 6%; background: radial-gradient(ellipse 60% 55% at 50% 55%, rgba(26,122,78,.35), transparent 75%), rgba(11,13,12,.86);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: opacity .5s, visibility 0s .5s;
+    }
+    .gd-cover[hidden] { display: flex; opacity: 0; visibility: hidden; pointer-events: none; }
+    .gd-cover-eye { font-size: 14px; font-weight: 600; color: var(--gd-mint); margin-bottom: 14px; }
+    .gd-cover h3 { font-size: clamp(28px, 4vw, 50px); line-height: 1.07; font-weight: 600; letter-spacing: -.035em; color: #fff; max-width: 760px; }
+    .gd-cover h3 span { color: #8b938e; }
+    .gd-cover p { font-size: 16.5px; line-height: 1.55; color: #c3c8c5; max-width: 520px; margin-top: 16px; }
+    .gd-start {
+      margin-top: 28px; display: inline-flex; align-items: center; gap: 12px; border: 0; cursor: pointer;
+      background: linear-gradient(135deg, #1A7A4E, #135c3a); color: #fff; font: 600 17px 'Geist', sans-serif;
+      padding: 17px 30px; border-radius: 16px; box-shadow: 0 14px 34px -10px rgba(26,122,78,.7); animation: gdRing 1.8s ease-out infinite;
+    }
+    .gd-start:hover { filter: brightness(1.08); }
+    .gd-start svg { width: 18px; height: 18px; fill: currentColor; }
+    .gd-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 18px; font-size: 13.5px; color: #a8a29e; }
+    .gd-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .gd-meta svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gd-end strong { display: block; font-size: clamp(64px, 11vw, 150px); line-height: .95; font-weight: 600; letter-spacing: -.06em; background: linear-gradient(120deg, #A8DDB5, #A8DDB5 40%, #1A7A4E); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .04em .08em; }
+    .gd-end .gd-you { margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; color: #e7f5ea; background: rgba(168,221,181,.12); padding: 7px 14px; border-radius: 100px; }
+    .gd-end-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 26px; }
+    .gd-end-cta a.gd-btn { text-decoration: none; }
+    .gd-end-cta .gd-btn.primary { padding: 0 24px; min-height: 52px; font-size: 16px; }
+    .gd-end-link { margin-top: 16px; font-size: 14px; color: #a8a29e; background: none; border: 0; cursor: pointer; font-family: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .gd-end-link:hover { color: #fff; }
+
+    /* Botó per avisar per a la IA: apareix quan s'obri l'avís */
+    .gd .fx-ia-btn { max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; opacity: 0; overflow: hidden; transition: max-height .45s ease, padding .45s ease, margin .45s ease, opacity .35s ease, transform .2s, box-shadow .3s; }
+    .gd .fx-ia-btn.show { max-height: 60px; padding-top: 12px; padding-bottom: 12px; margin-bottom: 14px; opacity: 1; overflow: visible; }
+    /* Capes invisibles que queden damunt: no han de robar els clics */
+    .gd .fx-ph-sent, .gd .fx-toast, .gd .fx-avui:not(.on), .gd .fx-mails:not(.on), .gd .fx-mail, .gd .fx-chat:not(.on) { pointer-events: none; }
+    /* Correus: targetes grans i llegibles, 2 columnes (escriptori) o 1 (mòbil) */
+    .gd .fx-mail { width: 520px; padding: 22px 24px; gap: 18px; border-radius: 20px; align-items: center; }
+    .gd .fx-mail .fx-av { width: 50px; height: 50px; font-size: 20px; }
+    .gd .fx-mail small { font-size: 16px; color: #78716c; }
+    .gd .fx-mail small strong { font-size: 18px; }
+    .gd .fx-mail b { font-size: 25px; margin: 3px 0 4px; }
+    .gd .fx-mail em { font-size: 19px; color: #44403c; }
+    .gd .fx-mail:nth-child(1) { left: 150px; top: 100px; } .gd .fx-mail:nth-child(2) { left: 720px; top: 100px; }
+    .gd .fx-mail:nth-child(3) { left: 150px; top: 290px; } .gd .fx-mail:nth-child(4) { left: 720px; top: 290px; }
+    .gd .fx-mail:nth-child(5) { left: 150px; top: 480px; } .gd .fx-mail:nth-child(6) { left: 720px; top: 480px; }
+    .gd .fx-world:has(.fx-mails.on) .fx-laptop { filter: brightness(.22) blur(3px); }
+    .gd .fx-world:has(.fx-mails.on) .fx-phone { opacity: 0; }
+    @media (max-width: 760px) {
+      .gd .fx-mail { width: 460px; left: 570px !important; }
+      .gd .fx-mail:nth-child(1) { top: 30px; } .gd .fx-mail:nth-child(2) { top: 190px; } .gd .fx-mail:nth-child(3) { top: 350px; }
+      .gd .fx-mail:nth-child(4) { top: 510px; } .gd .fx-mail:nth-child(5) { top: 670px; } .gd .fx-mail:nth-child(6) { top: 830px; }
+    }
+    .whatsapp-float, .instagram-float { transition: opacity .25s; }
+    body.gd-vis .whatsapp-float, body.gd-vis .instagram-float { opacity: 0; pointer-events: none; }
+    .gd .fx-card-new.open { border-color: #1A7A4E; box-shadow: 0 0 0 4px rgba(26,122,78,.14); }
+    .gd .fx-card-new.open .fx-badge { background: #E1EEE3; color: #1A7A4E; }
 
     /* Mòbil */
     .fx-phone {
@@ -1175,7 +1306,6 @@
       transform: translateX(105%); transition: transform .7s cubic-bezier(.2,.8,.2,1);
     }
     .fx-chat.on { transform: none; }
-    .fx-stage[data-ch="5"] .fx-chat, .fx-stage[data-ch="6"] .fx-chat, .fx-stage[data-ch="7"] .fx-chat { transform: translateX(105%); }
     .fx-chat-h { display: flex; gap: 10px; align-items: center; padding: 14px 16px; border-bottom: 1px solid #f5f5f4; }
     .fx-chat-h b { display: block; color: #1A7A4E; } .fx-chat-h small { font-size: 11px; color: #a8a29e; }
     .fx-blob { width: 30px; height: 30px; border-radius: 46% 54% 52% 48% / 55% 45% 55% 45%; background: radial-gradient(circle at 35% 35%, #A8DDB5, #1A7A4E); animation: fxMorph 4s ease-in-out infinite; }
@@ -1193,6 +1323,14 @@
     .fx-msg b { color: #1a1a1a; }
     .fx-prop { border: 1.5px solid #A8DDB5; background: #f0fdf4; border-radius: 12px; padding: 10px 12px; color: #166534; font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
     .fx-prop small { font: 600 10px 'Geist', sans-serif; letter-spacing: 0; color: #15803d; }
+    .fx-prop-l { list-style: none; margin: 4px 0 2px; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+    .fx-prop-l li { display: flex; align-items: baseline; gap: 8px; background: #fff; border-radius: 8px; padding: 5px 9px; font-weight: 500; color: #1a1a1a; }
+    .fx-prop-l span { flex: none; width: 78px; font-size: 11.5px; font-variant-numeric: tabular-nums; color: #57534e; }
+    .fx-prop-l b { font-weight: 650; color: #1A7A4E; }
+    .fx-prop-l i { font-style: normal; font-size: 10.5px; color: #92400e; background: #fef3c7; padding: 1px 6px; border-radius: 10px; }
+    .fx-prop-ok { font-size: 11.5px; font-weight: 600; color: #166534; margin-top: 2px; }
+    .fx-mail small strong { font-weight: 700; color: #1A7A4E; }
+    .gd-who .gd-blob { width: 17px; height: 17px; flex: none; border-radius: 46% 54% 52% 48% / 55% 45% 55% 45%; background: radial-gradient(circle at 35% 35%, #d6f2dd, #3fa86f 70%); box-shadow: 0 0 10px rgba(168,221,181,.55); animation: fxMorph 4s ease-in-out infinite; }
 
     /* La proposta en gran (capítol 4): la càmera hi fa zoom i el portàtil queda de fons */
     .fx-pz {
@@ -1201,11 +1339,9 @@
       opacity: 0; visibility: hidden; transform: translate(170px, 16px) scale(.62); transform-origin: 100% 60%;
       transition: opacity .45s ease, transform .75s cubic-bezier(.2,.8,.2,1), visibility 0s .75s;
     }
-    .fx-stage[data-ch="4"] .fx-pz { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease, transform .75s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+    .gd[data-step="5"] .fx-pz { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease, transform .75s cubic-bezier(.2,.8,.2,1), visibility 0s; }
     .fx-laptop, .fx-phone { transition: opacity .8s ease, transform 1s cubic-bezier(.2,.7,.2,1), filter .6s; }
-    .fx-stage[data-ch="4"] .fx-laptop, .fx-stage[data-ch="4"] .fx-phone { filter: brightness(.35) blur(2px); }
-    /* Mentre la proposta és protagonista, el títol es plega i la vista guanya tota l'alçada */
-    .fx-stage[data-ch="4"] .fx-caps { height: 0 !important; opacity: 0; overflow: hidden; }
+    .gd[data-step="5"] .fx-laptop, .gd[data-step="5"] .fx-phone { filter: brightness(.35) blur(2px); }
     .fx-pz-h { display: flex; align-items: center; gap: 14px; padding: 20px 28px; background: #E1EEE3; }
     .fx-pz-h small { display: block; font-size: 15px; font-weight: 600; color: #1A7A4E; }
     .fx-pz-h b { display: block; font-size: 24px; font-weight: 600; letter-spacing: -.02em; color: #14271F; }
@@ -1245,49 +1381,54 @@
     .fx-mail:nth-child(6) { left: 1020px; top: 600px; --fx-x: -300px; --fx-y: -200px; }
     .fx-world:has(.fx-mails.on) .fx-laptop, .fx-world:has(.fx-mails.on) .fx-phone { filter: brightness(.45) blur(1px); }
 
-    /* Final */
-    .fx-outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 6%; opacity: 0; transform: scale(.96); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
-    .fx-outro.on { opacity: 1; transform: none; }
-    .fx-outro p { font-size: clamp(20px, 2.6vw, 34px); font-weight: 600; color: #a8a29e; letter-spacing: -.02em; }
-    .fx-outro strong { font-size: clamp(72px, 13vw, 190px); line-height: .95; font-weight: 600; letter-spacing: -.06em; background: linear-gradient(120deg, #A8DDB5, #A8DDB5 40%, #1A7A4E); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .04em .08em; }
-    .fx-outro span { font-size: clamp(15px, 1.5vw, 19px); color: #a8a29e; margin-top: 10px; }
-    .fx-outro .fx-outro-final { font-style: normal; font-size: clamp(20px, 2.4vw, 32px); font-weight: 500; letter-spacing: -.015em; color: #F4F2EA; margin-top: 22px; }
-    .fx-stage:has(.fx-outro.on) .fx-view { opacity: .06; }
-    .fx-stage:has(.fx-outro.on) .fx-caps { opacity: 0; }
-    .fx-caps { transition: height .6s cubic-bezier(.2,.8,.2,1), opacity .4s ease; }
-
-    .fx-foot { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(420px, 70%); display: flex; align-items: center; gap: 14px; }
-    .fx-bar { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden; }
-    .fx-bar i { display: block; height: 100%; background: #A8DDB5; transform-origin: left; transform: scaleX(0); }
-    .fx-skip { font-size: 12.5px; font-weight: 600; color: #a8a29e; white-space: nowrap; }
-    .fx-skip:hover { color: #fff; }
-    .fx-hint { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); font-size: 12.5px; font-weight: 600; color: #d6d3d1; background: rgba(255,255,255,.08); padding: 7px 14px; border-radius: 100px; animation: tourNudge 1.6s ease-in-out infinite; transition: opacity .3s; pointer-events: none; }
-    .fx-hint.is-hidden { opacity: 0; animation: none; }
-    @keyframes tourNudge { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 5px); } }
-
-    .fx-sec .tour-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; margin: 40px auto 0; max-width: 1100px; padding: 0 5%; }
-    .tour-try {
-      display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer; font-family: inherit;
-      background: linear-gradient(135deg, #1A7A4E, #135c3a); color: #fff; font-size: 16px; font-weight: 600;
-      padding: 15px 26px; border-radius: 14px; box-shadow: 0 10px 26px -8px rgba(26,122,78,.55);
+    /* Tauleta en vertical i mòbil: la guia va davall de les pantalles */
+    @media (max-width: 900px) {
+      .gd {
+        grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto;
+        height: calc(100svh - 72px - 16px); min-height: 540px; max-height: 960px; margin-top: 28px;
+      }
+      .gd-guide { border-left: 0; border-top: 1px solid rgba(255,255,255,.08); padding: 16px 18px 16px; gap: 9px; overflow: visible; background: #141816; }
+      .gd-guide h3 { font-size: 20px; }
+      .gd-guide p { font-size: 14.5px; line-height: 1.5; }
+      .gd-do { padding: 11px 12px; font-size: 14px; margin-top: 2px; }
+      .gd-nav { padding-top: 4px; }
+      .gd-btn { min-height: 44px; }
     }
-    .tour-try:active { transform: scale(.98); }
-    .fx-sec .demo-hint { display: inline-flex; align-items: center; gap: 8px; background: rgba(168,221,181,.1); color: #A8DDB5; padding: 10px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; }
-    .fx-sec .demo-try-link { font-size: 13.5px; color: #a8a29e; }
-    .fx-sec .demo-try-link a { color: #A8DDB5; font-weight: 600; }
-    /* Mentre l'escenari està fixat, els botons flotants no tapen la pantalla */
-    .whatsapp-float, .instagram-float { transition: opacity .25s; }
-    body.tour-pinned .whatsapp-float, body.tour-pinned .instagram-float { opacity: 0; pointer-events: none; }
-
     @media (max-width: 760px) {
-      .fx-sec { padding: 64px 0 56px; }
-      .fx-track { height: 930vh; }
-      .fx-stage { padding: 14px 0 34px; }
-      .fx-caps { height: 118px; width: 92%; }
-      .fx-eye { font-size: 11px; margin-bottom: 8px; padding-right: 64px; text-align: left; }
-      .fx-cap { text-align: left; }
-      .fx-cap h3 { font-size: clamp(21px, 6vw, 28px); }
-      .fx-clock { top: -4px; font-size: 11px; padding: 4px 9px; }
+      .fx-sec { padding: 64px 0 40px; }
+      .fx-head .gd-sub { font-size: 15.5px; }
+      .gd { width: calc(100% - 20px); border-radius: 18px; }
+      .gd-top { padding: 9px 10px 9px 14px; gap: 10px; }
+      .gd-count { display: none; }
+      .gd-clock { padding: 4px 10px; font-size: 12px; }
+      .gd-cover h3 { font-size: clamp(26px, 7.4vw, 34px); }
+      .gd-cover p { font-size: 15px; }
+      .gd-start { width: 100%; max-width: 340px; justify-content: center; }
+      .gd-end-cta { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+      .gd-guide .gd-who { font-size: 12px; padding: 4px 10px; }
+      .gd-end strong { font-size: clamp(46px, 14vw, 72px); white-space: nowrap; }
+    }
+    /* Mòbils baixos: l'etiqueta "Prem aquí" ja diu on prémer; guanyem alçada per a les pantalles */
+    @media (max-width: 760px) and (max-height: 760px) {
+      .gd-do, .gd-guide .gd-who { display: none; }
+      .gd-top { padding-top: 6px; padding-bottom: 6px; }
+      .gd-icon-btn { width: 30px; height: 30px; }
+      .gd-guide { gap: 6px; padding-top: 12px; padding-bottom: 12px; }
+    }
+    @media (max-width: 380px) {
+      .gd-guide p { font-size: 13.5px; }
+      .gd-guide h3 { font-size: 18px; }
+      .gd-do { font-size: 13px; }
+    }
+    /* Mòbil en horitzontal: poca alçada, la guia torna al costat */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .gd { grid-template-columns: minmax(0, 1fr) 290px; grid-template-rows: auto minmax(0, 1fr); height: calc(100svh - 72px - 10px); min-height: 300px; }
+      .gd-guide { border-top: 0; border-left: 1px solid rgba(255,255,255,.08); overflow-y: auto; padding: 12px 14px; }
+      .gd-guide p { font-size: 13.5px; }
+      .gd-cover h3 { font-size: 24px; } .gd-cover p { display: none; } .gd-start { margin-top: 16px; }
+      .gd-end strong { font-size: 56px; }
+    }
+    @media (max-width: 760px) {
       /* Al mòbil els correus s'apilen en columna sobre el portàtil (la càmera hi enfoca) */
       .fx-mail { width: 360px; --fx-x: 0px !important; --fx-y: 60px !important; }
       .fx-mail { padding: 13px 16px; }
@@ -1311,10 +1452,12 @@
       .fx-pz-foot { padding: 12px 18px; }
       .fx-pz-foot > span:first-child { display: none; }
       .fx-pz-apply { width: 100%; text-align: center; }
+      .gd .fx-avisos { right: auto; width: 480px; }
       .fx-mail b { font-size: 17px; } .fx-mail em { font-size: 14px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .fx-sec *, .fx-sec *::before, .fx-sec *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
+      .gd-target { outline: 3px solid #A8DDB5; outline-offset: 4px; }
     }
     .demo-overlay {
       position: fixed; inset: 0; z-index: 10000; background: #fff;
@@ -1419,7 +1562,7 @@
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
-  <link rel="stylesheet" href="/marca.css" />
+  <link rel="stylesheet" href="/marca.css?v=2" />
 </head>
 <body>
 
@@ -1535,45 +1678,41 @@
 </div>
 
 
-<!-- COM FUNCIONA (recorregut cinemàtic per scroll) -->
+<!-- COM FUNCIONA (demo guiada clic a clic) -->
 <section id="com-funciona" class="fx-sec">
   <div class="fx-head">
     <div class="section-tag">Com funciona</div>
     <h2 class="section-title">De l'avís a la cobertura en minuts</h2>
+    <p class="gd-sub">Una demo guiada: tu fas els clics i nosaltres t'expliquem què passa a cada pas.</p>
   </div>
 
-  <div class="fx-track" id="fx">
-    <div class="fx-stage" id="fxStage">
-      <div class="fx-caps" aria-live="polite">
-        <div class="fx-clock"><span class="fx-clock-dot"></span><span id="fxClock">8:47</span></div>
-        <div class="fx-cap" data-c="0"><p class="fx-eye">Dilluns, 8:47</p><h3>La Marta es lleva amb febre. <span>El seu grup entra a les 9.</span></h3></div>
-        <div class="fx-cap" data-c="1"><p class="fx-eye">1 · El docent avisa</p><h3>Un toc des del mòbil. <span>Per l'app, per WhatsApp o des de direcció.</span></h3></div>
-        <div class="fx-cap" data-c="2"><p class="fx-eye">2 · La cap d'estudis ho veu</p><h3>L'avís arriba a l'instant. <span>Amb les franges afectades i el motiu.</span></h3></div>
-        <div class="fx-cap" data-c="3"><p class="fx-eye">3 · Horaria IA proposa</p><h3>La millor cobertura, raonada. <span>Creua horaris, deutes de TP i normes del centre.</span></h3></div>
-        <div class="fx-cap" data-c="4"></div><!-- Capítol sense títol: la proposta ocupa tota la pantalla -->
-        <div class="fx-cap" data-c="5"><p class="fx-eye">4 · Un clic</p><h3>L'horari del dia s'actualitza. <span>I queda registrat a l'historial.</span></h3></div>
-        <div class="fx-cap" data-c="6"><p class="fx-eye">5 · Tothom notificat</p><h3>Cada persona rep el seu correu. <span>Qui cobreix, la coordinació i la mateixa Marta.</span></h3></div>
-      </div>
+  <div class="gd" id="gd" data-step="0">
+    <div class="gd-top">
+      <div class="gd-dots" id="gdDots" role="group" aria-label="Progrés de la demo"></div>
+      <span class="gd-count" id="gdCount"></span>
+      <span class="gd-clock" id="gdClock"><i></i><b id="gdHora">8:47</b></span>
+      <button type="button" class="gd-icon-btn" id="gdRestart" aria-label="Tornar a començar" title="Tornar a començar">↺</button>
+    </div>
 
-      <div class="fx-view" id="fxView">
-        <div class="fx-world" id="fxWorld" aria-hidden="true">
+    <div class="fx-view" id="fxView">
+        <div class="fx-world" id="fxWorld">
 
           <!-- Mòbil del docent -->
-          <div class="fx-phone" data-at=".04">
+          <div class="fx-phone">
             <div class="fx-phone-screen">
               <div class="fx-ph-status"><b>8:48</b><span class="fx-ph-island"></span><span class="fx-ph-bat"></span></div>
               <div class="fx-ph-body">
                 <div class="fx-ph-hero"><small>Hola, Marta</small><strong>Avisa la teva absència</strong><em>Rebràs confirmació quan estigui organitzat.</em></div>
                 <div class="fx-ph-label">Franges afectades</div>
-                <div class="fx-ph-franges" data-at=".155">
+                <div class="fx-ph-franges">
                   <span>1a hora<i>9:00</i></span><span>2a hora<i>10:00</i></span><span>3a hora<i>11:30</i></span>
                   <span>4a hora<i>12:00</i></span><span>Tarda<i>15:00</i></span><span>Tarda<i>15:30</i></span>
                 </div>
                 <div class="fx-ph-label">Motiu</div>
                 <div class="fx-ph-motiu">Malaltia</div>
-                <div class="fx-ph-btn" data-at=".17">Falto avui tot el dia<span class="fx-tap"></span></div>
+                <div class="fx-ph-btn">Falto avui tot el dia<span class="fx-tap"></span></div>
               </div>
-              <div class="fx-ph-sent" data-at=".2">
+              <div class="fx-ph-sent">
                 <div class="fx-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
                 <strong>Avís enviat</strong>
                 <span>La cap d'estudis ja ho sap.<br>Ara descansa.</span>
@@ -1582,7 +1721,7 @@
           </div>
 
           <!-- Portàtil de la cap d'estudis -->
-          <div class="fx-laptop" data-at=".24">
+          <div class="fx-laptop">
             <div class="fx-lid"><div class="fx-screen">
               <aside class="fx-side">
                 <div class="fx-school"><b>Escola El Pinar</b><small>HorariaPro</small></div>
@@ -1594,13 +1733,13 @@
                 <div class="fx-layer fx-avisos">
                   <div class="fx-crumb">Escola El Pinar / Avisos rebuts</div>
                   <h4>Avisos rebuts</h4>
-                  <div class="fx-toast" data-at=".27"><span class="fx-pulse"></span><div><b>Nou avís · ara mateix</b><small>Marta Puig no vindrà avui</small></div></div>
-                  <div class="fx-card fx-card-new" data-at=".28">
+                  <div class="fx-toast"><span class="fx-pulse"></span><div><b>Nou avís · ara mateix</b><small>Marta Puig no vindrà avui</small></div></div>
+                  <div class="fx-card fx-card-new">
                     <div class="fx-date"><b>15</b><small>DL</small></div>
                     <div class="fx-card-t"><b>Marta Puig</b><small>Tot el dia · Malaltia · 1r A</small></div>
                     <span class="fx-badge">Nou</span>
                   </div>
-                  <div class="fx-ia-btn" data-at=".35">✦ Proposa cobertura amb Horaria</div>
+                  <div class="fx-ia-btn">✦ Proposa cobertura amb Horaria</div>
                   <div class="fx-card fx-card-old">
                     <div class="fx-date"><b>15</b><small>DL</small></div>
                     <div class="fx-card-t"><b>David Roig</b><small>Visita mèdica · 11:30–12:30</small></div>
@@ -1608,10 +1747,10 @@
                   </div>
                 </div>
 
-                <div class="fx-layer fx-avui" data-at=".675">
+                <div class="fx-layer fx-avui">
                   <div class="fx-crumb">Escola El Pinar / Avui</div>
                   <h4>Avui · dilluns 15</h4>
-                  <div class="fx-grid" data-at=".705">
+                  <div class="fx-grid">
                     <span class="h"></span><span class="h">1r A</span><span class="h">1r B</span><span class="h">2n A</span><span class="h">2n B</span><span class="h">3r A</span>
                     <span class="t">9:00</span><span class="c x" style="--d:0s"><b>Jordi Camps</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Anna Torres</span><span class="c">Carles Mas</span>
                     <span class="t">10:00</span><span class="c x" style="--d:.08s"><b>Jordi Camps</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Núria Pons</span><span class="c">Carles Mas</span>
@@ -1620,21 +1759,26 @@
                     <span class="t">15:00</span><span class="c x" style="--d:.32s"><b>Elena Ribes</b></span><span class="c">Laia Vidal</span><span class="c">Pere Soler</span><span class="c">Núria Pons</span><span class="c">Sílvia Mir</span>
                     <span class="t">15:30</span><span class="c x" style="--d:.40s"><b>Elena Ribes</b></span><span class="c">Joan Rius</span><span class="c">Pere Soler</span><span class="c">Anna Torres</span><span class="c">Carles Mas</span>
                   </div>
-                  <div class="fx-saved" data-at=".74">✓ Cobertura aplicada i registrada</div>
+                  <div class="fx-saved">✓ Cobertura aplicada i registrada</div>
                 </div>
               </main>
 
               <!-- Xat d'Horaria IA -->
-              <div class="fx-chat" data-at=".37">
+              <div class="fx-chat">
                 <div class="fx-chat-h"><span class="fx-blob"></span><div><b>Horaria</b><small>Marta Puig · avui</small></div></div>
                 <div class="fx-chat-b">
-                  <div class="fx-typing" data-at=".38"><i></i><i></i><i></i></div>
-                  <p class="fx-msg" data-at=".40">He revisat <b>24 horaris</b>, els <b>deutes de TP</b> i les <b>normes del centre</b>.</p>
-                  <p class="fx-msg" data-at=".425">Cap tutor amb grup es mou. Reparteixo el dia entre <b>4 docents</b> per no carregar ningú.</p>
-                  <div class="fx-prop" data-at=".45">
-                    <small>Proposta IA</small>
-                    <div>6 franges · <b>4 docents</b></div>
-                    <div>Cap grup sense cobrir ✓</div>
+                  <div class="fx-typing"><i></i><i></i><i></i></div>
+                  <p class="fx-msg">He revisat <b>24 horaris</b>, els <b>deutes de TP</b> i les <b>normes del centre</b>.</p>
+                  <p class="fx-msg">Cap tutor amb grup es mou. Reparteixo el dia entre <b>4 docents</b> per no carregar ningú.</p>
+                  <div class="fx-prop">
+                    <small>Proposta d'Horaria · 1r A</small>
+                    <ul class="fx-prop-l">
+                      <li><span>9:00–11:00</span><b>Jordi Camps</b></li>
+                      <li><span>11:00–11:30</span><b>Carles Mas</b><i>pati</i></li>
+                      <li><span>11:30–12:30</span><b>Núria Pons</b></li>
+                      <li><span>15:00–16:30</span><b>Elena Ribes</b></li>
+                    </ul>
+                    <div class="fx-prop-ok">6 franges · <b>4 docents</b> · Cap grup sense cobrir ✓</div>
                   </div>
                 </div>
               </div>
@@ -1651,18 +1795,18 @@
             </div>
             <div class="fx-pz-body">
               <div class="fx-pz-rows">
-                <div class="fx-pz-row" data-at=".485"><span class="fx-pz-t">9:00–11:00</span><div><b>Jordi Camps</b><em>Feia suport a 3r, que es pot ajornar. No genera deute de TP.</em></div></div>
-                <div class="fx-pz-row" data-at=".505"><span class="fx-pz-t">11:00–11:30</span><div><b>Carles Mas · Pati</b><em>Agafa el torn de la Marta. Aquesta setmana encara no n'ha fet cap d'extra.</em></div></div>
-                <div class="fx-pz-row" data-at=".525"><span class="fx-pz-t">11:30–12:30</span><div><b>Núria Pons</b><em>Tenia TP, però és qui menys ha cobert aquest mes.</em></div></div>
-                <div class="fx-pz-row" data-at=".545"><span class="fx-pz-t">15:00–16:30</span><div><b>Elena Ribes</b><em>El suport a 2n es pot moure sense deixar ningú sol.</em></div></div>
+                <div class="fx-pz-row"><span class="fx-pz-t">9:00–11:00</span><div><b>Jordi Camps</b><em>Feia suport a 3r, que es pot ajornar. No genera deute de TP.</em></div></div>
+                <div class="fx-pz-row"><span class="fx-pz-t">11:00–11:30</span><div><b>Carles Mas · Pati</b><em>Agafa el torn de la Marta. Aquesta setmana encara no n'ha fet cap d'extra.</em></div></div>
+                <div class="fx-pz-row"><span class="fx-pz-t">11:30–12:30</span><div><b>Núria Pons</b><em>Tenia TP, però és qui menys ha cobert aquest mes.</em></div></div>
+                <div class="fx-pz-row"><span class="fx-pz-t">15:00–16:30</span><div><b>Elena Ribes</b><em>El suport a 2n es pot moure sense deixar ningú sol.</em></div></div>
               </div>
               <aside class="fx-pz-side">
-                <div data-at=".57">
+                <div>
                   <small>Què canvia</small>
                   <p>El suport de 3r passa a dimecres, 10:00.</p>
                   <p>La Núria suma 1 h de TP a recuperar.</p>
                 </div>
-                <div data-at=".59">
+                <div>
                   <small>Descartats</small>
                   <p>Laia Vidal: tutora, amb el seu grup.</p>
                   <p>Joan Rius: anglès a 1r B a les 11:30.</p>
@@ -1670,43 +1814,56 @@
                 </div>
               </aside>
             </div>
-            <div class="fx-pz-foot" data-at=".615">
-              <span>Pots canviar qualsevol franja abans d'aplicar-la.</span>
-              <span class="fx-pz-apply" data-at=".65">✓ Aplicar proposta</span>
+            <div class="fx-pz-foot">
+              <span>Vols canviar alguna franja? Demana-ho a Horaria pel xat.</span>
+              <span class="fx-pz-apply">✓ Aplicar proposta</span>
             </div>
           </div>
 
           <!-- Correus que reben els implicats -->
-          <div class="fx-mails" data-at=".81">
-            <div class="fx-mail" style="--i:0"><span class="fx-av" style="background:#2563eb">J</span><div><small>Per a Jordi Camps</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 9:00–11:00</em></div></div>
-            <div class="fx-mail" style="--i:1"><span class="fx-av" style="background:#7c3aed">N</span><div><small>Per a Núria Pons</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 11:30–12:30</em></div></div>
-            <div class="fx-mail" style="--i:2"><span class="fx-av" style="background:#db2777">E</span><div><small>Per a Elena Ribes</small><b>Cobertura assignada</b><em>Cobreixes 1r A · 15:00–16:30</em></div></div>
-            <div class="fx-mail" style="--i:3"><span class="fx-av" style="background:#0d9488">C</span><div><small>Per a Carles Mas</small><b>Torn de pati</b><em>Avui fas el pati de les 11:00</em></div></div>
-            <div class="fx-mail" style="--i:4"><span class="fx-av" style="background:#d97706">C</span><div><small>Per a la coordinació</small><b>Canvi d'organització</b><em>La Marta no vindrà avui. Tot cobert.</em></div></div>
-            <div class="fx-mail" style="--i:5"><span class="fx-av" style="background:#1A7A4E">M</span><div><small>Per a Marta Puig</small><b>Ja està tot organitzat</b><em>Que et milloris!</em></div></div>
+          <div class="fx-mails">
+            <div class="fx-mail" style="--i:0"><span class="fx-av" style="background:#2563eb">J</span><div><small>Per a <strong>Jordi Camps</strong></small><b>Cobertura assignada</b><em>Cobreixes 1r A · 9:00–11:00</em></div></div>
+            <div class="fx-mail" style="--i:1"><span class="fx-av" style="background:#7c3aed">N</span><div><small>Per a <strong>Núria Pons</strong></small><b>Cobertura assignada</b><em>Cobreixes 1r A · 11:30–12:30</em></div></div>
+            <div class="fx-mail" style="--i:2"><span class="fx-av" style="background:#db2777">E</span><div><small>Per a <strong>Elena Ribes</strong></small><b>Cobertura assignada</b><em>Cobreixes 1r A · 15:00–16:30</em></div></div>
+            <div class="fx-mail" style="--i:3"><span class="fx-av" style="background:#0d9488">C</span><div><small>Per a <strong>Carles Mas</strong></small><b>Torn de pati</b><em>Avui fas el pati de les 11:00</em></div></div>
+            <div class="fx-mail" style="--i:4"><span class="fx-av" style="background:#d97706">R</span><div><small>Per a <strong>Rosa Grau</strong> · coordinadora</small><b>Canvi d'organització</b><em>La Marta no vindrà avui. Tot cobert.</em></div></div>
+            <div class="fx-mail" style="--i:5"><span class="fx-av" style="background:#1A7A4E">M</span><div><small>Per a <strong>Marta Puig</strong></small><b>Ja està tot organitzat</b><em>Que et milloris!</em></div></div>
           </div>
         </div>
-      </div>
-
-      <div class="fx-outro" data-at=".91">
-        <p>De l'avís a la cobertura</p>
-        <strong>2 minuts.</strong>
-        <span>Sense trucades, sense graelles, sense ningú sol amb el grup.</span>
-        <em class="fx-outro-final">Ara ja et pots dedicar al que realment importa.</em>
-      </div>
-
-      <div class="fx-foot">
-        <div class="fx-bar" aria-hidden="true"><i id="fxBar"></i></div>
-        <a class="fx-skip" href="#per-que-horariapro">Saltar ↓</a>
-      </div>
-      <div class="fx-hint" id="fxHint">Fes scroll ↓</div>
+      <div class="gd-tip" id="gdTip" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M13 10.5a1.5 1.5 0 0 1 3 0V12"/><path d="M16 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a6 6 0 0 1-4.6-2.2L4.6 15.6a1.5 1.5 0 0 1 2.2-2L9 15.5V8.5a1.5 1.5 0 0 1 1 0"/></svg><span>Prem aquí</span></div>
     </div>
-  </div>
 
-  <div class="tour-cta">
-    <button type="button" class="tour-try" data-track="cta_demo_prova_tu" onclick="openDemoOverlay()">▶ Prova-ho tu mateix</button>
-    <p class="demo-hint">⏱️ Cronometra't des de l'avís fins a la confirmació i gestió finalitzada.</p>
-    <p class="demo-try-link">o <a href="/demo/" target="_blank" rel="noopener" data-track="cta_demo_nova_pestanya">obre-la en una pestanya nova →</a></p>
+    <aside class="gd-guide" aria-live="polite">
+      <div id="gdCard"></div>
+      <div class="gd-nav">
+        <button type="button" class="gd-btn" id="gdPrev">← Enrere</button>
+        <button type="button" class="gd-btn next" id="gdNext">Següent →</button>
+      </div>
+    </aside>
+
+    <div class="gd-cover" id="gdIntro">
+      <p class="gd-cover-eye">Dilluns, 8:47</p>
+      <h3>La Marta, tutora de 1r A, es lleva amb febre. <span>El seu grup entra a les 9.</span></h3>
+      <p>Viu-ho des dels dos costats: el mòbil de la Marta i l'ordinador de la Vero, la cap d'estudis. A cada pas et direm on has de prémer.</p>
+      <button type="button" class="gd-start" id="gdStart" data-track="demo_guiada_inici"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Comença la demo</button>
+      <div class="gd-meta">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Uns 2 minuts</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M13 10.5a1.5 1.5 0 0 1 3 0V12"/><path d="M16 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a6 6 0 0 1-4.6-2.2L4.6 15.6a1.5 1.5 0 0 1 2.2-2L9 15.5V8.5a1.5 1.5 0 0 1 1 0"/></svg>7 passos guiats</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/></svg>Dades fictícies</span>
+      </div>
+    </div>
+
+    <div class="gd-cover gd-end" id="gdEnd" hidden>
+      <p class="gd-cover-eye">De l'avís a la cobertura</p>
+      <strong>2 minuts.</strong>
+      <p>Sense trucades, sense graelles, sense ningú sol amb el grup.</p>
+      <span class="gd-you" id="gdYou"></span>
+      <div class="gd-end-cta">
+        <a class="gd-btn primary" href="incorporacio.html" data-track="cta_demo_guiada_prova">Prova-ho gratis al teu centre</a>
+        <button type="button" class="gd-btn" id="gdAgain" data-track="demo_guiada_repetir">↺ Torna-la a veure</button>
+      </div>
+      <button type="button" class="gd-end-link" onclick="openDemoOverlay()" data-track="cta_demo_prova_tu">o explora el simulador complet, sense guia →</button>
+    </div>
   </div>
 </section>
 
@@ -2828,6 +2985,9 @@
   }
   function syncHeroFullscreenBtn() {
     var b = document.getElementById('heroFull');
+    var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    var cardFs = document.querySelector('.hero-video-card');
+    cardFs.classList.toggle('hero-fs', !!fsEl && fsEl === cardFs);
     var on = heroIsExpanded();
     b.innerHTML = on ? "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6L6 18\"/></svg>" : "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5\"/></svg>";
     b.title = on ? 'Tancar' : 'Pantalla completa';
@@ -3075,90 +3235,324 @@
   }
 
   /* ═══════════════════════════════════════════════
-     COM FUNCIONA — recorregut cinemàtic: el scroll mou la càmera sobre el món (#fxWorld)
-     i activa els estats puntuals ([data-at] → .on)
+     COM FUNCIONA — demo guiada clic a clic.
+     Cada pas: la càmera enfoca una part del món (#fxWorld), el panell explica què passa
+     i l'element que cal prémer polsa (.gd-target) amb l'etiqueta flotant (#gdTip).
   ═══════════════════════════════════════════════ */
   (function() {
-    var track = document.getElementById('fx');
-    if (!track) return;
-    var stage = document.getElementById('fxStage');
+    var gd = document.getElementById('gd');
+    if (!gd) return;
     var view = document.getElementById('fxView');
     var world = document.getElementById('fxWorld');
-    var bar = document.getElementById('fxBar');
-    var hint = document.getElementById('fxHint');
-    var clock = document.getElementById('fxClock');
-    var caps = [].slice.call(stage.querySelectorAll('.fx-cap'));
-    var acts = [].slice.call(stage.querySelectorAll('[data-at]')).map(function(el) {
-      return { el: el, at: parseFloat(el.getAttribute('data-at')) };
-    });
-    var NAV = 72;
-    // Capítols: on comença cadascun (0 = obertura, 4 = proposta en gran, 7 = final) i l'hora del rellotge
-    var CH = [0, .06, .23, .36, .47, .665, .79, .91];
-    var HORA = ['8:47', '8:48', '8:48', '8:49', '8:49', '8:49', '8:50', '8:50'];
-    // Càmera: rectangle del món que ha d'omplir la vista (d = escriptori, m = mòbil)
-    var TOT = { cx: 700, cy: 420, w: 1400, h: 820 };
-    var PROP = { d: { cx: 900, cy: 384, w: 1080, h: 610 }, m: { cx: 870, cy: 380, w: 520, h: 720 } };
-    var CAM = [
-      { p: 0,    d: TOT,                                   m: { cx: 220, cy: 410, w: 330, h: 660 } },
-      { p: .066, d: { cx: 220, cy: 410, w: 400, h: 650 },  m: { cx: 220, cy: 410, w: 330, h: 660 } },
-      { p: .22,  d: { cx: 220, cy: 410, w: 400, h: 650 },  m: { cx: 220, cy: 410, w: 330, h: 660 } },
-      { p: .26,  d: { cx: 760, cy: 410, w: 1340, h: 700 }, m: { cx: 868, cy: 330, w: 490, h: 420 } },
-      { p: .36,  d: { cx: 760, cy: 410, w: 1340, h: 700 }, m: { cx: 868, cy: 330, w: 490, h: 420 } },
-      { p: .395, d: { cx: 1150, cy: 380, w: 640, h: 600 }, m: { cx: 1186, cy: 374, w: 350, h: 570 } },
-      { p: .455, d: { cx: 1150, cy: 380, w: 640, h: 600 }, m: { cx: 1186, cy: 374, w: 350, h: 570 } },
-      { p: .49,  d: PROP.d, m: PROP.m },
-      { p: .655, d: PROP.d, m: PROP.m },
-      { p: .69,  d: { cx: 900, cy: 390, w: 1000, h: 660 }, m: { cx: 810, cy: 350, w: 400, h: 420 } },
-      { p: .77,  d: { cx: 900, cy: 390, w: 1000, h: 660 }, m: { cx: 810, cy: 350, w: 400, h: 420 } },
-      { p: .82,  d: { cx: 815, cy: 420, w: 1220, h: 760 }, m: { cx: 800, cy: 400, w: 400, h: 720 } },
-      { p: 1,    d: { cx: 815, cy: 420, w: 1220, h: 760 }, m: { cx: 800, cy: 400, w: 400, h: 720 } }
+    var tip = document.getElementById('gdTip');
+    var card = document.getElementById('gdCard');
+    var dots = document.getElementById('gdDots');
+    var prev = document.getElementById('gdPrev');
+    var next = document.getElementById('gdNext');
+    var intro = document.getElementById('gdIntro');
+    var end = document.getElementById('gdEnd');
+    var hora = document.getElementById('gdHora');
+    var clock = document.getElementById('gdClock');
+    var mq = window.matchMedia('(max-width: 760px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function T(s, v) { return window.HPI18N ? window.HPI18N.t(s, v) : s.replace(/\{(\w+)\}/g, function(m, k) { return v && v[k] !== undefined ? v[k] : m; }); }
+    function $(s) { return world.querySelector(s); }
+    function $$(s) { return [].slice.call(world.querySelectorAll(s)); }
+
+    var IC = {
+      phone: '<rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/>',
+      laptop: '<rect x="4" y="4" width="16" height="11" rx="2"/><path d="M2 19h20"/>',
+      ia: '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+      grid: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M9 4v17"/>',
+      mail: '<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+      hand: '<path d="M10 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M13 10.5a1.5 1.5 0 0 1 3 0V12"/><path d="M16 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a6 6 0 0 1-4.6-2.2L4.6 15.6a1.5 1.5 0 0 1 2.2-2L9 15.5V8.5a1.5 1.5 0 0 1 1 0"/>',
+      wait: '<path d="M21 12a9 9 0 1 1-6.2-8.6"/>'
+    };
+    function svg(k) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>'; }
+
+    // Càmera: rectangle del món que ha d'omplir la vista (d = escriptori/tauleta, m = mòbil)
+    var CAM = {
+      phone:  { d: { cx: 220, cy: 410, w: 360, h: 660 },  m: { cx: 220, cy: 375, w: 330, h: 450 } },
+      avisos: { d: { cx: 900, cy: 385, w: 1000, h: 640 }, m: { cx: 850, cy: 268, w: 480, h: 340 } },
+      chat:   { d: { cx: 1010, cy: 380, w: 860, h: 600 }, m: { cx: 1186, cy: 300, w: 350, h: 440, baix: '.fx-prop', pad: 64 } },
+      prop:   { d: { cx: 900, cy: 384, w: 1080, h: 610 }, m: { cx: 870, cy: 250, w: 510, h: 450 } },
+      propB:  { d: { cx: 900, cy: 384, w: 1080, h: 610 }, m: { cx: 870, w: 510, h: 430, baix: '.fx-pz' } },
+      avui:   { d: { cx: 900, cy: 390, w: 1000, h: 660 }, m: { cx: 810, cy: 340, w: 400, h: 440 } },
+      mails:  { d: { cx: 695, cy: 360, w: 1150, h: 590 }, m: { cx: 800, cy: 255, w: 480, h: 450 } },
+      mailsB: { d: { cx: 695, cy: 360, w: 1150, h: 590 }, m: { cx: 800, w: 480, h: 450, baix: '.fx-mail:last-child' } }
+    };
+
+    // Passos. target: element del món que cal prémer ('next' = el botó Següent del panell).
+    // anim: [retard ms, selector, classe] que s'afegeixen en entrar al pas avançant.
+    var S = [
+      { cam: 'phone', hora: '8:47' }, // 0 = portada
+      { who: 'phone', whoT: 'Mòbil de la Marta · tutora de 1r A', cam: 'phone', hora: '8:47', target: '.fx-ph-franges',
+        h: 'La Marta avisa des del mòbil',
+        p: "No ha de trucar ni escriure a ningú. Obre l'app i marca les franges que no podrà fer.",
+        doT: 'Prem les franges per marcar-les' },
+      { who: 'phone', whoT: 'Mòbil de la Marta · tutora de 1r A', cam: 'phone', hora: '8:48', target: '.fx-ph-btn', tipBelow: true,
+        h: "Un toc i l'avís ja és enviat",
+        p: 'També pot avisar per WhatsApp, o ho pot fer direcció per ella. Tot arriba al mateix lloc.',
+        doT: 'Prem «Falto avui tot el dia»' },
+      { who: 'laptop', whoT: "Ordinador de la Vero · cap d'estudis", cam: 'avisos', hora: '8:48', target: '.fx-ia-btn', tipBelow: true, delay: 1900,
+        h: "L'avís arriba a l'instant",
+        p: 'La Vero el rep a Avisos rebuts, amb les franges, el motiu i el grup. Just davall, Horaria li ofereix buscar la millor cobertura.',
+        doT: 'Prem «Proposa cobertura amb Horaria»', waitT: "Arriba l'avís de la Marta…",
+        anim: [[0, '.fx-laptop', 'on'], [650, '.fx-toast', 'on'], [950, '.fx-card-new', 'on'], [1500, '.fx-ia-btn', 'show']] },
+      { who: 'ia', whoT: 'Horaria', cam: 'chat', hora: '8:49', target: '.fx-prop', tipBelow: true, delay: 3000,
+        h: "Horaria t'explica què ha fet",
+        p: 'En segons revisa tots els horaris, totes les normes del vostre centre, el context de cada dia i les baixes, entre altres factors.',
+        doT: 'Prem la proposta per veure-la en detall', waitT: 'Horaria està preparant la proposta…',
+        anim: [[0, '.fx-ia-btn', 'on'], [300, '.fx-chat', 'on'], [650, '.fx-typing', 'on'], [1800, '.fx-msg:nth-of-type(1)', 'on'], [2250, '.fx-msg:nth-of-type(2)', 'on'], [2700, '.fx-prop', 'on']] },
+      { who: 'ia', whoT: "Proposta d'Horaria", cam: 'prop', cam2: 'propB', hora: '8:49', target: '.fx-pz-apply', delay: 2300,
+        h: 'Cada franja, amb el seu perquè',
+        p: "Qui cobreix cada franja i per què, què canvia i qui s'ha descartat. Pots canviar qualsevol franja abans d'aplicar-la, simplement parlant pel xat amb Horaria i suggerint-li el canvi que vulguis.",
+        doT: 'Prem «Aplicar proposta»', waitT: 'Llegeix la proposta…',
+        anim: [[450, '.fx-pz-row:nth-child(1)', 'on'], [700, '.fx-pz-row:nth-child(2)', 'on'], [950, '.fx-pz-row:nth-child(3)', 'on'], [1200, '.fx-pz-row:nth-child(4)', 'on'], [1450, '.fx-pz-side > div:nth-child(1)', 'on'], [1650, '.fx-pz-side > div:nth-child(2)', 'on'], [1900, '.fx-pz-foot', 'on']] },
+      { who: 'grid', whoT: 'Avui · horari del dia', cam: 'avui', hora: '8:49', target: 'next', delay: 1700,
+        h: "L'horari del dia, actualitzat",
+        p: "Les 6 franges del grup de la Marta, 1r A, ja tenen docent. El canvi queda registrat a l'historial i els deutes de TP es recalculen sols.",
+        doT: 'Prem «Següent» per veure qui rep l\'avís', waitT: "Aplicant la proposta…",
+        anim: [[250, '.fx-avui', 'on'], [800, '.fx-grid', 'on'], [1500, '.fx-saved', 'on']] },
+      { who: 'mail', whoT: 'Correus automàtics', cam: 'mails', cam2: 'mailsB', hora: '8:50', target: 'next', delay: 2600,
+        h: 'Tothom rep el seu correu',
+        p: 'Qui cobreix, el torn de pati, la coordinadora de la Marta i la mateixa Marta. Cadascú sap què ha de fer, i la Vero només ha fet 1 clic per enviar-los tots.',
+        doT: 'Prem «Finalitzar» per acabar', waitT: 'Enviant els correus…',
+        anim: [[200, '.fx-mails', 'on']] }
     ];
-    var vw = 0, vh = 0, narrow = false, ch = -1, raf = 0;
+    var N = S.length - 1;
+    var step = 0, busy = false, timers = [], t0 = 0, camNom = 'phone', followUntil = 0, tgtEl = null;
 
-    function ease(t) { return t * t * (3 - 2 * t); }
-    function mida() {
-      vw = view.clientWidth; vh = view.clientHeight;
-      narrow = vw < 640;
-    }
-    function camera(p) {
-      var k = 1;
-      while (k < CAM.length - 1 && CAM[k].p < p) k++;
-      var a = CAM[k - 1], b = CAM[k];
-      var t = ease(Math.min(1, Math.max(0, (p - a.p) / ((b.p - a.p) || 1))));
-      var ra = narrow ? a.m : a.d, rb = narrow ? b.m : b.d;
-      var r = {};
-      ['cx', 'cy', 'w', 'h'].forEach(function(q) { r[q] = ra[q] + (rb[q] - ra[q]) * t; });
-      var s = Math.min(vw / r.w, vh / r.h);
-      world.style.transform = 'translate(' + (vw / 2 - r.cx * s).toFixed(1) + 'px,' + (vh / 2 - r.cy * s).toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
-    }
-    function capitol(p) {
-      var c = 0;
-      while (c < CH.length - 1 && p >= CH[c + 1]) c++;
-      if (c === ch) return;
-      ch = c;
-      stage.setAttribute('data-ch', c);
-      caps.forEach(function(el, i) { el.classList.toggle('on', i === c); });
-      clock.textContent = HORA[c];
-    }
-    function update() {
-      raf = 0;
-      var range = Math.max(1, track.offsetHeight - stage.offsetHeight);
-      var p = Math.min(1, Math.max(0, (NAV - track.getBoundingClientRect().top) / range));
-      bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
-      hint.classList.toggle('is-hidden', p > .015);
-      document.body.classList.toggle('tour-pinned', p > 0 && p < 1);
-      acts.forEach(function(a) { a.el.classList.toggle('on', p >= a.at); });
-      capitol(p);
-      camera(p);
-    }
-    function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
+    function later(ms, fn) { timers.push(setTimeout(fn, reduce.matches ? Math.min(ms, 60) : ms)); }
+    function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+    function set(sel, cls, on) { $$(sel).forEach(function(el) { el.classList.toggle(cls, !!on); }); }
 
-    mida();
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function() { mida(); onScroll(); });
-    // La vista canvia d'alçada quan el títol es plega: la càmera s'hi adapta a cada pas
-    if (window.ResizeObserver) new ResizeObserver(function() { mida(); onScroll(); }).observe(view);
+    // Estat "assentat" del món en arribar al pas k (sense animacions)
+    function estat(k) {
+      set('.fx-phone', 'on', true);
+      set('.fx-ph-franges', 'on', k >= 2);
+      set('.fx-ph-btn', 'on', false);
+      set('.fx-ph-sent', 'on', k >= 3);
+      set('.fx-laptop', 'on', k >= 3);
+      set('.fx-toast', 'on', false);
+      set('.fx-card-new', 'on', k >= 3);
+      set('.fx-ia-btn', 'show', k >= 3);
+      set('.fx-ia-btn', 'on', k >= 4);
+      set('.fx-chat', 'on', k === 4 || k === 5);
+      set('.fx-typing', 'on', false);
+      set('.fx-msg, .fx-prop', 'on', k >= 4);
+      set('.fx-pz-row, .fx-pz-side > div, .fx-pz-foot', 'on', k >= 5);
+      set('.fx-pz-apply', 'on', false);
+      set('.fx-avui', 'on', k >= 6);
+      set('.fx-grid', 'on', k >= 6);
+      set('.fx-saved', 'on', k >= 6);
+      set('.fx-mails', 'on', k >= 7);
+      var nav = $$('.fx-nav span');
+      if (nav.length > 1) { nav[0].classList.toggle('on', k >= 6); nav[1].classList.toggle('on', k < 6); }
+      var badge = $('.fx-nav i'); if (badge) badge.style.visibility = k >= 4 ? 'hidden' : '';
+      gd.setAttribute('data-step', k);
+    }
+
+    // ── Càmera ──
+    function camera(nom) {
+      camNom = nom || camNom;
+      var r = CAM[camNom][mq.matches ? 'm' : 'd'];
+      var vw = view.clientWidth, vh = view.clientHeight;
+      if (!vw || !vh) return;
+      var s = Math.min(vw / r.w, vh / r.h, 1.25);
+      var cy = r.cy;
+      // Ancorat a la part de baix d'un element (p. ex. el botó Aplicar de la proposta)
+      if (r.baix) { var el = $(r.baix), wr = world.getBoundingClientRect(), er = el.getBoundingClientRect(), k = wr.height / world.offsetHeight || 1; cy = (er.bottom - wr.top) / k + (r.pad || 12) - vh / s / 2; }
+      world.style.transform = 'translate(' + (vw / 2 - r.cx * s).toFixed(1) + 'px,' + (vh / 2 - cy * s).toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+      follow(1100);
+    }
+
+    // ── Etiqueta flotant "Prem aquí" sobre l'element objectiu ──
+    function placeTip() {
+      if (!tgtEl || !tip.classList.contains('on')) return;
+      var v = view.getBoundingClientRect(), r = tgtEl.getBoundingClientRect();
+      var tw = tip.offsetWidth, th = tip.offsetHeight;
+      var cx = r.left + r.width / 2 - v.left;
+      var top = r.top - v.top - th - 14, below = false;
+      var under = r.bottom - v.top + 14;
+      if (top < 8 || (S[step].tipBelow && under + th < v.height - 6)) { top = under; below = true; }
+      if (top + th > v.height - 6) { top = Math.max(8, r.top - v.top + r.height / 2 - th / 2); }
+      var left = Math.max(8, Math.min(v.width - tw - 8, cx - tw / 2));
+      tip.classList.toggle('below', below);
+      tip.style.setProperty('--ax', Math.max(14, Math.min(tw - 14, cx - left)) + 'px');
+      tip.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
+    }
+    function follow(ms) {
+      var was = followUntil > performance.now();
+      followUntil = Math.max(followUntil, performance.now() + ms);
+      if (was) return;
+      (function loop() { placeTip(); if (performance.now() < followUntil) requestAnimationFrame(loop); })();
+    }
+
+    function setTarget(sel) {
+      if (tgtEl) { tgtEl.classList.remove('gd-target'); tgtEl.removeAttribute('tabindex'); tgtEl.removeAttribute('role'); tgtEl.removeAttribute('aria-label'); }
+      next.classList.remove('pulse');
+      tgtEl = null;
+      tip.classList.remove('on');
+      if (!sel) return;
+      if (sel === 'next') { next.classList.add('pulse'); return; }
+      tgtEl = $(sel);
+      if (!tgtEl) return;
+      tgtEl.classList.add('gd-target');
+      tgtEl.setAttribute('tabindex', '0');
+      tgtEl.setAttribute('role', 'button');
+      tgtEl.setAttribute('aria-label', T(S[step].doT));
+      tip.classList.add('on');
+      placeTip();
+      follow(600);
+    }
+
+    // ── Panell de guia ──
+    function pinta(waiting) {
+      var s = S[step];
+      if (!s.h) return;
+      card.innerHTML =
+        '<div class="gd-anim">' +
+          '<span class="gd-who">' + (s.who === 'ia' ? '<i class="gd-blob" aria-hidden="true"></i>' : svg(s.who)) + '<span></span></span>' +
+        '</div>' +
+        '<h3 class="gd-anim"></h3>' +
+        '<p class="gd-anim"></p>' +
+        '<div class="gd-do gd-anim' + (waiting ? ' wait' : '') + '" id="gdDo">' + svg(waiting ? 'wait' : 'hand') + '<span></span></div>';
+      card.querySelector('.gd-who span').textContent = T(s.whoT);
+      card.querySelector('h3').textContent = T(s.h);
+      card.querySelector('p').textContent = T(s.p);
+      card.querySelector('.gd-do span').textContent = T(waiting ? s.waitT || s.doT : s.doT);
+      var count = document.getElementById('gdCount');
+      count.textContent = T('Pas {n} de {t}', { n: step, t: N });
+      prev.disabled = step <= 1;
+      next.innerHTML = '';
+      next.textContent = step === N ? T('Finalitzar ✓') : T('Següent →');
+      tip.querySelector('span').textContent = T('Prem aquí');
+      var b = dots.children;
+      for (var i = 0; i < b.length; i++) {
+        b[i].className = i + 1 < step ? 'done' : i + 1 === step ? 'cur' : '';
+        b[i].setAttribute('aria-label', T('Pas {n} de {t}', { n: i + 1, t: N }));
+      }
+    }
+    function readyDo() {
+      var d = document.getElementById('gdDo');
+      if (!d) return;
+      d.classList.remove('wait');
+      d.innerHTML = svg('hand') + '<span></span>';
+      d.querySelector('span').textContent = T(S[step].doT);
+    }
+
+    // ── Navegació ──
+    function go(k, animate) {
+      clearTimers();
+      busy = false;
+      step = k;
+      estat(k);
+      var s = S[k];
+      hora.textContent = s.hora;
+      clock.classList.remove('ok');
+      intro.hidden = k !== 0;
+      end.hidden = true;
+      if (animate && s.anim) {
+        s.anim.forEach(function(a) {
+          $$(a[1]).forEach(function(el) { el.classList.remove(a[2]); });
+          later(a[0], function() { set(a[1], a[2], true); });
+        });
+      }
+      camera(s.cam);
+      if (k === 0) { setTarget(null); return; }
+      var wait = animate && s.delay;
+      pinta(wait && s.waitT);
+      setTarget(null);
+      if (wait) {
+        later(s.delay, function() { readyDo(); setTarget(s.target); if (s.cam2) camera(s.cam2); });
+      } else {
+        setTarget(s.target);
+        if (s.cam2) camera(s.cam2);
+      }
+    }
+
+    // Què passa quan es prem l'objectiu de cada pas
+    function accio() {
+      if (busy || step === 0) return;
+      var k = step;
+      busy = true;
+      setTarget(null);
+      if (k === 1) { set('.fx-ph-franges', 'on', true); later(700, function() { go(2, true); }); }
+      else if (k === 2) { set('.fx-ph-btn', 'on', true); later(450, function() { set('.fx-ph-sent', 'on', true); }); later(1600, function() { go(3, true); }); }
+      else if (k === 5) { set('.fx-pz-apply', 'on', true); later(450, function() { go(6, true); }); }
+      else if (k === N) { acaba(); }
+      else go(k + 1, true);
+    }
+
+    function acaba() {
+      clearTimers();
+      setTarget(null);
+      hora.textContent = '8:50';
+      clock.classList.add('ok');
+      var secs = Math.max(1, Math.round((Date.now() - t0) / 1000));
+      var mm = Math.floor(secs / 60), ss = ('0' + (secs % 60)).slice(-2);
+      document.getElementById('gdYou').textContent = T('Tu ho acabes de fer en {t}, llegint-ho tot.', { t: mm + ':' + ss });
+      end.hidden = false;
+      busy = false;
+      try { document.getElementById('gdAgain').focus({ preventScroll: true }); } catch (e) {}
+    }
+
+    function comenca() {
+      t0 = Date.now();
+      go(1, true);
+      var nav = document.querySelector('nav');
+      var top = gd.getBoundingClientRect().top + window.scrollY - (nav ? nav.offsetHeight : 72) - 8;
+      if (Math.abs(window.scrollY - top) > 4) window.scrollTo({ top: top, behavior: reduce.matches ? 'auto' : 'smooth' });
+    }
+
+    // ── Esdeveniments ──
+    for (var i = 1; i <= N; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('data-i', i);
+      dots.appendChild(b);
+    }
+    dots.addEventListener('click', function(e) {
+      var b = e.target.closest('button');
+      if (!b) return;
+      var i = +b.getAttribute('data-i');
+      if (i < step) go(i, false);
+    });
+    document.getElementById('gdStart').addEventListener('click', comenca);
+    document.getElementById('gdRestart').addEventListener('click', comenca);
+    document.getElementById('gdAgain').addEventListener('click', comenca);
+    prev.addEventListener('click', function() { if (step > 1) go(step - 1, false); });
+    next.addEventListener('click', function() {
+      if (step === 0) return comenca();
+      if (busy) return;
+      if (S[step].target === 'next' || tgtEl) return accio();
+      // Encara s'està animant: avança igualment al pas següent
+      if (step === N) acaba(); else go(step + 1, true);
+    });
+    world.addEventListener('click', function(e) {
+      if (tgtEl && tgtEl.contains(e.target)) return accio();
+      if (busy || !step) return;
+      // Clic fora de l'objectiu: recordatori suau d'on cal prémer
+      var d = document.getElementById('gdDo');
+      [tip, d].forEach(function(el) { if (!el) return; el.classList.remove('shake', 'nudge'); void el.offsetWidth; el.classList.add(el === tip ? 'shake' : 'nudge'); });
+      if (S[step].target === 'next') { next.classList.remove('pulse'); void next.offsetWidth; next.classList.add('pulse'); }
+    });
+    world.addEventListener('keydown', function(e) {
+      if ((e.key === 'Enter' || e.key === ' ') && tgtEl && e.target === tgtEl) { e.preventDefault(); accio(); }
+    });
+    function refit() { world.style.transition = 'none'; camera(); void world.offsetWidth; world.style.transition = ''; }
+    window.addEventListener('resize', refit);
+    if (window.ResizeObserver) new ResizeObserver(refit).observe(view);
+    if (mq.addEventListener) mq.addEventListener('change', refit);
+    document.addEventListener('hp:langchange', function() { if (step > 0) { pinta(false); if (tgtEl) tip.classList.add('on'); placeTip(); } else { tip.querySelector('span').textContent = T('Prem aquí'); } });
+
+    if (window.IntersectionObserver) new IntersectionObserver(function(es) {
+      document.body.classList.toggle('gd-vis', es[0].intersectionRatio > .35);
+    }, { threshold: [0, .35, .7] }).observe(gd);
+
+    go(0, false);
   })();
 
   /* ═══════════════════════════════════════════════
@@ -3345,7 +3739,7 @@
   })();
 </script>
 
-<script src="/i18n.js?v=6"></script>
+<script src="/i18n.js?v=8"></script>
 <script src="/i18n-guies.js?v=2"></script>
 <script src="/analytics.js" defer></script>
 
