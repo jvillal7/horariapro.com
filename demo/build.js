@@ -4,7 +4,7 @@
 //      node demo/build.js --extract  -> treu la plantilla actual de demo/index.html a demo/src/template.html
 const fs = require('fs');
 const path = require('path');
-const out = path.join(__dirname, 'index.html');
+const out = path.join(__dirname, 'antiga', 'index.html'); // demo antiga (Claude Design); la nova és demo/index.html, sense bundle
 const src = path.join(__dirname, 'src', 'template.html');
 const re = /(<script type="__bundler\/template">)([\s\S]*?)(<\/script>)/;
 const html = fs.readFileSync(out, 'utf8');

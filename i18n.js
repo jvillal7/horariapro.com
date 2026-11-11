@@ -202,7 +202,7 @@
     ["8 passos guiats", "8 pasos guiados", "8 passos guiats"],
     ["Dades fictícies", "Datos ficticios", "Dades fictícies"],
     ["↺ Torna-la a veure", "↺ Vuelve a verla", "↺ Torna-la a veure"],
-    ["o explora el simulador complet, sense guia →", "o explora el simulador completo, sin guía →", "o explora el simulador complet, sense guia →"],
+    ["o explora el simulador complet, com tu vulguis, lliurement →", "o explora el simulador completo, como tú quieras, libremente →", "o explora el simulador complet, com tu vulgues, lliurement →"],
     ["← Enrere", "← Atrás", "← Arrere"],
     ["Següent →", "Siguiente →", "Següent →"],
     ["Finalitzar ✓", "Finalizar ✓", "Finalitzar ✓"],
