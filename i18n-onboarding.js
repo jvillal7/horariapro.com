@@ -22,7 +22,7 @@
 
     // ── A. Horari i dades del centre ──
     ['Horari del centre', 'Horario del centro'],
-    ["Això genera la graella d'horaris real que farà servir HorarIA per proposar cobertures — no cal escriure-la enlloc més.", 'Esto genera la parrilla de horarios real que usará HorarIA para proponer sustituciones — no hace falta escribirla en ningún otro sitio.'],
+    ["Això genera la graella d'horaris real que farà servir Horaria per proposar cobertures — no cal escriure-la enlloc més.", 'Esto genera la parrilla de horarios real que usará Horaria para proponer sustituciones — no hace falta escribirla en ningún otro sitio.'],
     ["Hora d'inici del matí", 'Hora de inicio de la mañana'],
     ['Durada de cada sessió', 'Duración de cada sesión'],
     ['15 minuts', '15 minutos'],

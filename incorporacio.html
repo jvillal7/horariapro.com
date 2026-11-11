@@ -224,7 +224,7 @@
   <!-- PAS 1 — Perfil operatiu -->
   <div class="wiz-step" data-step="1" hidden>
     <h2>Perfil del centre</h2>
-    <p class="wiz-sub">Ajuda'ns a conèixer millor el centre — això també servirà per personalitzar HorarIA.</p>
+    <p class="wiz-sub">Ajuda'ns a conèixer millor el centre — això també servirà per personalitzar Horaria.</p>
     <div class="fields">
       <div class="field">
         <label>Nombre aproximat de docents</label>
@@ -314,7 +314,7 @@
           <li>Gestió de sortides amb acompanyants</li>
           <li>Gestió del Treball Personal</li>
           <li>Gestió d'horaris de jornada intensiva</li>
-          <li>Chat HorarIA per WhatsApp</li>
+          <li>Chat Horaria per WhatsApp</li>
           <li>Implantació gratuïta</li>
         </ul>
       </div>
@@ -344,7 +344,7 @@
           <div class="cp-part">
             <div class="rol">Proveïdor · Encarregat del Tractament</div>
             <div class="nom">Jorge Villalba</div>
-            <div class="det">HorariaPro<br>horaria.admin@gmail.com<br>horariapro.com</div>
+            <div class="det">HorariaPro<br>horaria@horariapro.com<br>horariapro.com</div>
           </div>
           <div class="cp-part">
             <div class="rol">Client · Responsable del Tractament</div>
@@ -402,7 +402,7 @@
         <div class="cp-sig">
           <div class="rol">Proveïdor · Encarregat del Tractament</div>
           <div class="nom">Jorge Villalba</div>
-          <div class="det">HorariaPro · horaria.admin@gmail.com</div>
+          <div class="det">HorariaPro · horaria@horariapro.com</div>
           <div class="linia">Signatura i segell<br><br>Lloc: _________________ Data: _________________</div>
         </div>
         <div class="cp-sig">
@@ -413,7 +413,7 @@
         </div>
       </div>
 
-      <div class="cp-peu">HorariaPro · horaria.admin@gmail.com · horariapro.com · Contracte v1.0</div>
+      <div class="cp-peu">HorariaPro · horaria@horariapro.com · horariapro.com · Contracte v1.0</div>
     </div>
 
     <div class="wiz-nav" style="margin-top:14px;">
@@ -681,13 +681,13 @@ async function confirmarICrear() {
       btnConfigurar.href = 'https://app.horariapro.com/?lang=' + encodeURIComponent(payload.idioma);
       showStep(4);
     } else {
-      errEl.textContent = '⚠️ ' + (T(escolaData.error || '') || T('Error en crear el compte — contacta amb horaria.admin@gmail.com'));
+      errEl.textContent = '⚠️ ' + (T(escolaData.error || '') || T('Error en crear el compte — contacta amb horaria@horariapro.com'));
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.textContent = T('Confirmar i crear el compte →');
     }
   } catch (err) {
-    errEl.textContent = '⚠️ ' + T('Error de connexió — contacta amb horaria.admin@gmail.com');
+    errEl.textContent = '⚠️ ' + T('Error de connexió — contacta amb horaria@horariapro.com');
     errEl.style.display = 'block';
     btn.disabled = false;
     btn.textContent = T('Confirmar i crear el compte →');
