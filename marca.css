@@ -203,6 +203,14 @@ body.vista-funcionalitats section:not(.vista-func) { display: none !important; }
 .rols-stat { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .rols-stat b { font-size: clamp(44px, 5vw, 64px); font-weight: 600; letter-spacing: -.05em; line-height: 1; color: var(--verd); }
 .rols-stat span { font-size: 15px; color: var(--muted); }
+/* Efecte d'escriptura de la xifra (2 clics ⇄ 2 min) */
+.rols-stat .tecleja { display: inline-flex; align-items: center; white-space: nowrap; }
+.rols-stat .tecleja span { font-size: inherit; color: inherit; }
+.rols-stat .tecleja .lletres { display: inline-block; height: 1em; line-height: 1; }
+.rols-stat .tecleja .cursor { display: inline-block; width: .06em; height: .8em; margin-left: .06em; background: var(--verd); border-radius: 2px; animation: hp-parpelleja 1s steps(1) infinite; }
+.rols-stat .tecleja.escrivint .cursor { animation: none; opacity: 1; }
+@keyframes hp-parpelleja { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .rols-stat .tecleja .cursor { display: none; } }
 .rols-text h3 { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -.035em; line-height: 1.08; color: var(--fosca); margin-bottom: 12px; }
 .rols-accent { font-size: 17px; font-weight: 500; color: var(--verd); margin-bottom: 12px; }
 .rols-text > p:not(.rols-accent) { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin-bottom: 22px; }

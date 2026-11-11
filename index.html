@@ -2222,7 +2222,7 @@
       <div class="rols-panel is-on" id="cap-estudis" role="tabpanel" aria-labelledby="rolTab0">
         <div class="rols-phone"><video data-v="chat-horaria" src="videos/chat-horaria.mp4" poster="videos/chat-horaria.jpg" muted loop playsinline preload="none" aria-label="La cap d'estudis demana una proposta de cobertura al xat d'Horaria"></video></div>
         <div class="rols-text">
-          <div class="rols-stat"><b>2 clics</b><span>per confirmar una cobertura</span></div>
+          <div class="rols-stat"><b class="tecleja" data-frases="2 clics|2 min" aria-label="2 clics · 2 min"><span class="lletres" aria-hidden="true">2 clics</span><span class="cursor" aria-hidden="true"></span></b><span>per confirmar una cobertura</span></div>
           <h3>Oblida't dels papers i les trucades</h3>
           <p class="rols-accent">L'app que organitza les cobertures i et retorna les tardes lliures.</p>
           <p>Rep l'avís, consulta la proposta de la IA i confirma la cobertura en dos clics. HorariaPro fa la feina administrativa perquè tu et puguis centrar en la pedagògica.</p>
@@ -3801,6 +3801,49 @@
       if (visible) { v.play().catch(function () {}); } else { v.pause(); }
     }, { threshold: .35 }).observe(sec);
   })();
+</script>
+<script>
+/* "Per què HorariaPro?" · Cap d'estudis: la xifra s'escriu i s'esborra en bucle ("2 clics" ⇄ "2 min").
+   La línia sempre té text (espai zero) i l'ample de la frase més llarga: el text del costat no es mou. */
+(function () {
+  var el = document.querySelector('.tecleja'); if (!el) return;
+  var box = el.querySelector('.lletres'), frases = el.getAttribute('data-frases').split('|');
+  var ZW = '​', i = 0, n = frases[0].length, esborrant = true, t = 0, actiu = false;
+  function posa(s) { box.textContent = s || ZW; }
+  function reserva() {
+    var w = 0, ara = box.textContent;
+    el.style.minWidth = '';
+    frases.forEach(function (f) { box.textContent = f; w = Math.max(w, el.getBoundingClientRect().width); });
+    el.style.minWidth = Math.ceil(w) + 'px'; box.textContent = ara;
+  }
+  reserva();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserva);
+  window.addEventListener('resize', reserva);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(function () { i = (i + 1) % frases.length; posa(frases[i]); }, 3200);
+    return;
+  }
+  function pas() {
+    if (!actiu) return;
+    var f = frases[i];
+    el.classList.add('escrivint');
+    if (esborrant) {
+      n--; posa(f.slice(0, n));
+      if (n <= 0) { esborrant = false; i = (i + 1) % frases.length; el.classList.remove('escrivint'); t = setTimeout(pas, 380); return; }
+      t = setTimeout(pas, 55); return;
+    }
+    n++; posa(frases[i].slice(0, n));
+    if (n >= frases[i].length) { esborrant = true; el.classList.remove('escrivint'); t = setTimeout(pas, 1900); return; }
+    t = setTimeout(pas, 95 + Math.random() * 60);
+  }
+  // Només es mou quan la secció es veu a la pantalla
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    var vis = es[0].isIntersecting;
+    if (vis && !actiu) { actiu = true; t = setTimeout(pas, 1400); }
+    if (!vis && actiu) { actiu = false; clearTimeout(t); }
+  }, { threshold: 0.4 }) : null;
+  if (io) io.observe(el); else { actiu = true; t = setTimeout(pas, 1400); }
+})();
 </script>
 </body>
 </html>
