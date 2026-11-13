@@ -30,7 +30,7 @@
     ['cobertures resoltes', 'sustituciones resueltas', 'cobertures resoltes'],
     ["propostes d'Horaria", 'propuestas de Horaria', "propostes d'Horaria"],
     ["de l'avís a la cobertura", 'del aviso a la sustitución', "de l'avís a la cobertura"],
-    ['Dades reals dels centres que ja fan servir HorariaPro · novembre de 2026', 'Datos reales de los centros que ya usan HorariaPro · noviembre de 2026', 'Dades reals dels centres que ja utilitzen HorariaPro · novembre de 2026'],
+    ["Dades reals dels centres que ja fan servir HorariaPro · s'actualitza cada setmana", 'Datos reales de los centros que ya usan HorariaPro · se actualiza cada semana', "Dades reals dels centres que ja utilitzen HorariaPro · s'actualitza cada setmana"],
     ['Preus', 'Precios', 'Preus'],
     ['FAQ', 'FAQ', 'FAQ'],
     ['Privacitat', 'Privacidad', 'Privacitat'],
